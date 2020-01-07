@@ -1,0 +1,61 @@
+
+.main-container button{
+  font-size: 1.2em;
+}
+mat-sidenav-container.main-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #272727;
+}
+@media only screen and (max-width: 450px) {
+  mat-sidenav.sidenav {
+    width: 100vw;
+    background-color: #4345da;
+    color: white;
+    border-right: 1px solid white;
+  }
+}
+mat-sidenav.sidenav {
+  min-width: 300px;
+  background-color: #4345da;
+  color: white;
+  border-right: 1px solid white;
+}
+mat-toolbar.toolbar {
+  background-color: #4345da;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+mat-toolbar .btn-toolbar{
+  background-color: transparent;
+  color: white;
+}
+mat-toolbar nav.toolbar{
+  font-size: 0.8em;
+}
+mat-toolbar nav mat-nav-list a {
+  margin-right: 20px;
+}
+mat-toolbar nav mat-nav-list a mat-icon{
+  font-size: 1em;
+  margin-right:0;
+}
+.remaining-space {
+  flex: 1 1 auto;
+}
+
+nav mat-nav-list .mat-list-item {
+  color: white;
+}
+nav mat-nav-list a.active span{
+  font-weight: bolder;
+  text-decoration: underline;
+}
+nav mat-nav-list a mat-icon{
+  margin-right: 10px;
+}

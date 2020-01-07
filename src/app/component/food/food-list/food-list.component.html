@@ -1,0 +1,16 @@
+<div *ngFor="let food of foods">
+  <div>
+    <h3>{{ food.type.typeName }}</h3>
+    <h1>
+      {{ food.foodName}}
+    </h1>
+      <p>
+        {{food.foodDescription}}
+      </p>
+    <h5>Allergens</h5>
+    <div *ngFor="let allergen of food.allergen">
+        {{allergen.allergenName}}
+    </div>
+  </div>
+  <div>///////////////////////////////////////////////</div>
+</div>

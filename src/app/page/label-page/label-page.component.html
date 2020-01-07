@@ -1,0 +1,7 @@
+<div>
+  <app-label-list *ngIf="action === 'list'"></app-label-list>
+  <app-label-create *ngIf="action === 'create'"></app-label-create>
+  <app-label-edit *ngIf="action === 'edit'"></app-label-edit>
+  <button *ngIf="action === 'list'"
+          class="btn" routerLink="/label/create"> ajouter un label </button>
+</div>

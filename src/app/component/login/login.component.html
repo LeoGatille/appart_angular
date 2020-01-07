@@ -1,0 +1,30 @@
+<div class="form-container">
+
+  <form [formGroup]="loginForm">
+    <h2 class="form-title">Se connecter</h2>
+    <mat-form-field>
+      <input matInput type="text"
+              placeholder="username"
+              autocomplete="Off"
+             formControlName="username"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password"
+             placeholder="password"
+             autocomplete="Off"
+             formControlName="password"
+      />
+    </mat-form-field>
+    <div>
+      <button mat-flat-button
+        [disabled]="loginForm.invalid"
+        (click)="login()"
+        color="primary"
+      >
+        Envoyer
+      </button>
+    </div>
+  </form>
+
+</div>

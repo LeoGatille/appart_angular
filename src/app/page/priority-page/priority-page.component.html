@@ -1,0 +1,7 @@
+<div>
+  <app-priority-list *ngIf="action === 'list'"></app-priority-list>
+  <app-priority-create *ngIf="action === 'create'"></app-priority-create>
+  <app-priority-edit *ngIf="action === 'edit'"></app-priority-edit>
+  <button *ngIf="action === 'list'"
+          class="btn" routerLink="/priority/create"> ajouter une priorité </button>
+</div>
