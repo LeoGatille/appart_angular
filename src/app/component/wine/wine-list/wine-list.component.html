@@ -1,0 +1,26 @@
+<p>wine-list works!</p>
+<table>
+  <thead>
+  <tr>
+    <th>Label</th>
+    <th>Couleur</th>
+    <th>Catégorie</th>
+    <th>Appellation</th>
+    <th>Nom</th>
+    <th>Millésime</th>
+    <th>Prix</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let wine of wines">
+  <tr>
+    <td>{{wine.label.labelName}}</td>
+    <td>{{wine.color.colorName}}</td>
+    <td>{{wine.category.categoryName}}</td>
+    <td>{{wine.designation.designationName}}</td>
+    <td>{{wine.wineName}}</td>
+    <td>{{wine.vintage.vintageYear}}</td>
+    <td>{{wine.winePrice}}</td>
+  </tr>
+  </tbody>
+</table>
+

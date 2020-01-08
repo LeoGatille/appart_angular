@@ -23,6 +23,12 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { AdminHomePageComponent } from './page/admin-home-page/admin-home-page.component';
 import { FoodShowComponent } from './component/food/food-show/food-show.component';
 import { FoodListComponent } from './component/food/food-list/food-list.component';
+import { WineListComponent } from './component/wine/wine-list/wine-list.component';
+import { WineListPageComponent } from './page/admin/wine/wine-list-page/wine-list-page.component';
+import { CategoryListComponent } from './component/wine/category-list/category-list.component';
+import { CategoryListPageComponent } from './page/admin/wine/category-list-page/category-list-page.component';
+import { ColorListComponent } from './component/wine/color-list/color-list.component';
+import { ColorListPageComponent } from './page/admin/wine/color-list-page/color-list-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +41,12 @@ import { FoodListComponent } from './component/food/food-list/food-list.componen
     AdminHomePageComponent,
     FoodShowComponent,
     FoodListComponent,
+    WineListComponent,
+    WineListPageComponent,
+    CategoryListComponent,
+    CategoryListPageComponent,
+    ColorListComponent,
+    ColorListPageComponent,
   ],
   imports: [
     BrowserModule,

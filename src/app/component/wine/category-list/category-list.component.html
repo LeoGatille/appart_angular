@@ -1,0 +1,18 @@
+<p>category-list works!</p>
+<table *ngFor="let catergoy of categories">
+  <thead>
+  <tr>
+    {{catergoy.categoryName}}
+  </tr>
+  </thead>
+  <tbody *ngIf="catergoy.wines.length > 0">
+  <tr *ngFor="let wine of catergoy.wines">
+    <td>{{wine.label.labelName}}</td>
+    <td>{{wine.color.colorName}}</td>
+    <td>{{wine.designation.designationName}}</td>
+    <td>{{wine.wineName}}</td>
+    <td>{{wine.vintage.vintageYear}}</td>
+    <td>{{wine.winePrice}}</td>
+  </tr>
+  </tbody>
+</table>

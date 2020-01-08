@@ -1,0 +1,34 @@
+<!--<div *ngFor="let color of colors">-->
+<!--  <div>-->
+<!--    {{color.colorName}}-->
+<!--  </div>-->
+<!--  <div *ngIf="color.wines">-->
+<!--    <div *ngFor="let wine of color.wines">-->
+<!--      <div>{{wine.label.labelName}}</div>-->
+<!--      <div>{{color.colorName}}</div>-->
+<!--      <div>{{wine.designation.designationName}}</div>-->
+<!--      <div>{{wine.wineName}}</div>-->
+<!--      <div>{{wine.vintage.vintageYear}}</div>-->
+<!--      <div>{{wine.winePrice}}</div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<table *ngFor="let color of colors">
+  <thead>
+  <tr>
+    {{color.colorName}}
+  </tr>
+  </thead>
+  <tbody *ngIf="color.wines.length > 0">
+  <tr *ngFor="let wine of color.wines">
+    <td>{{wine.label.labelName}}</td>
+    <td>{{wine.category.categoryName}}</td>
+    <td>{{color.colorName}}</td>
+    <td>{{wine.designation.designationName}}</td>
+    <td>{{wine.wineName}}</td>
+    <td>{{wine.vintage.vintageYear}}</td>
+    <td>{{wine.winePrice}}</td>
+  </tr>
+  </tbody>
+</table>

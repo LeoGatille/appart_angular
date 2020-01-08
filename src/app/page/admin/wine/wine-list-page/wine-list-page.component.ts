@@ -1,29 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-priority-page',
-  templateUrl: './priority-page.component.html',
-  styleUrls: ['./priority-page.component.css']
+  selector: 'app-wine-list-page',
+  templateUrl: './wine-list-page.component.html',
+  styleUrls: ['./wine-list-page.component.css']
 })
-export class PriorityPageComponent implements OnInit {
+export class WineListPageComponent implements OnInit {
 
-  action = 'list';
+  action = 'List';
   constructor(
     private activatedRoute: ActivatedRoute,
   ) {
     this.activatedRoute.params
-      .subscribe( (params) => {
+      .subscribe((params) => {
         console.log(params);
         if (params && params.verb) {
           this.action = params.verb;
         }
-
       });
   }
 
   ngOnInit() {
-
   }
 
 }
