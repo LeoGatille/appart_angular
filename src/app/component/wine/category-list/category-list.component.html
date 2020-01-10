@@ -8,6 +8,7 @@
   <tbody *ngIf="catergoy.wines.length > 0">
   <tr *ngFor="let wine of catergoy.wines">
     <td>{{wine.label.labelName}}</td>
+    <td>{{catergoy.categoryName}}</td>
     <td>{{wine.color.colorName}}</td>
     <td>{{wine.designation.designationName}}</td>
     <td>{{wine.wineName}}</td>

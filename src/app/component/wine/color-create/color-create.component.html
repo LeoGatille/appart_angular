@@ -1,0 +1,27 @@
+<p>color-create works!</p>
+<form [formGroup]="colorForm" style="background: white;">
+  <h2 class="form-title">Nouvelle couleur</h2>
+  <mat-form-field>
+    <input matInput type="text"
+           placeholder="Nom"
+           autocomplete="Off"
+           formControlName="colorName"
+    />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number"
+           placeholder="Ordre"
+           autocomplete="Off"
+           formControlName="colorOrder"
+    />
+  </mat-form-field>
+  <div>
+    <button mat-flat-button
+            [disabled]="colorForm.invalid"
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>

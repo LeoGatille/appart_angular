@@ -1,0 +1,18 @@
+<p>category-auto works!</p>
+
+<mat-form-field>
+  <input
+    type="text"
+    placeholder="Catégorie"
+    matInput
+    [formControl]="categoryControl"
+    [matAutocomplete]="auto"
+  />
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let option of (filteredOptions | async)" [value]="option">
+    {{ option.categoryName  }}
+  </mat-option>
+</mat-autocomplete>
+

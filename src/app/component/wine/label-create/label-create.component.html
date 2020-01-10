@@ -1,0 +1,21 @@
+<p>label-create works!</p>
+<p>color-create works!</p>
+<form [formGroup]="labelForm" style="background: white;">
+  <h2 class="form-title">Nouveau Label</h2>
+  <mat-form-field>
+    <input matInput type="text"
+           placeholder="Nom"
+           autocomplete="Off"
+           formControlName="labelName"
+    />
+  </mat-form-field>
+  <div>
+    <button mat-flat-button
+            [disabled]="labelForm.invalid"
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>

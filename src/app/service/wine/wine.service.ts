@@ -13,4 +13,15 @@ export class WineService {
   public getAllWines() {
     return this.http.get(`${this.uri}`);
   }
+  public createWine(category: number,
+                    designation: number,
+                    color: number,
+                    label: number,
+                    wineName: string,
+                    winePrice: number,
+                    vintage: number,
+                    status: number
+                  ) {
+    return this.http.post(`${this.uri}/create`, {category, designation, color, label, wineName, winePrice, vintage, status});
+  }
 }

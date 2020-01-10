@@ -1,0 +1,20 @@
+<p>designation-create works!</p>
+<form [formGroup]="designationForm" style="background: white">
+  <h2 class="form-title">Nouvelle appellation</h2>
+  <mat-form-field>
+    <input matInput type="text"
+           placeholder="Nom"
+           autocomplete="Off"
+           formControlName="designationName"
+    />
+  </mat-form-field>
+  <div>
+    <button mat-flat-button
+            [disabled]="designationForm.invalid"
+            (click)="save()"
+            color="warn"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>

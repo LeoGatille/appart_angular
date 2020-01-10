@@ -1,0 +1,19 @@
+<p>designation-list works!</p>
+<table *ngFor="let designation of designations">
+  <thead>
+  <tr>
+    {{designation.designationName}}
+  </tr>
+  </thead>
+  <tbody *ngIf="designation.wines.length > 0">
+  <tr *ngFor="let wine of designation.wines">
+    <td>{{wine.label.labelName}}</td>
+    <td>{{wine.category.categoryName}}</td>
+    <td>{{wine.color.colorName}}</td>
+    <td>{{designation.designationName}}</td>
+    <td>{{wine.wineName}}</td>
+    <td>{{wine.vintage.vintageYear}}</td>
+    <td>{{wine.winePrice}}</td>
+  </tr>
+  </tbody>
+</table>

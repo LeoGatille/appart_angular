@@ -29,6 +29,25 @@ import { CategoryListComponent } from './component/wine/category-list/category-l
 import { CategoryListPageComponent } from './page/admin/wine/category-list-page/category-list-page.component';
 import { ColorListComponent } from './component/wine/color-list/color-list.component';
 import { ColorListPageComponent } from './page/admin/wine/color-list-page/color-list-page.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AutocompleteComponent } from './component/autocomplete/autocomplete.component';
+import { DesignationListComponent } from './component/wine/designation-list/designation-list.component';
+import { DesignationListPageComponent } from './page/admin/wine/designation-list-page/designation-list-page.component';
+import { LabelListComponent } from './component/wine/label-list/label-list.component';
+import { LabelListPageComponent } from './page/admin/wine/label-list-page/label-list-page.component';
+import { VintageListComponent } from './component/wine/vintage-list/vintage-list.component';
+import { VintageListPageComponent } from './page/admin/wine/vintage-list-page/vintage-list-page.component';
+import { ColorCreateComponent } from './component/wine/color-create/color-create.component';
+import { VintageCreateComponent } from './component/wine/vintage-create/vintage-create.component';
+import { LabelCreateComponent } from './component/wine/label-create/label-create.component';
+import { CategoryCreateComponent } from './component/wine/category-create/category-create.component';
+import { DesignationCreateComponent } from './component/wine/designation-create/designation-create.component';
+import { WineCreateComponent } from './component/wine/wine-create/wine-create.component';
+import { WineCreatePageComponent } from './page/admin/wine/wine-create-page/wine-create-page.component';
+import { CategoryAutoComponent } from './component/autocomplete/category-auto/category-auto.component';
+import { DesignationAutoComponent } from './component/autocomplete/designation-auto/designation-auto.component';
+import { LabelAutoComponent } from './component/autocomplete/label-auto/label-auto.component';
+import { VintageAutoComponent } from './component/autocomplete/vintage-auto/vintage-auto.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +66,27 @@ import { ColorListPageComponent } from './page/admin/wine/color-list-page/color-
     CategoryListPageComponent,
     ColorListComponent,
     ColorListPageComponent,
+    AutocompleteComponent,
+    DesignationListComponent,
+    DesignationListPageComponent,
+    LabelListComponent,
+    LabelListPageComponent,
+    VintageListComponent,
+    VintageListPageComponent,
+    ColorCreateComponent,
+    VintageCreateComponent,
+    LabelCreateComponent,
+    CategoryCreateComponent,
+    DesignationCreateComponent,
+    WineCreateComponent,
+    WineCreatePageComponent,
+    CategoryAutoComponent,
+    DesignationAutoComponent,
+    LabelAutoComponent,
+    VintageAutoComponent,
   ],
   imports: [
+    MatAutocompleteModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

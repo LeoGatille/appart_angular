@@ -8,9 +8,33 @@ import {AdminHomePageComponent} from './page/admin-home-page/admin-home-page.com
 import {WineListPageComponent} from './page/admin/wine/wine-list-page/wine-list-page.component';
 import {CategoryListPageComponent} from './page/admin/wine/category-list-page/category-list-page.component';
 import {ColorListPageComponent} from './page/admin/wine/color-list-page/color-list-page.component';
+import {DesignationListPageComponent} from './page/admin/wine/designation-list-page/designation-list-page.component';
+import {LabelListPageComponent} from './page/admin/wine/label-list-page/label-list-page.component';
+import {VintageListPageComponent} from './page/admin/wine/vintage-list-page/vintage-list-page.component';
+import {WineCreatePageComponent} from './page/admin/wine/wine-create-page/wine-create-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin/wine/create',
+    component: WineCreatePageComponent,
+    data: {title: 'CreateWine'}
+  },
+  {
+    path: 'admin/wine/vintage',
+    component: VintageListPageComponent,
+    data: {title: 'VintageList'}
+  },
+  {
+    path: 'admin/wine/label',
+    component: LabelListPageComponent,
+    data: {title: 'LabelList'}
+  },
+  {
+    path: 'admin/wine/designation',
+    component: DesignationListPageComponent,
+    data: {title: 'DesignationList'}
+  },
   {
     path: 'admin/wine/color',
     component: ColorListPageComponent,

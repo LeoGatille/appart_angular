@@ -1,0 +1,19 @@
+<p>label-list works!</p>
+<table *ngFor="let label of labels">
+  <thead>
+  <tr>
+    {{label.labelName}}
+  </tr>
+  </thead>
+  <tbody *ngIf="label.wines.length > 0">
+  <tr *ngFor="let wine of label.wines">
+    <td>{{label.labelName}}</td>
+    <td>{{wine.category.categoryName}}</td>
+    <td>{{wine.color.colorName}}</td>
+    <td>{{wine.designation.designationName}}</td>
+    <td>{{wine.wineName}}</td>
+    <td>{{wine.vintage.vintageYear}}</td>
+    <td>{{wine.winePrice}}</td>
+  </tr>
+  </tbody>
+</table>

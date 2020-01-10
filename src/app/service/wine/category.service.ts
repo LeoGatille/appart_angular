@@ -14,4 +14,8 @@ export class CategoryService {
   public getAllCategories() {
     return this.http.get(`${this.uri}`);
   }
+  public createCategory( categoryName: string, categoryOrder: number ) {
+    return this.http.post(`${this.uri}/create`, {categoryName, categoryOrder});
+  }
+
 }

@@ -1,0 +1,12 @@
+<p>wine-create works!</p>
+<form [formGroup]="wineForm" style="background: white">
+    <app-category-auto></app-category-auto>
+  <div>
+    <button mat-flat-button
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>
