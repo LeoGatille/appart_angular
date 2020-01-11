@@ -5,8 +5,9 @@
     type="text"
     placeholder="Catégorie"
     matInput
-    [formControl]="categoryControl"
+    [(ngModel)]="wine.category"
     [matAutocomplete]="auto"
+    (ngModelChange)="categoryChanged()"
   />
 </mat-form-field>
 

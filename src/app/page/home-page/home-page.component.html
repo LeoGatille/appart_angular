@@ -1,5 +1,46 @@
 <div class="main-content">
   je suis home page
+  <app-auto-complete *ngIf="!loading"
+                     [listOfElements]="colors"
+                     [parentModel]="vin.color"
+                     [displayFn]="displayFn"
+                     [callBackFilter]="callBackFilter">
+
+  </app-auto-complete>
+
+  <app-auto-complete *ngIf="!loading"
+                     [listOfElements]="categories"
+                     [parentModel]="vin.category"
+                     [displayFn]="displayFnCategory"
+                     [callBackFilter]="callBackFilterCat">
+
+  </app-auto-complete>
+
+  <app-auto-complete *ngIf="!loading"
+                     [listOfElements]="designations"
+                     [parentModel]="vin.designation"
+                     [displayFn]="displayFnDesignation"
+                     [callBackFilter]="callBackFilterDesignation"
+  >
+  </app-auto-complete>
+
+  <app-auto-complete *ngIf="!loading"
+                     [listOfElements]="labels"
+                     [parentModel]="vin.label"
+                     [displayFn]="displayFnLabel"
+                     [callBackFilter]="callBackFilterLabel"
+  >
+  </app-auto-complete>
+
+  <app-auto-complete *ngIf="!loading"
+                     [listOfElements]="vintages"
+                     [parentModel]="vin.vintage"
+                     [displayFn]="displayFnVintage"
+                     [callBackFilter]="callBackFilterVintage"
+  >
+
+  </app-auto-complete>
 </div>
 <!--<app-food-list></app-food-list>-->
 <!--<app-autocomplete></app-autocomplete>-->
+

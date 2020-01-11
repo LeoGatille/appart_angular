@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {WineService} from '../../../service/wine/wine.service';
+import {Wine} from '../../../class/wine/wine';
 
 @Component({
   selector: 'app-wine-create',
@@ -10,19 +11,20 @@ import {WineService} from '../../../service/wine/wine.service';
 export class WineCreateComponent implements OnInit {
 
   wineForm: FormGroup;
+  categoryControl = new FormControl();
   constructor(
     private fb: FormBuilder,
     private wineService: WineService
   ) { }
 
   ngOnInit() {
-   this.wineForm = this.fb.group( {
+    this.wineForm = this.fb.group( {
      categoryControl : ['', Validators.required]
    });
   }
   save() {
     const val = this.wineForm.value;
-    console.log('val.id = ' + val.categoryControl);
+    console.log('val = ' + val.categoryControl);
   }
 
 }

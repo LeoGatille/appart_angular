@@ -1,6 +1,6 @@
 <p>wine-create works!</p>
 <form [formGroup]="wineForm" style="background: white">
-    <app-category-auto></app-category-auto>
+    <app-category-auto [formControl]="categoryControl"></app-category-auto>
   <div>
     <button mat-flat-button
             (click)="save()"

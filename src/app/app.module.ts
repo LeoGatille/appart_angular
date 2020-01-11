@@ -48,6 +48,7 @@ import { CategoryAutoComponent } from './component/autocomplete/category-auto/ca
 import { DesignationAutoComponent } from './component/autocomplete/designation-auto/designation-auto.component';
 import { LabelAutoComponent } from './component/autocomplete/label-auto/label-auto.component';
 import { VintageAutoComponent } from './component/autocomplete/vintage-auto/vintage-auto.component';
+import { AutoCompleteComponent } from './component/common/auto-complete/auto-complete.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { VintageAutoComponent } from './component/autocomplete/vintage-auto/vint
     DesignationAutoComponent,
     LabelAutoComponent,
     VintageAutoComponent,
+    AutoCompleteComponent,
   ],
   imports: [
     MatAutocompleteModule,

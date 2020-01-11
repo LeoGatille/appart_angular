@@ -1,0 +1,17 @@
+<mat-form-field>
+  <input
+    type="text"
+    placeholder="Pick one"
+    matInput
+    [(ngModel)]="parentModel"
+    [formControl]="myControl"
+    [matAutocomplete]="auto"
+    (ngModelChange)="elementChanged()"
+  />
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-option *ngFor="let option of (filteredElements | async)" [value]="option">
+    {{ option.colorName || option.categoryName ||option.designationName || option.labelName }}
+  </mat-option>
+</mat-autocomplete>
