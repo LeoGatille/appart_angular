@@ -3,6 +3,7 @@ import {Designation} from './designation';
 import {Color} from './color';
 import {Label} from './label';
 import {Vintage} from './vintage';
+import {Status} from './status';
 
 export class Wine {
   id: number;
@@ -15,4 +16,5 @@ export class Wine {
   color: Color;
   label: Label;
   vintage: Vintage;
+  status: Status;
 }

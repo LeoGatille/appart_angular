@@ -49,6 +49,8 @@ import { DesignationAutoComponent } from './component/autocomplete/designation-a
 import { LabelAutoComponent } from './component/autocomplete/label-auto/label-auto.component';
 import { VintageAutoComponent } from './component/autocomplete/vintage-auto/vintage-auto.component';
 import { AutoCompleteComponent } from './component/common/auto-complete/auto-complete.component';
+import { ValidateButtonComponent } from './component/common/validate-button/validate-button.component';
+import { ControlLabelPipe } from './pipe/wine/control-label.pipe';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,8 @@ import { AutoCompleteComponent } from './component/common/auto-complete/auto-com
     LabelAutoComponent,
     VintageAutoComponent,
     AutoCompleteComponent,
+    ValidateButtonComponent,
+    ControlLabelPipe,
   ],
   imports: [
     MatAutocompleteModule,

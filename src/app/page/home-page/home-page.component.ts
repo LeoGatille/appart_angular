@@ -11,6 +11,7 @@ import {VintageService} from '../../service/wine/vintage.service';
 import {Designation} from '../../class/wine/designation';
 import {Label} from '../../class/wine/label';
 import {Vintage} from '../../class/wine/vintage';
+import {Status} from '../../class/wine/status';
 
 @Component({
   selector: 'app-home-page',
@@ -19,7 +20,18 @@ import {Vintage} from '../../class/wine/vintage';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
+  reservoir: any;
+  wineName: string;
+  winePrice: number;
+  status: Status;
+  color: Color;
+  category: Category;
+  designation: Designation;
+  label: Label;
+  vintage: Vintage;
   vin: Wine;
+  labelName: string;
+  labelId: number;
   loading = true;
   colors: any[];
   categories: any[];
@@ -100,6 +112,59 @@ export class HomePageComponent implements OnInit, OnDestroy {
       return vintage.vintageYear.includes(filterValue);
     };
   }
+  setColor($event: Color) {
+    this.color = $event;
+    console.log('color.id = ' + this.color.id);
+    console.log('color.colorName = ' + this.color.colorName);
+  }
+  setCategory($event: Category) {
+    this.category = $event;
+    console.log('category.id = ' + this.category.id);
+    console.log('category.categoryName = ' + this.category.categoryName);
+  }
+  setDesignation($event: Designation) {
+    this.designation = $event;
+    console.log('designation.id = ' + this.designation.id);
+    console.log('designation.designationName = ' + this.designation.designationName);
+  }
+  setLabel($event: Label) {
+    this.label = $event;
+    console.log('label.id = ' + this.label.id);
+    console.log('label.labelName = ' + this.label.labelName);
+  }
+  setVintage($event: Vintage) {
+    this.vintage = $event;
+    console.log('vintage.id = ' + this.vintage.id);
+    console.log('vintage.vintageYear = ' + this.vintage.vintageYear);
+  }
+  setStatus($event: Status) {
+    this.status = $event;
+    console.log('status.id = ' + this.status.id);
+    console.log('status.statusName = ' + this.status.statusName);
+  }
+  setWineName($event: string) {
+    this.vin.wineName = $event;
+    console.log('wineName = ' + this.vin.wineName);
+  }
+  setWinePrice($event: number) {
+    this.vin.winePrice = $event;
+    console.log('winePrice = ' + this.vin.winePrice);
+  }
+  log() {
+    console.log('Log');
+  }
+
+  validate() {
+   this.vin.color = this.color;
+   this.vin.category = this.category;
+   this.vin.designation = this.designation;
+   this.vin.label = this.label;
+   console.log('color : ' + this.color.id);
+   console.log('color : ' + this.color.colorName);
+  }
+   // childSaid($event) {
+  //   console.log('childSaid = ' + $event);
+  // }
 
 
   ngOnInit() {}

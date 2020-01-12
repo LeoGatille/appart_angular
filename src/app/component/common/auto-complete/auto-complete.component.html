@@ -3,10 +3,11 @@
     type="text"
     placeholder="Pick one"
     matInput
+    (keyup)="sendToParent()"
+    (focus)="sendToParent()"
     [(ngModel)]="parentModel"
     [formControl]="myControl"
     [matAutocomplete]="auto"
-    (ngModelChange)="elementChanged()"
   />
 </mat-form-field>
 
