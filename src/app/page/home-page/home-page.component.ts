@@ -75,13 +75,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
       const vintages = data[4];
       const statuses = data[5];
 
-      this.vin.category = categories[0];
-      this.vin.color = colors[0];
+      this.vin.category = null;
+      this.vin.color  = null;
 
-      this.vin.designation = designations[0];
-      this.vin.label = labels[0];
-      this.vin.vintage = vintages[0];
-      this.vin.status = statuses[0];
+      this.vin.designation = null;
+      this.vin.label = null;
+      this.vin.vintage  = null;
+      this.vin.status  = null;
 
       this.colors = colors;
       this.categories = categories;
@@ -151,41 +151,65 @@ export class HomePageComponent implements OnInit, OnDestroy {
     };
   }
   setColor($event: Color) {
+    if (!$event) {
+      return;
+    }
     this.color = $event;
     console.log('color.id = ' + this.color.id);
     console.log('color.colorName = ' + this.color.colorName);
     console.log(this.wineForm.value);
   }
   setCategory($event: Category) {
+    if (!$event) {
+      return;
+    }
     this.category = $event;
     console.log('category.id = ' + this.category.id);
     console.log('category.categoryName = ' + this.category.categoryName);
   }
   setDesignation($event: Designation) {
+    if (!$event) {
+      return;
+    }
     this.designation = $event;
     console.log('designation.id = ' + this.designation.id);
     console.log('designation.designationName = ' + this.designation.designationName);
   }
   setLabel($event: Label) {
+    if (!$event) {
+      return;
+    }
     this.label = $event;
     console.log('label.id = ' + this.label.id);
     console.log('label.labelName = ' + this.label.labelName);
   }
   setVintage($event: Vintage) {
+    if (!$event) {
+      return;
+    }
     this.vintage = $event;
     console.log('vintage.id = ' + this.vintage.id);
     console.log('vintage.vintageYear = ' + this.vintage.vintageYear);
   }
   setStatus($event: Status) {
+    if (!$event) {
+      return;
+    }
     this.status = $event;
     console.log('status.id = ' + this.status.id);
     console.log('status.statusName = ' + this.status.statusName);
   }
   setWineName($event: string) {
+    if (!$event) {
+      return;
+    }
     this.vin.wineName = $event;
     console.log('wineName = ' + this.vin.wineName);
   }
   setWinePrice($event: number) {
+    if (!$event) {
+      return;
+    }
     this.vin.winePrice = $event;
     console.log('winePrice = ' + this.vin.winePrice);
   }

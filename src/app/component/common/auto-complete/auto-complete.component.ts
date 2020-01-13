@@ -7,6 +7,8 @@ import {CategoryService} from '../../../service/wine/category.service';
 import {filter, map, startWith} from 'rxjs/operators';
 import {Color} from '../../../class/wine/color';
 import {ColorService} from '../../../service/wine/color.service';
+import {MatDialog} from '@angular/material';
+import {DialogComponent} from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-auto-complete',
@@ -19,15 +21,19 @@ export class AutoCompleteComponent implements OnInit {
   @Input() parentModel: any;
   @Input() displayFn: any;
   @Input() callBackFilter: any;
+  @Input() creation = false;
   @Input() find: any;
+  @Input() listToAdd: any[];
   @Input() myControl: FormControl;
 
+  result: any;
   @Output() addElement = new EventEmitter<any>();
 
   sendable: any;
   filteredElements: Observable<any[]>;
-  constructor() {
-  }
+  constructor(
+    public dialog: MatDialog
+  ) {}
   ngOnInit() {
     this.filteredElements = this.myControl.valueChanges
       .pipe(
@@ -53,6 +59,18 @@ export class AutoCompleteComponent implements OnInit {
 
   sendToParent() {
      this.addElement.emit(this.myControl.value);
+  }
+
+  launchModalCreation() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { }
+    });
+    const instance = dialogRef.componentInstance;
+    instance.listToAdd = this.listToAdd;
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 

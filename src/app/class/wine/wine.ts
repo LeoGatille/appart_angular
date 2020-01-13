@@ -11,10 +11,10 @@ export class Wine {
   winePrice: number;
   wineAging: boolean;
   unavailable: boolean;
-  category: Category;
-  designation: Designation;
-  color: Color;
-  label: Label;
-  vintage: Vintage;
-  status: Status;
+  category: Category | null;
+  designation: Designation| null;
+  color: Color| null;
+  label: Label| null;
+  vintage: Vintage| null;
+  status: Status| null;
 }

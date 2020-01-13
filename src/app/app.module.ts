@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatCardModule, MatCheckboxModule, MatFormFieldModule,
+  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatOptionModule,
   MatProgressSpinnerModule, MatSelectModule,
@@ -51,6 +51,7 @@ import { VintageAutoComponent } from './component/autocomplete/vintage-auto/vint
 import { AutoCompleteComponent } from './component/common/auto-complete/auto-complete.component';
 import { ValidateButtonComponent } from './component/common/validate-button/validate-button.component';
 import { ControlLabelPipe } from './pipe/wine/control-label.pipe';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -90,29 +91,35 @@ import { ControlLabelPipe } from './pipe/wine/control-label.pipe';
     AutoCompleteComponent,
     ValidateButtonComponent,
     ControlLabelPipe,
+    DialogComponent,
   ],
-  imports: [
-    MatAutocompleteModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatListModule,
-    MatProgressSpinnerModule,
-    MatCardModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatMenuModule,
-    FormsModule,
-    MatOptionModule,
-    MatSelectModule,
-  ],
+    imports: [
+        MatAutocompleteModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatListModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatMenuModule,
+        MatDialogModule,
+        FormsModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatButtonToggleModule,
+    ],
+    entryComponents: [
+      DialogComponent
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }

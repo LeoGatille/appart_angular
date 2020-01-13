@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategoryService} from '../../../service/wine/category.service';
+import {Category} from '../../../class/wine/category';
+import {DialogComponent} from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-category-create',
@@ -8,6 +10,10 @@ import {CategoryService} from '../../../service/wine/category.service';
   styleUrls: ['./category-create.component.css']
 })
 export class CategoryCreateComponent implements OnInit {
+
+
+  @Input() listToAdd: Category[];
+  @Input() dialog;
 
   categoryForm: FormGroup;
   constructor(
@@ -24,7 +30,14 @@ export class CategoryCreateComponent implements OnInit {
   save() {
     const val = this.categoryForm.value;
     this.categoryService.createCategory(val.categoryName, val.categoryOrder)
-      .subscribe();
+      .subscribe( (category: Category) => {
+        if (this.listToAdd) {
+          this.listToAdd.push(category);
+        }
+        if (this.dialog) {
+          this.dialog.close();
+        }
+      });
     this.categoryForm.reset();
   }
 }

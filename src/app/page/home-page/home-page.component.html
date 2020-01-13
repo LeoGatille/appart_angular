@@ -2,7 +2,7 @@ je suis home page
 <div class="main-content">
 
 
- <form *ngIf="!loading" [formGroup]="wineForm">
+ <form *ngIf="!loading" [formGroup]="wineForm" style="background: red;">
     <div>
       <mat-form-field class="example-full-width">
         <input type="text"
@@ -41,9 +41,10 @@ je suis home page
                        [displayFn]="displayFnCategory"
                        [myControl]="categoryControl"
                        [callBackFilter]="callBackFilterCat"
+                       [creation]="true"
+                       [listToAdd]="categories"
 
     >
-
     </app-auto-complete>
     </div>
     <div>

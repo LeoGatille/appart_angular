@@ -24,4 +24,7 @@ export class WineService {
                   ) {
     return this.http.post(`${this.uri}/create`, {category, designation, color, label, wineName, winePrice, vintage, status});
   }
+  public wineAttributPromise() {
+
+  }
 }
