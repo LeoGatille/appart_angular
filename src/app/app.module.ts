@@ -52,6 +52,9 @@ import { AutoCompleteComponent } from './component/common/auto-complete/auto-com
 import { ValidateButtonComponent } from './component/common/validate-button/validate-button.component';
 import { ControlLabelPipe } from './pipe/wine/control-label.pipe';
 import { DialogComponent } from './dialog/dialog.component';
+import { CreateFormComponent } from './component/common/create-form/create-form.component';
+import { TestPageComponent } from './page/test-page/test-page.component';
+import { SecTestPageComponent } from './page/sec-test-page/sec-test-page.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { DialogComponent } from './dialog/dialog.component';
     ValidateButtonComponent,
     ControlLabelPipe,
     DialogComponent,
+    CreateFormComponent,
+    TestPageComponent,
+    SecTestPageComponent,
   ],
     imports: [
         MatAutocompleteModule,

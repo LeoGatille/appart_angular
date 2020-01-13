@@ -1,0 +1,33 @@
+<form *ngIf="!loading"
+      [formGroup]="createForm"
+      style="background: white;"
+>
+  <div>
+    <mat-form-field *ngIf="nameField">
+      <input matInput type="text"
+             placeholder="{{placeholderName}}"
+             autocomplete="Off"
+             formControlName="nameControl"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field *ngIf="numberField">
+      <input matInput type="number"
+             placeholder="{{placeholderNumber}}"
+             autocomplete="Off"
+             formControlName="numberControl"
+      />
+    </mat-form-field>
+    </div>
+  <div>
+    <button mat-flat-button
+            [disabled]="createForm.invalid"
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>

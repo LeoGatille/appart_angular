@@ -12,9 +12,21 @@ import {DesignationListPageComponent} from './page/admin/wine/designation-list-p
 import {LabelListPageComponent} from './page/admin/wine/label-list-page/label-list-page.component';
 import {VintageListPageComponent} from './page/admin/wine/vintage-list-page/vintage-list-page.component';
 import {WineCreatePageComponent} from './page/admin/wine/wine-create-page/wine-create-page.component';
+import {TestPageComponent} from './page/test-page/test-page.component';
+import {SecTestPageComponent} from './page/sec-test-page/sec-test-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'sectest',
+    component: SecTestPageComponent,
+    data: {title: 'SecondTestPage'}
+  },
+  {
+    path: 'test',
+    component: TestPageComponent,
+    data: {title: 'TestPage'}
+  },
   {
     path: 'admin/wine/create',
     component: WineCreatePageComponent,
