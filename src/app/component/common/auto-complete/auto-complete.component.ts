@@ -20,10 +20,11 @@ export class AutoCompleteComponent implements OnInit {
   @Input() displayFn: any;
   @Input() callBackFilter: any;
   @Input() find: any;
+  @Input() myControl: FormControl;
+
   @Output() addElement = new EventEmitter<any>();
 
   sendable: any;
-  myControl = new FormControl();
   filteredElements: Observable<any[]>;
   constructor() {
   }
