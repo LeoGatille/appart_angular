@@ -1,17 +1,8 @@
 je suis home page
 <div class="main-content">
 
-  <form *ngIf="!loading" [formGroup]="wineForm">
-    <app-auto-complete (addElement)="setColor($event)"
-                       [listOfElements]="colors"
-                       [parentModel]="vin.color"
-                       [displayFn]="displayFn"
-                       [myControl]="colorControl"
-                       [callBackFilter]="callBackFilter"
-    ></app-auto-complete>
-  </form>
 
-  <!-- <form [formGroup]="wineForm">
+ <form *ngIf="!loading" [formGroup]="wineForm">
     <div>
       <mat-form-field class="example-full-width">
         <input type="text"
@@ -32,7 +23,13 @@ je suis home page
                >
       </mat-form-field>
     </div>
-
+    <app-auto-complete (addElement)="setColor($event)"
+                       [listOfElements]="colors"
+                       [parentModel]="vin.color"
+                       [displayFn]="displayFn"
+                       [myControl]="colorControl"
+                       [callBackFilter]="callBackFilter"
+    ></app-auto-complete>
     <div>
 
     </div>
@@ -42,6 +39,7 @@ je suis home page
                        [listOfElements]="categories"
                        [parentModel]="vin.category"
                        [displayFn]="displayFnCategory"
+                       [myControl]="categoryControl"
                        [callBackFilter]="callBackFilterCat"
 
     >
@@ -54,6 +52,7 @@ je suis home page
                        [listOfElements]="designations"
                        [parentModel]="vin.designation"
                        [displayFn]="displayFnDesignation"
+                       [myControl]="designationControl"
                        [callBackFilter]="callBackFilterDesignation"
     >
     </app-auto-complete>
@@ -64,6 +63,7 @@ je suis home page
                        [listOfElements]="labels"
                        [parentModel]="vin.label"
                        [displayFn]="displayFnLabel"
+                       [myControl]="labelControl"
                        [callBackFilter]="callBackFilterLabel"
     >
     </app-auto-complete>
@@ -74,10 +74,12 @@ je suis home page
                        [listOfElements]="vintages"
                        [parentModel]="vin.vintage"
                        [displayFn]="displayFnVintage"
+                       [myControl]="vintageControl"
                        [callBackFilter]="callBackFilterVintage"
     >
     </app-auto-complete>
     </div>
+
     <div>
     <mat-form-field>
       <mat-label>Statut</mat-label>
@@ -89,13 +91,14 @@ je suis home page
       </mat-select>
     </mat-form-field>
     </div>
+
     <div>
     <button mat-flat-button
             (click)="validate()"
             [disabled]="wineForm.invalid"
     >Envoyer</button>
     </div>
-  </form>-->
+  </form>
 </div>
 <!--<app-food-list></app-food-list>-->
 <!--<app-autocomplete></app-autocomplete>-->
