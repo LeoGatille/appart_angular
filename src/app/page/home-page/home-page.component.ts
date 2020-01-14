@@ -22,9 +22,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
-  reservoir: any;
-  wineName: string;
-  winePrice: number;
+
   allStatus: Status[];
   status: Status;
   color: Color;
@@ -48,6 +46,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
   labelControl: FormControl;
   vintageControl: FormControl;
   statusControl: FormControl;
+  createCategory: boolean;
+  activateButton: boolean;
 
   constructor( private colorService: ColorService,
                private categoryService: CategoryService,
@@ -108,6 +108,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
         priceControl : ['', Validators.required]
       });
     });
+    this.createCategory = true;
+    this.activateButton = true;
   }
   displayFn(color: Color): string {
     return color ? color.colorName : '';
@@ -155,70 +157,43 @@ export class HomePageComponent implements OnInit, OnDestroy {
       return;
     }
     this.color = $event;
-    console.log('color.id = ' + this.color.id);
-    console.log('color.colorName = ' + this.color.colorName);
-    console.log(this.wineForm.value);
   }
   setCategory($event: Category) {
     if (!$event) {
       return;
     }
+    this.activateNewCategory($event);
     this.category = $event;
-    console.log('category.id = ' + this.category.id);
-    console.log('category.categoryName = ' + this.category.categoryName);
   }
   setDesignation($event: Designation) {
     if (!$event) {
       return;
     }
     this.designation = $event;
-    console.log('designation.id = ' + this.designation.id);
-    console.log('designation.designationName = ' + this.designation.designationName);
   }
   setLabel($event: Label) {
     if (!$event) {
       return;
     }
     this.label = $event;
-    console.log('label.id = ' + this.label.id);
-    console.log('label.labelName = ' + this.label.labelName);
   }
   setVintage($event: Vintage) {
     if (!$event) {
       return;
     }
     this.vintage = $event;
-    console.log('vintage.id = ' + this.vintage.id);
-    console.log('vintage.vintageYear = ' + this.vintage.vintageYear);
   }
-  setStatus($event: Status) {
-    if (!$event) {
-      return;
+
+  activateNewCategory(val) {
+    if (typeof val === 'string') {
+      console.log('activateNewCategory = ' + this.categories.some((sample) => sample.categoryName === val));
+      this.activateButton =  this.categories.some((sample) => sample.categoryName === val);
     }
-    this.status = $event;
-    console.log('status.id = ' + this.status.id);
-    console.log('status.statusName = ' + this.status.statusName);
-  }
-  setWineName($event: string) {
-    if (!$event) {
-      return;
-    }
-    this.vin.wineName = $event;
-    console.log('wineName = ' + this.vin.wineName);
-  }
-  setWinePrice($event: number) {
-    if (!$event) {
-      return;
-    }
-    this.vin.winePrice = $event;
-    console.log('winePrice = ' + this.vin.winePrice);
-  }
-  log() {
-    console.log('Log');
   }
 
   validate() {
     console.log('wineForm = ' + this.wineForm.value);
+    console.log('wineForm = ' + this.wineForm.value.statusControl.statusName);
    // this.vin.color = this.color;
    // this.vin.category = this.category;
    // this.vin.designation = this.designation;
@@ -226,13 +201,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
    // console.log('color : ' + this.color.id);
    // console.log('color : ' + this.color.colorName);
   }
-
-
-
   ngOnInit() {
     console.log('INIT START');
 
   }
-
   ngOnDestroy() {}
 }

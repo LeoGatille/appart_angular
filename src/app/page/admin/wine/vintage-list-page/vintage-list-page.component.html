@@ -1,3 +1,9 @@
-<p>vintage-list-page works!</p>
-<app-vintage-create></app-vintage-create>
-<app-vintage-list></app-vintage-list>
+<app-create-form [listToAdd]="listToAdd"
+                 [class]="class"
+                 (serviceCreate)="createElement($event)"
+                 [numberField]="true"
+                 [placeholderName]="placeholderName"
+></app-create-form>
+<div *ngFor="let vintage of listToAdd">
+  <p>{{vintage.vintageYear}}</p>
+</div>

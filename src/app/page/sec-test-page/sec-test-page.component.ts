@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Label} from '../../class/wine/label';
-import {LabelService} from '../../service/wine/label.service';
 import {Color} from '../../class/wine/color';
 import {ColorService} from '../../service/wine/color.service';
 

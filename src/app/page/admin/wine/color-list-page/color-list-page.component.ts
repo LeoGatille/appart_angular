@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Color} from '../../../../class/wine/color';
+import {ColorService} from '../../../../service/wine/color.service';
 
 @Component({
   selector: 'app-color-list-page',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ColorListPageComponent implements OnInit {
 
-  constructor() { }
+  listToAdd: Color[];
+  class: Color;
+  placeholderName: string;
+  constructor(
+    private colorService: ColorService,
+  ) { }
 
   ngOnInit() {
+    this.placeholderName = 'Nom';
+    this.colorService.getAllColors()
+      .subscribe((colors: Color[]) => {
+        this.listToAdd = colors;
+      });
+  }
+  createElement($event) {
+    console.log($event);
+    this.colorService.createColor($event.nameControl, $event.numberControl)
+      .subscribe( (color: Color) => {
+        this.listToAdd.push(color);
+      });
   }
 
 }

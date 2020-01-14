@@ -1,3 +1,9 @@
-<p>designation-list-page works!</p>
-<app-designation-create></app-designation-create>
-<app-designation-list></app-designation-list>
+<app-create-form [listToAdd]="listToAdd"
+                 [class]="class"
+                 (serviceCreate)="createElement($event)"
+                 [nameField]="true"
+                 [placeholderName]="placeholderName"
+></app-create-form>
+<div *ngFor="let designation of listToAdd">
+  <p>{{designation.designationName}}</p>
+</div>

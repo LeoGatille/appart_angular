@@ -1,3 +1,10 @@
-<p>category-list-page works!</p>
-<app-category-create [listToAdd]="categories"></app-category-create>
-<app-category-list [categories]="categories"></app-category-list>
+<app-create-form [listToAdd]="listToAdd"
+                 [class]="class"
+                 (serviceCreate)="createElement($event)"
+                 [nameField]="true"
+                 [numberField]="true"
+                 [placeholderName]="placeholderName"
+></app-create-form>
+<div *ngFor="let category of listToAdd">
+  <p>{{category.categoryName}}</p>
+</div>

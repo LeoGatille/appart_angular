@@ -9,7 +9,9 @@
     [matAutocomplete]="auto"
   />
 </mat-form-field>
-<button *ngIf="creation" (click)="launchModalCreation()">+ bouton</button>
+<button
+        [disabled]="activateButton === true"
+        (click)="launchModalCreation()">+ bouton</button>
 
 <mat-autocomplete #auto="matAutocomplete"
                   [displayWith]="displayFn"

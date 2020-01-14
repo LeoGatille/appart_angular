@@ -1,3 +1,9 @@
-<p>label-list-page works!</p>
-<app-label-create></app-label-create>
-<app-label-list></app-label-list>
+<app-create-form [listToAdd]="listToAdd"
+                 [class]="class"
+                 (serviceCreate)="createElement($event)"
+                 [nameField]="true"
+                 [placeholderName]="placeholderName"
+></app-create-form>
+<div *ngFor="let label of listToAdd">
+  <p>{{label.labelName}}</p>
+</div>

@@ -41,7 +41,9 @@ je suis home page
                        [displayFn]="displayFnCategory"
                        [myControl]="categoryControl"
                        [callBackFilter]="callBackFilterCat"
-                       [creation]="true"
+                       [creation]="createCategory"
+                       [activateButton]="activateButton"
+                       (controlButton)="activateNewCategory"
                        [listToAdd]="categories"
 
     >
