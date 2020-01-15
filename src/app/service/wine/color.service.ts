@@ -15,8 +15,12 @@ export class ColorService {
     return this.http.get(`${this.uri}`);
   }
   public createColor( colorName: string, colorOrder: number) {
-    console.log('colorName = ' + colorName);
-    console.log('order = ' + colorName);
     return this.http.post(`${this.uri}/create`, { colorName, colorOrder });
+  }
+  public editColor( colorName: string, colorOrder: number, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, { colorName, colorOrder });
+  }
+  public getOneColor(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
   }
 }

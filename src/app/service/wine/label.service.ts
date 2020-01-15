@@ -20,18 +20,11 @@ export class LabelService {
   public createLabel(labelName: string) {
     return this.http.post(`${this.uri}/create`, {labelName});
   }
-  public controlLabel(newLabelName: string) {
-    this.allLabels = this.getAllLabels();
-    this.allLabels.forEach(label => {
-      if (label.labelName === newLabelName) {
-        return label.id;
-      }
-    });
-    return false;
-    // this.allLabels.pipe(map(label => this.allLabels));
-    // if (this.allLabels.labelName.toLowerCase().includes(newLabelName.toLowerCase())) {
-    //   return this.allLabels.id;
-    // }
-    // return false;
+  public editLabel( labelName: string, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {labelName});
   }
+  public getOneLabel(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
+  }
+
 }

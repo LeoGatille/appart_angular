@@ -15,13 +15,18 @@ export class CreateFormComponent implements OnInit {
   @Input() numberField = false;
   @Input() placeholderName: string;
   @Input() placeholderNumber: string;
-  @Output() serviceCreate = new EventEmitter();
+  @Input() nameValue: string | null;
+  @Input() numberValue: number | null;
+  @Output() serviceCall = new EventEmitter<any>();
 
   loading = true;
   createForm: FormGroup;
   constructor(
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.nameValue = null;
+    this.numberValue = null;
+  }
 
   ngOnInit() {
     this.loading = false;
@@ -34,7 +39,7 @@ export class CreateFormComponent implements OnInit {
         nameControl : ['', Validators.required]
       });
     } else {
-      if (this.numberField && this.numberField) {
+      if (this.nameField && this.numberField) {
         return this.fb.group({
           nameControl : ['', Validators.required],
           numberControl: ['', Validators.required]
@@ -48,8 +53,10 @@ export class CreateFormComponent implements OnInit {
   }
 
   save() {
+
     const val = this.createForm.value;
-    this.serviceCreate.emit(val);
+    console.log('save activated = ' + val.nameControl);
+    this.serviceCall.emit(val);
 
 
     // const val = this.createForm.value;

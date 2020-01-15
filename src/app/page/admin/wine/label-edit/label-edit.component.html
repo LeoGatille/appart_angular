@@ -1,0 +1,9 @@
+<app-create-form *ngIf="!loading"
+                 [class]="class"
+                 (serviceCall)="editElement($event)"
+                 [nameField]="true"
+                 [nameValue]="myComponent.labelName"
+></app-create-form>
+<div *ngFor="let wine  of linkedWines ">
+  <p>{{wine.wineName}}</p>
+</div>

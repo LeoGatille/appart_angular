@@ -1,29 +1,29 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CategoryService} from '../../service/wine/category.service';
-import {Category} from '../../class/wine/category';
-import {map, startWith} from 'rxjs/operators';
-import {ColorService} from '../../service/wine/color.service';
-import {Color} from '../../class/wine/color';
-import {Wine} from '../../class/wine/wine';
-import {DesignationService} from '../../service/wine/designation.service';
-import {LabelService} from '../../service/wine/label.service';
-import {VintageService} from '../../service/wine/vintage.service';
-import {Designation} from '../../class/wine/designation';
-import {Label} from '../../class/wine/label';
-import {Vintage} from '../../class/wine/vintage';
-import {Status} from '../../class/wine/status';
-import {StatusService} from '../../service/wine/status.service';
+import { Component, OnInit } from '@angular/core';
+import {WineService} from '../../../../service/wine/wine.service';
+import {ActivatedRoute} from '@angular/router';
+import {Wine} from '../../../../class/wine/wine';
+import {Color} from '../../../../class/wine/color';
+import {Category} from '../../../../class/wine/category';
+import {Designation} from '../../../../class/wine/designation';
+import {Label} from '../../../../class/wine/label';
+import {Vintage} from '../../../../class/wine/vintage';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {WineService} from '../../service/wine/wine.service';
+import {ColorService} from '../../../../service/wine/color.service';
+import {CategoryService} from '../../../../service/wine/category.service';
+import {DesignationService} from '../../../../service/wine/designation.service';
+import {LabelService} from '../../../../service/wine/label.service';
+import {VintageService} from '../../../../service/wine/vintage.service';
+import {StatusService} from '../../../../service/wine/status.service';
+import {Status} from '../../../../class/wine/status';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-wine-edit',
+  templateUrl: './wine-edit.component.html',
+  styleUrls: ['./wine-edit.component.css']
 })
-export class HomePageComponent implements OnInit, OnDestroy {
+export class WineEditComponent implements OnInit {
 
-
+  selectWine: Wine;
   listToAdd: Wine[];
   allStatus: Status[];
   status: Status;
@@ -50,16 +50,26 @@ export class HomePageComponent implements OnInit, OnDestroy {
   statusControl: FormControl;
   createCategory: boolean;
   activateButton = true;
-
-  constructor( private colorService: ColorService,
-               private categoryService: CategoryService,
-               private designationService: DesignationService,
-               private labelService: LabelService,
-               private vintageService: VintageService,
-               private statusService: StatusService,
-               private wineService: WineService,
-               private fb: FormBuilder
+  id: number;
+  constructor(
+    private colorService: ColorService,
+    private categoryService: CategoryService,
+    private designationService: DesignationService,
+    private labelService: LabelService,
+    private vintageService: VintageService,
+    private statusService: StatusService,
+    private wineService: WineService,
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        this.id = params.id;
+      });
+    this.wineService.getOneWine(this.id)
+      .subscribe((wine: Wine) => {
+        this.selectWine = wine;
+      });
     this.vin = new Wine();
     const catP = this.categoryService.getAllCategories().toPromise();
     const colorP = this.colorService.getAllColors().toPromise();
@@ -113,6 +123,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
     this.createCategory = true;
     this.activateButton = true;
+  }
+
+  ngOnInit() {
+
   }
   displayFn(color: Color): string {
     return color ? color.colorName : '';
@@ -194,35 +208,4 @@ export class HomePageComponent implements OnInit, OnDestroy {
     }
   }
 
-  validate() {
-    this.vin.status = this.wineForm.value.statusControl;
-    this.vin.wineName = this.wineForm.value.nameControl;
-    this.vin.winePrice = this.wineForm.value.priceControl;
-    this.vin.category = this.category;
-    this.vin.designation = this.designation;
-    this.vin.color = this.color;
-    this.vin.label = this.label;
-    this.vin.vintage = this.vintage;
-    this.wineService.createWine(this.vin.category.id,
-                                this.vin.designation.id,
-                                this.vin.color.id,
-                                this.vin.label.id,
-                                this.vin.wineName,
-                                this.vin.winePrice,
-                                this.vin.vintage.id,
-                                this.vin.status.id
-                               )
-      .subscribe((wine: Wine) => {
-        this.listToAdd.push(wine);
-      });
-  }
-  ngOnInit() {
-    console.log('INIT START');
-    this.wineService.getAllWines()
-      .subscribe((wines: Wine[]) => {
-        this.listToAdd = wines;
-      });
-
-  }
-  ngOnDestroy() {}
 }

@@ -1,9 +1,10 @@
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
-                 (serviceCreate)="createElement($event)"
+                 (serviceCall)="createElement($event)"
                  [nameField]="true"
                  [placeholderName]="placeholderName"
 ></app-create-form>
 <div *ngFor="let label of listToAdd">
   <p>{{label.labelName}}</p>
+  <button [routerLink]="['/admin/wine/label/edit', label.id]">modifier</button>
 </div>

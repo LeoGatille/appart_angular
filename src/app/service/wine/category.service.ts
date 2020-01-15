@@ -17,5 +17,10 @@ export class CategoryService {
   public createCategory( categoryName: string, categoryOrder: number ) {
     return this.http.post(`${this.uri}/create`, {categoryName, categoryOrder});
   }
-
+  public getOneCategory(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
+  }
+  public editCategory( categoryName: string, categoryOrder: number, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {categoryName, categoryOrder});
+  }
 }

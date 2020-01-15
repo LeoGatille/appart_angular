@@ -18,4 +18,10 @@ export class DesignationService {
   public createDesignation(designationName: string) {
     return this.http.post(`${this.uri}/create`, {designationName});
   }
+  public editDesignation( designationName: string, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {designationName});
+  }
+  public getOneDesignation(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
+  }
 }

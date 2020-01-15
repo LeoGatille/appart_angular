@@ -3,6 +3,7 @@ import {Color} from '../../../../class/wine/color';
 import {ColorService} from '../../../../service/wine/color.service';
 import {Designation} from '../../../../class/wine/designation';
 import {DesignationService} from '../../../../service/wine/designation.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-designation-list-page',
@@ -15,8 +16,14 @@ export class DesignationListPageComponent implements OnInit {
   class: Designation;
   placeholderName: string;
   constructor(
-    private designationService: DesignationService,
-  ) { }
+    private activatedRoute: ActivatedRoute,
+    private designationService: DesignationService
+  ) {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        console.log('toto', params);
+      });
+  }
 
   ngOnInit() {
     this.placeholderName = 'Nom';

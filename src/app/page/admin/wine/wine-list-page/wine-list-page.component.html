@@ -1,2 +1,27 @@
-<p>wine-list-page works!</p>
-<app-wine-list></app-wine-list>
+<table>
+  <thead>
+  <tr>
+    <th>Label</th>
+    <th>Couleur</th>
+    <th>Catégorie</th>
+    <th>Appellation</th>
+    <th>Nom</th>
+    <th>Millésime</th>
+    <th>Prix</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let wine of wines">
+    <tr>
+      <td>{{wine.label.labelName}}</td>
+      <td>{{wine.color.colorName}}</td>
+      <td>{{wine.category.categoryName}}</td>
+      <td>{{wine.designation.designationName}}</td>
+      <td>{{wine.wineName}}</td>
+      <td>{{wine.vintage.vintageYear}}</td>
+      <td>{{wine.winePrice}}</td>
+      <td><button [routerLink]="['/admin/wine/edit/', wine.id]">modifier</button></td>
+    </tr>
+  </tbody>
+</table>
+

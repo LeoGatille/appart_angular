@@ -3,6 +3,7 @@ import {Color} from '../../../../class/wine/color';
 import {ColorService} from '../../../../service/wine/color.service';
 import {Vintage} from '../../../../class/wine/vintage';
 import {VintageService} from '../../../../service/wine/vintage.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-vintage-list-page',
@@ -16,7 +17,13 @@ export class VintageListPageComponent implements OnInit {
   placeholderNumber: string;
   constructor(
     private vintageService: VintageService,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        console.log('toto', params);
+      });
+  }
 
   ngOnInit() {
     this.placeholderNumber = 'Année';

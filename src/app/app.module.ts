@@ -55,6 +55,12 @@ import { DialogComponent } from './dialog/dialog.component';
 import { CreateFormComponent } from './component/common/create-form/create-form.component';
 import { TestPageComponent } from './page/test-page/test-page.component';
 import { SecTestPageComponent } from './page/sec-test-page/sec-test-page.component';
+import { CategoryEditComponent } from './page/admin/wine/category-edit/category-edit.component';
+import { ColorEditComponent } from './page/admin/wine/color-edit/color-edit.component';
+import { DesignationEditComponent } from './page/admin/wine/designation-edit/designation-edit.component';
+import { LabelEditComponent } from './page/admin/wine/label-edit/label-edit.component';
+import { VintageEditComponent } from './page/admin/wine/vintage-edit/vintage-edit.component';
+import { WineEditComponent } from './page/admin/wine/wine-edit/wine-edit.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +104,12 @@ import { SecTestPageComponent } from './page/sec-test-page/sec-test-page.compone
     CreateFormComponent,
     TestPageComponent,
     SecTestPageComponent,
+    CategoryEditComponent,
+    ColorEditComponent,
+    DesignationEditComponent,
+    LabelEditComponent,
+    VintageEditComponent,
+    WineEditComponent,
   ],
     imports: [
         MatAutocompleteModule,

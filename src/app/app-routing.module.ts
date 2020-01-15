@@ -14,9 +14,45 @@ import {VintageListPageComponent} from './page/admin/wine/vintage-list-page/vint
 import {WineCreatePageComponent} from './page/admin/wine/wine-create-page/wine-create-page.component';
 import {TestPageComponent} from './page/test-page/test-page.component';
 import {SecTestPageComponent} from './page/sec-test-page/sec-test-page.component';
+import {CategoryEditComponent} from './page/admin/wine/category-edit/category-edit.component';
+import {ColorEditComponent} from './page/admin/wine/color-edit/color-edit.component';
+import {DesignationEditComponent} from './page/admin/wine/designation-edit/designation-edit.component';
+import {LabelEditComponent} from './page/admin/wine/label-edit/label-edit.component';
+import {VintageEditComponent} from './page/admin/wine/vintage-edit/vintage-edit.component';
+import {WineEditComponent} from './page/admin/wine/wine-edit/wine-edit.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin/wine/:verb/:id',
+    component: WineEditComponent,
+    data: {title: 'WineModif'}
+  },
+  {
+    path: 'admin/wine/vintage/:verb/:id',
+    component: VintageEditComponent,
+    data: {title: 'VintageModif'}
+  },
+  {
+    path: 'admin/wine/label/:verb/:id',
+    component: LabelEditComponent,
+    data: {title: 'LabelModif'}
+  },
+  {
+    path: 'admin/wine/designation/:verb/:id',
+    component: DesignationEditComponent,
+    data: {title: 'DesignationModif'}
+  },
+  {
+    path: 'admin/wine/color/:verb/:id',
+    component: ColorEditComponent,
+    data: {title: 'ColorModif'}
+  },
+  {
+    path: 'admin/wine/category/:verb/:id',
+    component: CategoryEditComponent,
+    data: {title: 'CategorieModif'}
+  },
   {
     path: 'sectest',
     component: SecTestPageComponent,

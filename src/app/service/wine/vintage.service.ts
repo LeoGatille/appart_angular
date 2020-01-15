@@ -19,4 +19,10 @@ export class VintageService {
     console.log('vintageService !');
     return this.http.post(`${this.uri}/create`, { vintageYear });
   }
+  public editVintage( vintageYear: number, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {vintageYear});
+  }
+  public getOneVintage(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
+  }
 }

@@ -24,7 +24,17 @@ export class WineService {
                   ) {
     return this.http.post(`${this.uri}/create`, {category, designation, color, label, wineName, winePrice, vintage, status});
   }
-  public wineAttributPromise() {
-
+  public editWine( category: number,
+                   designation: number,
+                   color: number,
+                   label: number,
+                   wineName: string,
+                   winePrice: number,
+                   vintage: number,
+                   status: number, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {category, designation, color, label, wineName, winePrice, vintage, status});
+  }
+  public getOneWine(id: number) {
+    return this.http.get(`${this.uri}/${id}`);
   }
 }

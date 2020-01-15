@@ -3,6 +3,7 @@ import {Color} from '../../../../class/wine/color';
 import {ColorService} from '../../../../service/wine/color.service';
 import {Label} from '../../../../class/wine/label';
 import {LabelService} from '../../../../service/wine/label.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-label-list-page',
@@ -16,7 +17,13 @@ export class LabelListPageComponent implements OnInit {
   placeholderName: string;
   constructor(
     private labelService: LabelService,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        console.log('toto', params);
+      });
+  }
 
   ngOnInit() {
     this.placeholderName = 'Nom';

@@ -1,0 +1,103 @@
+
+<div class="main-content">
+  <form *ngIf="!loading" [formGroup]="wineForm" style="background: red;">
+    <div>
+      <mat-form-field class="example-full-width">
+        <input type="text"
+               matInput
+               placeholder="Nom"
+               formControlName="nameControl"
+
+        >
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field class="example-full-width">
+        <input type="number"
+               matInput
+               placeholder="Prix"
+               formControlName="priceControl"
+        >
+      </mat-form-field>
+    </div>
+    <app-auto-complete (addElement)="setColor($event)"
+                       [listOfElements]="colors"
+                       [parentModel]="vin.color"
+                       [displayFn]="displayFn"
+                       [myControl]="colorControl"
+                       [callBackFilter]="callBackFilter"
+    ></app-auto-complete>
+    <div>
+
+    </div>
+    <div>
+      <app-auto-complete *ngIf="!loading"
+                         (addElement)="setCategory($event)"
+                         [listOfElements]="categories"
+                         [parentModel]="vin.category"
+                         [displayFn]="displayFnCategory"
+                         [myControl]="categoryControl"
+                         [callBackFilter]="callBackFilterCat"
+                         [creation]="createCategory"
+                         [activateButton]="activateButton"
+                         (controlButton)="activateNewCategory"
+                         [listToAdd]="categories"
+
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete *ngIf="!loading"
+                         (addElement)="setDesignation($event)"
+                         [listOfElements]="designations"
+                         [parentModel]="vin.designation"
+                         [displayFn]="displayFnDesignation"
+                         [myControl]="designationControl"
+                         [callBackFilter]="callBackFilterDesignation"
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete *ngIf="!loading"
+                         (addElement)="setLabel($event)"
+                         [listOfElements]="labels"
+                         [parentModel]="vin.label"
+                         [displayFn]="displayFnLabel"
+                         [myControl]="labelControl"
+                         [callBackFilter]="callBackFilterLabel"
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete *ngIf="!loading"
+                         (addElement)="setVintage($event)"
+                         [listOfElements]="vintages"
+                         [parentModel]="vin.vintage"
+                         [displayFn]="displayFnVintage"
+                         [myControl]="vintageControl"
+                         [callBackFilter]="callBackFilterVintage"
+      >
+      </app-auto-complete>
+    </div>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Statut</mat-label>
+        <mat-select formControlName="statusControl"
+        >
+          <mat-option *ngFor="let status of allStatus" [value]="status">
+            {{status.statusName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-flat-button
+
+              [disabled]="wineForm.invalid"
+      >Envoyer</button>
+    </div>
+  </form>
+</div>

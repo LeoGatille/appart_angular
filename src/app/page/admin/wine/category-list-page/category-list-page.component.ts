@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../../../class/wine/category';
 import {CategoryService} from '../../../../service/wine/category.service';
-import {Color} from '../../../../class/wine/color';
-import {ColorService} from '../../../../service/wine/color.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-category-list-page',
@@ -16,13 +15,19 @@ export class CategoryListPageComponent implements OnInit {
   placeholderName: string;
   constructor(
     private categoryService: CategoryService,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params
+      .subscribe((params) => {
+        console.log('toto', params);
+      });
+  }
 
   ngOnInit() {
     this.placeholderName = 'Nom';
     this.categoryService.getAllCategories()
-      .subscribe((category: Category[]) => {
-        this.listToAdd = category;
+      .subscribe((categories: Category[]) => {
+        this.listToAdd = categories;
       });
   }
   createElement($event) {

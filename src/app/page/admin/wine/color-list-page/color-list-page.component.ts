@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Color} from '../../../../class/wine/color';
 import {ColorService} from '../../../../service/wine/color.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-color-list-page',
@@ -14,7 +15,11 @@ export class ColorListPageComponent implements OnInit {
   placeholderName: string;
   constructor(
     private colorService: ColorService,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params
+      .subscribe();
+  }
 
   ngOnInit() {
     this.placeholderName = 'Nom';

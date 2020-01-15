@@ -1,9 +1,9 @@
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
-                 (serviceCreate)="createElement($event)"
+                 (serviceCall)="createElement($event)"
                  [numberField]="true"
-                 [placeholderName]="placeholderName"
 ></app-create-form>
 <div *ngFor="let vintage of listToAdd">
   <p>{{vintage.vintageYear}}</p>
+  <button [routerLink]="['/admin/wine/vintage/edit', vintage.id]">modifier</button>
 </div>
