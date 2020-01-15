@@ -23,4 +23,7 @@ export class CategoryService {
   public editCategory( categoryName: string, categoryOrder: number, id ) {
     return this.http.put(`${this.uri}/${id}/edit`, {categoryName, categoryOrder});
   }
+  public deleteCategory(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
 }

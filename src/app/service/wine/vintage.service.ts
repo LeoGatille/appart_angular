@@ -25,4 +25,7 @@ export class VintageService {
   public getOneVintage(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
+  public deleteVintage(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
 }

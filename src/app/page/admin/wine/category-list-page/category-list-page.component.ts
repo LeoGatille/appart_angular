@@ -37,4 +37,8 @@ export class CategoryListPageComponent implements OnInit {
         this.listToAdd.push(category);
       });
   }
+  delete(id: number) {
+    this.categoryService.deleteCategory(id)
+      .subscribe();
+  }
 }

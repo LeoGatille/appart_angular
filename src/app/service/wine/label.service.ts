@@ -26,5 +26,8 @@ export class LabelService {
   public getOneLabel(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
+  public deleteLabel(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
 
 }

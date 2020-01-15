@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Wine} from '../../../../class/wine/wine';
 import {WineService} from '../../../../service/wine/wine.service';
+import {StatusService} from '../../../../service/wine/status.service';
+import {Status} from '../../../../class/wine/status';
 
 @Component({
   selector: 'app-wine-list-page',
@@ -12,9 +14,12 @@ export class WineListPageComponent implements OnInit {
 
   action = 'List';
   wines: Wine[];
+  loading = true;
+  // currentStatus = Status;
   constructor(
     private activatedRoute: ActivatedRoute,
-    private wineService: WineService
+    private wineService: WineService,
+    // private statusService: StatusService
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -30,6 +35,14 @@ export class WineListPageComponent implements OnInit {
       .subscribe((wines: Wine[]) => {
         this.wines = wines;
       });
+    this.loading = true;
+  }
+  delete(id) {
+    this.wineService.deleteWine(id)
+      .subscribe();
+  }
+  log() {
+    console.log('mega toto');
   }
 
 }

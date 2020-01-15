@@ -8,4 +8,5 @@
 <div *ngFor="let color of listToAdd">
   <p>{{color.colorName}}</p>
   <button [routerLink]="['/admin/wine/color/edit/', color.id]">modifier</button>
+  <button (click)="delete(color.id)">suppr</button>
 </div>

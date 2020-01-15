@@ -39,5 +39,9 @@ export class LabelListPageComponent implements OnInit {
         this.listToAdd.push(label);
       });
   }
+  delete(id) {
+    this.labelService.deleteLabel(id)
+      .subscribe();
+  }
 
 }

@@ -1,0 +1,22 @@
+<tr *ngIf="!loading">
+  <td>{{wine.label.labelName}}</td>
+  <td>{{wine.color.colorName}}</td>
+  <td>{{wine.category.categoryName}}</td>
+  <td>{{wine.designation.designationName}}</td>
+  <td>{{wine.wineName}}</td>
+  <td>{{wine.vintage.vintageYear}}</td>
+  <td>{{wine.winePrice}}</td>
+  <td><button (click)="delete(wine.id)">suppr</button></td>
+  <td><button [routerLink]="['/admin/wine/edit/', wine.id]">modifier</button></td>
+  <td><button (click)="showWineStatus()">Statut</button></td>
+</tr>
+<div *ngIf="showAllStatus">
+<tr *ngFor="let status of allStatus">
+  <td >
+    <button (click)="editWineStatus(status.id)">{{status.statusName}}</button>
+  </td>
+</tr>
+</div>
+<tr *ngIf="!showAllStatus && showCurrentStatus ">
+<td>{{wine.status.statusName}}</td>
+</tr>

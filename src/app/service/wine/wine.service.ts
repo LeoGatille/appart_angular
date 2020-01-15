@@ -37,4 +37,12 @@ export class WineService {
   public getOneWine(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
+  public deleteWine(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
+  public patchWine(id: number, status: number) {
+    console.log('Servicepatch->id= ', id );
+    console.log('Servicepatch->status= ', id );
+    return this.http.patch(`${this.uri}/${id}/patch`, {status});
+  }
 }

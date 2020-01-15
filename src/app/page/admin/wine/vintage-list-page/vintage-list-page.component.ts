@@ -39,5 +39,9 @@ export class VintageListPageComponent implements OnInit {
         this.listToAdd.push(vintage);
       });
   }
+  delete(id) {
+    this.vintageService.deleteVintage(id)
+      .subscribe();
+  }
 
 }

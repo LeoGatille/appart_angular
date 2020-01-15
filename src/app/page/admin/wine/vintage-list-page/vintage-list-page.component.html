@@ -6,4 +6,5 @@
 <div *ngFor="let vintage of listToAdd">
   <p>{{vintage.vintageYear}}</p>
   <button [routerLink]="['/admin/wine/vintage/edit', vintage.id]">modifier</button>
+  <button (click)="delete(vintage.id)">suppr</button>
 </div>

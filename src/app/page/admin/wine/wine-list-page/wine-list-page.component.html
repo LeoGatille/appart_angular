@@ -12,16 +12,8 @@
   </tr>
   </thead>
   <tbody *ngFor="let wine of wines">
-    <tr>
-      <td>{{wine.label.labelName}}</td>
-      <td>{{wine.color.colorName}}</td>
-      <td>{{wine.category.categoryName}}</td>
-      <td>{{wine.designation.designationName}}</td>
-      <td>{{wine.wineName}}</td>
-      <td>{{wine.vintage.vintageYear}}</td>
-      <td>{{wine.winePrice}}</td>
-      <td><button [routerLink]="['/admin/wine/edit/', wine.id]">modifier</button></td>
-    </tr>
+    <app-wine-row [wine]="wine"
+    ></app-wine-row>
   </tbody>
 </table>
 

@@ -7,4 +7,5 @@
 <div *ngFor="let designation of listToAdd">
   <p>{{designation.designationName}}</p>
   <button [routerLink]="['/admin/wine/designation/edit', designation.id]">modifier</button>
+  <button (click)="delete(designation.id)">suppr</button>
 </div>

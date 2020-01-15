@@ -61,6 +61,7 @@ import { DesignationEditComponent } from './page/admin/wine/designation-edit/des
 import { LabelEditComponent } from './page/admin/wine/label-edit/label-edit.component';
 import { VintageEditComponent } from './page/admin/wine/vintage-edit/vintage-edit.component';
 import { WineEditComponent } from './page/admin/wine/wine-edit/wine-edit.component';
+import { WineRowComponent } from './component/wine/wine-row/wine-row.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { WineEditComponent } from './page/admin/wine/wine-edit/wine-edit.compone
     LabelEditComponent,
     VintageEditComponent,
     WineEditComponent,
+    WineRowComponent,
   ],
     imports: [
         MatAutocompleteModule,

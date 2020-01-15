@@ -23,4 +23,7 @@ export class ColorService {
   public getOneColor(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
+  public deleteColor(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
 }

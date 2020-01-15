@@ -24,4 +24,7 @@ export class DesignationService {
   public getOneDesignation(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
+  public deleteDesignation(id: number) {
+    return this.http.delete(`${this.uri}/${id}/delete`);
+  }
 }

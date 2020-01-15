@@ -39,5 +39,9 @@ export class DesignationListPageComponent implements OnInit {
         this.listToAdd.push(designation);
       });
   }
+  delete(id) {
+    this.designationService.deleteDesignation(id)
+      .subscribe();
+  }
 
 }

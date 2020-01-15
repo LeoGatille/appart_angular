@@ -35,5 +35,9 @@ export class ColorListPageComponent implements OnInit {
         this.listToAdd.push(color);
       });
   }
+  delete(id) {
+    this.colorService.deleteColor(id)
+      .subscribe();
+  }
 
 }
