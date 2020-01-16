@@ -25,7 +25,7 @@ export class WineRowComponent implements OnInit {
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
-        console.log(params);
+        console.log('activatedRoute.params = ', params);
       });
     this.statusService.getAllStatus()
       .subscribe((allstatus: Status[]) => {
@@ -49,14 +49,13 @@ export class WineRowComponent implements OnInit {
   editWineStatus(idStatus) {
     if (this.showAllStatus) {
       this.wineService.patchWine(this.wine.id, idStatus )
-        .subscribe((status: Status) => {
-          console.log('nouveau status = ', status);
-          this.wine.status = status;
+        .subscribe((patchedWine: Wine) => {
+          this.wine.status = patchedWine.status;
+          this.showAllStatus = false;
+          if (this.wine.status.id !== 1) {
+            this.showCurrentStatus = true;
+          }
         });
-    }
-    this.showAllStatus = false;
-    if (this.wine.status.id !== 1) {
-      this.showCurrentStatus = true;
     }
     console.log('idStatus = ', idStatus );
     console.log('wine.status.id = ', this.wine.status.id);

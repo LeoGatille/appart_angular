@@ -20,9 +20,15 @@ import {DesignationEditComponent} from './page/admin/wine/designation-edit/desig
 import {LabelEditComponent} from './page/admin/wine/label-edit/label-edit.component';
 import {VintageEditComponent} from './page/admin/wine/vintage-edit/vintage-edit.component';
 import {WineEditComponent} from './page/admin/wine/wine-edit/wine-edit.component';
+import {FoodListPageComponent} from './page/admin/food/food-list-page/food-list-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin/food',
+    component: FoodListPageComponent,
+    data: {title: 'FoodList'}
+  },
   {
     path: 'admin/wine/:verb/:id',
     component: WineEditComponent,

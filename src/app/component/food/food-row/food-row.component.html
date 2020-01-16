@@ -1,0 +1,12 @@
+<div>{{food.foodName}}
+  <button mat-flat-button
+          (click)="showFoodAllergens()"
+  > allergènes</button>
+  <button mat-flat-button
+          (click)="deleteFood()"
+  > suppr</button>
+</div>
+<div>{{food.foodDescription}}</div>
+<div *ngIf="showAllergens">
+  <div *ngFor=" let allergen of food.allergen ">{{allergen.allergenName}}</div>
+</div>

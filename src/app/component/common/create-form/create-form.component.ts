@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-form',
@@ -13,10 +13,12 @@ export class CreateFormComponent implements OnInit {
   @Input() class: any;
   @Input() nameField = false;
   @Input() numberField = false;
+  @Input() descriptionField = false;
   @Input() placeholderName: string;
   @Input() placeholderNumber: string;
   @Input() nameValue: string | null;
   @Input() numberValue: number | null;
+
   @Output() serviceCall = new EventEmitter<any>();
 
   loading = true;
@@ -29,27 +31,42 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.createForm = this.fb.group({
+      initControl : ['', Validators.required]
+    });
+    this.buildForm();
     this.loading = false;
-    this.createForm = this.buildForm();
   }
 
   buildForm() {
-    if (this.nameField && !this.numberField) {
-      return this.fb.group({
-        nameControl : ['', Validators.required]
-      });
-    } else {
-      if (this.nameField && this.numberField) {
-        return this.fb.group({
-          nameControl : ['', Validators.required],
-          numberControl: ['', Validators.required]
-        });
-      } else {
-        return this.fb.group({
-          numberControl: ['', Validators.required]
-        });
-      }
+    // this.createForm.addControl('nameControl', new FormControl('', validators));
+    this.createForm.removeControl('initControl');
+    if (this.numberField) {
+      this.createForm.addControl('numberControl', new FormControl('', Validators.required) );
     }
+    if (this.nameField) {
+      this.createForm.addControl('nameControl', new FormControl('', Validators.required) );
+    }
+    if (this.descriptionField) {
+      this.createForm.addControl('descriptionControl', new FormControl('', Validators.required) );
+    }
+    // if (this.nameField && !this.numberField) {
+    //   return this.fb.group({
+    //     nameControl : ['', Validators.required]
+    //   });
+    // } else {
+    //   if (this.nameField && this.numberField) {
+    //     return this.fb.group({
+    //       nameControl : ['', Validators.required],
+    //       numberControl: ['', Validators.required]
+    //     });
+    //   } else {
+    //     return this.fb.group({
+    //       numberControl: ['', Validators.required]
+    //     });
+    //   }
+    // }
   }
 
   save() {

@@ -62,6 +62,14 @@ import { LabelEditComponent } from './page/admin/wine/label-edit/label-edit.comp
 import { VintageEditComponent } from './page/admin/wine/vintage-edit/vintage-edit.component';
 import { WineEditComponent } from './page/admin/wine/wine-edit/wine-edit.component';
 import { WineRowComponent } from './component/wine/wine-row/wine-row.component';
+import { FoodListPageComponent } from './page/admin/food/food-list-page/food-list-page.component';
+import { FoodCreatePageComponent } from './page/admin/food/food-create-page/food-create-page.component';
+import { AllergenListPageComponent } from './page/admin/food/allergen-list-page/allergen-list-page.component';
+import { FormulaPageComponent } from './page/admin/food/formula-page/formula-page.component';
+import { EventListPageComponent } from './page/admin/event/event-list-page/event-list-page.component';
+import { EventEditPageComponent } from './page/admin/event/event-edit-page/event-edit-page.component';
+import { GalleryListPageComponent } from './page/admin/gallery/gallery-list-page/gallery-list-page.component';
+import { FoodRowComponent } from './component/food/food-row/food-row.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +120,14 @@ import { WineRowComponent } from './component/wine/wine-row/wine-row.component';
     VintageEditComponent,
     WineEditComponent,
     WineRowComponent,
+    FoodListPageComponent,
+    FoodCreatePageComponent,
+    AllergenListPageComponent,
+    FormulaPageComponent,
+    EventListPageComponent,
+    EventEditPageComponent,
+    GalleryListPageComponent,
+    FoodRowComponent,
   ],
     imports: [
         MatAutocompleteModule,

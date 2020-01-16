@@ -10,13 +10,13 @@
   <td><button [routerLink]="['/admin/wine/edit/', wine.id]">modifier</button></td>
   <td><button (click)="showWineStatus()">Statut</button></td>
 </tr>
-<div *ngIf="showAllStatus">
-<tr *ngFor="let status of allStatus">
-  <td >
+
+<tr *ngIf="showAllStatus">
+  <td *ngFor="let status of allStatus">
     <button (click)="editWineStatus(status.id)">{{status.statusName}}</button>
   </td>
 </tr>
-</div>
+
 <tr *ngIf="!showAllStatus && showCurrentStatus ">
 <td>{{wine.status.statusName}}</td>
 </tr>
