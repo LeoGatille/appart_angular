@@ -1,1 +1,21 @@
-<p>formula-page works!</p>
+<app-create-form [listToAdd]="allFormulas"
+                 [nameField]="true"
+                 [descriptionField]="true"
+                 [numberField]="true"
+                 [placeholderName]="'Nom'"
+                 (serviceCall)="createFormula($event)"
+></app-create-form>
+<div *ngIf="!loading">
+
+</div>
+<div *ngFor="let formula of allFormulas">
+  <div>
+    {{formula.formulaName}} | {{formula.formulaPrice}}
+    <button mat-flat-button
+            (click)="deleteFormula(formula.id)"
+    >suppr</button>
+  </div>
+  <div>
+    {{formula.description}}
+  </div>
+</div>

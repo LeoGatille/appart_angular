@@ -21,9 +21,27 @@ import {LabelEditComponent} from './page/admin/wine/label-edit/label-edit.compon
 import {VintageEditComponent} from './page/admin/wine/vintage-edit/vintage-edit.component';
 import {WineEditComponent} from './page/admin/wine/wine-edit/wine-edit.component';
 import {FoodListPageComponent} from './page/admin/food/food-list-page/food-list-page.component';
+import {AllergenListPageComponent} from './page/admin/food/allergen-list-page/allergen-list-page.component';
+import {FormulaPageComponent} from './page/admin/food/formula-page/formula-page.component';
+import {GalleryListPageComponent} from './page/admin/gallery/gallery-list-page/gallery-list-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin/gallery',
+    component: GalleryListPageComponent,
+    data: {title: 'GalleryList'}
+  },
+  {
+    path: 'admin/food/formula',
+    component: FormulaPageComponent,
+    data: {title: 'FormulaList'}
+  },
+  {
+    path: 'admin/food/allergen',
+    component: AllergenListPageComponent,
+    data: {title: 'AllergensList'}
+  },
   {
     path: 'admin/food',
     component: FoodListPageComponent,

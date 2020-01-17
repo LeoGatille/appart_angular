@@ -78,7 +78,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       const vintages = data[4];
       const statuses = data[5];
 
-      this.vin.category = null;
+      this.vin.category = categories[0];
       this.vin.color  = null;
 
       this.vin.designation = null;

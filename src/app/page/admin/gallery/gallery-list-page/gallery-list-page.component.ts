@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ImageService} from '../../../../service/gallery/image.service';
 
 @Component({
   selector: 'app-gallery-list-page',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryListPageComponent implements OnInit {
 
-  constructor() { }
+  allImages: string[];
+  constructor(
+    private imageService: ImageService
+  ) { }
 
   ngOnInit() {
+    this.imageService.getAllImages()
+      .subscribe((allurl: string[]) => {
+        this.allImages = allurl;
+      });
   }
 
 }

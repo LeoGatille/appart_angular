@@ -1,1 +1,13 @@
-<p>allergen-list-page works!</p>
+<app-create-form *ngIf="!loading"
+                 [listToAdd]="allAllergens"
+                 [nameField]="true"
+                 [placeholderName]="'Nom'"
+                 (serviceCall)="createAllergen($event)"
+></app-create-form>
+<div *ngFor="let allergen of allAllergens">
+  <div>{{allergen.allergenName}}
+    <button mat-flat-button
+            (click)="deleteAllergen(allergen.id)"
+    >suppr</button>
+  </div>
+</div>

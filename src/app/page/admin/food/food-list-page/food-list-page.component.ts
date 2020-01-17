@@ -3,7 +3,7 @@ import {Type} from '../../../../class/food/type';
 import {Food} from '../../../../class/food/food';
 import {TypeService} from '../../../../service/food/type.service';
 import {FoodService} from '../../../../service/food/food.service';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Allergen} from '../../../../class/food/allergen';
 import {Color} from '../../../../class/wine/color';
 import {AllergenService} from '../../../../service/food/allergen.service';
@@ -14,32 +14,36 @@ import {AllergenService} from '../../../../service/food/allergen.service';
   styleUrls: ['./food-list-page.component.css']
 })
 export class FoodListPageComponent implements OnInit {
-  autoElements: any[];
-  parentModel: Allergen;
-  allergensId: number[];
+  // allergens: Allergen[];
+  foodForm: FormGroup;
+  stockAllergen: Allergen;
+  allergens: Allergen[];
+  allergensId = [];
+  allergenControl: FormControl;
   food: Food;
   createAutoElement = false;
-  find: any;
   listToAdd: any[];
-  myControl: FormControl;
-  activateButton = true;
-  selectElements: any[];
-  elementAttribut: any;
   allTypes: Type[];
-  autoControl: FormControl;
   loading = true;
   constructor(
+    private fb: FormBuilder,
     private typeService: TypeService,
     private foodService: FoodService,
     private allergenService: AllergenService,
   ) {
-    this.createAutoElement = true;
-    this.autoControl = new FormControl(this.food.allergen);
-    this.allergenService.getAllAllergens()
-      .subscribe((allergens: Allergen[]) => {
-        this.autoElements = allergens;
-      });
     this.food = new Food();
+    this.allergenControl = new FormControl(this.stockAllergen, Validators.required);
+    const allergenP = this.allergenService.getAllAllergens().toPromise();
+    Promise.resolve(allergenP).then((data: any) => {
+      this.loading = false;
+      this.allergens = data;
+      this.foodForm = this.fb.group({
+        allergenControl : this.allergenControl,
+        descriptionControl : ['', Validators.required],
+        nameControl : ['', Validators.required],
+        typeControl : ['', Validators.required]
+      });
+    });
   }
 
   ngOnInit() {
@@ -57,17 +61,18 @@ export class FoodListPageComponent implements OnInit {
       return allergen.allergenName.toLowerCase().includes(filterValue);
     };
   }
-  activateNewAutoElement(val) {
-    if (typeof val === 'string') {
-      // console.log('activateNewCategory = ' + this.categories.some((sample) => sample.categoryName === val));
-      this.activateButton =  this.autoElements.some((sample) => sample.allergenName.toLowerCase() === val.toLowerCase());
-    }
-  }
-  setAutoElement($event) {
+  getAllergenId($event) {
     if (!$event) {
       return;
     }
-    this.allergensId.push($event.id);
+    if (typeof $event.id === 'number') {
+      this.allergensId.push($event.id);
+    }
+  }
+  save() {
+    const val = this.foodForm.value;
+    this.foodService.createFood(val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId)
+      .subscribe(() => { this.ngOnInit(); });
   }
 
 }

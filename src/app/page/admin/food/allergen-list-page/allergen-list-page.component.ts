@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Allergen} from '../../../../class/food/allergen';
+import {AllergenService} from '../../../../service/food/allergen.service';
 
 @Component({
   selector: 'app-allergen-list-page',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllergenListPageComponent implements OnInit {
 
-  constructor() { }
+  allAllergens: Allergen[];
+  loading = true;
+  constructor(
+    private allergenService: AllergenService
+  ) { }
 
   ngOnInit() {
+    this.allergenService.getAllAllergens()
+    .subscribe((allergens: Allergen[]) => {
+      this.allAllergens = allergens;
+    });
+    this.loading = false;
+  }
+  createAllergen($event) {
+    console.log('event', $event);
+    this.allergenService.createAllergen($event.nameControl)
+      .subscribe((allergen: Allergen) => {
+        this.allAllergens.push(allergen);
+      });
+  }
+  deleteAllergen(id) {
+    this.allergenService.deleteAllergen(id)
+      .subscribe();
   }
 
 }

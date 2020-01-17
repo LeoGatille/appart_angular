@@ -5,21 +5,21 @@ import {HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AllergenService {
+export class FormulaService {
 
-  private uri = `${Globals.APP_API_URL}/allergen`;
+  private uri = `${Globals.APP_API_URL}/formula`;
+
   constructor(
     private http: HttpClient
   ) { }
 
-  public getAllAllergens() {
+  public getAllFormulas() {
     return this.http.get(`${this.uri}`);
   }
-  public createAllergen(allergenName: string) {
-    console.log('serviceCreate', allergenName);
-    return this.http.post(`${this.uri}/create`, {allergenName});
+  public createFormula(formulaName: string, formulaPrice: number, description: string) {
+    return this.http.post(`${this.uri}/create`, {formulaName, formulaPrice, description});
   }
-  public deleteAllergen(id: number) {
+  public deleteFormula(id: number) {
     console.log('serviceDelete', id);
     return this.http.delete(`${this.uri}/${id}/delete`);
   }

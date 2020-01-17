@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DesignationAutoComponent } from './designation-auto.component';
+import { AllImagesComponent } from './all-images.component';
 
-describe('DesignationAutoComponent', () => {
-  let component: DesignationAutoComponent;
-  let fixture: ComponentFixture<DesignationAutoComponent>;
+describe('AllImagesComponent', () => {
+  let component: AllImagesComponent;
+  let fixture: ComponentFixture<AllImagesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DesignationAutoComponent ]
+      declarations: [ AllImagesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DesignationAutoComponent);
+    fixture = TestBed.createComponent(AllImagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

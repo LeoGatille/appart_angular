@@ -14,10 +14,10 @@ export class FoodService {
   public getAllFood() {
     return this.http.get(`${this.uri}`);
   }
-  public createFood(foodName: string, foodDescription: string, allergens: Allergen[]) {
-    return this.http.post(`${this.uri}/create`, {foodName, foodDescription, allergens});
+  public createFood(foodName: string, foodDescription: string, type: number, allergens: number[]) {
+    return this.http.post(`${this.uri}/create`, {foodName, foodDescription, allergens, type});
   }
-  public editFood(id: number, foodName: string, foodDescription: string, allergens: Allergen[]) {
+  public editFood(id: number, foodName: string, foodDescription: string, allergens: Allergen[],  type: number) {
     return this.http.post(`${this.uri}/${id}/edit`, {foodName, foodDescription, allergens});
   }
   public getOneFood(id: number) {

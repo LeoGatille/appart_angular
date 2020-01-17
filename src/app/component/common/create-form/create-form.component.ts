@@ -40,7 +40,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   buildForm() {
-    // this.createForm.addControl('nameControl', new FormControl('', validators));
     this.createForm.removeControl('initControl');
     if (this.numberField) {
       this.createForm.addControl('numberControl', new FormControl('', Validators.required) );
@@ -51,22 +50,6 @@ export class CreateFormComponent implements OnInit {
     if (this.descriptionField) {
       this.createForm.addControl('descriptionControl', new FormControl('', Validators.required) );
     }
-    // if (this.nameField && !this.numberField) {
-    //   return this.fb.group({
-    //     nameControl : ['', Validators.required]
-    //   });
-    // } else {
-    //   if (this.nameField && this.numberField) {
-    //     return this.fb.group({
-    //       nameControl : ['', Validators.required],
-    //       numberControl: ['', Validators.required]
-    //     });
-    //   } else {
-    //     return this.fb.group({
-    //       numberControl: ['', Validators.required]
-    //     });
-    //   }
-    // }
   }
 
   save() {
