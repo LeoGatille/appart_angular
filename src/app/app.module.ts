@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatFormFieldModule,
+  MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
-  MatListModule, MatMenuModule, MatOptionModule,
+  MatListModule, MatMenuModule, MatNativeDateModule, MatOptionModule,
   MatProgressSpinnerModule, MatSelectModule,
   MatSidenavModule,
   MatToolbarModule
@@ -67,6 +67,7 @@ import { GalleryListPageComponent } from './page/admin/gallery/gallery-list-page
 import { FoodRowComponent } from './component/food/food-row/food-row.component';
 import { AllImagesComponent } from './page/gallery/all-images/all-images.component';
 import { ImageComponent } from './component/gallery/image/image.component';
+import { EventCreateComponent } from './page/admin/event/event-create/event-create.component';
 
 @NgModule({
   declarations: [
@@ -122,31 +123,34 @@ import { ImageComponent } from './component/gallery/image/image.component';
     FoodRowComponent,
     AllImagesComponent,
     ImageComponent,
+    EventCreateComponent,
   ],
-    imports: [
-        MatAutocompleteModule,
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatListModule,
-        MatProgressSpinnerModule,
-        MatCardModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatMenuModule,
-        MatDialogModule,
-        FormsModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatButtonToggleModule,
-    ],
+  imports: [
+    MatAutocompleteModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatMenuModule,
+    MatDialogModule,
+    FormsModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
     entryComponents: [
       DialogComponent
     ],

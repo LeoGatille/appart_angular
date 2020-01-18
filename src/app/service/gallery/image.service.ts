@@ -7,22 +7,17 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ImageService {
   private allImagess: any;
-  private uriAdmin = `${Globals.APP_API_URL}/gallery`;
   private uri = `${Globals.APP_API_URL}/image`;
   constructor(
     private http: HttpClient
   ) { }
-
-  public getAllImages() {
-    return this.http.get(`${this.uriAdmin}`);
-  }
-  public getAllChoosenImages() {
+  public getAllImage() {
     return this.http.get(`${this.uri}`);
   }
-  public createChoosenImages(imageUrl: string, imageAlt: string) {
-    return this.http.post(`${this.uri}/create`, {imageUrl, imageAlt});
+  public createImage(image) {
+    return this.http.post(`${this.uri}/create`, {image});
   }
-  public deleteLabel(id: number) {
+  public deleteImage(id: number) {
     return this.http.delete(`${this.uri}/${id}/delete`);
   }
 }

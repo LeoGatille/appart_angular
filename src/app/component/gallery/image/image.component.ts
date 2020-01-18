@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Image} from '../../../class/gallery/image';
 import {ImageService} from '../../../service/gallery/image.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-image',

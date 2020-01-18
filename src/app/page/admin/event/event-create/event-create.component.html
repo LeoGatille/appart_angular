@@ -1,0 +1,116 @@
+<form *ngIf="!loading"
+      [formGroup]="createEvent"
+      style="background: white;">
+  <div>
+    <mat-form-field>
+      <input matInput type="text"
+             placeholder="'Nom'"
+             autocomplete="Off"
+             formControlName="name"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+        <textarea matInput type="textarea"
+                  placeholder="'Description'"
+                  autocomplete="Off"
+                  formControlName="description"
+        ></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+
+    <mat-datepicker></mat-datepicker>
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="picker"
+             formControlName="date"
+             placeholder="Choose a date"
+      >
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput
+             type="number"
+             placeholder=""
+             autocomplete="Off"
+             formControlName="priceNoDrinks"
+      />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput
+             type="number"
+             placeholder=""
+             autocomplete="Off"
+             formControlName="priceWithDrinks"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="typeControl"
+      >
+        <mat-option *ngFor="let type of allTypes"
+                    [value]="type"
+        >
+          {{type.typeName}}
+          <mat-select formControlName="foodControl"
+          >
+            <mat-option *ngFor="let food of type.foods"
+                        [value]="food"
+                        (click)="getSelectedFood(food, type)"
+            >
+              {{food.foodName}}
+            </mat-option>
+          </mat-select>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-flat-button
+            [disabled]="createEvent.invalid"
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+  <div>
+    Menue
+    <button mat-flat-button
+            (click)="reset()"
+    >Réinitialiser</button>
+    <div style="display: flex; justify-content: space-around">
+      <div>
+        <h5>Entrées</h5>
+        <div *ngFor="let food of selectedEntrees">
+          <div>{{food.foodName}}</div>
+        </div>
+      </div>
+      <div>
+        <h5>Plats</h5>
+        <div *ngFor="let food of selectedPlats">
+          <div>{{food.foodName}}</div>
+        </div>
+      </div>
+      <div>
+        <h5>Desserts</h5>
+        <div *ngFor="let food of selectedDesserts">
+          <div>{{food.foodName}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
