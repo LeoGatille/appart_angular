@@ -21,6 +21,9 @@ export class EventCreateComponent implements OnInit {
   selectedEntrees: Food[];
   selectedPlats: Food[];
   selectedDesserts: Food[];
+  entreesId = 1;
+  platsId = 2;
+  dessertsId = 3;
   constructor(
     private eventService: EventService,
     private foodService: FoodService,
@@ -53,19 +56,23 @@ export class EventCreateComponent implements OnInit {
   }
   getSelectedFood(food: Food, type: Type) {
     this.foodsId.push(food.id);
-    if (type.id === 1) {
+    if (type.id === this.entreesId) {
       this.selectedEntrees.push(food);
     }
-    if (type.id === 2) {
+    if (type.id === this.platsId) {
       this.selectedPlats.push(food);
     }
-    if (type.id === 3) {
+    if (type.id === this.dessertsId) {
       this.selectedDesserts.push(food);
     }
     console.log('FoodIds = ', this.foodsId);
   }
   save() {
+
     console.log('eventForm = ', this.createEvent.value);
+    const val = this.createEvent.value;
+    this.eventService.createEvent(val.date, val.description, val.name, val.priceNoDrinks, val.priceWithDrinks, this.foodsId)
+      .subscribe();
   }
   reset() {
     this.foodsId = [];

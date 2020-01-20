@@ -1,12 +1,22 @@
+<h1>Catégories</h1>
+<h4 *ngIf="action === 'list'">Création</h4>
+<h4 *ngIf="action === 'edit'">Modification</h4>
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
                  (serviceCall)="createElement($event)"
                  [nameField]="true"
+                 [nameValue]="categoryNameEdit"
                  [numberField]="true"
+                 [numberValue]="categoryOrderEdit"
                  [placeholderName]="placeholderName"
 ></app-create-form>
+<div>
+  <button mat-flat-button
+          (click)="changeAction()"
+  >Création</button>
+</div>
 <div *ngFor="let category of listToAdd">
   <p>{{category.categoryName}}</p>
-  <button [routerLink]="['/admin/wine/category/edit', category.id]">modifier</button>
+  <button (click)="editMod(category.id)">modifier</button>
   <button (click)="delete(category.id)" >delete</button>
 </div>

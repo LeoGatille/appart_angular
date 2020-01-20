@@ -18,6 +18,7 @@ export class CreateFormComponent implements OnInit {
   @Input() placeholderNumber: string;
   @Input() nameValue: string | null;
   @Input() numberValue: number | null;
+  @Input() descriptionValue: number | null;
 
   @Output() serviceCall = new EventEmitter<any>();
 

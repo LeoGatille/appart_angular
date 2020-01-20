@@ -11,7 +11,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class GalleryListPageComponent implements OnInit {
 
-  taskForm: FormGroup;
+  imageForm: FormGroup;
   fileToUpload: File = null;
   constructor(
     private imageService: ImageService,
@@ -20,29 +20,62 @@ export class GalleryListPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.taskForm = this.fb.group({
-      alt: [null, Validators.required],
+    this.imageForm = this.fb.group({
+      fileControl: [null],
+      altControl: ['']
     });
   }
 
-  // createTask() {
-  //   const val = this.taskForm.value;
-  //   });
-  //   this.loading = true;
-  //   if (this.fileToUpload) {
-  //     this.imgServ.postFile(this.fileToUpload)
-  //       .subscribe((image: Image) => {
-  //         this.launchTaskCreation(val.name, val.priority, categories, image.id);
-  //       });
-  //     return ;
-  //   }
-  //   this.launchTaskCreation(val.name, val.priority, categories);
-  // }
-  // private launchTaskCreation(image) {
-  //   this.imageService.(name, priority, categories, image)
-  //     .subscribe((data) => {
-  //       this.loading = false;
-  //       this.router.navigate(['/task']);
-  //     });
-  // }
+  onFileSelect(event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    console.log('file = ', file);
+    this.imageForm.patchValue({
+      fileControl: file
+    });
+    this.imageForm.get('fileControl').updateValueAndValidity();
+  }
+
+  handleFileInput(files: FileList) {
+    console.log('$event files = ', files);
+    this.fileToUpload = files.item(0);
+  }
+
+  save() {
+
+
+    if (this.fileToUpload) {
+      console.log('fileToUpload = ', this.fileToUpload.type);
+      const val = this.imageForm.value;
+      const input = new FormData();
+      input.append('image', this.fileToUpload);
+      input.append('alternative', val.altControl);
+      this.imageService.createImage(input)
+        .subscribe(() => {
+
+        });
+    }
+
+
+    // console.log('val', this.imageForm.value);
+    // const formData = new FormData();
+    // formData.append('file', this.imageForm.get('fileControl').value);
+    // this.imageService.createImage(formData)
+    //   .subscribe(() => {
+    //     console.log('FormData = ', formData.get('file'));
+    //   });
+
+    // const formModel = this.prepareSave();
+    // this.imageService.createImage(formModel)
+    //   .subscribe(() => {
+    //     console.log('formModel = ', formModel);
+    //   });
+    //  this.imageService.createImage(val.image)
+    //    .subscribe();
+  }
+  private prepareSave(): any {
+    const input = new FormData();
+    input.append('name', this.imageForm.get('alt').value);
+    input.append('avatar', this.imageForm.get('file').value);
+    return input;
+  }
 }

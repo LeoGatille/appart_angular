@@ -1,0 +1,53 @@
+<form [formGroup]="foodForm">
+  <div>
+    <mat-form-field>
+      <input matInput type="text"
+             placeholder="Nom"
+             autocomplete="Off"
+             formControlName="nameControl"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+        <textarea matInput type="textarea"
+                  placeholder="Description"
+                  autocomplete="Off"
+                  formControlName="descriptionControl"
+        ></textarea>
+    </mat-form-field>
+  </div>
+  <div>
+    <app-auto-complete (addElement)="getAllergenId($event)"
+                       [listOfElements]="allergens"
+                       [parentModel]=""
+                       [displayFn]="displayFn"
+                       [myControl]="allergenControl"
+                       [callBackFilter]="callBackFilter"
+    ></app-auto-complete>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Type</mat-label>
+      <mat-select formControlName="typeControl"
+      >
+        <mat-option *ngFor="let type of allTypes" [value]="type">
+          {{type.typeName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <button (click)="save()">envoyer</button>
+  </div>
+</form>
+
+<div *ngIf="!loading">
+  <div *ngFor="let type of allTypes">
+    <h4>{{type.typeName}}</h4>
+    <div *ngFor="let food of type.foods ">
+      <app-food-row [food]="food"></app-food-row>
+    </div>
+  </div>
+</div>
