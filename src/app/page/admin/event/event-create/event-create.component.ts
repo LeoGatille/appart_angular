@@ -5,6 +5,8 @@ import {FoodService} from '../../../../service/food/food.service';
 import {Food} from '../../../../class/food/food';
 import {TypeService} from '../../../../service/food/type.service';
 import {Type} from '../../../../class/food/type';
+import {DatePipe} from '@angular/common';
+import {Timestamp} from 'rxjs/internal-compatibility';
 
 @Component({
   selector: 'app-event-create',
@@ -29,6 +31,7 @@ export class EventCreateComponent implements OnInit {
     private foodService: FoodService,
     private typeService: TypeService,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
   ) { }
   ngOnInit() {
     this.foodsId = [];
@@ -68,10 +71,12 @@ export class EventCreateComponent implements OnInit {
     console.log('FoodIds = ', this.foodsId);
   }
   save() {
-
     console.log('eventForm = ', this.createEvent.value);
     const val = this.createEvent.value;
-    this.eventService.createEvent(val.date, val.description, val.name, val.priceNoDrinks, val.priceWithDrinks, this.foodsId)
+    // const formatDate = this.datePipe.transform(val.date, 'yyyy/mm/dd hh:mm:ss');
+    const timestamp = val.date.getTime();
+    console.log('timestamp', timestamp);
+    this.eventService.createEvent(timestamp, val.description, val.name, val.priceNoDrinks, val.priceWithDrinks, this.foodsId)
       .subscribe();
   }
   reset() {

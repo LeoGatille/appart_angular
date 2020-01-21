@@ -1,1 +1,5 @@
 <app-event-create></app-event-create>
+<div *ngFor="let event of allEvents ">
+  <div>{{event.eventName}} ||| {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</div>
+  <button (click)="log(event.eventDate)" >log</button>
+</div>

@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
+  MAT_DATE_LOCALE,
   MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule,
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatNativeDateModule, MatOptionModule,
@@ -68,6 +69,7 @@ import { FoodRowComponent } from './component/food/food-row/food-row.component';
 import { AllImagesComponent } from './page/gallery/all-images/all-images.component';
 import { ImageComponent } from './component/gallery/image/image.component';
 import { EventCreateComponent } from './page/admin/event/event-create/event-create.component';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -155,6 +157,8 @@ import { EventCreateComponent } from './page/admin/event/event-create/event-crea
       DialogComponent
     ],
   providers: [
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ResponseInterceptor, multi: true }
   ],

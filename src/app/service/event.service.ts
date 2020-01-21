@@ -15,7 +15,7 @@ export class EventService {
   public getAllEvents() {
     return this.http.get(`${this.uri}`);
   }
-  public createEvent(eventDate: number,
+  public createEvent(eventDate: any,
                      eventDescription: string,
                      eventName: string,
                      priceNoDrinks: number,
@@ -30,12 +30,12 @@ export class EventService {
     return this.http.post(`${this.uri}/create`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks, foods});
   }
   public editEvent(id: number,
-                   eventDate: number,
+                   eventDate: any,
                    eventDescription: string,
                    eventName: string,
                    priceNoDrinks: number,
                    priceWithDrinks: number) {
-    return this.http.post(`${this.uri}/${id}/edit`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks});
+    return this.http.put(`${this.uri}/${id}/edit`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks});
   }
   public getOneEvent(id: number) {
     return this.http.get(`${this.uri}/${id}`);

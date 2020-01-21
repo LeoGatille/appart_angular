@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Event} from '../../../../class/event';
+import {EventService} from '../../../../service/event.service';
 
 @Component({
   selector: 'app-event-list-page',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventListPageComponent implements OnInit {
 
-  constructor() { }
+  allEvents: Event[];
+  constructor(
+    private eventService: EventService,
+  ) { }
 
   ngOnInit() {
+    this.eventService.getAllEvents()
+      .subscribe((events: Event[]) => {
+        this.allEvents = events;
+      });
+    console.log('eventDate = ', this.allEvents);
+  }
+  log(date) {
+    console.log('realDate = ', date);
   }
 
 }
