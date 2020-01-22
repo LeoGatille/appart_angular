@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {EventService} from '../../../../service/event.service';
 import {FoodService} from '../../../../service/food/food.service';
@@ -15,6 +15,18 @@ import {Timestamp} from 'rxjs/internal-compatibility';
 })
 export class EventCreateComponent implements OnInit {
 
+  @Output() allControllers = new EventEmitter<any>();
+
+  @Input() eventId: number | null;
+  @Input() action: string;
+  @Input() oldName: string |null;
+  @Input() oldDescription: string |null;
+  @Input() oldDate: Date |null;
+  @Input() oldPriceNoDrinks: number |null;
+  @Input() oldPriceWithDrinks: number |null;
+  @Input() oldFoodControl: Food[] |null;
+  @Input() oldTypeControl: string |null;
+  dataToParent: any[];
   foodsId: number[];
   createEvent: FormGroup;
   allFoods: Food[];
@@ -34,6 +46,7 @@ export class EventCreateComponent implements OnInit {
     private datePipe: DatePipe,
   ) { }
   ngOnInit() {
+
     this.foodsId = [];
     this.selectedEntrees = [];
     this.selectedPlats = [];
@@ -71,13 +84,10 @@ export class EventCreateComponent implements OnInit {
     console.log('FoodIds = ', this.foodsId);
   }
   save() {
-    console.log('eventForm = ', this.createEvent.value);
+    this.dataToParent = [];
     const val = this.createEvent.value;
-    // const formatDate = this.datePipe.transform(val.date, 'yyyy/mm/dd hh:mm:ss');
-    const timestamp = val.date.getTime();
-    console.log('timestamp', timestamp);
-    this.eventService.createEvent(timestamp, val.description, val.name, val.priceNoDrinks, val.priceWithDrinks, this.foodsId)
-      .subscribe();
+    this.dataToParent.push(this.eventId, val, this.foodsId);
+    this.allControllers.emit(this.dataToParent);
   }
   reset() {
     this.foodsId = [];
@@ -85,4 +95,5 @@ export class EventCreateComponent implements OnInit {
     this.selectedEntrees = [];
     this.selectedPlats = [];
   }
+
 }

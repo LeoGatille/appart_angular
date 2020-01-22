@@ -34,8 +34,15 @@ export class EventService {
                    eventDescription: string,
                    eventName: string,
                    priceNoDrinks: number,
-                   priceWithDrinks: number) {
-    return this.http.put(`${this.uri}/${id}/edit`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks});
+                   priceWithDrinks: number,
+                   foods: number[] | null) {
+    console.log('eventDate = ', eventDate);
+    console.log('eventDescription = ', eventDescription);
+    console.log('eventName = ', eventName);
+    console.log('priceNoDrinks = ', priceNoDrinks);
+    console.log('priceWithDrinks = ', priceWithDrinks);
+    console.log('eventDate = ', foods);
+    return this.http.put(`${this.uri}/${id}/edit`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks, foods});
   }
   public getOneEvent(id: number) {
     return this.http.get(`${this.uri}/${id}`);

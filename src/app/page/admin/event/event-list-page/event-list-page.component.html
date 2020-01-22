@@ -1,5 +1,16 @@
-<app-event-create></app-event-create>
+<div (click)="changeAction()" >{{action}}</div>
+<app-event-create (allControllers)="callServices($event)"
+                  [eventId]="chooseId"
+                  [oldName]="oldName"
+                  [oldDate]="oldDate"
+                  [oldDescription]="oldDescription"
+                  [oldFoodControl]="oldFoodControl"
+                  [oldPriceNoDrinks]="oldPriceNoDrinks"
+                  [oldPriceWithDrinks]="oldPriceWithDrinks"
+
+></app-event-create>
 <div *ngFor="let event of allEvents ">
   <div>{{event.eventName}} ||| {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</div>
-  <button (click)="log(event.eventDate)" >log</button>
+  <button (click)="edit(event.id)" >modifer</button>
+  <button (click)="delete(event.id)" >suppr</button>
 </div>

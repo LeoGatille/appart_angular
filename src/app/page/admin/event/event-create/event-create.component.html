@@ -7,6 +7,7 @@
              placeholder="'Nom'"
              autocomplete="Off"
              formControlName="name"
+             [ngModel]="oldName"
       />
     </mat-form-field>
   </div>
@@ -17,19 +18,26 @@
                   placeholder="'Description'"
                   autocomplete="Off"
                   formControlName="description"
+                  [ngModel]="oldDescription"
         ></textarea>
     </mat-form-field>
   </div>
   <div>
 
-    <mat-datepicker></mat-datepicker>
+<!--    <mat-datepicker-->
+<!--    ></mat-datepicker>-->
     <mat-form-field>
       <input matInput
+             [ngModel]="oldDate"
              [matDatepicker]="picker"
              formControlName="date"
              placeholder="Choose a date"
+
       >
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker-toggle matSuffix
+                             [for]="picker"
+
+      ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
@@ -42,6 +50,7 @@
              placeholder=""
              autocomplete="Off"
              formControlName="priceNoDrinks"
+             [ngModel]="oldPriceNoDrinks"
       />
     </mat-form-field>
   </div>
@@ -52,6 +61,7 @@
              placeholder=""
              autocomplete="Off"
              formControlName="priceWithDrinks"
+             [ngModel]="oldPriceWithDrinks"
       />
     </mat-form-field>
   </div>
