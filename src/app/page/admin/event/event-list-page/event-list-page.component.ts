@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Event} from '../../../../class/event';
 import {EventService} from '../../../../service/event.service';
 import {Food} from '../../../../class/food/food';
+import {EventCreateComponent} from '../event-create/event-create.component';
 
 @Component({
   selector: 'app-event-list-page',

@@ -46,7 +46,6 @@ export class EventCreateComponent implements OnInit {
     private datePipe: DatePipe,
   ) { }
   ngOnInit() {
-
     this.foodsId = [];
     this.selectedEntrees = [];
     this.selectedPlats = [];
@@ -89,6 +88,11 @@ export class EventCreateComponent implements OnInit {
     this.dataToParent.push(this.eventId, val, this.foodsId);
     this.allControllers.emit(this.dataToParent);
   }
+  displayOldFoods() {
+  this.oldFoodControl.forEach(food => {
+  this.getSelectedFood(food, food.type);
+});
+}
   reset() {
     this.foodsId = [];
     this.selectedDesserts = [];

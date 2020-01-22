@@ -23,7 +23,7 @@ export class FoodService {
   public createFood(foodName: string, foodDescription: string, type: number, allergens: number[]) {
     return this.http.post(`${this.uri}/create`, {foodName, foodDescription, allergens, type});
   }
-  public editFood(id: number, foodName: string, foodDescription: string, allergens: Allergen[],  type: number) {
+  public editFood(id: number, foodName: string, foodDescription: string, allergens: number[],  type: number) {
     return this.http.post(`${this.uri}/${id}/edit`, {foodName, foodDescription, allergens});
   }
   public getOneFood(id: number) {

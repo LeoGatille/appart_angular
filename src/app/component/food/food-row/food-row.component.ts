@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Food} from '../../../class/food/food';
 import {WineService} from '../../../service/wine/wine.service';
 import {FoodService} from '../../../service/food/food.service';
@@ -13,6 +13,7 @@ export class FoodRowComponent implements OnInit {
   loading = true;
   showAllergens = false;
   @Input() food: Food;
+  @Output() editData = new EventEmitter<any>();
   constructor(
     private foodService: FoodService
   ) { }
@@ -25,6 +26,9 @@ export class FoodRowComponent implements OnInit {
      return this.showAllergens = false;
     }
     return this.showAllergens = true;
+  }
+  launchEdit(food: Food) {
+    this.editData.emit(food);
   }
   deleteFood() {
     this.foodService.deleteFood(this.food.id)

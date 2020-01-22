@@ -6,6 +6,7 @@
              placeholder="Nom"
              autocomplete="Off"
              formControlName="nameControl"
+             [value]="food.foodName"
       />
     </mat-form-field>
   </div>
@@ -16,25 +17,26 @@
                 placeholder="Description"
                 autocomplete="Off"
                 formControlName="descriptionControl"
+                [value]="food.foodDescription"
       ></textarea>
     </mat-form-field>
   </div>
-    <div>
-      <app-auto-complete (addElement)="getAllergenId($event)"
-                         [listOfElements]="allergens"
-                         [parentModel]=""
-                         [displayFn]="displayFn"
-                         [myControl]="allergenControl"
-                         [callBackFilter]="callBackFilter"
-      ></app-auto-complete>
-    </div>
-    <div *ngFor="let allergen of allAllergens">
-      <button mat-flat-button >{{allergen.allergenName}}</button>
-    </div>
+  <div>
+    <app-auto-complete (addElement)="getAllergenId($event)"
+                       [listOfElements]="allAllergens"
+                       [parentModel]=""
+                       [displayFn]="displayFn"
+                       [myControl]="allergenControl"
+                       [callBackFilter]="callBackFilter"
+    ></app-auto-complete>
+  </div>
+  <div *ngFor="let allergen of selectedAllergens">
+    <button mat-flat-button >{{allergen.allergenName}}</button>
+  </div>
   <div>
     <mat-form-field>
       <mat-label>Type</mat-label>
-      <mat-select formControlName="typeControl"
+      <mat-select formControlName="typeControl" [value]="food.type"
       >
         <mat-option *ngFor="let type of allTypes" [value]="type">
           {{type.typeName}}
@@ -46,13 +48,3 @@
     <button mat-flat-button (click)="save()">envoyer</button>
   </div>
 </form>
-
-<div *ngIf="!loading">
-  <div *ngFor="let type of allTypes">
-    <h4>{{type.typeName}}</h4>
-    <div *ngFor="let food of type.foods ">
-      <app-food-row [food]="food"
-      ></app-food-row>
-    </div>
-  </div>
-</div>

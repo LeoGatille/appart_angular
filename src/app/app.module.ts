@@ -70,6 +70,7 @@ import { AllImagesComponent } from './page/gallery/all-images/all-images.compone
 import { ImageComponent } from './component/gallery/image/image.component';
 import { EventCreateComponent } from './page/admin/event/event-create/event-create.component';
 import {DatePipe} from '@angular/common';
+import { FoodEditPageComponent } from './page/admin/food/food-edit-page/food-edit-page.component';
 
 @NgModule({
   declarations: [
@@ -126,6 +127,7 @@ import {DatePipe} from '@angular/common';
     AllImagesComponent,
     ImageComponent,
     EventCreateComponent,
+    FoodEditPageComponent,
   ],
   imports: [
     MatAutocompleteModule,

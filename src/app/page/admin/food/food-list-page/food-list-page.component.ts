@@ -14,16 +14,16 @@ import {AllergenService} from '../../../../service/food/allergen.service';
   styleUrls: ['./food-list-page.component.css']
 })
 export class FoodListPageComponent implements OnInit {
-  // allergens: Allergen[];
   foodForm: FormGroup;
   stockAllergen: Allergen;
   allergens: Allergen[];
   allergensId = [];
   allergenControl: FormControl;
   food: Food;
-  createAutoElement = false;
   listToAdd: any[];
   allTypes: Type[];
+  allAllergens: Allergen[];
+  action: string;
   loading = true;
   constructor(
     private fb: FormBuilder,
@@ -31,6 +31,18 @@ export class FoodListPageComponent implements OnInit {
     private foodService: FoodService,
     private allergenService: AllergenService,
   ) {
+
+  }
+
+  ngOnInit() {
+    console.log('init');
+    this.typeService.getAllType()
+      .subscribe((types: Type[]) => {
+        this.allTypes = types;
+      });
+    console.log('build');
+    this.action = 'list';
+    this.allAllergens = [];
     this.food = new Food();
     this.allergenControl = new FormControl(this.stockAllergen, Validators.required);
     const allergenP = this.allergenService.getAllAllergens().toPromise();
@@ -41,17 +53,9 @@ export class FoodListPageComponent implements OnInit {
         allergenControl : this.allergenControl,
         descriptionControl : ['', Validators.required],
         nameControl : ['', Validators.required],
-        typeControl : ['', Validators.required]
+        typeControl : [ '' , Validators.required]
       });
     });
-  }
-
-  ngOnInit() {
-    this.typeService.getAllType()
-      .subscribe((types: Type[]) => {
-        this.allTypes = types;
-      });
-    this.loading = false;
   }
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
@@ -67,8 +71,16 @@ export class FoodListPageComponent implements OnInit {
     }
     if (typeof $event.id === 'number') {
       this.allergensId.push($event.id);
+      this.allAllergens.push($event);
     }
   }
+  // setEditDatas($event) {
+  //   this.action = 'edit';
+  //   this.oldName = $event.foodName;
+  //   this.oldDescription = $event.foodDescription;
+  //   this.oldAllergens = $event.allergen;
+  //   this.oldType = $event.type;
+  // }
   save() {
     const val = this.foodForm.value;
     this.foodService.createFood(val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId)

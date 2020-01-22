@@ -25,9 +25,15 @@ import {AllergenListPageComponent} from './page/admin/food/allergen-list-page/al
 import {FormulaPageComponent} from './page/admin/food/formula-page/formula-page.component';
 import {GalleryListPageComponent} from './page/admin/gallery/gallery-list-page/gallery-list-page.component';
 import {EventListPageComponent} from './page/admin/event/event-list-page/event-list-page.component';
+import {FoodEditPageComponent} from './page/admin/food/food-edit-page/food-edit-page.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin/food/:verb/:id',
+    component: FoodEditPageComponent,
+    data: {title: 'FoodEdit'}
+  },
   {
     path: 'admin/event',
     component: EventListPageComponent,

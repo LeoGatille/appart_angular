@@ -1,5 +1,6 @@
 <div (click)="changeAction()" >{{action}}</div>
 <app-event-create (allControllers)="callServices($event)"
+                  [action]="action"
                   [eventId]="chooseId"
                   [oldName]="oldName"
                   [oldDate]="oldDate"
