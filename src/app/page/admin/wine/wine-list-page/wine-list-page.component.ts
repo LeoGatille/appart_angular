@@ -37,9 +37,11 @@ export class WineListPageComponent implements OnInit {
       });
     this.loading = true;
   }
-  delete(id) {
-    this.wineService.deleteWine(id)
-      .subscribe();
+  delete($event) {
+    this.wineService.deleteWine($event)
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
   log() {
     console.log('mega toto');

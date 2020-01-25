@@ -36,8 +36,7 @@
   <div>
     <mat-form-field>
       <mat-label>Type</mat-label>
-      <mat-select formControlName="typeControl" [value]="food.type"
-      >
+      <mat-select formControlName="typeControl">
         <mat-option *ngFor="let type of allTypes" [value]="type">
           {{type.typeName}}
         </mat-option>
@@ -48,3 +47,5 @@
     <button mat-flat-button (click)="save()">envoyer</button>
   </div>
 </form>
+
+

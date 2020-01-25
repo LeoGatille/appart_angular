@@ -12,14 +12,14 @@ mat-sidenav-container.main-container {
 @media only screen and (max-width: 450px) {
   mat-sidenav.sidenav {
     width: 100vw;
-    background-color: #4345da;
+    background-color: #DA2018;
     color: white;
     border-right: 1px solid white;
   }
 }
 mat-sidenav.sidenav {
   min-width: 300px;
-  background-color: #4345da;
+  background-color: #DA2018;
   color: white;
   border-right: 1px solid white;
 }

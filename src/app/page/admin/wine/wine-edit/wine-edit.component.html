@@ -1,6 +1,8 @@
-
+<div style="background: red" *ngIf="error">
+  {{errorLog}}
+</div>
 <div class="main-content">
-  <form *ngIf="!loading" [formGroup]="wineForm" style="background: red;">
+  <form *ngIf="!loading" [formGroup]="wineForm" style="background: white;">
     <div>
       <mat-form-field class="example-full-width">
         <input type="text"
@@ -23,7 +25,7 @@
     </div>
     <app-auto-complete (addElement)="setColor($event)"
                        [listOfElements]="colors"
-                       [parentModel]="vin.color"
+                       [parentModel]="selectWine.color"
                        [displayFn]="displayFn"
                        [myControl]="colorControl"
                        [callBackFilter]="callBackFilter"
@@ -35,7 +37,7 @@
       <app-auto-complete *ngIf="!loading"
                          (addElement)="setCategory($event)"
                          [listOfElements]="categories"
-                         [parentModel]="vin.category"
+                         [parentModel]="selectWine.category"
                          [displayFn]="displayFnCategory"
                          [myControl]="categoryControl"
                          [callBackFilter]="callBackFilterCat"
@@ -51,7 +53,7 @@
       <app-auto-complete *ngIf="!loading"
                          (addElement)="setDesignation($event)"
                          [listOfElements]="designations"
-                         [parentModel]="vin.designation"
+                         [parentModel]="selectWine.designation"
                          [displayFn]="displayFnDesignation"
                          [myControl]="designationControl"
                          [callBackFilter]="callBackFilterDesignation"
@@ -62,7 +64,7 @@
       <app-auto-complete *ngIf="!loading"
                          (addElement)="setLabel($event)"
                          [listOfElements]="labels"
-                         [parentModel]="vin.label"
+                         [parentModel]="selectWine.label"
                          [displayFn]="displayFnLabel"
                          [myControl]="labelControl"
                          [callBackFilter]="callBackFilterLabel"
@@ -73,7 +75,7 @@
       <app-auto-complete *ngIf="!loading"
                          (addElement)="setVintage($event)"
                          [listOfElements]="vintages"
-                         [parentModel]="vin.vintage"
+                         [parentModel]="selectWine.vintage"
                          [displayFn]="displayFnVintage"
                          [myControl]="vintageControl"
                          [callBackFilter]="callBackFilterVintage"
@@ -95,8 +97,8 @@
 
     <div>
       <button mat-flat-button
-
               [disabled]="wineForm.invalid"
+              (click)="save()"
       >Envoyer</button>
     </div>
   </form>

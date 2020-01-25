@@ -15,6 +15,7 @@ import {Status} from '../../class/wine/status';
 import {StatusService} from '../../service/wine/status.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {WineService} from '../../service/wine/wine.service';
+import {ModalService} from '../../component/test/modal';
 
 @Component({
   selector: 'app-home-page',
@@ -58,7 +59,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
                private vintageService: VintageService,
                private statusService: StatusService,
                private wineService: WineService,
-               private fb: FormBuilder
+               private fb: FormBuilder,
+               private modalService: ModalService,
   ) {
     this.vin = new Wine();
     const catP = this.categoryService.getAllCategories().toPromise();
@@ -86,7 +88,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.vin.vintage  = null;
       this.vin.status  = null;
 
-      this.colors = colors;
+      this.colors = colors[0];
       this.categories = categories;
 
       this.designations = designations;
@@ -224,5 +226,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
       });
 
   }
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
   ngOnDestroy() {}
 }

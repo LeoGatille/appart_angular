@@ -32,106 +32,127 @@ const routes: Routes = [
   {
     path: 'admin/food/:verb/:id',
     component: FoodEditPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'FoodEdit'}
   },
   {
     path: 'admin/event',
     component: EventListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'EventList'}
   },
   {
     path: 'admin/gallery',
     component: GalleryListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'GalleryList'}
   },
   {
     path: 'admin/food/formula',
     component: FormulaPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'FormulaList'}
   },
   {
     path: 'admin/food/allergen',
     component: AllergenListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'AllergensList'}
   },
   {
     path: 'admin/food',
     component: FoodListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'FoodList'}
   },
   {
     path: 'admin/wine/:verb/:id',
     component: WineEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'WineModif'}
   },
   {
     path: 'admin/wine/vintage/:verb/:id',
     component: VintageEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'VintageModif'}
   },
   {
     path: 'admin/wine/label/:verb/:id',
     component: LabelEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'LabelModif'}
   },
   {
     path: 'admin/wine/designation/:verb/:id',
     component: DesignationEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'DesignationModif'}
   },
   {
     path: 'admin/wine/color/:verb/:id',
     component: ColorEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'ColorModif'}
   },
   {
     path: 'admin/wine/category/:verb/:id',
     component: CategoryEditComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'CategorieModif'}
   },
   {
     path: 'sectest',
     component: SecTestPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'SecondTestPage'}
   },
   {
     path: 'test',
     component: TestPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'TestPage'}
   },
   {
     path: 'admin/wine/create',
     component: WineCreatePageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'CreateWine'}
   },
   {
     path: 'admin/wine/vintage',
     component: VintageListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'VintageList'}
   },
   {
     path: 'admin/wine/label',
     component: LabelListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'LabelList'}
   },
   {
     path: 'admin/wine/designation',
     component: DesignationListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'DesignationList'}
   },
   {
     path: 'admin/wine/color',
     component: ColorListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'ColorList'}
   },
   {
     path: 'admin/wine/category',
     component: CategoryListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'CategoryList'}
   },
   {
     path: 'admin/wine',
     component: WineListPageComponent,
+    canActivate: [ CanAccessToGuard ],
     data: {title: 'WineList'}
   },
   {

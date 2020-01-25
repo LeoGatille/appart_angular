@@ -22,10 +22,10 @@ export class FoodEditPageComponent implements OnInit {
   loading = true;
   allergenControl: FormControl;
   foodForm: FormGroup;
-  selectedAllergen: Allergen;
   allergensId: number[];
   selectedAllergens: Allergen[];
   type: Type;
+  typeControl: FormControl;
   constructor(
     private fb: FormBuilder,
     private foodService: FoodService,
@@ -46,25 +46,26 @@ export class FoodEditPageComponent implements OnInit {
 
   }
   launchProcesses() {
-
-
     this.typeService.getAllType()
       .subscribe((types: Type[]) => {
         this.allTypes = types;
       });
-    this.allergenControl = new FormControl(this.selectedAllergen);
+
     const allergenP = this.allergenService.getAllAllergens().toPromise();
     const oneFoodP = this.foodService.getOneFood(this.id).toPromise();
     Promise.all([allergenP, oneFoodP]).then((data: any) => {
       this.allAllergens = data[0];
       this.food = data[1];
+      this.selectedAllergens = this.food.allergen;
+      this.allergenControl = new FormControl(this.food.allergen[0]);
       this.foodForm = this.fb.group({
-        allergenControl : this.allergenControl,
+        myControl : this.allergenControl,
         descriptionControl : [this.food.foodDescription, Validators.required],
         nameControl : [this.food.foodName, Validators.required],
-        typeControl : [ this.food.type , Validators.required]
+        typeControl : [this.food.type, Validators.required ]
       });
       this.loading = false;
+      console.log('typeControl = ', this.typeControl);
     });
   }
   displayFn(allergen: Allergen): string {
@@ -82,12 +83,17 @@ export class FoodEditPageComponent implements OnInit {
     if (typeof $event.id === 'number') {
       this.allergensId.push($event.id);
       this.selectedAllergens.push($event);
+      console.log('allergensId = ', this.allergensId);
     }
   }
 
   save() {
     const val = this.foodForm.value;
-    this.foodService.editFood(this.id, val.nameControl, val.descriptionControl, this.allergensId, val.type )
+    console.log(this.id);
+    this.foodService.editFood(this.id, val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId, )
       .subscribe();
+  }
+  selectLog(type: Type) {
+    console.log(type);
   }
 }

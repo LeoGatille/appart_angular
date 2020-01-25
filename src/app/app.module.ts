@@ -71,6 +71,8 @@ import { ImageComponent } from './component/gallery/image/image.component';
 import { EventCreateComponent } from './page/admin/event/event-create/event-create.component';
 import {DatePipe} from '@angular/common';
 import { FoodEditPageComponent } from './page/admin/food/food-edit-page/food-edit-page.component';
+import { ModalComponent } from './component/test/modal/modal.component';
+import {ModalModule} from './component/test/modal';
 
 @NgModule({
   declarations: [
@@ -154,6 +156,7 @@ import { FoodEditPageComponent } from './page/admin/food/food-edit-page/food-edi
     MatButtonToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    ModalModule,
   ],
     entryComponents: [
       DialogComponent

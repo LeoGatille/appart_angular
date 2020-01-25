@@ -64,16 +64,20 @@
         <mat-nav-list>
           <a routerLink="/home" routerLinkActive="active" >
             <mat-icon>home</mat-icon>
-            <span>Accueil</span>
+            <span>Home</span>
           </a>
           <span *ngIf="isConnected()">
-            <a routerLink="/label" routerLinkActive="active">
+          <a routerLink="/admin/event" routerLinkActive="active" >
+            <mat-icon>home</mat-icon>
+            <span>Event</span>
+          </a>
+            <a routerLink="/admin/food" routerLinkActive="active">
               <mat-icon>bookmarks</mat-icon>
-              <span>Label</span>
+              <span>Food</span>
             </a>
-            <a routerLink="/priority/list" routerLinkActive="active" *ngIf="isAdmin()">
+            <a routerLink="/admin/wine" routerLinkActive="active">
               <mat-icon>warning</mat-icon>
-              <span>Priority</span>
+              <span>Wine</span>
             </a>
           </span>
           <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()">

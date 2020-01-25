@@ -6,14 +6,20 @@
   <td>{{wine.wineName}}</td>
   <td>{{wine.vintage.vintageYear}}</td>
   <td>{{wine.winePrice}}</td>
-  <td><button (click)="delete(wine.id)">suppr</button></td>
-  <td><button [routerLink]="['/admin/wine/edit/', wine.id]">modifier</button></td>
-  <td><button (click)="showWineStatus()">Statut</button></td>
+  <td><button mat-icon-button (click)="sendDelete(wine.id)"><i class="material-icons">
+    clear
+  </i></button></td>
+  <td><button mat-icon-button [routerLink]="['/admin/wine/edit/', wine.id]" color="success"><i class="material-icons">
+    create
+  </i></button></td>
+  <td><button mat-icon-button (click)="showWineStatus()"><i class="material-icons">
+    style
+  </i></button></td>
 </tr>
 
 <tr *ngIf="showAllStatus">
   <td *ngFor="let status of allStatus">
-    <button (click)="editWineStatus(status.id)">{{status.statusName}}</button>
+    <button mat-flat-button (click)="editWineStatus(status.id)">{{status.statusName}}</button>
   </td>
 </tr>
 

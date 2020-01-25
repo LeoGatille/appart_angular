@@ -17,10 +17,11 @@ export class ResponseInterceptor implements HttpInterceptor {
       .pipe(catchError( err => {
         if (err.status === 401) {
           this.auth.logout();
-          this.router.navigate(['/auth']);
+          //this.router.navigate(['/auth']);
         }
         const error = err.error.message || err.statusText;
-        return throwError(error);
+        const errorMessage = err.error;
+        return throwError(errorMessage);
       }));
   }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {WineService} from '../../../service/wine/wine.service';
 import {StatusService} from '../../../service/wine/status.service';
@@ -12,6 +12,7 @@ import {Status} from '../../../class/wine/status';
 })
 export class WineRowComponent implements OnInit {
 
+  @Output() delete = new EventEmitter()
   @Input() wine: Wine;
   status: Status;
   allStatus: Status[];
@@ -33,9 +34,8 @@ export class WineRowComponent implements OnInit {
       });
 
   }
-  delete(id) {
-    this.wineService.deleteWine(id)
-      .subscribe();
+  sendDelete(id) {
+    this.delete.emit(id);
   }
   log() {
     console.log('mega toto');
