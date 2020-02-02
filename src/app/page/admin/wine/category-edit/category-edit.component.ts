@@ -46,7 +46,7 @@ export class CategoryEditComponent implements OnInit {
   }
 
   editElement($event) {
-    this.categoryService.editCategory($event.nameControl, $event.numberControl, this.id)
+    this.categoryService.editCategory($event.nameControl, this.id)
       .subscribe();
   }
 

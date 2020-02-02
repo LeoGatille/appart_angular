@@ -1,0 +1,18 @@
+<div *ngIf="!loading">
+  <div *ngIf="isConnected()">
+
+    <app-create-form [descriptionField]="true"
+                     [descriptionValue]="message.message"
+                     (serviceCall)="editMessage($event)"
+    ></app-create-form>
+
+    <form [formGroup]="formGroup">
+     <mat-checkbox (change)="patchMessage()"
+                   formControlName="check"
+     >Afficher</mat-checkbox>
+    </form>
+  </div>
+  <div *ngIf="!isConnected()">
+    <p>{{message.message}}</p>
+  </div>
+</div>

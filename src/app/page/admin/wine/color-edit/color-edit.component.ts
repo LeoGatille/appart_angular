@@ -43,8 +43,7 @@ export class ColorEditComponent implements OnInit {
 
   editElement($event) {
     console.log($event.nameControl);
-    console.log($event.numberControl);
-    this.colorService.editColor($event.nameControl, $event.numberControl, this.id)
+    this.colorService.editColor($event.nameControl, this.id)
       .subscribe();
   }
 

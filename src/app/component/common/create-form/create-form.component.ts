@@ -18,7 +18,7 @@ export class CreateFormComponent implements OnInit {
   @Input() placeholderNumber: string;
   @Input() nameValue: string | null;
   @Input() numberValue: number | null;
-  @Input() descriptionValue: number | null;
+  @Input() descriptionValue: string | null;
 
   @Output() serviceCall = new EventEmitter<any>();
 
@@ -49,14 +49,13 @@ export class CreateFormComponent implements OnInit {
       this.createForm.addControl('nameControl', new FormControl('', Validators.required) );
     }
     if (this.descriptionField) {
-      this.createForm.addControl('descriptionControl', new FormControl('', Validators.required) );
+      this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue, Validators.required) );
     }
   }
 
   save() {
-
     const val = this.createForm.value;
-    console.log('save activated = ' + val.nameControl);
+    console.log('save activated = ', val);
     this.serviceCall.emit(val);
 
 

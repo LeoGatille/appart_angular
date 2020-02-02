@@ -7,7 +7,7 @@ import {CategoryService} from '../../../service/wine/category.service';
 import {filter, map, startWith} from 'rxjs/operators';
 import {Color} from '../../../class/wine/color';
 import {ColorService} from '../../../service/wine/color.service';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
 
 @Component({
@@ -26,6 +26,9 @@ export class AutoCompleteComponent implements OnInit {
   @Input() listToAdd: any[];
   @Input() myControl: FormControl;
   @Input() activateButton: true;
+  @Input() numberField = false;
+  @Input() nameField = false;
+  @Input() descriptionField = false;
 
   @Output() controlButton = new EventEmitter<any>();
   @Output() addElement = new EventEmitter<any>();
@@ -69,15 +72,26 @@ export class AutoCompleteComponent implements OnInit {
   }
 
   launchModalCreation() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: { }
-    });
-    const instance = dialogRef.componentInstance;
-    instance.listToAdd = this.listToAdd;
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      numberField: this.numberField,
+      nameField: this.nameField,
+      descriptionField: this.descriptionField
+    };
+    this.dialog.open(DialogComponent, dialogConfig);
+
+    // const dialogRef = this.dialog.open(DialogComponent, {
+    //   width: '250px',
+    //   data: {
+    //     numberField: true
+    //   }
+    // });
+    // const instance = dialogRef.componentInstance;
+    // instance.listToAdd = this.listToAdd;
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 }
 

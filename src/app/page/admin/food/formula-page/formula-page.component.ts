@@ -36,4 +36,7 @@ export class FormulaPageComponent implements OnInit {
       .subscribe(() => { this.ngOnInit(); });
   }
 
+  addFormula($event) {
+    this.allFormulas.push($event);
+  }
 }

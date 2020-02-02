@@ -7,6 +7,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Allergen} from '../../../../class/food/allergen';
 import {Color} from '../../../../class/wine/color';
 import {AllergenService} from '../../../../service/food/allergen.service';
+import {ModalService} from '../../../../component/test/modal';
 
 @Component({
   selector: 'app-food-list-page',
@@ -30,6 +31,7 @@ export class FoodListPageComponent implements OnInit {
     private typeService: TypeService,
     private foodService: FoodService,
     private allergenService: AllergenService,
+    private modalService: ModalService,
   ) {
 
   }
@@ -86,5 +88,7 @@ export class FoodListPageComponent implements OnInit {
     this.foodService.createFood(val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId)
       .subscribe(() => { this.ngOnInit(); });
   }
-
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
 }

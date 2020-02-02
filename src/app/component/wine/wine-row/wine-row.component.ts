@@ -12,7 +12,7 @@ import {Status} from '../../../class/wine/status';
 })
 export class WineRowComponent implements OnInit {
 
-  @Output() delete = new EventEmitter()
+  @Output() delete = new EventEmitter();
   @Input() wine: Wine;
   status: Status;
   allStatus: Status[];

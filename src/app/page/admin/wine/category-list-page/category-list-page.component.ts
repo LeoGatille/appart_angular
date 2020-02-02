@@ -12,7 +12,6 @@ export class CategoryListPageComponent implements OnInit {
 
   editId: number;
   categoryNameEdit: string | null;
-  categoryOrderEdit: number | null;
   action: string;
   listToAdd: Category[];
   class: Category;
@@ -30,7 +29,6 @@ export class CategoryListPageComponent implements OnInit {
   ngOnInit() {
     this.action = 'list';
     this.categoryNameEdit = null;
-    this.categoryOrderEdit = null;
     this.placeholderName = 'Nom';
     this.categoryService.getAllCategories()
       .subscribe((categories: Category[]) => {
@@ -40,12 +38,12 @@ export class CategoryListPageComponent implements OnInit {
   createElement($event) {
     console.log($event);
     if (this.action === 'list') {
-      this.categoryService.createCategory($event.nameControl, $event.numberControl)
+      this.categoryService.createCategory($event.nameControl)
         .subscribe( (category: Category) => {
           this.listToAdd.push(category);
         });
     } else {
-      this.categoryService.editCategory($event.nameControl, $event.numberControl, this.editId)
+      this.categoryService.editCategory($event.nameControl, this.editId)
         .subscribe( () => { this.ngOnInit(); } );
     }
   }
@@ -53,7 +51,6 @@ export class CategoryListPageComponent implements OnInit {
     this.categoryService.getOneCategory(id)
       .subscribe((category: Category) => {
         this.categoryNameEdit = category.categoryName;
-        this.categoryOrderEdit = category.categoryOrder;
         this.editId = category.id;
         this.action = 'edit';
       });
@@ -66,7 +63,6 @@ export class CategoryListPageComponent implements OnInit {
     if (this.action !== 'list') {
       this.action = 'list';
       this.categoryNameEdit = null;
-      this.categoryOrderEdit = null;
     }
   }
 }

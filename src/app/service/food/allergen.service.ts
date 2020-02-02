@@ -15,7 +15,7 @@ export class AllergenService {
   public getAllAllergens() {
     return this.http.get(`${this.uri}`);
   }
-  public createAllergen(allergenName: string) {
+  public createAllergen(allergenName) {
     console.log('serviceCreate', allergenName);
     return this.http.post(`${this.uri}/create`, {allergenName});
   }

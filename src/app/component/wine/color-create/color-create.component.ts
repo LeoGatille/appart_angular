@@ -19,13 +19,12 @@ export class ColorCreateComponent implements OnInit {
   ngOnInit() {
     this.colorForm = this.fb.group( {
       colorName : ['',  Validators.required],
-      colorOrder     : ['', Validators.required]
     });
   }
   save() {
     const val = this.colorForm.value;
     // console.log('val = ' + val.order);
-    this.colorService.createColor(val.colorName, val.colorOrder)
+    this.colorService.createColor(val.colorName)
       .subscribe();
   }
 }

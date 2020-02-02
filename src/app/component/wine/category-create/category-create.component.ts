@@ -24,12 +24,11 @@ export class CategoryCreateComponent implements OnInit {
   ngOnInit() {
     this.categoryForm = this.fb.group( {
       categoryName: ['', Validators.required],
-      categoryOrder  : ['', Validators.required]
     });
   }
   save() {
     const val = this.categoryForm.value;
-    this.categoryService.createCategory(val.categoryName, val.categoryOrder)
+    this.categoryService.createCategory(val.categoryName)
       .subscribe( (category: Category) => {
         if (this.listToAdd) {
           this.listToAdd.push(category);

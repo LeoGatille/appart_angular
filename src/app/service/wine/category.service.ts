@@ -14,14 +14,14 @@ export class CategoryService {
   public getAllCategories() {
     return this.http.get(`${this.uri}`);
   }
-  public createCategory( categoryName: string, categoryOrder: number ) {
-    return this.http.post(`${this.uri}/create`, {categoryName, categoryOrder});
+  public createCategory( categoryName: string ) {
+    return this.http.post(`${this.uri}/create`, {categoryName});
   }
   public getOneCategory(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
-  public editCategory( categoryName: string, categoryOrder: number, id ) {
-    return this.http.put(`${this.uri}/${id}/edit`, {categoryName, categoryOrder});
+  public editCategory( categoryName: string, id ) {
+    return this.http.put(`${this.uri}/${id}/edit`, {categoryName});
   }
   public deleteCategory(id: number) {
     return this.http.delete(`${this.uri}/${id}/delete`);

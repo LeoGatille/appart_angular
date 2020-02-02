@@ -73,6 +73,8 @@ import {DatePipe} from '@angular/common';
 import { FoodEditPageComponent } from './page/admin/food/food-edit-page/food-edit-page.component';
 import { ModalComponent } from './component/test/modal/modal.component';
 import {ModalModule} from './component/test/modal';
+import { ShortcutComponent } from './component/test/shortcut/shortcut.component';
+import { MessageComponent } from './component/message/message.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +132,8 @@ import {ModalModule} from './component/test/modal';
     ImageComponent,
     EventCreateComponent,
     FoodEditPageComponent,
+    ShortcutComponent,
+    MessageComponent,
   ],
   imports: [
     MatAutocompleteModule,

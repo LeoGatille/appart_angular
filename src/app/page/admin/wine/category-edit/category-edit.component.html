@@ -2,9 +2,7 @@
                  [class]="class"
                  (serviceCall)="editElement($event)"
                  [nameField]="true"
-                 [numberField]="true"
                  [nameValue]="myComponent.categoryName"
-                 [numberValue]="myComponent.categoryOrder"
 ></app-create-form>
 <div *ngFor="let wine  of linkedWines ">
   <p>{{wine.wineName}}</p>
