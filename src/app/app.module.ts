@@ -10,7 +10,7 @@ import {
   MatIconModule, MatInputModule,
   MatListModule, MatMenuModule, MatNativeDateModule, MatOptionModule,
   MatProgressSpinnerModule, MatSelectModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSlideToggleModule,
   MatToolbarModule
 } from '@angular/material';
 import { HomePageComponent } from './page/home-page/home-page.component';
@@ -161,6 +161,7 @@ import { MessageComponent } from './component/message/message.component';
     MatDatepickerModule,
     MatNativeDateModule,
     ModalModule,
+    MatSlideToggleModule,
   ],
     entryComponents: [
       DialogComponent

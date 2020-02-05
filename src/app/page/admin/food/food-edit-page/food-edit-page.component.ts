@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {AllergenService} from '../../../../service/food/allergen.service';
 import {TypeService} from '../../../../service/food/type.service';
 import {Type} from '../../../../class/food/type';
+import {log} from 'util';
 
 @Component({
   selector: 'app-food-edit-page',
@@ -15,6 +16,7 @@ import {Type} from '../../../../class/food/type';
 })
 export class FoodEditPageComponent implements OnInit {
 
+  display: number;
   id: number;
   food: Food;
   allAllergens: Allergen[];
@@ -60,9 +62,10 @@ export class FoodEditPageComponent implements OnInit {
       this.allergenControl = new FormControl(this.food.allergen[0]);
       this.foodForm = this.fb.group({
         myControl : this.allergenControl,
-        descriptionControl : [this.food.foodDescription, Validators.required],
+        descriptionControl : [this.food.foodDescription],
         nameControl : [this.food.foodName, Validators.required],
-        typeControl : [this.food.type, Validators.required ]
+        typeControl : [this.food.type, Validators.required ],
+        displayControl : [this.food.display]
       });
       this.loading = false;
       console.log('typeControl = ', this.typeControl);
@@ -89,9 +92,31 @@ export class FoodEditPageComponent implements OnInit {
 
   save() {
     const val = this.foodForm.value;
-    console.log(this.id);
-    this.foodService.editFood(this.id, val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId, )
-      .subscribe();
+    this.foodService.editFood(
+      this.id, val.nameControl,
+      val.descriptionControl,
+      this.getBooelan(val.displayControl),
+      val.typeControl.id,
+      this.allergensId
+    ).subscribe((res) => {
+        console.log('res = ', res);
+      });
+  }
+  toglle(event) {
+    this.foodForm.patchValue({
+      displayControl: event.checked
+    });
+    console.log(event);
+    console.log(this.foodForm.value.displayControl);
+  }
+
+  getBooelan(val) {
+    console.log(val);
+    let checked = 2;
+    if (val === true) {
+      checked = 1;
+    }
+    return checked;
   }
   selectLog(type: Type) {
     console.log(type);

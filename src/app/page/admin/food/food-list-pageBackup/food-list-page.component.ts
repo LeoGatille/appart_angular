@@ -73,7 +73,7 @@ export class FoodListPageComponent implements OnInit {
   }
   save() {
     const val = this.foodForm.value;
-    this.foodService.createFood(val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId)
+    this.foodService.createFood(val.nameControl, val.descriptionControl, 2, val.typeControl.id, this.allergensId)
       .subscribe(() => { this.ngOnInit(); });
   }
 

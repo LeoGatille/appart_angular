@@ -44,6 +44,8 @@
     </mat-form-field>
   </div>
   <div>
+    <mat-slide-toggle (change)="toglle($event)">Ajouter à la carte</mat-slide-toggle>  </div>
+  <div>
     <button mat-flat-button (click)="save()">envoyer</button>
   </div>
 </form>

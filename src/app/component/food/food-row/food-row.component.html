@@ -8,6 +8,13 @@
   <button mat-flat-button
           (click)="deleteFood()"
   > suppr</button>
+  <div>
+    <form [formGroup]="patchForm">
+      <mat-checkbox (change)="patchFood(food.id)"
+                    formControlName="check"
+      >Afficher</mat-checkbox>
+    </form>
+  </div>
 </div>
 <div>{{food.foodDescription}}</div>
 <div *ngIf="showAllergens">

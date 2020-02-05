@@ -38,10 +38,7 @@ export class FoodListPageComponent implements OnInit {
 
   ngOnInit() {
     console.log('init');
-    this.typeService.getAllType()
-      .subscribe((types: Type[]) => {
-        this.allTypes = types;
-      });
+    this.getFood();
     console.log('build');
     this.action = 'list';
     this.allAllergens = [];
@@ -51,13 +48,15 @@ export class FoodListPageComponent implements OnInit {
     Promise.resolve(allergenP).then((data: any) => {
       this.loading = false;
       this.allergens = data;
-      this.foodForm = this.fb.group({
-        allergenControl : this.allergenControl,
-        descriptionControl : ['', Validators.required],
-        nameControl : ['', Validators.required],
-        typeControl : [ '' , Validators.required]
-      });
+      this.createForm();
     });
+  }
+
+  getFood() {
+    this.typeService.getAllType()
+      .subscribe((types: Type[]) => {
+        this.allTypes = types;
+      });
   }
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
@@ -76,17 +75,44 @@ export class FoodListPageComponent implements OnInit {
       this.allAllergens.push($event);
     }
   }
-  // setEditDatas($event) {
-  //   this.action = 'edit';
-  //   this.oldName = $event.foodName;
-  //   this.oldDescription = $event.foodDescription;
-  //   this.oldAllergens = $event.allergen;
-  //   this.oldType = $event.type;
-  // }
+
+  toglle(event) {
+    this.foodForm.patchValue({
+      displayControl: event.checked
+    });
+    console.log(event);
+    console.log(this.foodForm.value.displayControl);
+  }
+
+  getBooelan(val) {
+    let checked = 2;
+    if (val === true) {
+      checked = 1;
+    }
+    return checked;
+  }
+
   save() {
     const val = this.foodForm.value;
-    this.foodService.createFood(val.nameControl, val.descriptionControl, val.typeControl.id, this.allergensId)
-      .subscribe(() => { this.ngOnInit(); });
+    this.foodService.createFood(val.nameControl,
+      val.descriptionControl,
+      this.getBooelan(val.displayControl),
+      val.typeControl.id,
+      this.allergensId
+    ).subscribe((res) => {
+        this.getFood();
+        this.createForm();
+        console.log(res);
+      });
+  }
+  createForm() {
+    this.foodForm = this.fb.group({
+      allergenControl : this.allergenControl,
+      descriptionControl : ['', Validators.required],
+      nameControl : ['', Validators.required],
+      typeControl : [ '' , Validators.required],
+      displayControl : [this.food.display]
+    });
   }
   openModal(id: string) {
     this.modalService.open(id);
