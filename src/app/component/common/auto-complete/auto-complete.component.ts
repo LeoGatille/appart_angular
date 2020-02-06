@@ -29,6 +29,8 @@ export class AutoCompleteComponent implements OnInit {
   @Input() numberField = false;
   @Input() nameField = false;
   @Input() descriptionField = false;
+  @Input() title: string;
+  @Input() service: any;
 
   @Output() controlButton = new EventEmitter<any>();
   @Output() addElement = new EventEmitter<any>();
@@ -73,13 +75,23 @@ export class AutoCompleteComponent implements OnInit {
 
   launchModalCreation() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
+    // dialogConfig.autoFocus = true;
     dialogConfig.data = {
+      modal: true,
+      value: this.myControl.value,
       numberField: this.numberField,
       nameField: this.nameField,
-      descriptionField: this.descriptionField
+      descriptionField: this.descriptionField,
+      title: this.title,
     };
     this.dialog.open(DialogComponent, dialogConfig);
+
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data => this.createElement(data)
+    );
 
     // const dialogRef = this.dialog.open(DialogComponent, {
     //   width: '250px',
@@ -92,6 +104,19 @@ export class AutoCompleteComponent implements OnInit {
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed');
     // });
+  }
+  createElement(data: any) {
+    if (data.nameControl) {
+      this.service.create(data.nameControl)
+        .subscribe((res) => {
+          this.listOfElements.push(res);
+        });
+    } else {
+      this.service.create(data.numberControl)
+        .subscribe((res) => {
+          this.listOfElements.push(res);
+        });
+    }
   }
 }
 

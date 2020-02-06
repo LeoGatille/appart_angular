@@ -19,6 +19,7 @@ export class CreateFormComponent implements OnInit {
   @Input() nameValue: string | null;
   @Input() numberValue: number | null;
   @Input() descriptionValue: string | null;
+  @Input() modal = false;
 
   @Output() serviceCall = new EventEmitter<any>();
 
@@ -42,14 +43,26 @@ export class CreateFormComponent implements OnInit {
 
   buildForm() {
     this.createForm.removeControl('initControl');
-    if (this.numberField) {
-      this.createForm.addControl('numberControl', new FormControl('', Validators.required) );
-    }
-    if (this.nameField) {
-      this.createForm.addControl('nameControl', new FormControl('', Validators.required) );
-    }
-    if (this.descriptionField) {
-      this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue, Validators.required) );
+    if (this.modal) {
+      if (this.numberField) {
+        this.createForm.addControl('numberControl', new FormControl(this.numberValue) );
+      }
+      if (this.nameField) {
+        this.createForm.addControl('nameControl', new FormControl(this.nameValue) );
+      }
+      if (this.descriptionField) {
+        this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue) );
+      }
+    } else {
+      if (this.numberField) {
+        this.createForm.addControl('numberControl', new FormControl(this.numberValue, Validators.required) );
+      }
+      if (this.nameField) {
+        this.createForm.addControl('nameControl', new FormControl(this.nameValue, Validators.required) );
+      }
+      if (this.descriptionField) {
+        this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue, Validators.required) );
+      }
     }
   }
 

@@ -226,9 +226,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       });
 
   }
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
+
 
   ngOnDestroy() {}
 }

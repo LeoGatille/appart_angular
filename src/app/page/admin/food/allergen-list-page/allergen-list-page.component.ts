@@ -24,7 +24,7 @@ export class AllergenListPageComponent implements OnInit {
   }
   createAllergen($event) {
     console.log('event', $event);
-    this.allergenService.createAllergen($event.nameControl)
+    this.allergenService.create($event.nameControl)
       .subscribe((allergen: Allergen) => {
         this.allAllergens.push(allergen);
       });

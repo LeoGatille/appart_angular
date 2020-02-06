@@ -26,6 +26,7 @@ export class FoodListPageComponent implements OnInit {
   allAllergens: Allergen[];
   action: string;
   loading = true;
+  title = 'Allergen';
   constructor(
     private fb: FormBuilder,
     private typeService: TypeService,
@@ -114,7 +115,5 @@ export class FoodListPageComponent implements OnInit {
       displayControl : [this.food.display]
     });
   }
-  openModal(id: string) {
-    this.modalService.open(id);
-  }
+
 }

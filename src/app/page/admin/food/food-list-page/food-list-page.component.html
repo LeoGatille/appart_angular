@@ -27,6 +27,9 @@
                          [myControl]="allergenControl"
                          [callBackFilter]="callBackFilter"
                          [creation]="true"
+                         [nameField]="true"
+                         [title]="title"
+                         [service]="allergenService"
       ></app-auto-complete>
     </div>
     <div *ngFor="let allergen of allAllergens">
