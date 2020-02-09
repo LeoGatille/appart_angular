@@ -21,16 +21,16 @@ export class VintageEditComponent implements OnInit {
     private vintageService: VintageService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        this.id = params.id;
-        this.vintageService.getOneVintage(this.id)
-          .subscribe((vintage: Vintage) => {
-            this.loading = false;
-            this.myComponent = vintage;
-            this.linkedWines = this.myComponent.wines;
-          });
-      });
+    // this.activatedRoute.params
+    //   .subscribe((params) => {
+    //     this.id = params.id;
+    //     this.vintageService.getOneVintage(this.id)
+    //       .subscribe((vintage: Vintage) => {
+    //         this.loading = false;
+    //         this.myComponent = vintage;
+    //         this.linkedWines = this.myComponent.wines;
+    //       });
+    //   });
   }
 
   ngOnInit() {

@@ -17,7 +17,7 @@ export class DialogComponent implements OnInit {
   title: string;
   service: any;
   value: any;
-  numberValue: number = null;
+  numberValue: any = null;
   nameValue: string = null;
   modal: boolean;
 
@@ -29,20 +29,22 @@ export class DialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.defineValue(data.value);
     this.modal = data.modal;
     this.numberField = data.numberField;
     this.nameField = data.nameField;
     this.descriptionField = data.descriptionField;
     this.title = data.title;
     this.service = data.service;
+    this.defineValue(data.value);
   }
 
   ngOnInit() {
   }
   defineValue(data) {
+    console.log('data = ', this.numberField);
     if (typeof data !== 'object') {
       if (this.numberField) {
+        console.log('toto');
         this.numberValue = data;
       } else {
         this.nameValue = data;
