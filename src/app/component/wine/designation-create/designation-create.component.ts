@@ -16,16 +16,16 @@ export class DesignationCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.designationForm = this.fb.group( {
-      designationName: ['', Validators.required]
-    });
+    // this.designationForm = this.fb.group( {
+    //   designationName: ['', Validators.required]
+    // });
   }
   save() {
-    const val = this.designationForm.value;
-    console.log('designationForm = ' + this.designationForm.value.designationName);
-    this.designationService.createDesignation(val.designationName)
-      .subscribe();
-    this.designationForm.reset();
+    // const val = this.designationForm.value;
+    // console.log('designationForm = ' + this.designationForm.value.designationName);
+    // this.designationService.createDesignation(val.designationName)
+    //   .subscribe();
+    // this.designationForm.reset();
   }
 
 }

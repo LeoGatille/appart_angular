@@ -17,18 +17,18 @@ export class TestPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.placeholderName = 'Nom';
-    this.labelService.getAllLabels()
-      .subscribe((labels: Label[]) => {
-        this.listToAdd = labels;
-      });
+    // this.placeholderName = 'Nom';
+    // this.labelService.getAllLabels()
+    //   .subscribe((labels: Label[]) => {
+    //     this.listToAdd = labels;
+    //   });
   }
-  createElement($event) {
-    console.log($event);
-    this.labelService.createLabel($event.nameControl)
-      .subscribe((label: Label) => {
-        this.listToAdd.push(label);
-      });
-  }
+  // createElement($event) {
+  //   console.log($event);
+  //   this.labelService.createLabel($event.nameControl)
+  //     .subscribe((label: Label) => {
+  //       this.listToAdd.push(label);
+  //     });
+  // }
 
 }

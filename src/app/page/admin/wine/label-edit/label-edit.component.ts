@@ -23,16 +23,16 @@ export class LabelEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private labelService: LabelService
   ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        this.id = params.id;
-        this.labelService.getOneLabel(this.id)
-          .subscribe((label: Label) => {
-            this.loading = false;
-            this.myComponent = label;
-            this.linkedWines = this.myComponent.wines;
-          });
-      });
+    // this.activatedRoute.params
+    //   .subscribe((params) => {
+    //     this.id = params.id;
+    //     this.labelService.getOneLabel(this.id)
+    //       .subscribe((label: Label) => {
+    //         this.loading = false;
+    //         this.myComponent = label;
+    //         this.linkedWines = this.myComponent.wines;
+    //       });
+    //   });
   }
 
   ngOnInit() {

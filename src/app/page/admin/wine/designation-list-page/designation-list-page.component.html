@@ -1,11 +1,11 @@
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
-                 (serviceCall)="createElement($event)"
+                 (serviceCall)="createDesignation($event)"
                  [nameField]="true"
                  [placeholderName]="placeholderName"
 ></app-create-form>
 <div *ngFor="let designation of listToAdd">
   <p>{{designation.designationName}}</p>
-  <button [routerLink]="['/admin/wine/designation/edit', designation.id]">modifier</button>
+  <button (click)="editInit(designation.id)">modifier</button>
   <button (click)="delete(designation.id)">suppr</button>
 </div>
