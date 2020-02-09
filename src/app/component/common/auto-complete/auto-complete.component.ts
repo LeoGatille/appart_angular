@@ -52,12 +52,6 @@ export class AutoCompleteComponent implements OnInit {
         );
       this.getOrigin(this.myControl.value);
     });
-    // this.filteredElements = this.myControl.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value))
-    //   );
-    // this.getOrigin(this.myControl.value);
   }
 
   private _filter(value: string): any[] {
@@ -96,8 +90,6 @@ export class AutoCompleteComponent implements OnInit {
       descriptionField: this.descriptionField,
       title: this.title,
     };
-    this.dialog.open(DialogComponent, dialogConfig);
-
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
 
