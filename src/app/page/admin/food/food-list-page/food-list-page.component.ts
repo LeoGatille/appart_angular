@@ -27,6 +27,7 @@ export class FoodListPageComponent implements OnInit {
   action: string;
   loading = true;
   title = 'Allergen';
+  allergenPromise: any;
   constructor(
     private fb: FormBuilder,
     private typeService: TypeService,
@@ -44,13 +45,11 @@ export class FoodListPageComponent implements OnInit {
     this.action = 'list';
     this.allAllergens = [];
     this.food = new Food();
+
+    this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
     this.allergenControl = new FormControl(this.stockAllergen, Validators.required);
-    const allergenP = this.allergenService.getAllAllergens().toPromise();
-    Promise.resolve(allergenP).then((data: any) => {
-      this.loading = false;
-      this.allergens = data;
-      this.createForm();
-    });
+    this.createForm();
+    this.loading = false;
   }
 
   getFood() {

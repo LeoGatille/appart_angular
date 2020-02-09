@@ -61,60 +61,60 @@ export class WineCreatePageComponent implements OnInit {
                private wineService: WineService,
                private fb: FormBuilder
   ) {
-    this.vin = new Wine();
-    const catP = this.categoryService.getAllCategories().toPromise();
-    const colorP = this.colorService.getAllColors().toPromise();
-    const designationP = this.designationService.getAllDesignations().toPromise();
-    const labelP = this.labelService.getAllLabels().toPromise();
-    const vintageP = this.vintageService.getAllVintages().toPromise();
-    const statusP = this.statusService.getAllStatus().toPromise();
-    Promise.all([catP, colorP, designationP, labelP, vintageP, statusP]).then((data: any[]) => {
-      console.log('PROMISE FINISHED');
-      this.loading = false;
-      const categories = data[0];
-      const colors = data[1];
-      console.log('colors = ', colors);
-
-      const designations = data[2];
-      const labels = data[3];
-      const vintages = data[4];
-      const statuses = data[5];
-
-      this.vin.category = categories[0];
-      this.vin.color  = null;
-
-      this.vin.designation = null;
-      this.vin.label = null;
-      this.vin.vintage  = null;
-      this.vin.status  = null;
-
-      this.colors = colors;
-      this.categories = categories;
-
-      this.designations = designations;
-      this.labels = labels;
-      this.vintages = vintages;
-      this.allStatus = statuses;
-
-      this.colorControl = new FormControl(this.vin.color, Validators.required);
-      this.categoryControl = new FormControl(this.vin.category, Validators.required);
-      this.designationControl = new FormControl(this.vin.designation, Validators.required);
-      this.labelControl = new FormControl(this.vin.label, Validators.required);
-      this.vintageControl = new FormControl(this.vin.vintage, Validators.required);
-      this.statusControl = new FormControl(this.vin.status, Validators.required);
-      this.wineForm = this.fb.group({
-        colorControl : this.colorControl,
-        categoryControl : this.categoryControl,
-        designationControl : this.designationControl,
-        labelControl : this.labelControl,
-        vintageControl : this.vintageControl,
-        statusControl : ['', Validators.required],
-        nameControl : ['', Validators.required],
-        priceControl : ['', Validators.required]
-      });
-    });
-    this.createCategory = true;
-    this.activateButton = true;
+    // this.vin = new Wine();
+    // const catP = this.categoryService.getAllCategories().toPromise();
+    // const colorP = this.colorService.getAllColors().toPromise();
+    // const designationP = this.designationService.getAllDesignations().toPromise();
+    // const labelP = this.labelService.getAllLabels().toPromise();
+    // const vintageP = this.vintageService.getAllVintages().toPromise();
+    // const statusP = this.statusService.getAllStatus().toPromise();
+    // Promise.all([catP, colorP, designationP, labelP, vintageP, statusP]).then((data: any[]) => {
+    //   console.log('PROMISE FINISHED');
+    //   this.loading = false;
+    //   const categories = data[0];
+    //   const colors = data[1];
+    //   console.log('colors = ', colors);
+    //
+    //   const designations = data[2];
+    //   const labels = data[3];
+    //   const vintages = data[4];
+    //   const statuses = data[5];
+    //
+    //   this.vin.category = categories[0];
+    //   this.vin.color  = null;
+    //
+    //   this.vin.designation = null;
+    //   this.vin.label = null;
+    //   this.vin.vintage  = null;
+    //   this.vin.status  = null;
+    //
+    //   this.colors = colors;
+    //   this.categories = categories;
+    //
+    //   this.designations = designations;
+    //   this.labels = labels;
+    //   this.vintages = vintages;
+    //   this.allStatus = statuses;
+    //
+    //   this.colorControl = new FormControl(this.vin.color, Validators.required);
+    //   this.categoryControl = new FormControl(this.vin.category, Validators.required);
+    //   this.designationControl = new FormControl(this.vin.designation, Validators.required);
+    //   this.labelControl = new FormControl(this.vin.label, Validators.required);
+    //   this.vintageControl = new FormControl(this.vin.vintage, Validators.required);
+    //   this.statusControl = new FormControl(this.vin.status, Validators.required);
+    //   this.wineForm = this.fb.group({
+    //     colorControl : this.colorControl,
+    //     categoryControl : this.categoryControl,
+    //     designationControl : this.designationControl,
+    //     labelControl : this.labelControl,
+    //     vintageControl : this.vintageControl,
+    //     statusControl : ['', Validators.required],
+    //     nameControl : ['', Validators.required],
+    //     priceControl : ['', Validators.required]
+    //   });
+    // });
+    // this.createCategory = true;
+    // this.activateButton = true;
   }
   displayFn(color: Color): string {
     return color ? color.colorName : '';

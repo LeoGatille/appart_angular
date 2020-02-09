@@ -21,7 +21,7 @@
   </div>
     <div>
       <app-auto-complete (addElement)="getAllergenId($event)"
-                         [listOfElements]="allergens"
+                         [arrayPromise]="allergenPromise"
                          [parentModel]=""
                          [displayFn]="displayFn"
                          [myControl]="allergenControl"
