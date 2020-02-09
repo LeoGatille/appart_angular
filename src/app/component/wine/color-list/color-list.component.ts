@@ -15,11 +15,11 @@ export class ColorListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.colorService.getAllColors()
-      .subscribe((colors: Color[]) => {
-        this.colors = colors;
-        console.log(this.colors[0].wines[0].wineName);
-      });
+    // this.colorService.getAllColors()
+    //   .subscribe((colors: Color[]) => {
+    //     this.colors = colors;
+    //     console.log(this.colors[0].wines[0].wineName);
+    //   });
   }
 
 }

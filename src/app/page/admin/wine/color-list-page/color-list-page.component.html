@@ -1,11 +1,11 @@
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
-                 (serviceCall)="createElement($event)"
+                 (serviceCall)="createColor($event)"
                  [nameField]="true"
                  [placeholderName]="placeholderName"
 ></app-create-form>
 <div *ngFor="let color of listToAdd">
   <p>{{color.colorName}}</p>
-  <button [routerLink]="['/admin/wine/color/edit/', color.id]">modifier</button>
+  <button (click)="editInit(color.id)">modifier</button>
   <button (click)="delete(color.id)">suppr</button>
 </div>

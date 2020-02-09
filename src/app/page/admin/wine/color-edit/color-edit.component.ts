@@ -25,18 +25,18 @@ export class ColorEditComponent implements OnInit {
     private colorService: ColorService,
     private activatedRoute: ActivatedRoute
   ) {
-    console.log('toto');
-    this.activatedRoute.params
-      .subscribe((params) => {
-        console.log('params = ', params);
-        this.id = params.id;
-        this.colorService.getOneColor(this.id)
-        .subscribe((color: Color) => {
-          this.myComponent = color;
-          this.loading = false;
-          this.linkedWines = this.myComponent.wines;
-        });
-      });
+    // console.log('toto');
+    // this.activatedRoute.params
+    //   .subscribe((params) => {
+    //     console.log('params = ', params);
+    //     this.id = params.id;
+    //     this.colorService.getOneColor(this.id)
+    //     .subscribe((color: Color) => {
+    //       this.myComponent = color;
+    //       this.loading = false;
+    //       this.linkedWines = this.myComponent.wines;
+    //     });
+    //   });
   }
 
   ngOnInit() { }

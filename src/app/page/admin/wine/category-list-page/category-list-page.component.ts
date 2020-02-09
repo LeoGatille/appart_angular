@@ -44,21 +44,18 @@ export class CategoryListPageComponent implements OnInit {
    }
 
    createCategory($event) {
-     console.log('event', $event);
      this.categoryService.create($event.nameControl)
        .subscribe((category: Category) => {
          this.listToAdd.push(category);
        });
    }
   editInit(id: number) {
-    console.log('toto');
     this.categoryService.getOneCategory(id)
       .subscribe((category: Category) => {
         this.launchModalCreation(category);
       });
   }
   launchModalCreation(category: Category) {
-    console.log('titi');
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
