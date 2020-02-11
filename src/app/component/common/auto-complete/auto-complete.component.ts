@@ -69,10 +69,14 @@ export class AutoCompleteComponent implements OnInit {
     }
   }
 
+  reserValue() {
+  }
+
   sendToParent() {
     this.addElement.emit(this.myControl.value);
     this.askActivateButton(this.myControl.value);
     console.log('activateButton = ' + this.activateButton);
+    this.reserValue();
   }
 
   askActivateButton(val) {
@@ -111,14 +115,17 @@ export class AutoCompleteComponent implements OnInit {
   }
   createElement(data: any) {
     if (data.nameControl) {
+      console.log(this.service);
       this.service.create(data.nameControl)
         .subscribe((res) => {
           this.listOfElements.push(res);
+          this.addElement.emit(res);
         });
     } else {
       this.service.create(data.numberControl)
         .subscribe((res) => {
           this.listOfElements.push(res);
+          this.addElement.emit(res);
         });
     }
   }

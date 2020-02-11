@@ -23,7 +23,7 @@ export class ColorService {
   // public getAllColors() {
   //   return this.http.get(`${this.uri}`);
   // }
-  public createColor( colorName: string) {
+  public create( colorName: string) {
     return this.http.post(`${this.uri}/create`, { colorName });
   }
   public editColor( colorName: string, id ) {
