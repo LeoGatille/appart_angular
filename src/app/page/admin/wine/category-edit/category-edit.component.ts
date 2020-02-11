@@ -39,10 +39,10 @@ export class CategoryEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoryService.getAllCategories()
-      .subscribe((categories: Category[]) => {
-        this.listToAdd = categories;
-      });
+    // this.categoryService.getAllCategories()
+    //   .subscribe((categories: Category[]) => {
+    //     this.listToAdd = categories;
+    //   });
   }
 
   editElement($event) {

@@ -15,10 +15,10 @@ export class LabelListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.labelService.getAllLabels()
-      .subscribe((labels: Label[]) => {
-        this.labels = labels;
-      });
+    // this.labelService.getAllLabels()
+    //   .subscribe((labels: Label[]) => {
+    //     this.labels = labels;
+    //   });
   }
 
 }

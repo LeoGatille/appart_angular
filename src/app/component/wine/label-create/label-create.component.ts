@@ -17,14 +17,14 @@ export class LabelCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.labelForm = this.fb.group( {
-      labelName : ['', Validators.required],
-    });
+    // this.labelForm = this.fb.group( {
+    //   labelName : ['', Validators.required],
+    // });
   }
   save() {
-    const val = this.labelForm.value;
-    this.labelService.createLabel(val.labelName)
-      .subscribe();
+    // const val = this.labelForm.value;
+    // this.labelService.createLabel(val.labelName)
+    //   .subscribe();
   }
 
 }

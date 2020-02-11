@@ -18,14 +18,14 @@ export class VintageCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vintageForm = this.fb.group( {
-      vintageYear : ['', Validators.required]
-    });
+    // this.vintageForm = this.fb.group( {
+    //   vintageYear : ['', Validators.required]
+    // });
   }
-  save() {
-    const val = this.vintageForm.value;
-    this.vintageService.createVintage(val.vintageYear)
-      .subscribe();
-  }
+  // save() {
+  //   const val = this.vintageForm.value;
+  //   this.vintageService.createVintage(val.vintageYear)
+  //     .subscribe();
+  // }
 
 }

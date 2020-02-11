@@ -21,16 +21,16 @@ export class DesignationEditComponent implements OnInit {
     private designationService: DesignationService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        this.id = params.id;
-        this.designationService.getOneDesignation(this.id)
-          .subscribe((designation: Designation) => {
-            this.loading = false;
-            this.myComponent = designation;
-            this.linkedWines = designation.wines;
-          });
-      });
+    // this.activatedRoute.params
+    //   .subscribe((params) => {
+    //     this.id = params.id;
+    //     this.designationService.getOneDesignation(this.id)
+    //       .subscribe((designation: Designation) => {
+    //         this.loading = false;
+    //         this.myComponent = designation;
+    //         this.linkedWines = designation.wines;
+    //       });
+    //   });
   }
 
   ngOnInit() {

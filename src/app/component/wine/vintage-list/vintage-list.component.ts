@@ -15,10 +15,10 @@ export class VintageListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.vintageService.getAllVintages()
-      .subscribe((vintages: Vintage[]) => {
-        this.vintages = vintages;
-      });
+    // this.vintageService.getAllVintages()
+    //   .subscribe((vintages: Vintage[]) => {
+    //     this.vintages = vintages;
+    //   });
   }
 
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Category} from '../../../../class/wine/category';
 import {CategoryService} from '../../../../service/wine/category.service';
 import {ActivatedRoute} from '@angular/router';
+import {Allergen} from '../../../../class/food/allergen';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-category-list-page',
@@ -10,15 +13,16 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CategoryListPageComponent implements OnInit {
 
-  editId: number;
   categoryNameEdit: string | null;
   action: string;
   listToAdd: Category[];
   class: Category;
   placeholderName: string;
+  categoryPromise: any;
   constructor(
     private categoryService: CategoryService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -30,39 +34,51 @@ export class CategoryListPageComponent implements OnInit {
     this.action = 'list';
     this.categoryNameEdit = null;
     this.placeholderName = 'Nom';
-    this.categoryService.getAllCategories()
-      .subscribe((categories: Category[]) => {
-        this.listToAdd = categories;
-      });
-  }
-  createElement($event) {
-    console.log($event);
-    if (this.action === 'list') {
-      this.categoryService.createCategory($event.nameControl)
-        .subscribe( (category: Category) => {
-          this.listToAdd.push(category);
-        });
-    } else {
-      this.categoryService.editCategory($event.nameControl, this.editId)
-        .subscribe( () => { this.ngOnInit(); } );
-    }
-  }
-  editMod(id: number) {
+    this.getCategories();
+   }
+   getCategories(force = false) {
+     this.categoryPromise = (bool) => this.categoryService.getAllCategories((force));
+     this.categoryPromise().then((data: any[]) => {
+       this.listToAdd = data;
+     });
+   }
+
+   createCategory($event) {
+     this.categoryService.create($event.nameControl)
+       .subscribe((category: Category) => {
+         this.listToAdd.push(category);
+       });
+   }
+  editInit(id: number) {
     this.categoryService.getOneCategory(id)
       .subscribe((category: Category) => {
-        this.categoryNameEdit = category.categoryName;
-        this.editId = category.id;
-        this.action = 'edit';
+        this.launchModalCreation(category);
+      });
+  }
+  launchModalCreation(category: Category) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      modal: true,
+      value: category.categoryName,
+      nameField: true,
+      title: 'Modification' ,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data => this.editCategory(data, category.id)
+    );
+  }
+  editCategory(data, id) {
+    this.categoryService.editCategory(data.nameControl, id)
+      .subscribe( () => {
+        this.getCategories(true);
       });
   }
   delete(id: number) {
     this.categoryService.deleteCategory(id)
-      .subscribe();
-  }
-  changeAction() {
-    if (this.action !== 'list') {
-      this.action = 'list';
-      this.categoryNameEdit = null;
-    }
+      .subscribe(() => {
+        this.getCategories(true);
+      });
   }
 }

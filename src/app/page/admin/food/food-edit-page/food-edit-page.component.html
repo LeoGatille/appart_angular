@@ -23,11 +23,15 @@
   </div>
   <div>
     <app-auto-complete (addElement)="getAllergenId($event)"
-                       [listOfElements]="allAllergens"
+                       [arrayPromise]="allergenPromise"
                        [parentModel]=""
                        [displayFn]="displayFn"
                        [myControl]="allergenControl"
                        [callBackFilter]="callBackFilter"
+                       [creation]="true"
+                       [nameField]="true"
+                       [title]="title"
+                       [service]="allergenService"
     ></app-auto-complete>
   </div>
   <div *ngFor="let allergen of selectedAllergens">

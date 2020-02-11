@@ -15,10 +15,10 @@ export class DesignationListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.designationService.getAllDesignations()
-      .subscribe((designations: Designation[]) => {
-        this.designations = designations;
-      });
+    // this.designationService.getAllDesignations()
+    //   .subscribe((designations: Designation[]) => {
+    //     this.designations = designations;
+    //   });
   }
 
 }

@@ -22,21 +22,21 @@ export class CategoryCreateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.categoryForm = this.fb.group( {
-      categoryName: ['', Validators.required],
-    });
+    // this.categoryForm = this.fb.group( {
+    //   categoryName: ['', Validators.required],
+    // });
   }
-  save() {
-    const val = this.categoryForm.value;
-    this.categoryService.createCategory(val.categoryName)
-      .subscribe( (category: Category) => {
-        if (this.listToAdd) {
-          this.listToAdd.push(category);
-        }
-        if (this.dialog) {
-          this.dialog.close();
-        }
-      });
-    this.categoryForm.reset();
-  }
+  // save() {
+  //   const val = this.categoryForm.value;
+  //   this.categoryService.createCategory(val.categoryName)
+  //     .subscribe( (category: Category) => {
+  //       if (this.listToAdd) {
+  //         this.listToAdd.push(category);
+  //       }
+  //       if (this.dialog) {
+  //         this.dialog.close();
+  //       }
+  //     });
+  //   this.categoryForm.reset();
+  // }
 }

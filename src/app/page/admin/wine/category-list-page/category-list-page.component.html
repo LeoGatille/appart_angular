@@ -3,18 +3,14 @@
 <h4 *ngIf="action === 'edit'">Modification</h4>
 <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
-                 (serviceCall)="createElement($event)"
+                 (serviceCall)="createCategory($event)"
                  [nameField]="true"
-                 [nameValue]="categoryNameEdit"
                  [placeholderName]="placeholderName"
 ></app-create-form>
 <div>
-  <button mat-flat-button
-          (click)="changeAction()"
-  >Création</button>
 </div>
 <div *ngFor="let category of listToAdd">
   <p>{{category.categoryName}}</p>
-  <button (click)="editMod(category.id)">modifier</button>
+  <button (click)="editInit(category.id)">modifier</button>
   <button (click)="delete(category.id)" >delete</button>
 </div>

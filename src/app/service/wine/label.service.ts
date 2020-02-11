@@ -8,16 +8,23 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LabelService {
-  private allLabels: any;
   private uri = `${Globals.APP_API_URL}/label`;
+  private allLabelsPromise: Promise<Label[]>;
   constructor(
     private http: HttpClient
   ) { }
 
-  public getAllLabels() {
-   return this.http.get(`${this.uri}`);
+  public getAllLabels(force = false) {
+    if (this.allLabelsPromise && !force) {
+      return Promise.resolve(this.allLabelsPromise);
+    }
+    this.allLabelsPromise = this.http.get<Label[]>(`${this.uri}`).toPromise();
+    return this.allLabelsPromise;
   }
-  public createLabel(labelName: string) {
+  // public getAllLabels() {
+  //  return this.http.get(`${this.uri}`);
+  // }
+  public create(labelName: string) {
     return this.http.post(`${this.uri}/create`, {labelName});
   }
   public editLabel( labelName: string, id ) {

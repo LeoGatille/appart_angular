@@ -9,18 +9,29 @@ import {AllergenService} from '../../../../service/food/allergen.service';
 })
 export class AllergenListPageComponent implements OnInit {
 
-  allAllergens: Allergen[];
+  allAllergens: any[];
+  allergenPromise: any;
   loading = true;
   constructor(
     private allergenService: AllergenService
   ) { }
 
   ngOnInit() {
-    this.allergenService.getAllAllergens()
-    .subscribe((allergens: Allergen[]) => {
-      this.allAllergens = allergens;
-    });
+    this.getAllergens();
     this.loading = false;
+    // this.allergenService.getAllAllergens()
+    // .subscribe((allergens: Allergen[]) => {
+    //   this.allAllergens = allergens;
+    // });
+    // this.loading = false;
+  }
+  getAllergens(force = false) {
+    console.log('titi');
+    this.allergenPromise = (bool) => this.allergenService.getAllAllergens((force));
+    this.allergenPromise().then((data: any[]) => {
+      this.allAllergens = data;
+      console.log('toto');
+    });
   }
   createAllergen($event) {
     console.log('event', $event);
@@ -31,7 +42,13 @@ export class AllergenListPageComponent implements OnInit {
   }
   deleteAllergen(id) {
     this.allergenService.deleteAllergen(id)
-      .subscribe();
+      .subscribe(() => {
+        this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
+        this.allergenPromise().then((data: any[]) => {
+          this.allAllergens = data;
+          console.log('toto');
+        });
+      });
   }
 
 }

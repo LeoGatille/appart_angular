@@ -7,28 +7,28 @@ import {ColorService} from '../../service/wine/color.service';
   templateUrl: './sec-test-page.component.html',
   styleUrls: ['./sec-test-page.component.css']
 })
-export class SecTestPageComponent implements OnInit {
+export class SecTestPageComponent {
 
-  listToAdd: Color[];
-  class: Color;
-  placeholderName: string;
-  constructor(
-    private colorService: ColorService,
-  ) { }
-
-  ngOnInit() {
-    this.placeholderName = 'Nom';
-    this.colorService.getAllColors()
-      .subscribe((colors: Color[]) => {
-        this.listToAdd = colors;
-      });
-  }
-  createElement($event) {
-    console.log($event);
-    this.colorService.createColor($event.nameControl)
-      .subscribe( (color: Color) => {
-        this.listToAdd.push(color);
-      });
-  }
+  // listToAdd: Color[];
+  // class: Color;
+  // placeholderName: string;
+  // constructor(
+  //   private colorService: ColorService,
+  // ) { }
+  //
+  // ngOnInit() {
+  //   this.placeholderName = 'Nom';
+  //   this.colorService.getAllColors()
+  //     .subscribe((colors: Color[]) => {
+  //       this.listToAdd = colors;
+  //     });
+  // }
+  // createElement($event) {
+  //   console.log($event);
+  //   this.colorService.createColor($event.nameControl)
+  //     .subscribe( (color: Color) => {
+  //       this.listToAdd.push(color);
+  //     });
+  // }
 
 }

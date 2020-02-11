@@ -28,6 +28,9 @@ export class FoodEditPageComponent implements OnInit {
   selectedAllergens: Allergen[];
   type: Type;
   typeControl: FormControl;
+  allergenPromise: any;
+  title = 'Allergen';
+
   constructor(
     private fb: FormBuilder,
     private foodService: FoodService,
@@ -52,24 +55,16 @@ export class FoodEditPageComponent implements OnInit {
       .subscribe((types: Type[]) => {
         this.allTypes = types;
       });
+    this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
+    this.allergenControl = new FormControl('', Validators.required);
 
-    const allergenP = this.allergenService.getAllAllergens().toPromise();
-    const oneFoodP = this.foodService.getOneFood(this.id).toPromise();
-    Promise.all([allergenP, oneFoodP]).then((data: any) => {
-      this.allAllergens = data[0];
-      this.food = data[1];
-      this.selectedAllergens = this.food.allergen;
-      this.allergenControl = new FormControl(this.food.allergen[0]);
-      this.foodForm = this.fb.group({
-        myControl : this.allergenControl,
-        descriptionControl : [this.food.foodDescription],
-        nameControl : [this.food.foodName, Validators.required],
-        typeControl : [this.food.type, Validators.required ],
-        displayControl : [this.food.display]
-      });
-      this.loading = false;
-      console.log('typeControl = ', this.typeControl);
-    });
+    this.foodService.getOneFood(this.id)
+       .subscribe((food: Food) => {
+         this.food = food;
+         this.selectedAllergens = this.food.allergen;
+         this.createForm();
+         this.loading = false;
+       });
   }
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
@@ -118,7 +113,14 @@ export class FoodEditPageComponent implements OnInit {
     }
     return checked;
   }
-  selectLog(type: Type) {
-    console.log(type);
+
+  createForm() {
+    this.foodForm = this.fb.group({
+      allergenControl : this.allergenControl,
+      descriptionControl : ['', Validators.required],
+      nameControl : ['', Validators.required],
+      typeControl : [ '' , Validators.required],
+      displayControl : [this.food.display]
+    });
   }
 }
