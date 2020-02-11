@@ -33,15 +33,10 @@ export class WineCreatePageComponent implements OnInit {
   designation: Designation;
   label: Label;
   vintage: Vintage;
-  vin: Wine;
   labelName: string;
-  labelId: number;
   loading = true;
   colors: any[];
   categories: any[];
-  designations: any[];
-  labels: any[];
-  vintages: any[];
   wineForm: FormGroup;
   colorControl: FormControl;
   categoryControl: FormControl;
@@ -49,8 +44,21 @@ export class WineCreatePageComponent implements OnInit {
   labelControl: FormControl;
   vintageControl: FormControl;
   statusControl: FormControl;
-  createCategory: boolean;
   activateButton = true;
+
+
+
+
+
+
+
+
+
+  colorPromise: any = null;
+  categoryPromise: any = null;
+  designationPromise: any = null;
+  labelPromise: any = null;
+  vintagePromise: any = null;
 
   constructor( private colorService: ColorService,
                private categoryService: CategoryService,
@@ -60,61 +68,43 @@ export class WineCreatePageComponent implements OnInit {
                private statusService: StatusService,
                private wineService: WineService,
                private fb: FormBuilder
-  ) {
-    // this.vin = new Wine();
-    // const catP = this.categoryService.getAllCategories().toPromise();
-    // const colorP = this.colorService.getAllColors().toPromise();
-    // const designationP = this.designationService.getAllDesignations().toPromise();
-    // const labelP = this.labelService.getAllLabels().toPromise();
-    // const vintageP = this.vintageService.getAllVintages().toPromise();
-    // const statusP = this.statusService.getAllStatus().toPromise();
-    // Promise.all([catP, colorP, designationP, labelP, vintageP, statusP]).then((data: any[]) => {
-    //   console.log('PROMISE FINISHED');
-    //   this.loading = false;
-    //   const categories = data[0];
-    //   const colors = data[1];
-    //   console.log('colors = ', colors);
-    //
-    //   const designations = data[2];
-    //   const labels = data[3];
-    //   const vintages = data[4];
-    //   const statuses = data[5];
-    //
-    //   this.vin.category = categories[0];
-    //   this.vin.color  = null;
-    //
-    //   this.vin.designation = null;
-    //   this.vin.label = null;
-    //   this.vin.vintage  = null;
-    //   this.vin.status  = null;
-    //
-    //   this.colors = colors;
-    //   this.categories = categories;
-    //
-    //   this.designations = designations;
-    //   this.labels = labels;
-    //   this.vintages = vintages;
-    //   this.allStatus = statuses;
-    //
-    //   this.colorControl = new FormControl(this.vin.color, Validators.required);
-    //   this.categoryControl = new FormControl(this.vin.category, Validators.required);
-    //   this.designationControl = new FormControl(this.vin.designation, Validators.required);
-    //   this.labelControl = new FormControl(this.vin.label, Validators.required);
-    //   this.vintageControl = new FormControl(this.vin.vintage, Validators.required);
-    //   this.statusControl = new FormControl(this.vin.status, Validators.required);
-    //   this.wineForm = this.fb.group({
-    //     colorControl : this.colorControl,
-    //     categoryControl : this.categoryControl,
-    //     designationControl : this.designationControl,
-    //     labelControl : this.labelControl,
-    //     vintageControl : this.vintageControl,
-    //     statusControl : ['', Validators.required],
-    //     nameControl : ['', Validators.required],
-    //     priceControl : ['', Validators.required]
-    //   });
-    // });
-    // this.createCategory = true;
-    // this.activateButton = true;
+  ) { }
+
+  ngOnInit() {
+  this.getElements();
+  this.createForm();
+  this.loading = false;
+
+  }
+  createForm() {
+    this.colorControl = new FormControl('', Validators.required);
+    this.categoryControl = new FormControl('', Validators.required);
+    this.designationControl = new FormControl('', Validators.required);
+    this.labelControl = new FormControl('', Validators.required);
+    this.vintageControl = new FormControl('', Validators.required);
+    this.statusControl = new FormControl('', Validators.required);
+    this.wineForm = this.fb.group({
+      colorControl : this.colorControl,
+      categoryControl : this.categoryControl,
+      designationControl : this.designationControl,
+      labelControl : this.labelControl,
+      vintageControl : this.vintageControl,
+      statusControl : ['', Validators.required],
+      nameControl : ['', Validators.required],
+      priceControl : ['', Validators.required]
+    });
+  }
+
+  getElements(selector = '', force = false) {
+      this.colorPromise = (bool) => this.colorService.getAllColors(force);
+      this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
+      this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
+      this.labelPromise = (bool) => this.labelService.getAllLabels(force);
+      this.vintagePromise = (bool) => this.vintageService.getAllVintages(force);
+      this.statusService.getAllStatus()
+        .subscribe((status: Status[]) => {
+        this.allStatus = status;
+      });
   }
   displayFn(color: Color): string {
     return color ? color.colorName : '';
@@ -197,22 +187,24 @@ export class WineCreatePageComponent implements OnInit {
   }
 
   validate() {
-    this.vin.status = this.wineForm.value.statusControl;
-    this.vin.wineName = this.wineForm.value.nameControl;
-    this.vin.winePrice = this.wineForm.value.priceControl;
-    this.vin.category = this.category;
-    this.vin.designation = this.designation;
-    this.vin.color = this.color;
-    this.vin.label = this.label;
-    this.vin.vintage = this.vintage;
-    this.wineService.createWine(this.vin.category.id,
-      this.vin.designation.id,
-      this.vin.color.id,
-      this.vin.label.id,
-      this.vin.wineName,
-      this.vin.winePrice,
-      this.vin.vintage.id,
-      this.vin.status.id
+    const vin = new Wine();
+    vin.status = this.wineForm.value.statusControl;
+    vin.wineName = this.wineForm.value.nameControl;
+    vin.winePrice = this.wineForm.value.priceControl;
+    vin.category = this.category;
+    vin.designation = this.designation;
+    vin.color = this.color;
+    vin.label = this.label;
+    vin.vintage = this.vintage;
+    this.wineService.createWine(
+      vin.category.id,
+      vin.designation.id,
+      vin.color.id,
+      vin.label.id,
+      vin.wineName,
+      vin.winePrice,
+      vin.vintage.id,
+      vin.status.id
     )
       .subscribe(success =>  console.log('oh yes ! ', success),
         error => {
@@ -224,13 +216,5 @@ export class WineCreatePageComponent implements OnInit {
     this.errorLog = error;
     this.error = true;
   }
-  ngOnInit() {
-    console.log('INIT START');
-    this.wineService.getAllWines()
-      .subscribe((wines: Wine[]) => {
-        this.listToAdd = wines;
-      });
 
-  }
-  ngOnDestroy() {}
 }

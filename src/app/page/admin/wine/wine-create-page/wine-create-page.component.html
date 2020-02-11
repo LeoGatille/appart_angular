@@ -23,65 +23,77 @@
         >
       </mat-form-field>
     </div>
-<!--    <app-auto-complete (addElement)="setColor($event)"-->
-<!--                       [listOfElements]="colors"-->
-<!--                       [parentModel]="vin.color"-->
-<!--                       [displayFn]="displayFn"-->
-<!--                       [myControl]="colorControl"-->
-<!--                       [callBackFilter]="callBackFilter"-->
-<!--    ></app-auto-complete>-->
-<!--    <div>-->
+    <app-auto-complete (addElement)="setColor($event)"
+                       [arrayPromise]="colorPromise"
+                       [parentModel]=""
+                       [displayFn]="displayFn"
+                       [myControl]="colorControl"
+                       [callBackFilter]="callBackFilter"
+                       [creation]="true"
+                       [nameField]="true"
+                       [title]="'Couleur'"
+                       [service]="colorService"
+    ></app-auto-complete>
+    <div>
 
-<!--    </div>-->
-<!--    <div>-->
-<!--      <app-auto-complete *ngIf="!loading"-->
-<!--                         (addElement)="setCategory($event)"-->
-<!--                         [listOfElements]="categories"-->
-<!--                         [parentModel]="vin.category"-->
-<!--                         [displayFn]="displayFnCategory"-->
-<!--                         [myControl]="categoryControl"-->
-<!--                         [callBackFilter]="callBackFilterCat"-->
-<!--                         [creation]="createCategory"-->
-<!--                         [activateButton]="activateButton"-->
-<!--                         (controlButton)="activateNewCategory"-->
-<!--                         [listToAdd]="categories"-->
+    </div>
+    <div>
+      <app-auto-complete (addElement)="setCategory($event)"
+                         [arrayPromise]="categoryPromise"
+                         [parentModel]=""
+                         [displayFn]="displayFnCategory"
+                         [myControl]="categoryControl"
+                         [callBackFilter]="callBackFilterCat"
+                         [creation]="true"
+                         [nameField]="true"
+                         [title]="'Catégorie'"
+                         [service]="categoryService"
 
-<!--      >-->
-<!--      </app-auto-complete>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <app-auto-complete *ngIf="!loading"-->
-<!--                         (addElement)="setDesignation($event)"-->
-<!--                         [listOfElements]="designations"-->
-<!--                         [parentModel]="vin.designation"-->
-<!--                         [displayFn]="displayFnDesignation"-->
-<!--                         [myControl]="designationControl"-->
-<!--                         [callBackFilter]="callBackFilterDesignation"-->
-<!--      >-->
-<!--      </app-auto-complete>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <app-auto-complete *ngIf="!loading"-->
-<!--                         (addElement)="setLabel($event)"-->
-<!--                         [listOfElements]="labels"-->
-<!--                         [parentModel]="vin.label"-->
-<!--                         [displayFn]="displayFnLabel"-->
-<!--                         [myControl]="labelControl"-->
-<!--                         [callBackFilter]="callBackFilterLabel"-->
-<!--      >-->
-<!--      </app-auto-complete>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <app-auto-complete *ngIf="!loading"-->
-<!--                         (addElement)="setVintage($event)"-->
-<!--                         [listOfElements]="vintages"-->
-<!--                         [parentModel]="vin.vintage"-->
-<!--                         [displayFn]="displayFnVintage"-->
-<!--                         [myControl]="vintageControl"-->
-<!--                         [callBackFilter]="callBackFilterVintage"-->
-<!--      >-->
-<!--      </app-auto-complete>-->
-<!--    </div>-->
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete (addElement)="setDesignation($event)"
+                         [arrayPromise]="designationPromise"
+                         [parentModel]=""
+                         [displayFn]="displayFnDesignation"
+                         [myControl]="designationControl"
+                         [callBackFilter]="callBackFilterDesignation"
+                         [creation]="true"
+                         [nameField]="true"
+                         [title]="'Appellation'"
+                         [service]="designationService"
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete (addElement)="setLabel($event)"
+                         [arrayPromise]="labelPromise"
+                         [parentModel]=""
+                         [displayFn]="displayFnLabel"
+                         [myControl]="labelControl"
+                         [callBackFilter]="callBackFilterLabel"
+                         [creation]="true"
+                         [nameField]="true"
+                         [title]="'Label'"
+                         [service]="labelService"
+      >
+      </app-auto-complete>
+    </div>
+    <div>
+      <app-auto-complete (addElement)="setVintage($event)"
+                         [arrayPromise]="vintagePromise"
+                         [parentModel]=""
+                         [displayFn]="displayFnVintage"
+                         [myControl]="vintageControl"
+                         [callBackFilter]="callBackFilterVintage"
+                         [creation]="true"
+                         [numberField]="true"
+                         [title]="'Millésime'"
+                         [service]="vintageService"
+      >
+      </app-auto-complete>
+    </div>
 
     <div>
       <mat-form-field>
