@@ -21,10 +21,10 @@ export class ColorCreateComponent implements OnInit {
       colorName : ['',  Validators.required],
     });
   }
-  save() {
-    const val = this.colorForm.value;
-    // console.log('val = ' + val.order);
-    this.colorService.createColor(val.colorName)
-      .subscribe();
-  }
+  // save() {
+  //   const val = this.colorForm.value;
+  //   // console.log('val = ' + val.order);
+  //   this.colorService.createColor(val.colorName)
+  //     .subscribe();
+  // }
 }

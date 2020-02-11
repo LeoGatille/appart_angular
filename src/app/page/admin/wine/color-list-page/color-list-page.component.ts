@@ -39,7 +39,7 @@ export class ColorListPageComponent implements OnInit {
   }
   createColor($event) {
     console.log($event);
-    this.colorService.createColor($event.nameControl)
+    this.colorService.create($event.nameControl)
       .subscribe( (color: Color) => {
         this.listToAdd.push(color);
       });
