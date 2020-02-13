@@ -3,6 +3,8 @@ import {Food} from '../../../class/food/food';
 import {WineService} from '../../../service/wine/wine.service';
 import {FoodService} from '../../../service/food/food.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-food-row',
@@ -17,6 +19,7 @@ export class FoodRowComponent implements OnInit {
   @Input() food: Food;
   @Output() editData = new EventEmitter<any>();
   constructor(
+    public dialog: MatDialog,
     private foodService: FoodService,
     private fb: FormBuilder,
   ) { }
@@ -57,5 +60,18 @@ export class FoodRowComponent implements OnInit {
       .subscribe(() => {
         this.editData.emit();
       });
+  }
+  editFood(food: Food) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      food,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  this.editData.emit()
+    );
   }
 }

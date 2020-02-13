@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {WineService} from '../../../../service/wine/wine.service';
 import {ActivatedRoute} from '@angular/router';
 import {Wine} from '../../../../class/wine/wine';
@@ -23,6 +23,7 @@ import {Status} from '../../../../class/wine/status';
 })
 export class WineEditComponent implements OnInit {
 
+  @Input() wine: Wine = null;
   error = false;
   errorLog: string;
   selectWine: Wine;

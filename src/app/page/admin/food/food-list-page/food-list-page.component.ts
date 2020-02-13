@@ -102,7 +102,7 @@ export class FoodListPageComponent implements OnInit {
     ).subscribe((res) => {
         this.getFood();
         this.createForm();
-        console.log(res);
+        this.allAllergens = [];
       });
   }
   createForm() {

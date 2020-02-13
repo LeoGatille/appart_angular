@@ -1,12 +1,13 @@
 <div>
   <h3>{{title}}</h3>
-  <app-create-form [nameField]="nameField"
+  <app-create-form *ngIf="!food && !wine" [nameField]="nameField"
                    [nameValue]="nameValue"
                    [numberField]="numberField"
                    [numberValue]="numberValue"
                    [descriptionField]="descriptionField"
                    [dialog]="dialog"
                    (serviceCall)="close($event)">
-
   </app-create-form>
+  <app-food-edit-page *ngIf="food" [food]="food" (close)="close()"></app-food-edit-page>
+  <app-wine-edit *ngIf="wine" [wine]="wine" ></app-wine-edit>
 </div>

@@ -3,7 +3,7 @@
           (click)="showFoodAllergens()"
   > allergènes</button>
   <button mat-flat-button
-          [routerLink]="['/admin/food/edit/', food.id]"
+          (click)="editFood(food)"
   > modification</button>
   <button mat-flat-button
           (click)="deleteFood()"

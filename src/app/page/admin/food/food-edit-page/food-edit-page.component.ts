@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Food} from '../../../../class/food/food';
 import {Allergen} from '../../../../class/food/allergen';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
@@ -18,18 +18,20 @@ export class FoodEditPageComponent implements OnInit {
 
   display: number;
   id: number;
-  food: Food;
+  // food: Food;
   allAllergens: Allergen[];
   allTypes: Type[];
   loading = true;
   allergenControl: FormControl;
   foodForm: FormGroup;
-  allergensId: number[];
-  selectedAllergens: Allergen[];
+  allergensId: number[] = [];
+  selectedAllergens: Allergen[] = [];
   type: Type;
   typeControl: FormControl;
   allergenPromise: any;
   title = 'Allergen';
+  @Input() food: Food;
+  @Output() close = new EventEmitter<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -42,12 +44,14 @@ export class FoodEditPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.allergensId = [];
-    this.activatedRoute.params
-      .subscribe((params) => {
-        this.id = params.id;
-        return this.launchProcesses();
-      });
+    console.log('FOOD = ', this.food);
+    this.launchProcesses();
+    // this.allergensId = [];
+    // this.activatedRoute.params
+    //   .subscribe((params) => {
+    //     this.id = params.id;
+    //     return this.launchProcesses();
+    //   });
 
   }
   launchProcesses() {
@@ -57,14 +61,15 @@ export class FoodEditPageComponent implements OnInit {
       });
     this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
     this.allergenControl = new FormControl('', Validators.required);
-
-    this.foodService.getOneFood(this.id)
-       .subscribe((food: Food) => {
-         this.food = food;
-         this.selectedAllergens = this.food.allergen;
-         this.createForm();
-         this.loading = false;
-       });
+    this.createForm();
+    // this.foodService.getOneFood(this.id)
+    //    .subscribe((food: Food) => {
+    //      this.food = food;
+    //      this.selectedAllergens = this.food.allergen;
+    //
+    //      this.loading = false;
+    //    });
+    this.loading = false;
   }
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
@@ -87,14 +92,16 @@ export class FoodEditPageComponent implements OnInit {
 
   save() {
     const val = this.foodForm.value;
+    console.log('val = ', val);
     this.foodService.editFood(
-      this.id, val.nameControl,
+      this.food.id, val.nameControl,
       val.descriptionControl,
       this.getBooelan(val.displayControl),
       val.typeControl.id,
       this.allergensId
     ).subscribe((res) => {
         console.log('res = ', res);
+        this.close.emit();
       });
   }
   toglle(event) {
@@ -117,9 +124,9 @@ export class FoodEditPageComponent implements OnInit {
   createForm() {
     this.foodForm = this.fb.group({
       allergenControl : this.allergenControl,
-      descriptionControl : ['', Validators.required],
-      nameControl : ['', Validators.required],
-      typeControl : [ '' , Validators.required],
+      descriptionControl : [this.food.foodDescription],
+      nameControl : [this.food.foodName, Validators.required],
+      typeControl : [ this.food.type , Validators.required],
       displayControl : [this.food.display]
     });
   }
