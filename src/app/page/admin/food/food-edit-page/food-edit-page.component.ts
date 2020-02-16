@@ -19,7 +19,7 @@ export class FoodEditPageComponent implements OnInit {
   display: number;
   id: number;
   // food: Food;
-  allAllergens: Allergen[];
+ // allAllergens: Allergen[];
   allTypes: Type[];
   loading = true;
   allergenControl: FormControl;
@@ -61,7 +61,9 @@ export class FoodEditPageComponent implements OnInit {
       });
     this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
     this.allergenControl = new FormControl('', Validators.required);
+    this.selectedAllergens = this.food.allergen;
     this.createForm();
+    this.getAllergenId('init');
     // this.foodService.getOneFood(this.id)
     //    .subscribe((food: Food) => {
     //      this.food = food;
@@ -82,6 +84,11 @@ export class FoodEditPageComponent implements OnInit {
   getAllergenId($event) {
     if (!$event) {
       return;
+    }
+    if ($event === 'init') {
+      this.selectedAllergens.forEach(allergen => {
+        this.allergensId.push(allergen.id);
+      });
     }
     if (typeof $event.id === 'number') {
       this.allergensId.push($event.id);
@@ -129,5 +136,10 @@ export class FoodEditPageComponent implements OnInit {
       typeControl : [ this.food.type , Validators.required],
       displayControl : [this.food.display]
     });
+  }
+  removeAllergen(name, id) {
+    this.selectedAllergens.splice(this.selectedAllergens.indexOf(name), 1);
+    this.allergensId.splice(this.allergensId.indexOf(id), 1);
+    console.log('selected = ', this.selectedAllergens, ' allergensId = ', this.allergensId );
   }
 }

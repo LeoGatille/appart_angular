@@ -76,6 +76,7 @@ import { ModalComponent } from './component/test/modal/modal.component';
 import {ModalModule} from './component/test/modal';
 import { ShortcutComponent } from './component/test/shortcut/shortcut.component';
 import { MessageComponent } from './component/message/message.component';
+import {NgbButtonsModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -164,6 +165,7 @@ import { MessageComponent } from './component/message/message.component';
     ModalModule,
     MatSlideToggleModule,
     NgbModule,
+    NgbButtonsModule,
   ],
     entryComponents: [
       DialogComponent

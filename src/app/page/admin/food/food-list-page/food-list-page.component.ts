@@ -114,5 +114,9 @@ export class FoodListPageComponent implements OnInit {
       displayControl : [this.food.display]
     });
   }
+  removeAllergen(name, id) {
+    this.allAllergens.splice(this.allAllergens.indexOf(name), 1);
+    this.allergensId.splice(this.allergensId.indexOf(id), 1);
+  }
 
 }

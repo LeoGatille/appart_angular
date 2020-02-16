@@ -14,6 +14,7 @@
   <tbody *ngFor="let wine of wines">
     <app-wine-row [wine]="wine"
                   (delete)="delete($event)"
+                  (editData)="edit($event)"
     ></app-wine-row>
   </tbody>
 </table>

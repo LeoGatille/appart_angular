@@ -69,19 +69,16 @@ export class AutoCompleteComponent implements OnInit {
     }
   }
 
-  reserValue() {
-  }
 
   sendToParent() {
     this.addElement.emit(this.myControl.value);
-    this.askActivateButton(this.myControl.value);
+//    this.askActivateButton(this.myControl.value);
     console.log('activateButton = ' + this.activateButton);
-    this.reserValue();
   }
 
-  askActivateButton(val) {
-    this.controlButton.emit(val);
-  }
+  // askActivateButton(val) {
+  //   this.controlButton.emit(val);
+  // }
 
   launchModalCreation() {
     const dialogConfig = new MatDialogConfig();

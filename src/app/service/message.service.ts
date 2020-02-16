@@ -10,7 +10,7 @@ export class MessageService {
   private uri = `${Globals.APP_API_URL}/message`;
   constructor(
     private http: HttpClient
-  ) { }
+  ) { } 
   public getMessage() {
     return this.http.get(`${this.uri}`);
   }

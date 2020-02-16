@@ -46,5 +46,8 @@ export class WineListPageComponent implements OnInit {
   log() {
     console.log('mega toto');
   }
+  edit(wine: Wine) {
+
+  }
 
 }

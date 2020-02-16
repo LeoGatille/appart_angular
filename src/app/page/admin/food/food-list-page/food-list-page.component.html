@@ -33,7 +33,7 @@
       ></app-auto-complete>
     </div>
     <div *ngFor="let allergen of allAllergens">
-      <button mat-flat-button >{{allergen.allergenName}}</button>
+      <button mat-flat-button (click)="removeAllergen(allergen.allergenName, allergen.id)">{{allergen.allergenName}}</button>
     </div>
   <div>
     <mat-form-field>

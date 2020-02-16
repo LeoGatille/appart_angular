@@ -11,7 +11,6 @@ import {Wine} from '../class/wine/wine';
 })
 export class DialogComponent implements OnInit {
 
- // @Input() listToAdd: any[];
   dialog: this;
   numberField: boolean;
   nameField: boolean;
@@ -24,7 +23,6 @@ export class DialogComponent implements OnInit {
   modal: boolean;
   food: Food = null;
   wine: Wine = null;
-  makefood = false;
 
   @Output() sendData = new EventEmitter<any>();
 
@@ -51,9 +49,9 @@ export class DialogComponent implements OnInit {
     if (typeof data !== 'object') {
       if (this.numberField) {
         console.log('toto');
-        this.numberValue = data;
+        this.numberValue = data ? data : '';
       } else {
-        this.nameValue = data;
+        this.nameValue = data ? data : '';
       }
     }
   }

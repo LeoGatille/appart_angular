@@ -4,6 +4,9 @@ import {WineService} from '../../../service/wine/wine.service';
 import {StatusService} from '../../../service/wine/status.service';
 import {Wine} from '../../../class/wine/wine';
 import {Status} from '../../../class/wine/status';
+import {Food} from '../../../class/food/food';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-wine-row',
@@ -12,7 +15,8 @@ import {Status} from '../../../class/wine/status';
 })
 export class WineRowComponent implements OnInit {
 
-  @Output() delete = new EventEmitter();
+  @Output() delete = new EventEmitter<any>();
+  @Output() editData = new EventEmitter<any>();
   @Input() wine: Wine;
   status: Status;
   allStatus: Status[];
@@ -22,7 +26,8 @@ export class WineRowComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private wineService: WineService,
-    private statusService: StatusService
+    private statusService: StatusService,
+    private dialog: MatDialog,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -70,4 +75,17 @@ export class WineRowComponent implements OnInit {
 
   }
 
+  editWine(wine: Wine) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      wine,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  this.editData.emit()
+    );
+  }
 }

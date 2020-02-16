@@ -9,7 +9,7 @@
   <td><button mat-icon-button (click)="sendDelete(wine.id)"><i class="material-icons">
     clear
   </i></button></td>
-  <td><button mat-icon-button [routerLink]="['/admin/wine/edit/', wine.id]" color="success"><i class="material-icons">
+  <td><button mat-icon-button (click)="editWine(wine)" color="success"><i class="material-icons">
     create
   </i></button></td>
   <td><button mat-icon-button (click)="showWineStatus()"><i class="material-icons">

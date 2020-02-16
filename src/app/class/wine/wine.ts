@@ -9,8 +9,6 @@ export class Wine {
   id: number;
   wineName: string;
   winePrice: number;
-  wineAging: boolean;
-  unavailable: boolean;
   category: Category | null;
   designation: Designation| null;
   color: Color| null;
