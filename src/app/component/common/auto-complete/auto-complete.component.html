@@ -9,9 +9,12 @@
     [matAutocomplete]="auto"
   />
 </mat-form-field>
-<button
+<button mat-mini-fab
+        color="primary"
         [disabled]="activateButton"
-        (click)="launchModalCreation()">+ bouton</button>
+        (click)="launchModalCreation()">
+  <mat-icon>add</mat-icon>
+</button>
 
 <mat-autocomplete #auto="matAutocomplete"
                   [displayWith]="displayFn"

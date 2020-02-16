@@ -1,0 +1,51 @@
+.accordion {
+  margin-bottom: 30px;
+}
+.creation {
+  font-size: 2em;
+  font-weight: bold;
+  color: #da2018;
+}
+.main-container {
+  padding-left: 20px;
+}
+.mat-form-field {
+  font-size: 2em;
+}
+.app-auto-complete {
+  font-size: 2em;
+}
+.title {
+  width: 500px;
+}
+.description {
+  width: 700px;
+}
+.text {
+  height: 100px;
+}
+.allergens-btn {
+  margin:20px
+}
+.check-container {
+  font-size: 2em;
+  padding-left: 25px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  height: 60px;
+}
+.mat-checkbox-inner-container {
+  height: 35px ;
+  width: 35px;
+}
+.save {
+  background-color: #da2018;
+  color: white;
+  margin-bottom: 20px;
+}
+.list-container {
+ padding-left: 35px;
+}
+.type {
+
+}
