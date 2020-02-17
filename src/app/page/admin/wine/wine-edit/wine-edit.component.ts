@@ -19,7 +19,7 @@ import {Status} from '../../../../class/wine/status';
 @Component({
   selector: 'app-wine-edit',
   templateUrl: './wine-edit.component.html',
-  styleUrls: ['./wine-edit.component.css']
+  styleUrls: ['./wine-edit.component.scss']
 })
 export class WineEditComponent implements OnInit {
 

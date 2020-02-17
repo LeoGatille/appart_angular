@@ -5,7 +5,7 @@ import {ColorService} from '../../service/wine/color.service';
 @Component({
   selector: 'app-sec-test-page',
   templateUrl: './sec-test-page.component.html',
-  styleUrls: ['./sec-test-page.component.css']
+  styleUrls: ['./sec-test-page.component.scss']
 })
 export class SecTestPageComponent {
 

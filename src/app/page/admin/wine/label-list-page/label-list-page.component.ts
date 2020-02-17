@@ -11,7 +11,7 @@ import {DialogComponent} from '../../../../dialog/dialog.component';
 @Component({
   selector: 'app-label-list-page',
   templateUrl: './label-list-page.component.html',
-  styleUrls: ['./label-list-page.component.css']
+  styleUrls: ['./label-list-page.component.scss']
 })
 export class LabelListPageComponent implements OnInit {
 

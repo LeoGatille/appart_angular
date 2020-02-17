@@ -5,7 +5,7 @@ import {Label} from '../../class/wine/label';
 @Component({
   selector: 'app-test-page',
   templateUrl: './test-page.component.html',
-  styleUrls: ['./test-page.component.css']
+  styleUrls: ['./test-page.component.scss']
 })
 export class TestPageComponent implements OnInit {
 

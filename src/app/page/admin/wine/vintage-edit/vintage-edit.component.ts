@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-vintage-edit',
   templateUrl: './vintage-edit.component.html',
-  styleUrls: ['./vintage-edit.component.css']
+  styleUrls: ['./vintage-edit.component.scss']
 })
 export class VintageEditComponent implements OnInit {
 

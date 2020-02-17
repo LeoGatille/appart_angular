@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-vintage-create',
   templateUrl: './vintage-create.component.html',
-  styleUrls: ['./vintage-create.component.css']
+  styleUrls: ['./vintage-create.component.scss']
 })
 export class VintageCreateComponent implements OnInit {
 

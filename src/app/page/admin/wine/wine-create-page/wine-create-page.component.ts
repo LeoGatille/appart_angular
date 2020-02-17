@@ -18,7 +18,7 @@ import {WineService} from '../../../../service/wine/wine.service';
 @Component({
   selector: 'app-wine-create-page',
   templateUrl: './wine-create-page.component.html',
-  styleUrls: ['./wine-create-page.component.css']
+  styleUrls: ['./wine-create-page.component.scss']
 })
 export class WineCreatePageComponent implements OnInit {
 

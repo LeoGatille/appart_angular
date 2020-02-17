@@ -11,7 +11,7 @@ import {DialogComponent} from '../../../../dialog/dialog.component';
 @Component({
   selector: 'app-designation-list-page',
   templateUrl: './designation-list-page.component.html',
-  styleUrls: ['./designation-list-page.component.css']
+  styleUrls: ['./designation-list-page.component.scss']
 })
 export class DesignationListPageComponent implements OnInit {
 

@@ -12,7 +12,7 @@ import {ModalService} from '../../../../component/test/modal';
 @Component({
   selector: 'app-food-list-page',
   templateUrl: './food-list-page.component.html',
-  styleUrls: ['./food-list-page.component.css']
+  styleUrls: ['./food-list-page.component.scss']
 })
 export class FoodListPageComponent implements OnInit {
   foodForm: FormGroup;
@@ -111,7 +111,7 @@ export class FoodListPageComponent implements OnInit {
       descriptionControl : ['', Validators.required],
       nameControl : ['', Validators.required],
       typeControl : [ '' , Validators.required],
-      displayControl : [this.food.display]
+      displayControl : ['']
     });
   }
   removeAllergen(name, id) {

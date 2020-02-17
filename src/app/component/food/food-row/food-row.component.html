@@ -1,17 +1,36 @@
 
-<div class="main-container">
-  <div class="header">
-    <h2 class="title"></h2>
-    <div class="buttons-container">
-      <button></button>
-      <button></button>
-      <button></button>
-      <mat-checkbox></mat-checkbox>
+<div *ngIf="!loading" class="main-container">
+  <div class="header row" >
+    <h2 class="title col-sm-12 col-md-6 ">{{food.foodName}} <button *ngIf="tooltip" mat-mini-fab class="mini-btn"
+                                                                   [matTooltipPosition]="'above'"
+                                                                   matTooltip="{{tooltip}}"
+    >?</button></h2>
+    <div class="container-btn col-sm-12 col-md-6 ">
+
+
+      <button mat-mini-fab class="edit-btn"
+              (click)="editFood(food)"
+      >
+        <i class="material-icons">create</i>
+      </button>
+
+      <button mat-mini-fab class="delete-btn"
+              (click)="deleteFood()"
+      >
+        <i class="material-icons">delete</i></button>
+      <div class="container-check">
+        <form [formGroup]="patchForm">
+          <mat-checkbox (change)="patchFood(food.id)"
+                        formControlName="check"
+          ></mat-checkbox>
+        </form>
+      </div>
     </div>
+    <div class="col-6"></div>
   </div>
   <div class="text-container">
     <p class="description">
-
+      {{food.foodDescription}}
     </p>
   </div>
 </div>
@@ -21,26 +40,25 @@
 
 
 
-
-<div>{{food.foodName}}
-  <button mat-flat-button
-          (click)="showFoodAllergens()"
-  > allergènes</button>
-  <button mat-flat-button
-          (click)="editFood(food)"
-  > modification</button>
-  <button mat-flat-button
-          (click)="deleteFood()"
-  > suppr</button>
-  <div>
-    <form [formGroup]="patchForm">
-      <mat-checkbox (change)="patchFood(food.id)"
-                    formControlName="check"
-      >Afficher</mat-checkbox>
-    </form>
-  </div>
-</div>
-<div>{{food.foodDescription}}</div>
-<div *ngIf="showAllergens">
-  <div *ngFor=" let allergen of food.allergen ">{{allergen.allergenName}}</div>
-</div>
+<!--<div>{{food.foodName}}-->
+<!--  <button mat-flat-button-->
+<!--          (click)="showFoodAllergens()"-->
+<!--  > allergènes</button>-->
+<!--  <button mat-flat-button-->
+<!--          (click)="editFood(food)"-->
+<!--  > modification</button>-->
+<!--  <button mat-flat-button-->
+<!--          (click)="deleteFood()"-->
+<!--  > suppr</button>-->
+<!--  <div>-->
+<!--    <form [formGroup]="patchForm">-->
+<!--      <mat-checkbox (change)="patchFood(food.id)"-->
+<!--                    formControlName="check"-->
+<!--      >Afficher</mat-checkbox>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div>{{food.foodDescription}}</div>-->
+<!--<div *ngIf="showAllergens">-->
+<!--  <div *ngFor=" let allergen of food.allergen ">{{allergen.allergenName}}</div>-->
+<!--</div>-->

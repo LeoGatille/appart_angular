@@ -9,7 +9,7 @@ import {DialogComponent} from '../../../../dialog/dialog.component';
 @Component({
   selector: 'app-color-list-page',
   templateUrl: './color-list-page.component.html',
-  styleUrls: ['./color-list-page.component.css']
+  styleUrls: ['./color-list-page.component.scss']
 })
 export class ColorListPageComponent implements OnInit {
 

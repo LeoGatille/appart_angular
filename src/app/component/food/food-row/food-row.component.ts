@@ -5,19 +5,23 @@ import {FoodService} from '../../../service/food/food.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
+import {Allergen} from '../../../class/food/allergen';
 
 @Component({
   selector: 'app-food-row',
   templateUrl: './food-row.component.html',
-  styleUrls: ['./food-row.component.css']
+  styleUrls: ['./food-row.component.scss']
 })
 export class FoodRowComponent implements OnInit {
 
-  loading = true;
-  showAllergens = false;
-  patchForm: FormGroup;
   @Input() food: Food;
   @Output() editData = new EventEmitter<any>();
+  loading = true;
+ // showAllergens = false;
+  tooltip: string = null;
+  tata = 'boooooom';
+  allAllergens: string[] = [];
+  patchForm: FormGroup;
   constructor(
     public dialog: MatDialog,
     private foodService: FoodService,
@@ -25,20 +29,33 @@ export class FoodRowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loading = false;
+
     this.createForm();
+    this.getAllergensNames();
+
+  }
+  prepareTooltip() {
+    this.tooltip = this.allAllergens.join();
+    console.log('tooltip = ', this.tooltip);
+    this.loading = false;
+  }
+  getAllergensNames() {
+    this.food.allergen.forEach(allergen => {
+      this.allAllergens.push(allergen.allergenName)
+    });
+    this.prepareTooltip();
   }
   createForm() {
     this.patchForm = this.fb.group({
       check : [this.food.display]
     });
   }
-  showFoodAllergens() {
-    if (this.showAllergens) {
-     return this.showAllergens = false;
-    }
-    return this.showAllergens = true;
-  }
+  // showFoodAllergens() {
+  //   if (this.showAllergens) {
+  //    return this.showAllergens = false;
+  //   }
+  //   return this.showAllergens = true;
+  // }
   launchEdit(food: Food) {
     this.editData.emit(food);
   }
@@ -65,13 +82,17 @@ export class FoodRowComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
     dialogConfig.data = {
+      title: 'Edition',
       food,
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
 
     dialogRef.afterClosed().subscribe(
-      data =>  this.editData.emit()
+      data =>  {
+        this.editData.emit();
+        this.getAllergensNames();
+      }
     );
   }
 }

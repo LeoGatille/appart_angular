@@ -6,7 +6,7 @@ import {Wine} from '../../../class/wine/wine';
 @Component({
   selector: 'app-wine-create',
   templateUrl: './wine-create.component.html',
-  styleUrls: ['./wine-create.component.css']
+  styleUrls: ['./wine-create.component.scss']
 })
 export class WineCreateComponent implements OnInit {
 

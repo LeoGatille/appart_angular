@@ -25,7 +25,7 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
-    MatToolbarModule
+    MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import { HomePageComponent } from './page/home-page/home-page.component';
 import { AuthPageComponent } from './page/auth-page/auth-page.component';
@@ -90,6 +90,8 @@ import {ModalModule} from './component/test/modal';
 import { ShortcutComponent } from './component/test/shortcut/shortcut.component';
 import { MessageComponent } from './component/message/message.component';
 import {NgbButtonsModule} from '@ng-bootstrap/ng-bootstrap';
+import { CustomTooltipComponent } from './component/common/custom-tooltip/custom-tooltip.component';
+import { ToolTipRendererDirective } from './directive/tool-tip-renderer.directive';
 
 @NgModule({
   declarations: [
@@ -149,6 +151,8 @@ import {NgbButtonsModule} from '@ng-bootstrap/ng-bootstrap';
     FoodEditPageComponent,
     ShortcutComponent,
     MessageComponent,
+    CustomTooltipComponent,
+    ToolTipRendererDirective,
   ],
     imports: [
         MatAutocompleteModule,
@@ -180,9 +184,11 @@ import {NgbButtonsModule} from '@ng-bootstrap/ng-bootstrap';
         NgbModule,
         NgbButtonsModule,
         MatExpansionModule,
+        MatTooltipModule,
     ],
     entryComponents: [
-      DialogComponent
+      DialogComponent,
+      CustomTooltipComponent
     ],
   providers: [
     DatePipe,

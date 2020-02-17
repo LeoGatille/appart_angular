@@ -4,7 +4,7 @@ import {AutoCompleteComponent} from '../auto-complete/auto-complete.component';
 @Component({
   selector: 'app-validate-button',
   templateUrl: './validate-button.component.html',
-  styleUrls: ['./validate-button.component.css']
+  styleUrls: ['./validate-button.component.scss']
 })
 export class ValidateButtonComponent {
   @Output() testOutput = new EventEmitter<string>();

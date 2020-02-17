@@ -11,7 +11,7 @@ import {DialogComponent} from '../../../dialog/dialog.component';
 @Component({
   selector: 'app-wine-row',
   templateUrl: './wine-row.component.html',
-  styleUrls: ['./wine-row.component.css']
+  styleUrls: ['./wine-row.component.scss']
 })
 export class WineRowComponent implements OnInit {
 

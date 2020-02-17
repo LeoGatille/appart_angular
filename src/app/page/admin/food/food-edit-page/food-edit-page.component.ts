@@ -12,7 +12,7 @@ import {log} from 'util';
 @Component({
   selector: 'app-food-edit-page',
   templateUrl: './food-edit-page.component.html',
-  styleUrls: ['./food-edit-page.component.css']
+  styleUrls: ['./food-edit-page.component.scss']
 })
 export class FoodEditPageComponent implements OnInit {
 

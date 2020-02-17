@@ -7,7 +7,7 @@ import {DialogComponent} from '../../../dialog/dialog.component';
 @Component({
   selector: 'app-category-create',
   templateUrl: './category-create.component.html',
-  styleUrls: ['./category-create.component.css']
+  styleUrls: ['./category-create.component.scss']
 })
 export class CategoryCreateComponent implements OnInit {
 

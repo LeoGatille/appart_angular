@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 @Component({
   selector: 'app-gallery-list-page',
   templateUrl: './gallery-list-page.component.html',
-  styleUrls: ['./gallery-list-page.component.css']
+  styleUrls: ['./gallery-list-page.component.scss']
 })
 export class GalleryListPageComponent implements OnInit {
 

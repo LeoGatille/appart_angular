@@ -5,7 +5,7 @@ import {VintageService} from '../../../service/wine/vintage.service';
 @Component({
   selector: 'app-vintage-list',
   templateUrl: './vintage-list.component.html',
-  styleUrls: ['./vintage-list.component.css']
+  styleUrls: ['./vintage-list.component.scss']
 })
 export class VintageListComponent implements OnInit {
 

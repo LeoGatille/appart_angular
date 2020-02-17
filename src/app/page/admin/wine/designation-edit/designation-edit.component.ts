@@ -7,7 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 @Component({
   selector: 'app-designation-edit',
   templateUrl: './designation-edit.component.html',
-  styleUrls: ['./designation-edit.component.css']
+  styleUrls: ['./designation-edit.component.scss']
 })
 export class DesignationEditComponent implements OnInit {
 

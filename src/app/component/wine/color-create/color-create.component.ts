@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
 @Component({
   selector: 'app-color-create',
   templateUrl: './color-create.component.html',
-  styleUrls: ['./color-create.component.css']
+  styleUrls: ['./color-create.component.scss']
 })
 export class ColorCreateComponent implements OnInit {
   colorForm: FormGroup;

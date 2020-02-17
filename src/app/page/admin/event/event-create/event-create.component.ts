@@ -11,7 +11,7 @@ import {Timestamp} from 'rxjs/internal-compatibility';
 @Component({
   selector: 'app-event-create',
   templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.css']
+  styleUrls: ['./event-create.component.scss']
 })
 export class EventCreateComponent implements OnInit {
 

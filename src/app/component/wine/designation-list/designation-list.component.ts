@@ -5,7 +5,7 @@ import {DesignationService} from '../../../service/wine/designation.service';
 @Component({
   selector: 'app-designation-list',
   templateUrl: './designation-list.component.html',
-  styleUrls: ['./designation-list.component.css']
+  styleUrls: ['./designation-list.component.scss']
 })
 export class DesignationListComponent implements OnInit {
 

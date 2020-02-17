@@ -8,7 +8,7 @@ import {Status} from '../../../../class/wine/status';
 @Component({
   selector: 'app-wine-list-page',
   templateUrl: './wine-list-page.component.html',
-  styleUrls: ['./wine-list-page.component.css']
+  styleUrls: ['./wine-list-page.component.scss']
 })
 export class WineListPageComponent implements OnInit {
 

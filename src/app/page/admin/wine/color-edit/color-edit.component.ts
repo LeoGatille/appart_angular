@@ -10,7 +10,7 @@ import {$e} from 'codelyzer/angular/styles/chars';
 @Component({
   selector: 'app-color-edit',
   templateUrl: './color-edit.component.html',
-  styleUrls: ['./color-edit.component.css']
+  styleUrls: ['./color-edit.component.scss']
 })
 export class ColorEditComponent implements OnInit {
 

@@ -11,7 +11,7 @@ import {DialogComponent} from '../../../../dialog/dialog.component';
 @Component({
   selector: 'app-vintage-list-page',
   templateUrl: './vintage-list-page.component.html',
-  styleUrls: ['./vintage-list-page.component.css']
+  styleUrls: ['./vintage-list-page.component.scss']
 })
 export class VintageListPageComponent implements OnInit {
 

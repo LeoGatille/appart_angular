@@ -6,7 +6,7 @@ import {subscribeOn} from 'rxjs/operators';
 @Component({
   selector: 'app-label-create',
   templateUrl: './label-create.component.html',
-  styleUrls: ['./label-create.component.css']
+  styleUrls: ['./label-create.component.scss']
 })
 export class LabelCreateComponent implements OnInit {
 

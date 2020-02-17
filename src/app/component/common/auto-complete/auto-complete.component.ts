@@ -13,7 +13,7 @@ import {DialogComponent} from '../../../dialog/dialog.component';
 @Component({
   selector: 'app-auto-complete',
   templateUrl: './auto-complete.component.html',
-  styleUrls: ['./auto-complete.component.css']
+  styleUrls: ['./auto-complete.component.scss']
 })
 export class AutoCompleteComponent implements OnInit {
 
