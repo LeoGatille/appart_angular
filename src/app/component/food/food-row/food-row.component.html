@@ -1,11 +1,14 @@
 
 <div *ngIf="!loading" class="main-container">
   <div class="header row" >
-    <h2 class="title col-sm-12 col-md-6 ">{{food.foodName}} <button *ngIf="tooltip" mat-mini-fab class="mini-btn"
-                                                                   [matTooltipPosition]="'above'"
-                                                                   matTooltip="{{tooltip}}"
-    >?</button></h2>
-    <div class="container-btn col-sm-12 col-md-6 ">
+    <h2 class="title">{{food.foodName}}
+      <button *ngIf="tooltip"
+               mat-mini-fab class="mini-btn"
+              [matTooltipPosition]="'above'"
+               matTooltip="{{tooltip}}"
+      >?</button>
+    </h2>
+    <div class="container-btn">
 
 
       <button mat-mini-fab class="edit-btn"

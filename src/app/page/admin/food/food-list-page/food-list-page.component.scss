@@ -1,5 +1,5 @@
 .accordion {
-  margin-bottom: 30px;
+
 }
 .creation {
   font-size: 2em;
@@ -7,6 +7,7 @@
   color: #da2018;
 }
 .main-container {
+
   padding-left: 20px;
 }
 .mat-form-field {
@@ -49,3 +50,24 @@
 .type {
 
 }
+.list-container{
+  margin-top: 50px;
+
+  .container-type {
+    margin-bottom: 50px;
+
+    .type-title {
+      color: #da2018;
+      font-weight: bolder;
+    }
+    .line {
+      height: 1px;
+      width: 60%;
+      background: #da2018;
+      margin-bottom: 10px;
+
+    }
+  }
+
+}
+
