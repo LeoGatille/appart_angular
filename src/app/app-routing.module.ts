@@ -114,7 +114,7 @@ const routes: Routes = [
     data: {title: 'TestPage'}
   },
   {
-    path: 'admin/wine/create',
+    path: 'admin/wine',
     component: WineCreatePageComponent,
     canActivate: [ CanAccessToGuard ],
     data: {title: 'CreateWine'}
@@ -149,12 +149,12 @@ const routes: Routes = [
     canActivate: [ CanAccessToGuard ],
     data: {title: 'CategoryList'}
   },
-  {
-    path: 'admin/wine',
-    component: WineListPageComponent,
-    canActivate: [ CanAccessToGuard ],
-    data: {title: 'WineList'}
-  },
+  // {
+  //   path: 'admin/wine',
+  //   component: WineListPageComponent,
+  //   canActivate: [ CanAccessToGuard ],
+  //   data: {title: 'WineList'}
+  // },
   {
     path: 'auth',
     component: AuthPageComponent,

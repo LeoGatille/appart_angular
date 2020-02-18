@@ -50,10 +50,12 @@ export class WineCreatePageComponent implements OnInit {
 
 
 
-
-
-
-
+  newColor: Color = null;
+  newCategory: Category = null;
+  newDesignation: Designation = null;
+  newVintage: Vintage = null;
+  newLabel: Label = null;
+  wines: Wine[];
   colorPromise: any = null;
   categoryPromise: any = null;
   designationPromise: any = null;
@@ -71,12 +73,29 @@ export class WineCreatePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  this.getAllWines();
   this.getElements();
   this.createForm();
   this.loading = false;
-
   }
+
+  getAllWines() {
+    console.log('getAllaWines');
+    this.wineService.getAllWines()
+      .subscribe((wines: Wine[]) => {
+        this.wines = wines;
+      });
+  }
+
+  delete($event) {
+    this.wineService.deleteWine($event)
+      .subscribe(() => {
+        this.ngOnInit();
+      });
+  }
+
   createForm() {
+    console.log('createForm');
     this.colorControl = new FormControl('', Validators.required);
     this.categoryControl = new FormControl('', Validators.required);
     this.designationControl = new FormControl('', Validators.required);
@@ -152,6 +171,7 @@ export class WineCreatePageComponent implements OnInit {
       return;
     }
     this.color = $event;
+    this.newColor = $event;
   }
   setCategory($event: Category) {
     if (!$event) {
@@ -159,24 +179,28 @@ export class WineCreatePageComponent implements OnInit {
     }
     this.activateNewCategory($event);
     this.category = $event;
+    this.newCategory = $event;
   }
   setDesignation($event: Designation) {
     if (!$event) {
       return;
     }
     this.designation = $event;
+    this.newDesignation = $event;
   }
   setLabel($event: Label) {
     if (!$event) {
       return;
     }
     this.label = $event;
+    this.newLabel = $event;
   }
   setVintage($event: Vintage) {
     if (!$event) {
       return;
     }
     this.vintage = $event;
+    this.newVintage = $event;
   }
 
   activateNewCategory(val) {
@@ -206,10 +230,14 @@ export class WineCreatePageComponent implements OnInit {
       vin.vintage.id,
       vin.status.id
     )
-      .subscribe(success =>  console.log('oh yes ! ', success),
+      .subscribe(success =>  {
+          this.createForm();
+          this.getAllWines();
+        },
         error => {
           console.log('oh my...', error);
           this.createErrorLog(error);
+
         });
   }
   createErrorLog(error) {

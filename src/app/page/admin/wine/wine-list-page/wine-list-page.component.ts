@@ -31,21 +31,19 @@ export class WineListPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.wineService.getAllWines()
-      .subscribe((wines: Wine[]) => {
-        this.wines = wines;
-      });
+    // this.wineService.getAllWines()
+    //   .subscribe((wines: Wine[]) => {
+    //     this.wines = wines;
+    //   });
     this.loading = true;
   }
-  delete($event) {
-    this.wineService.deleteWine($event)
-      .subscribe(() => {
-        this.ngOnInit();
-      });
-  }
-  log() {
-    console.log('mega toto');
-  }
+  // delete($event) {
+  //   this.wineService.deleteWine($event)
+  //     .subscribe(() => {
+  //       this.ngOnInit();
+  //     });
+  // }
+
   edit(wine: Wine) {
 
   }

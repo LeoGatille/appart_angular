@@ -117,6 +117,7 @@ export class AutoCompleteComponent implements OnInit {
         .subscribe((res) => {
           this.listOfElements.push(res);
           this.addElement.emit(res);
+
         });
     } else {
       this.service.create(data.numberControl)

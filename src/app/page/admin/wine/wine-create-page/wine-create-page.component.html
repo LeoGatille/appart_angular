@@ -1,117 +1,257 @@
 <div style="background: red" *ngIf="error">
   {{errorLog}}
 </div>
-<div class="main-content">
-  <form *ngIf="!loading" [formGroup]="wineForm" style="background: #313131;">
-    <div>
-      <mat-form-field class="example-full-width">
-        <input type="text"
-               matInput
-               placeholder="Nom"
-               formControlName="nameControl"
 
-        >
-      </mat-form-field>
+<mat-accordion class="accordion">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="creation">
+        Création
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="main-content row">
+      <form *ngIf="!loading" [formGroup]="wineForm" >
+
+        <div class="name-price row">
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                     matInput
+                     placeholder="Nom"
+                     formControlName="nameControl"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field class="example-full-width">
+              <input type="number"
+                     matInput
+                     placeholder="Prix"
+                     formControlName="priceControl"
+              >
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="color-category row">
+          <div class="col-md-6 col-sm-12">
+            <app-auto-complete (addElement)="setColor($event)"
+                               [arrayPromise]="colorPromise"
+                               [parentModel]="newColor"
+                               [displayFn]="displayFn"
+                               [myControl]="colorControl"
+                               [callBackFilter]="callBackFilter"
+                               [creation]="true"
+                               [nameField]="true"
+                               [title]="'Couleur'"
+                               [service]="colorService"
+            ></app-auto-complete>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <app-auto-complete (addElement)="setCategory($event)"
+                               [arrayPromise]="categoryPromise"
+                               [parentModel]="newCategory"
+                               [displayFn]="displayFnCategory"
+                               [myControl]="categoryControl"
+                               [callBackFilter]="callBackFilterCat"
+                               [creation]="true"
+                               [nameField]="true"
+                               [title]="'Catégorie'"
+                               [service]="categoryService"
+            >
+            </app-auto-complete>
+          </div>
+        </div>
+        <div class="designation-label row">
+          <div class="col-md-6 col-sm-12">
+            <app-auto-complete (addElement)="setDesignation($event)"
+                               [arrayPromise]="designationPromise"
+                               [parentModel]="newDesignation"
+                               [displayFn]="displayFnDesignation"
+                               [myControl]="designationControl"
+                               [callBackFilter]="callBackFilterDesignation"
+                               [creation]="true"
+                               [nameField]="true"
+                               [title]="'Appellation'"
+                               [service]="designationService"
+            >
+            </app-auto-complete>
+          </div>
+          <div>
+            <app-auto-complete (addElement)="setLabel($event)"
+                               [arrayPromise]="labelPromise"
+                               [parentModel]="newLabel"
+                               [displayFn]="displayFnLabel"
+                               [myControl]="labelControl"
+                               [callBackFilter]="callBackFilterLabel"
+                               [creation]="true"
+                               [nameField]="true"
+                               [title]="'Label'"
+                               [service]="labelService"
+            >
+            </app-auto-complete>
+          </div>
+        </div>
+
+        <div class="vintage-status row">
+          <div class="col-md-6 col-sm-12">
+            <app-auto-complete (addElement)="setVintage($event)"
+                               [arrayPromise]="vintagePromise"
+                               [parentModel]="newVintage"
+                               [displayFn]="displayFnVintage"
+                               [myControl]="vintageControl"
+                               [callBackFilter]="callBackFilterVintage"
+                               [creation]="true"
+                               [numberField]="true"
+                               [title]="'Millésime'"
+                               [service]="vintageService"
+            >
+            </app-auto-complete>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <mat-form-field>
+              <mat-label>Statut</mat-label>
+              <mat-select formControlName="statusControl"
+              >
+                <mat-option *ngFor="let status of allStatus" [value]="status">
+                  {{status.statusName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div>
+          <button mat-flat-button
+                  (click)="validate()"
+                  [disabled]="wineForm.invalid"
+          >Envoyer</button>
+        </div>
+      </form>
     </div>
 
-    <div>
-      <mat-form-field class="example-full-width">
-        <input type="number"
-               matInput
-               placeholder="Prix"
-               formControlName="priceControl"
-        >
-      </mat-form-field>
-    </div>
-    <app-auto-complete (addElement)="setColor($event)"
-                       [arrayPromise]="colorPromise"
-                       [parentModel]=""
-                       [displayFn]="displayFn"
-                       [myControl]="colorControl"
-                       [callBackFilter]="callBackFilter"
-                       [creation]="true"
-                       [nameField]="true"
-                       [title]="'Couleur'"
-                       [service]="colorService"
-    ></app-auto-complete>
-    <div>
+  </mat-expansion-panel>
+</mat-accordion>
 
-    </div>
-    <div>
-      <app-auto-complete (addElement)="setCategory($event)"
-                         [arrayPromise]="categoryPromise"
-                         [parentModel]=""
-                         [displayFn]="displayFnCategory"
-                         [myControl]="categoryControl"
-                         [callBackFilter]="callBackFilterCat"
-                         [creation]="true"
-                         [nameField]="true"
-                         [title]="'Catégorie'"
-                         [service]="categoryService"
+<!--<div class="main-content">-->
+<!--  <form *ngIf="!loading" [formGroup]="wineForm" >-->
+<!--    <div>-->
+<!--      <mat-form-field class="example-full-width">-->
+<!--        <input type="text"-->
+<!--               matInput-->
+<!--               placeholder="Nom"-->
+<!--               formControlName="nameControl"-->
 
-      >
-      </app-auto-complete>
-    </div>
-    <div>
-      <app-auto-complete (addElement)="setDesignation($event)"
-                         [arrayPromise]="designationPromise"
-                         [parentModel]=""
-                         [displayFn]="displayFnDesignation"
-                         [myControl]="designationControl"
-                         [callBackFilter]="callBackFilterDesignation"
-                         [creation]="true"
-                         [nameField]="true"
-                         [title]="'Appellation'"
-                         [service]="designationService"
-      >
-      </app-auto-complete>
-    </div>
-    <div>
-      <app-auto-complete (addElement)="setLabel($event)"
-                         [arrayPromise]="labelPromise"
-                         [parentModel]=""
-                         [displayFn]="displayFnLabel"
-                         [myControl]="labelControl"
-                         [callBackFilter]="callBackFilterLabel"
-                         [creation]="true"
-                         [nameField]="true"
-                         [title]="'Label'"
-                         [service]="labelService"
-      >
-      </app-auto-complete>
-    </div>
-    <div>
-      <app-auto-complete (addElement)="setVintage($event)"
-                         [arrayPromise]="vintagePromise"
-                         [parentModel]=""
-                         [displayFn]="displayFnVintage"
-                         [myControl]="vintageControl"
-                         [callBackFilter]="callBackFilterVintage"
-                         [creation]="true"
-                         [numberField]="true"
-                         [title]="'Millésime'"
-                         [service]="vintageService"
-      >
-      </app-auto-complete>
-    </div>
+<!--        >-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
 
-    <div>
-      <mat-form-field>
-        <mat-label>Statut</mat-label>
-        <mat-select formControlName="statusControl"
-        >
-          <mat-option *ngFor="let status of allStatus" [value]="status">
-            {{status.statusName}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+<!--    <div>-->
+<!--      <mat-form-field class="example-full-width">-->
+<!--        <input type="number"-->
+<!--               matInput-->
+<!--               placeholder="Prix"-->
+<!--               formControlName="priceControl"-->
+<!--        >-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+<!--    <app-auto-complete (addElement)="setColor($event)"-->
+<!--                       [arrayPromise]="colorPromise"-->
+<!--                       [parentModel]="newColor"-->
+<!--                       [displayFn]="displayFn"-->
+<!--                       [myControl]="colorControl"-->
+<!--                       [callBackFilter]="callBackFilter"-->
+<!--                       [creation]="true"-->
+<!--                       [nameField]="true"-->
+<!--                       [title]="'Couleur'"-->
+<!--                       [service]="colorService"-->
+<!--    ></app-auto-complete>-->
+<!--    <div>-->
 
-    <div>
-      <button mat-flat-button
-              (click)="validate()"
-              [disabled]="wineForm.invalid"
-      >Envoyer</button>
-    </div>
-  </form>
+<!--    </div>-->
+<!--    <div>-->
+<!--      <app-auto-complete (addElement)="setCategory($event)"-->
+<!--                         [arrayPromise]="categoryPromise"-->
+<!--                         [parentModel]="newCategory"-->
+<!--                         [displayFn]="displayFnCategory"-->
+<!--                         [myControl]="categoryControl"-->
+<!--                         [callBackFilter]="callBackFilterCat"-->
+<!--                         [creation]="true"-->
+<!--                         [nameField]="true"-->
+<!--                         [title]="'Catégorie'"-->
+<!--                         [service]="categoryService"-->
+
+<!--      >-->
+<!--      </app-auto-complete>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <app-auto-complete (addElement)="setDesignation($event)"-->
+<!--                         [arrayPromise]="designationPromise"-->
+<!--                         [parentModel]="newDesignation"-->
+<!--                         [displayFn]="displayFnDesignation"-->
+<!--                         [myControl]="designationControl"-->
+<!--                         [callBackFilter]="callBackFilterDesignation"-->
+<!--                         [creation]="true"-->
+<!--                         [nameField]="true"-->
+<!--                         [title]="'Appellation'"-->
+<!--                         [service]="designationService"-->
+<!--      >-->
+<!--      </app-auto-complete>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <app-auto-complete (addElement)="setLabel($event)"-->
+<!--                         [arrayPromise]="labelPromise"-->
+<!--                         [parentModel]="newLabel"-->
+<!--                         [displayFn]="displayFnLabel"-->
+<!--                         [myControl]="labelControl"-->
+<!--                         [callBackFilter]="callBackFilterLabel"-->
+<!--                         [creation]="true"-->
+<!--                         [nameField]="true"-->
+<!--                         [title]="'Label'"-->
+<!--                         [service]="labelService"-->
+<!--      >-->
+<!--      </app-auto-complete>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--      <app-auto-complete (addElement)="setVintage($event)"-->
+<!--                         [arrayPromise]="vintagePromise"-->
+<!--                         [parentModel]="newVintage"-->
+<!--                         [displayFn]="displayFnVintage"-->
+<!--                         [myControl]="vintageControl"-->
+<!--                         [callBackFilter]="callBackFilterVintage"-->
+<!--                         [creation]="true"-->
+<!--                         [numberField]="true"-->
+<!--                         [title]="'Millésime'"-->
+<!--                         [service]="vintageService"-->
+<!--      >-->
+<!--      </app-auto-complete>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <mat-form-field>-->
+<!--        <mat-label>Statut</mat-label>-->
+<!--        <mat-select formControlName="statusControl"-->
+<!--        >-->
+<!--          <mat-option *ngFor="let status of allStatus" [value]="status">-->
+<!--            {{status.statusName}}-->
+<!--          </mat-option>-->
+<!--        </mat-select>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
+<!--    <div>-->
+<!--      <button mat-flat-button-->
+<!--              (click)="validate()"-->
+<!--              [disabled]="wineForm.invalid"-->
+<!--      >Envoyer</button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+
+<div *ngFor="let wine of wines">
+  <app-wine-row [wine]="wine"
+                (delete)="delete($event)"
+  ></app-wine-row>
 </div>
