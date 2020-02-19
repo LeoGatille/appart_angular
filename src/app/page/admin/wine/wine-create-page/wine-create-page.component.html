@@ -142,6 +142,7 @@
   <button mat-flat-button (click)="getSelector('vintage')">vintage</button>
 </div>
 <div *ngFor="let selected of selector">
+  <div class="selector">{{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}</div>
   <div *ngFor="let wine of selected.wines">
     <div>
       <app-wine-row [wine]="wine"

@@ -63,7 +63,7 @@ export class WineCreatePageComponent implements OnInit {
   vintagePromise: any = null;
 
   selector: any[] = [];
-  option = 'designation';
+  option = 'category';
 
   constructor( private colorService: ColorService,
                private categoryService: CategoryService,
