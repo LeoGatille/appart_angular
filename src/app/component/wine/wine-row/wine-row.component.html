@@ -42,9 +42,9 @@
   </div>
   <div class="wine-container col-12">
     <div class="wine-header">
-      <div class="vintage">{{wine.vintage.vintageYear}}</div>
-      <div class="designation">{{wine.designation.designationName}}</div>
-      <div class="label">{{wine.label.labelName}}</div>
+      <div class="vintage">{{ selector.vintageYear || wine.vintage.vintageYear  }}</div>
+      <div class="designation">{{selector.designationName || wine.designation.designationName  }}</div>
+      <div class="label">{{selector.labelName || wine.label.labelName }}</div>
     </div>
     <div class="wine-body col-md-5 col-sm-12">
       <h2 class="name">{{wine.wineName}}</h2>
@@ -54,7 +54,7 @@
     </div>
     <div class="wine-footer col-md-5 col-sm-12">
       <div class="wine-bottom">
-        <div class="color">{{wine.color.colorName}}</div>
+        <div class="color">{{selector.colorName || wine.color.colorName  }}</div>
         <div *ngIf="!showAllStatus && wine.status.statusName !== 'En stock'" class="current-status">*{{wine.status.statusName}}</div>
       </div>
       <div *ngIf="showAllStatus" class="all-status-container">

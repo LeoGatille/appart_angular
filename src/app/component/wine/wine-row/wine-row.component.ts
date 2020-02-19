@@ -20,6 +20,7 @@ export class WineRowComponent implements OnInit {
   @Output() delete = new EventEmitter<any>();
   @Output() editData = new EventEmitter<any>();
   @Input() wine: Wine;
+  @Input() selector: any;
   status: Status;
   allStatus: Status[];
   showAllStatus = false;

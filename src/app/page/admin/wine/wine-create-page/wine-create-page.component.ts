@@ -62,6 +62,9 @@ export class WineCreatePageComponent implements OnInit {
   labelPromise: any = null;
   vintagePromise: any = null;
 
+  selector: any[] = [];
+  option = 'designation';
+
   constructor( private colorService: ColorService,
                private categoryService: CategoryService,
                private designationService: DesignationService,
@@ -73,19 +76,51 @@ export class WineCreatePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-  this.getAllWines();
+  // this.getAllWines();
   this.getElements();
   this.createForm();
+  this.getSelector(this.option);
   this.loading = false;
   }
-
-  getAllWines() {
-    console.log('getAllaWines');
-    this.wineService.getAllWines()
-      .subscribe((wines: Wine[]) => {
-        this.wines = wines;
+  getSelector(option, force = false) {
+    if (force) {
+      this.getElements(force);
+    }
+    if (option === 'category') {
+      this.categoryPromise().then((data: Category[]) => {
+        this.selector = data;
       });
+    }
+    if (option === 'label') {
+      this.labelPromise().then((data: Label[]) => {
+        this.selector = data;
+      });
+    }
+    if (option === 'designation') {
+      this.designationPromise().then((data: Designation[]) => {
+        this.selector = data;
+      });
+    }
+    if (option === 'color') {
+      this.colorPromise().then((data: Color[]) => {
+        this.selector = data;
+      });
+    }
+    if (option === 'vintage') {
+      this.vintagePromise().then((data: Vintage[]) => {
+        this.selector = data;
+      });
+    }
   }
+
+
+  // getAllWines() {
+  //   console.log('getAllaWines');
+  //   this.wineService.getAllWines()
+  //     .subscribe((wines: Wine[]) => {
+  //       this.wines = wines;
+  //     });
+  // }
 
   delete($event) {
     this.wineService.deleteWine($event)
@@ -114,7 +149,7 @@ export class WineCreatePageComponent implements OnInit {
     });
   }
 
-  getElements(selector = '', force = false) {
+  getElements(force = false) {
       this.colorPromise = (bool) => this.colorService.getAllColors(force);
       this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
       this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
@@ -232,7 +267,7 @@ export class WineCreatePageComponent implements OnInit {
     )
       .subscribe(success =>  {
           this.createForm();
-          this.getAllWines();
+          this.getSelector(this.option, true);
         },
         error => {
           console.log('oh my...', error);

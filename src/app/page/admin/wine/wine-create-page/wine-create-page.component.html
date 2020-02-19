@@ -134,6 +134,29 @@
 
   </mat-expansion-panel>
 </mat-accordion>
+<div style="display: flex">
+  <button mat-flat-button (click)="getSelector('category')">category</button>
+  <button mat-flat-button (click)="getSelector('designation')">designation</button>
+  <button mat-flat-button (click)="getSelector('color')">color</button>
+  <button mat-flat-button (click)="getSelector('label')">label</button>
+  <button mat-flat-button (click)="getSelector('vintage')">vintage</button>
+</div>
+<div *ngFor="let selected of selector">
+  <div *ngFor="let wine of selected.wines">
+    <div>
+      <app-wine-row [wine]="wine"
+                    [selector]="selected"
+                    (delete)="delete($event)"
+      ></app-wine-row>
+    </div>
+  </div>
+</div>
+<!--<div *ngFor="let wine of wines">-->
+<!--  <app-wine-row [wine]="wine"-->
+<!--                (delete)="delete($event)"-->
+<!--  ></app-wine-row>-->
+<!--</div>-->
+
 
 <!--<div class="main-content">-->
 <!--  <form *ngIf="!loading" [formGroup]="wineForm" >-->
@@ -250,8 +273,3 @@
 <!--  </form>-->
 <!--</div>-->
 
-<div *ngFor="let wine of wines">
-  <app-wine-row [wine]="wine"
-                (delete)="delete($event)"
-  ></app-wine-row>
-</div>
