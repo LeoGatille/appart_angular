@@ -1,4 +1,11 @@
+$serif: 'Playfair Display', serif;
+
 .main-container {
 
   padding-left: 20px;
+}
+.test {
+  font-family: $serif;
+  font-size: 200px;
+  font-style: italic;
 }

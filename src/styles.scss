@@ -1,10 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~bootstrap/dist/css/bootstrap.css";
+// @import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,500,500i,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Serif:400,400i,500,600,700i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Didact+Gothic&display=swap');
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
+$serif: 'Playfair Display', serif;
 $myRed: #9E0C17;
 $black: #000000;
 $white: #FFFFFF;

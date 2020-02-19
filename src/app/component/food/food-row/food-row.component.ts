@@ -6,6 +6,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
 import {Allergen} from '../../../class/food/allergen';
+import {User} from '../../../class/user';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
   selector: 'app-food-row',
@@ -22,10 +24,12 @@ export class FoodRowComponent implements OnInit {
   tata = 'boooooom';
   allAllergens: string[] = [];
   patchForm: FormGroup;
+  user: User;
   constructor(
     public dialog: MatDialog,
     private foodService: FoodService,
     private fb: FormBuilder,
+    private auth: AuthService,
   ) { }
 
   ngOnInit() {
@@ -33,6 +37,10 @@ export class FoodRowComponent implements OnInit {
     this.createForm();
     this.getAllergensNames();
 
+  }
+  isConnected(): boolean {
+    this.user = this.auth.currentUser;
+    return this.auth.isConnected();
   }
   prepareTooltip() {
     this.tooltip = this.allAllergens.join();

@@ -7,6 +7,8 @@ import {Status} from '../../../class/wine/status';
 import {Food} from '../../../class/food/food';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
+import {User} from '../../../class/user';
+import {AuthService} from '../../../service/auth.service';
 
 @Component({
   selector: 'app-wine-row',
@@ -23,11 +25,13 @@ export class WineRowComponent implements OnInit {
   showAllStatus = false;
   showCurrentStatus = false;
   loading = true;
+  user: User;
   constructor(
     private activatedRoute: ActivatedRoute,
     private wineService: WineService,
     private statusService: StatusService,
     private dialog: MatDialog,
+    private auth: AuthService,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -38,6 +42,10 @@ export class WineRowComponent implements OnInit {
         this.allStatus = allstatus;
       });
 
+  }
+  isConnected(): boolean {
+    this.user = this.auth.currentUser;
+    return this.auth.isConnected();
   }
   sendDelete(id) {
     this.delete.emit(id);
