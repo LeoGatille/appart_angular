@@ -29,7 +29,7 @@
 <div class="main-container row">
   <div *ngIf="isConnected()" class="container-btn">
     <button mat-mini-fab class="edit-btn"
-            (click)="editWine(wine)"
+            (click)="editWine(wine, selector)"
     ><i class="material-icons">create</i></button>
 
     <button mat-mini-fab class="delete-btn"
@@ -44,7 +44,7 @@
     <div class="wine-header">
       <div class="vintage">{{ selector.vintageYear || wine.vintage.vintageYear  }}</div>
       <div class="designation">{{selector.designationName || wine.designation.designationName  }}</div>
-      <div class="label">{{selector.labelName || wine.label.labelName }}</div>
+      <div class="label">-{{selector.labelName || wine.label.labelName }}-</div>
     </div>
     <div class="wine-body col-md-5 col-sm-12">
       <h2 class="name">{{wine.wineName}}</h2>

@@ -24,6 +24,7 @@ import {Status} from '../../../../class/wine/status';
 export class WineEditComponent implements OnInit {
 
   @Input() wine: Wine = null;
+  @Input() selector: any = null;
 
 
   errorLog: string;
@@ -80,6 +81,7 @@ export class WineEditComponent implements OnInit {
 
   }
   createForm() {
+    this.addSelector();
     this.colorControl = new FormControl(this.wine.color, Validators.required);
     this.categoryControl = new FormControl(this.wine.category, Validators.required);
     this.designationControl = new FormControl(this.wine.designation, Validators.required);
@@ -96,6 +98,24 @@ export class WineEditComponent implements OnInit {
       nameControl : [this.wine.wineName, Validators.required],
       priceControl : [this.wine.winePrice, Validators.required]
     });
+  }
+
+  addSelector() {
+    if (!this.wine.label) {
+      this.wine.label = this.selector;
+    }
+    if (!this.wine.category) {
+      this.wine.category = this.selector;
+    }
+    if (!this.wine.designation) {
+      this.wine.designation = this.selector;
+    }
+    if (!this.wine.color) {
+      this.wine.color = this.selector;
+    }
+    if (!this.wine.vintage) {
+      this.wine.vintage = this.selector;
+    }
   }
 
   getElements(selector = '', force = false) {

@@ -84,11 +84,12 @@ export class WineRowComponent implements OnInit {
 
   }
 
-  editWine(wine: Wine) {
+  editWine(wine: Wine, selector: any) {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
     dialogConfig.data = {
       wine,
+      selector
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 

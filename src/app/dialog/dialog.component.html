@@ -9,5 +9,5 @@
                    (serviceCall)="close($event)">
   </app-create-form>
   <app-food-edit-page *ngIf="food" [food]="food" (close)="close()"></app-food-edit-page>
-  <app-wine-edit *ngIf="wine" [wine]="wine" ></app-wine-edit>
+  <app-wine-edit *ngIf="wine" [wine]="wine" [selector]="selector"></app-wine-edit>
 </div>

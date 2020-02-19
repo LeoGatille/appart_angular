@@ -23,6 +23,7 @@ export class DialogComponent implements OnInit {
   modal: boolean;
   food: Food = null;
   wine: Wine = null;
+  selector: any = null;
 
   @Output() sendData = new EventEmitter<any>();
 
@@ -40,6 +41,7 @@ export class DialogComponent implements OnInit {
     this.defineValue(data.value);
     this.food = data.food;
     this.wine = data.wine;
+    this.selector = data.selector;
   }
 
   ngOnInit() {
