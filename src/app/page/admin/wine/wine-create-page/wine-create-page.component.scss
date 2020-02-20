@@ -1,11 +1,49 @@
 $serif: 'Playfair Display', serif;
+$futura: 'Didact Gothic', sans-serif;
 
 .main-container {
 
-  padding-left: 20px;
+  padding-left: 0px;
 }
-.test {
-  font-family: $serif;
-  font-size: 200px;
-  font-style: italic;
+.filter-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+background-color: #9E0C17;
+  button {
+   // font-family: $serif;
+    background-color: #9E0C17;
+    color: #FFFFFF;
+  }
 }
+.no-choice {
+
+  .selector-container {
+
+    padding-left: 15px;
+    border: solid #9E0C17;
+    border-width: 0 0 0 1px;
+    .selector {
+      padding-top: 10px;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-weight: 200;
+      font-size: 1.5rem;
+      color: #9E0C17;
+      .mat-expansion-panel-body {
+        .wine-section {
+
+        }
+      }
+    }
+    .separation {
+      width: 100%;
+      margin-top: 20px;
+      border: solid #9E0C17;
+      border-width: 1px 0 ;
+    }
+  }
+}
+
+

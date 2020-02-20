@@ -2,8 +2,7 @@ $serif: 'Playfair Display', serif;
 
 .main-container {
   display: flex;
-  padding-left: 50px;
-  margin-bottom: 25px;
+  padding-left: 15px;
   .wine-container {
 
     display: flex;
@@ -58,9 +57,10 @@ $serif: 'Playfair Display', serif;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
+        color: #9E0C17;
         .prix{
           height: max-content;
-          font-family: 'IBM Plex Serif', serif;
+          font-family: $serif;
           font-size: 1rem;
           font-weight: 500;
         }

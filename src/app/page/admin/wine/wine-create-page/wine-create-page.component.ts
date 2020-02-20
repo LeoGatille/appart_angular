@@ -14,6 +14,8 @@ import {LabelService} from '../../../../service/wine/label.service';
 import {VintageService} from '../../../../service/wine/vintage.service';
 import {StatusService} from '../../../../service/wine/status.service';
 import {WineService} from '../../../../service/wine/wine.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-wine-create-page',
@@ -72,8 +74,10 @@ export class WineCreatePageComponent implements OnInit {
                private vintageService: VintageService,
                private statusService: StatusService,
                private wineService: WineService,
-               private fb: FormBuilder
-  ) { }
+               private fb: FormBuilder,
+               private dialog: MatDialog,
+
+) { }
 
   ngOnInit() {
   // this.getAllWines();
@@ -123,12 +127,27 @@ export class WineCreatePageComponent implements OnInit {
   // }
 
   delete($event) {
-    this.wineService.deleteWine($event)
-      .subscribe(() => {
-        this.ngOnInit();
-      });
-  }
+    console.log('event = ', $event);
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: $event.wineName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.wineService.deleteWine($event.id)
+            .subscribe(() => {
+              this.getSelector(this.option,true);
+            });
+        }
+      }
+    );
+  }
   createForm() {
     console.log('createForm');
     this.colorControl = new FormControl('', Validators.required);

@@ -24,6 +24,8 @@ export class DialogComponent implements OnInit {
   food: Food = null;
   wine: Wine = null;
   selector: any = null;
+  suppr = '';
+  confirmation = false;
 
   @Output() sendData = new EventEmitter<any>();
 
@@ -42,12 +44,14 @@ export class DialogComponent implements OnInit {
     this.food = data.food;
     this.wine = data.wine;
     this.selector = data.selector;
+    this.suppr = data.suppr;
   }
 
   ngOnInit() {
+    console.log('suppr =', this.suppr);
   }
   defineValue(data) {
-    console.log('data = ', this.numberField);
+
     if (typeof data !== 'object') {
       if (this.numberField) {
         console.log('toto');
@@ -60,6 +64,10 @@ export class DialogComponent implements OnInit {
 
   close(event = null) {
    this.dialogRef.close(event);
+  }
+  validate() {
+    this.confirmation = true;
+    this.dialogRef.close(this.confirmation);
   }
 
 }
