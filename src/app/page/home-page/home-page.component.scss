@@ -1,8 +1,45 @@
-.main-content {
-  margin-top: 20px;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  color: white;
+.home {
+  .picture-container {
+    background-image: url("http://api.bundles.do/uploads/test/home.jpg");
+    background-position: center ;
+    background-attachment: initial;
+    background-size: 1920px;
+    width: 100%;
+    height: calc(100vh - 64px) ;
+
+    display: flex;
+    justify-content: center;
+    .lustre {
+      justify-self: center;
+      width: 1920px;
+      height: auto;
+    }
+    .reserv-news {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .mat-flat-button {
+        border-radius: 0;
+        width: 150px;
+        margin: 20px;
+      }
+      .reservations {
+        a {
+          color: #9E0C17;
+        }
+
+      }
+      .news-letter {
+        color: #9E0C17;
+      }
+    }
+  }
+  @media only screen and (max-width: 450px) {
+    .picture-container {
+      background-size: cover;
+    }
+  }
 }
+

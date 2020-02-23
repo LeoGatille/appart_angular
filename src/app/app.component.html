@@ -61,46 +61,46 @@
         {{ title }}
       </button>
       <nav class="toolbar">
-        <mat-nav-list>
-          <a routerLink="/home" routerLinkActive="active" >
-            <mat-icon>home</mat-icon>
-            <span>Home</span>
-          </a>
-          <span *ngIf="isConnected()">
-          <a routerLink="/admin/event" routerLinkActive="active" >
-            <mat-icon>home</mat-icon>
-            <span>Event</span>
-          </a>
-            <a routerLink="/admin/food" routerLinkActive="active">
-              <mat-icon>bookmarks</mat-icon>
-              <span>Food</span>
-            </a>
-            <a routerLink="/admin/wine" routerLinkActive="active">
-              <mat-icon>warning</mat-icon>
-              <span>Wine</span>
-            </a>
-          </span>
-          <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()">
-            <mat-icon>account_circle</mat-icon>
-            <span>Se connecter</span>
-          </a>
-          <span *ngIf="isConnected()">
-                <button mat-button [matMenuTriggerFor]="menu">
-                  <mat-icon class="material-icons">account_box</mat-icon>
-                  {{ user.username }}
-                </button>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item routerLink="/profile" routerLinkActive="active" >
-                    <mat-icon class="material-icons">account_box</mat-icon>
-                    <span>Mon profile</span>
-                  </button>
-                  <button mat-menu-item (click)="logout()">
-                    <mat-icon class="material-icons" >close</mat-icon>
-                    <span>Se Déconnecter</span>
-                  </button>
-                </mat-menu>
-            </span>
-        </mat-nav-list>
+<!--        <mat-nav-list>-->
+<!--          <a routerLink="/home" routerLinkActive="active" >-->
+<!--            <mat-icon>home</mat-icon>-->
+<!--            <span>Home</span>-->
+<!--          </a>-->
+<!--          <span *ngIf="isConnected()">-->
+<!--          <a routerLink="/admin/event" routerLinkActive="active" >-->
+<!--            <mat-icon>home</mat-icon>-->
+<!--            <span>Event</span>-->
+<!--          </a>-->
+<!--            <a routerLink="/admin/food" routerLinkActive="active">-->
+<!--              <mat-icon>bookmarks</mat-icon>-->
+<!--              <span>Food</span>-->
+<!--            </a>-->
+<!--            <a routerLink="/admin/wine" routerLinkActive="active">-->
+<!--              <mat-icon>warning</mat-icon>-->
+<!--              <span>Wine</span>-->
+<!--            </a>-->
+<!--          </span>-->
+<!--          <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()">-->
+<!--            <mat-icon>account_circle</mat-icon>-->
+<!--            <span>Se connecter</span>-->
+<!--          </a>-->
+<!--          <span *ngIf="isConnected()">-->
+<!--                <button mat-button [matMenuTriggerFor]="menu">-->
+<!--                  <mat-icon class="material-icons">account_box</mat-icon>-->
+<!--                  {{ user.username }}-->
+<!--                </button>-->
+<!--                <mat-menu #menu="matMenu">-->
+<!--                  <button mat-menu-item routerLink="/profile" routerLinkActive="active" >-->
+<!--                    <mat-icon class="material-icons">account_box</mat-icon>-->
+<!--                    <span>Mon profile</span>-->
+<!--                  </button>-->
+<!--                  <button mat-menu-item (click)="logout()">-->
+<!--                    <mat-icon class="material-icons" >close</mat-icon>-->
+<!--                    <span>Se Déconnecter</span>-->
+<!--                  </button>-->
+<!--                </mat-menu>-->
+<!--            </span>-->
+<!--        </mat-nav-list>-->
       </nav>
     </mat-toolbar>
     <router-outlet></router-outlet>

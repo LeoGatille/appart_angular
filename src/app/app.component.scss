@@ -1,10 +1,16 @@
-
+.mat-drawer-content {
+  position: relative;
+  z-index: 1;
+  display: initial;
+  height: 100%;
+  overflow: auto;
+}
 .main-container button{
   font-size: 1.2em;
   font-family:'Didact Gothic', sans-serif;
 }
 mat-sidenav-container.main-container {
-  position: absolute;
+ // position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -12,21 +18,22 @@ mat-sidenav-container.main-container {
 }
 @media only screen and (max-width: 450px) {
   mat-sidenav.sidenav {
-    width: 100vw;
-    background-color: #DA2018;
+    width: 100%;
+    background-color: #9E0C17;
     color: white;
     border-right: 1px solid white;
   }
 }
 mat-sidenav.sidenav {
   min-width: 300px;
-  background-color: #DA2018;
+  background-color: #9E0C17;
   color: white;
   border-right: 1px solid white;
 }
 mat-toolbar.toolbar {
-  background-color: #da2018;
+  background-color: #9E0C17;
   color: white;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,7 +46,7 @@ mat-toolbar nav.toolbar{
   font-size: 0.8em;
 }
 mat-toolbar nav mat-nav-list a {
-  margin-right: 20px;
+  //margin-right: 20px;
 }
 mat-toolbar nav mat-nav-list a mat-icon{
   font-size: 1em;
