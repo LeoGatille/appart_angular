@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {WineService} from '../../../../service/wine/wine.service';
 import {ActivatedRoute} from '@angular/router';
 import {Wine} from '../../../../class/wine/wine';
@@ -26,6 +26,7 @@ export class WineEditComponent implements OnInit {
   @Input() wine: Wine = null;
   @Input() selector: any = null;
 
+  @Output() close = new EventEmitter<any>();
 
   errorLog: string;
   error = false;
@@ -229,10 +230,11 @@ export class WineEditComponent implements OnInit {
       this.wine.status.id,
       this.wine.id,
     )
-      .subscribe(success =>  console.log('oh yes ! ', success),
+      .subscribe(success =>  this.close.emit(),
         error => {
           console.log('oh my...', error);
           this.createErrorLog(error);
+
         });
   }
   createErrorLog(error) {

@@ -3,6 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material'
 import {ModalService} from '../component/test/modal';
 import {Food} from '../class/food/food';
 import {Wine} from '../class/wine/wine';
+import {Event} from '../class/event';
 
 @Component({
   selector: 'app-dialog',
@@ -26,6 +27,7 @@ export class DialogComponent implements OnInit {
   selector: any = null;
   suppr = '';
   confirmation = false;
+  event: Event;
 
   @Output() sendData = new EventEmitter<any>();
 
@@ -45,6 +47,7 @@ export class DialogComponent implements OnInit {
     this.wine = data.wine;
     this.selector = data.selector;
     this.suppr = data.suppr;
+    this.event = data.event
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 <div class="main-container row-cols-7">
   <form *ngIf="!loading"
       [formGroup]="createEvent">
-    <div class="row col-12">
+    <div class="row ">
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="name">
           <input matInput type="text"
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row col-12">
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="price-n-b">
           <input matInput
@@ -55,14 +55,17 @@
     </div>
 
       <div class="row">
-        <mat-form-field class="description">
+        <div class="col-12">
+          <mat-form-field class="description">
             <textarea matInput type="textarea"
                       placeholder="'Description'"
                       autocomplete="Off"
                       formControlName="description"
                       [ngModel]="oldDescription"
             ></textarea>
-        </mat-form-field>
+          </mat-form-field>
+        </div>
+
       </div>
 
     <div>
@@ -70,7 +73,7 @@
         <mat-label>Menu</mat-label>
         <mat-select formControlName="typeControl">
           <mat-optgroup *ngFor="let type of allTypes" [label]="type.typeName">
-            <mat-option  *ngFor="let food of type.foods" [value]="food" (click)="getSelectedFood(food, type)">
+            <mat-option  *ngFor="let food of type.foods" [value]="food" (click)="getSelectedFood(food)">
               {{food.foodName}}
             </mat-option>
           </mat-optgroup>
@@ -112,29 +115,13 @@
     </div>
     <div>
       Menue
-      <button mat-flat-button
-              (click)="reset()"
-      >Réinitialiser</button>
-      <div style="display: flex; justify-content: space-around">
-        <div>
-          <h5>Entrées</h5>
-          <div *ngFor="let food of selectedEntrees">
-            <div>{{food.foodName}}</div>
-          </div>
-        </div>
-        <div>
-          <h5>Plats</h5>
-          <div *ngFor="let food of selectedPlats">
-            <div>{{food.foodName}}</div>
-          </div>
-        </div>
-        <div>
-          <h5>Desserts</h5>
-          <div *ngFor="let food of selectedDesserts">
-            <div>{{food.foodName}}</div>
-          </div>
-        </div>
-      </div>
+    </div>
+    <div style="display: flex; " *ngFor="let food of allFoods">
+      <div style=" margin-right: 10px">{{food.foodName}}</div>
+      <button mat-mini-fab class="delete-btn"
+              (click)="removeFood(food.id)"
+      >
+        <i class="material-icons">delete</i></button>
     </div>
   </form>
 </div>

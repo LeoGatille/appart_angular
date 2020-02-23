@@ -1,6 +1,6 @@
 <div>
   <h3>{{title}}</h3>
-  <app-create-form *ngIf="!food && !wine && !suppr" [nameField]="nameField"
+  <app-create-form *ngIf="!food && !wine && !suppr && !event" [nameField]="nameField"
                    [nameValue]="nameValue"
                    [numberField]="numberField"
                    [numberValue]="numberValue"
@@ -9,7 +9,8 @@
                    (serviceCall)="close($event)">
   </app-create-form>
   <app-food-edit-page *ngIf="food" [food]="food" (close)="close()"></app-food-edit-page>
-  <app-wine-edit *ngIf="wine" [wine]="wine" [selector]="selector"></app-wine-edit>
+  <app-wine-edit *ngIf="wine" [wine]="wine" [selector]="selector" (close)="close()"></app-wine-edit>
+  <app-event-edit-page *ngIf="event" [event]="event" (close)="close()"></app-event-edit-page>
   <div *ngIf="suppr">
     <p>Êtes vous sur de vouloir supprimer <br> <b>*{{suppr}}*</b> ?</p>
     <div style="display: flex; justify-content: space-around">

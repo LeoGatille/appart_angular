@@ -3,6 +3,8 @@ import {Event} from '../../../../class/event';
 import {EventService} from '../../../../service/event.service';
 import {Food} from '../../../../class/food/food';
 import {EventCreateComponent} from '../event-create/event-create.component';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-event-list-page',
@@ -24,6 +26,7 @@ export class EventListPageComponent implements OnInit {
   action: string;
   constructor(
     private eventService: EventService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -31,32 +34,33 @@ export class EventListPageComponent implements OnInit {
     this.eventService.getAllEvents()
       .subscribe((events: Event[]) => {
         this.allEvents = events;
+        console.log('allEvents = ', this.allEvents);
       });
-    console.log('eventDate = ', this.allEvents);
+
   }
   log(date) {
     console.log('realDate = ', date);
   }
 
-  edit(id) {
-    if (this.action !== 'edit' ) {
-      this.action = 'edit';
-    }
-    this.chooseId = id;
-    this.eventService.getOneEvent(id)
-      .subscribe((event: any) => {
-        this.selectedEvent = event;
-
-        this.oldName = event.eventName;
-        this.oldDescription = event.eventDescription;
-        const timestamp = event.eventDate.timestamp;
-        this.oldDate = new Date(event.eventDate.timestamp * 1000);
-
-        this.oldPriceNoDrinks = event.priceNoDrinks;
-        this.oldPriceWithDrinks = event.priceWithDrinks;
-        this.oldFoodControl = event.foods;
-      });
-  }
+  // edit(id) {
+  //   if (this.action !== 'edit' ) {
+  //     this.action = 'edit';
+  //   }
+  //   this.chooseId = id;
+  //   this.eventService.getOneEvent(id)
+  //     .subscribe((event: any) => {
+  //       this.selectedEvent = event;
+  //
+  //       this.oldName = event.eventName;
+  //       this.oldDescription = event.eventDescription;
+  //       const timestamp = event.eventDate.timestamp;
+  //       this.oldDate = new Date(event.eventDate.timestamp * 1000);
+  //
+  //       this.oldPriceNoDrinks = event.priceNoDrinks;
+  //       this.oldPriceWithDrinks = event.priceWithDrinks;
+  //       this.oldFoodControl = event.foods;
+  //     });
+  // }
   callServices($event) {
     const eventId = $event[0];
     const eventData = $event[1];
@@ -87,19 +91,36 @@ export class EventListPageComponent implements OnInit {
       });
     }
   }
-  changeAction() {
-    if (this.action === 'edit') {
-      this.oldName = null;
-      this.oldDescription = null;
-      const timestamp = null;
-      this.oldDate = null;
+  edit(event: Event) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: 'Edition',
+      event,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
-      this.oldPriceNoDrinks = null;
-      this.oldPriceWithDrinks = null;
-      this.oldFoodControl = null;
-    }
-    this.action = 'list';
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        this.ngOnInit();
+      }
+    );
+
   }
+
+  // changeAction() {
+  //   if (this.action === 'edit') {
+  //     this.oldName = null;
+  //     this.oldDescription = null;
+  //     const timestamp = null;
+  //     this.oldDate = null;
+  //
+  //     this.oldPriceNoDrinks = null;
+  //     this.oldPriceWithDrinks = null;
+  //     this.oldFoodControl = null;
+  //   }
+  //   this.action = 'list';
+  // }
   delete(id) {
     this.eventService.deleteEvent(id)
       .subscribe(() => {

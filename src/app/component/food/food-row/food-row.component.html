@@ -19,6 +19,7 @@
               (click)="deleteFood()"
       >
         <i class="material-icons">delete</i></button>
+
       <div class="container-check">
         <form [formGroup]="patchForm">
           <mat-checkbox (change)="patchFood(food.id)"

@@ -8,5 +8,5 @@ export class Event {
   eventName: string;
   priceNoDrinks: number;
   priceWithDrinks: number;
-  foods: Food[];
+  food: Food[];
 }

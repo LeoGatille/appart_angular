@@ -1,4 +1,4 @@
-<div (click)="changeAction()" >{{action}}</div>
+
 <app-event-create (allControllers)="callServices($event)"
                   [action]="action"
                   [eventId]="chooseId"
@@ -12,6 +12,48 @@
 ></app-event-create>
 <div *ngFor="let event of allEvents ">
   <div>{{event.eventName}} ||| {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</div>
-  <button (click)="edit(event.id)" >modifer</button>
+  <div *ngFor="let food of event.foods">
+    <div>{{food.foodName}}</div>
+  </div>
+  <button (click)="edit(event)" >modifer</button>
   <button (click)="delete(event.id)" >suppr</button>
 </div>
+
+<!--<div *ngFor="let event of allEvents" class="row-cols-6">-->
+<!--  <h3 class="date">{{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h3>-->
+<!--  <h2 class="name">{{event.eventName}}</h2>-->
+<!--  <div>-->
+<!--    <p class="description">{{event.eventDescription}}</p>-->
+<!--  </div>-->
+<!--  <div *ngFor="let food of event.foods">-->
+<!--    {{food.foodName}}-->
+<!--  </div>-->
+<!--  <div class="menu-container">-->
+<!--    <mat-expansion-panel class="menu">-->
+<!--      <mat-expansion-panel-header>-->
+<!--        <div class="title">Menu</div>-->
+<!--      </mat-expansion-panel-header>-->
+<!--      <div class="food-container" *ngFor="let food of event.foods">-->
+<!--        <div>Entrée-->
+<!--          <div>-->
+<!--            <app-food-row *ngIf="food.type === 1" [food]="food"-->
+<!--            ></app-food-row>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div>Plats-->
+<!--          <div>-->
+<!--            <app-food-row *ngIf="food.type === 2" [food]="food"-->
+<!--            ></app-food-row>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div>Dessert-->
+<!--          <div>-->
+<!--            <app-food-row *ngIf="food.type === 3" [food]="food"-->
+<!--            ></app-food-row>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="separation container-fluid"></div>-->
+<!--    </mat-expansion-panel>-->
+<!--  </div>-->
+<!--</div>-->

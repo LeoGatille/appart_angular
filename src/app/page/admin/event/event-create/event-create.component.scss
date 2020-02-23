@@ -7,8 +7,8 @@
   color: #da2018;
 }
 .main-container {
-
-  padding-left: 20px;
+  padding-left: 35px;
+  padding-right: 15px;
 }
 .mat-form-field {
   font-size: 2em;
@@ -20,27 +20,41 @@
   width: 500px;
 }
 .date-picker {
-  width: 500px;
+  width: 250px;
 }
 .description {
   width: 700px;
 }
-
 .save {
   background-color: #da2018;
   color: white;
   margin-bottom: 20px;
 }
 .list-container {
-  padding-left: 35px;
+  // padding-left: 35px;
 }
 .type {
-
 }
-
-
 .menu-select {
   width: 500px;
-
+  font-size: 1.4rem;
 }
-
+.price-n-b {
+ // padding-left: 20px;
+  width: 280px;
+}
+.price-w-b {
+  width: 280px;
+}
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  height: 30px;
+  width: 30px;
+  background: #ff285d;
+  i {
+    color: white;
+  }
+}

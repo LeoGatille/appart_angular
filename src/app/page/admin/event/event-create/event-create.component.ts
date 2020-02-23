@@ -29,7 +29,7 @@ export class EventCreateComponent implements OnInit {
   dataToParent: any[];
   foodsId: number[];
   createEvent: FormGroup;
-  allFoods: Food[];
+  allFoods: Food[] = [];
   allTypes: Type[];
   loading = true;
   selectedEntrees: Food[];
@@ -54,50 +54,61 @@ export class EventCreateComponent implements OnInit {
       .subscribe((types: Type[]) => {
         this.allTypes = types;
       });
-    this.foodService.getAllFood()
-      .subscribe((foods: Food[]) => {
-        this.allFoods = foods;
-      });
+    // this.foodService.getAllFood()
+    //   .subscribe((foods: Food[]) => {
+    //     this.allFoods = foods;
+    //   });
     this.createEvent = this.fb.group({
       name : ['', Validators.required],
       description : ['', Validators.required],
       date : ['', Validators.required],
       priceNoDrinks : ['', Validators.required],
       priceWithDrinks : ['', Validators.required],
-      foodControl : ['', Validators.required],
-      typeControl : ['', Validators.required],
+      foodControl : [''],
+      typeControl : [''],
     });
     this.loading = false;
   }
-  getSelectedFood(food: Food, type: Type) {
+
+  getSelectedFood(food: Food) {
+    this.allFoods.push(food);
     this.foodsId.push(food.id);
-    if (type.id === this.entreesId) {
-      this.selectedEntrees.push(food);
-    }
-    if (type.id === this.platsId) {
-      this.selectedPlats.push(food);
-    }
-    if (type.id === this.dessertsId) {
-      this.selectedDesserts.push(food);
-    }
-    console.log('FoodIds = ', this.foodsId);
   }
+  removeFood(id) {
+    this.foodsId.splice(this.foodsId.indexOf(id), 1);
+    this.allFoods.splice(this.foodsId.indexOf(id), 1);
+  }
+
+  // getSelectedFood(food: Food, type: Type) {
+  //   console.log('food = ', food);
+  //   this.foodsId.push(food.id);
+  //   if (type.id === this.entreesId) {
+  //     this.selectedEntrees.push(food);
+  //   }
+  //   if (type.id === this.platsId) {
+  //     this.selectedPlats.push(food);
+  //   }
+  //   if (type.id === this.dessertsId) {
+  //     this.selectedDesserts.push(food);
+  //   }
+  //   console.log('FoodIds = ', this.foodsId);
+  // }
   save() {
     this.dataToParent = [];
     const val = this.createEvent.value;
     this.dataToParent.push(this.eventId, val, this.foodsId);
     this.allControllers.emit(this.dataToParent);
   }
-  displayOldFoods() {
-  this.oldFoodControl.forEach(food => {
-  this.getSelectedFood(food, food.type);
-});
-}
-  reset() {
-    this.foodsId = [];
-    this.selectedDesserts = [];
-    this.selectedEntrees = [];
-    this.selectedPlats = [];
-  }
+//   displayOldFoods() {
+//   this.oldFoodControl.forEach(food => {
+//   this.getSelectedFood(food, food.type);
+// });
+// }
+  // reset() {
+  //   this.foodsId = [];
+  //   this.selectedDesserts = [];
+  //   this.selectedEntrees = [];
+  //   this.selectedPlats = [];
+  // }
 
 }

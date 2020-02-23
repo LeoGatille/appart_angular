@@ -1,1 +1,100 @@
-<p>event-edit-page works!</p>
+<div class="main-container row-cols-7">
+  <form *ngIf="!loading"
+        [formGroup]="editEvent">
+    <div class="row ">
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="name">
+          <input matInput type="text"
+                 placeholder="'Nom'"
+                 autocomplete="Off"
+                 formControlName="name"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="date-picker">
+          <input matInput
+                 [matDatepicker]="picker"
+                 formControlName="date"
+                 placeholder="Choix de la date"
+          >
+          <mat-datepicker-toggle matSuffix
+                                 [for]="picker"
+
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row col-12">
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="price-n-b">
+          <input matInput
+                 type="number"
+                 placeholder="Prix sans boissons"
+                 autocomplete="Off"
+                 formControlName="priceNoDrinks"
+          />
+        </mat-form-field>
+      </div >
+      <div class="col-md-6 col-sm-12">
+        <mat-form-field class="price-w-b">
+          <input matInput
+                 type="number"
+                 placeholder="Prix avec boissons"
+                 autocomplete="Off"
+                 formControlName="priceWithDrinks"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <mat-form-field class="description">
+            <textarea matInput type="textarea"
+                      placeholder="'Description'"
+                      autocomplete="Off"
+                      formControlName="description"
+            ></textarea>
+        </mat-form-field>
+      </div>
+
+    </div>
+
+    <div>
+      <mat-form-field class="menu-select">
+        <mat-label>Menu</mat-label>
+        <mat-select>
+          <mat-optgroup *ngFor="let type of allTypes" [label]="type.typeName">
+            <mat-option  *ngFor="let food of type.foods" [value]="food" (click)="getSelectedFood(food)">
+              {{food.foodName}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div>
+      <button mat-flat-button
+              [disabled]="editEvent.invalid"
+              (click)="save()"
+              color="primary"
+      >
+        Envoyer
+      </button>
+    </div>
+    <div>
+      Menue
+    </div>
+      <div style="display: flex" *ngFor="let food of allFoods">
+        <div style=" margin-right: 10px">{{food.foodName}}</div>
+        <button mat-mini-fab class="delete-btn"
+                (click)="removeFood(food.id)"
+        >
+          <i class="material-icons">delete</i></button>
+      </div>
+  </form>
+</div>
