@@ -1,3 +1,15 @@
+
+//mat-toolbar {
+//  height: 64px;
+//  width: 100%;
+//  position: fixed;
+//  z-index: 100;
+//  width: 100%  !important;
+//  padding: 0;
+//  background-color: #9E0C17;
+//}
+
+
 .mat-drawer-content {
   position: relative;
   z-index: 1;
@@ -6,16 +18,20 @@
   overflow: auto;
 }
 .main-container button{
-  font-size: 1.2em;
+  font-size: 2em;
   font-family:'Didact Gothic', sans-serif;
 }
 mat-sidenav-container.main-container {
  // position: absolute;
+
   top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  //bottom: 0;
+  //left: 0;
+  //right: 0;
 }
+
+
+
 @media only screen and (max-width: 450px) {
   mat-sidenav.sidenav {
     width: 100%;
@@ -24,6 +40,10 @@ mat-sidenav-container.main-container {
     border-right: 1px solid white;
   }
 }
+
+
+
+
 mat-sidenav.sidenav {
   min-width: 300px;
   background-color: #9E0C17;

@@ -1,3 +1,78 @@
+
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! AU MOINS IL MARCHE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!--<div class="app-container">-->
+<!--  <mat-sidenav-container>-->
+
+<!--    <mat-sidenav #sidenav mode="over" class="sidenav">-->
+<!--          <mat-toolbar class="toolbar" role="heading">-->
+<!--            <span>Menu</span>-->
+<!--            <span class="remaining-space"></span>-->
+<!--            <button class="btn-toolbar" mat-button (click)="sidenav.close()">-->
+<!--              <mat-icon>clear</mat-icon>-->
+<!--            </button>-->
+<!--          </mat-toolbar>-->
+<!--          <nav>-->
+<!--            <mat-nav-list>-->
+<!--              <a routerLink="/home" routerLinkActive="active"-->
+<!--                 mat-list-item  (click)="sidenav.close()" >-->
+<!--                <mat-icon>home</mat-icon>-->
+<!--                <span>Accueil</span>-->
+<!--              </a>-->
+
+<!--              <span *ngIf="isConnected()">-->
+<!--                <a routerLink="/label" routerLinkActive="active"-->
+<!--                   mat-list-item (click)="sidenav.close()" >-->
+<!--                  <mat-icon>bookmarks</mat-icon>-->
+<!--                  <span>Label</span>-->
+<!--                </a>-->
+<!--                <a routerLink="/priority/list" routerLinkActive="active"-->
+<!--                   mat-list-item (click)="sidenav.close()" >-->
+<!--                  <mat-icon>warning</mat-icon>-->
+<!--                  <span>Priority</span>-->
+<!--                </a>-->
+<!--              </span>-->
+
+
+<!--              <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"-->
+<!--                 mat-list-item (click)="sidenav.close()" >-->
+<!--                <mat-icon>account_circle</mat-icon>-->
+<!--                <span>Se connecter</span>-->
+<!--              </a>-->
+<!--              <span *ngIf="isConnected()">-->
+<!--                      <a routerLink="/profile" routerLinkActive="active"-->
+<!--                         mat-list-item (click)="sidenav.close()" >-->
+<!--                          <mat-icon class="material-icons">account_box</mat-icon>-->
+<!--                          <span>Mon profile</span>-->
+<!--                      </a>-->
+<!--                      <a mat-list-item (click)="sidenav.close(); logout()" >-->
+<!--                          <mat-icon class="material-icons">close</mat-icon>-->
+<!--                          <span>Se Déconnecter</span>-->
+<!--                      </a>-->
+<!--              </span>-->
+
+
+<!--            </mat-nav-list>-->
+<!--          </nav>-->
+
+
+<!--        </mat-sidenav>-->
+
+<!--    <mat-toolbar>-->
+<!--      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">-->
+<!--        <mat-icon >view_headline</mat-icon>-->
+<!--        {{ title }}-->
+<!--      </button>-->
+<!--    </mat-toolbar>-->
+
+<!--    <div class="app-body">-->
+<!--      <router-outlet></router-outlet>-->
+<!--    </div>-->
+
+<!--  </mat-sidenav-container>-->
+<!--  <div>-->
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+
 <mat-sidenav-container class="main-container">
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-toolbar class="toolbar" role="heading">
@@ -61,46 +136,7 @@
         {{ title }}
       </button>
       <nav class="toolbar">
-<!--        <mat-nav-list>-->
-<!--          <a routerLink="/home" routerLinkActive="active" >-->
-<!--            <mat-icon>home</mat-icon>-->
-<!--            <span>Home</span>-->
-<!--          </a>-->
-<!--          <span *ngIf="isConnected()">-->
-<!--          <a routerLink="/admin/event" routerLinkActive="active" >-->
-<!--            <mat-icon>home</mat-icon>-->
-<!--            <span>Event</span>-->
-<!--          </a>-->
-<!--            <a routerLink="/admin/food" routerLinkActive="active">-->
-<!--              <mat-icon>bookmarks</mat-icon>-->
-<!--              <span>Food</span>-->
-<!--            </a>-->
-<!--            <a routerLink="/admin/wine" routerLinkActive="active">-->
-<!--              <mat-icon>warning</mat-icon>-->
-<!--              <span>Wine</span>-->
-<!--            </a>-->
-<!--          </span>-->
-<!--          <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()">-->
-<!--            <mat-icon>account_circle</mat-icon>-->
-<!--            <span>Se connecter</span>-->
-<!--          </a>-->
-<!--          <span *ngIf="isConnected()">-->
-<!--                <button mat-button [matMenuTriggerFor]="menu">-->
-<!--                  <mat-icon class="material-icons">account_box</mat-icon>-->
-<!--                  {{ user.username }}-->
-<!--                </button>-->
-<!--                <mat-menu #menu="matMenu">-->
-<!--                  <button mat-menu-item routerLink="/profile" routerLinkActive="active" >-->
-<!--                    <mat-icon class="material-icons">account_box</mat-icon>-->
-<!--                    <span>Mon profile</span>-->
-<!--                  </button>-->
-<!--                  <button mat-menu-item (click)="logout()">-->
-<!--                    <mat-icon class="material-icons" >close</mat-icon>-->
-<!--                    <span>Se Déconnecter</span>-->
-<!--                  </button>-->
-<!--                </mat-menu>-->
-<!--            </span>-->
-<!--        </mat-nav-list>-->
+
       </nav>
     </mat-toolbar>
     <router-outlet></router-outlet>
