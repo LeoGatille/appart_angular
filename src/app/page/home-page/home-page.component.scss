@@ -118,4 +118,135 @@ $serif: 'Merriweather', sans-serif ;
   }
 }
 
+.event {
+  background-color: black;
+  justify-content: center;
+
+  .first{
+    padding-top: 50px;
+  }
+  .second {
+    padding-bottom: 50px;
+  }
+  .event-container {
+
+
+    display: flex;
+    justify-content: center;
+
+    h2 {
+      color: #FFFFFF;
+      font-family: $serif;
+      font-size: 10rem;
+      font-weight: bold;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .first{
+    }
+    .second {
+    }
+    .event-container {
+
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        color: #FFFFFF;
+        font-family: $serif;
+        font-size: 3rem;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.chef {
+  padding-top: 100px;
+  background-color: black;
+  .picture {
+    background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
+    background-position: center;
+    background-size: cover;
+    height: 800px;
+  }
+  .histoire {
+    background: white;
+    padding: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    color: black;
+    p {
+      font-size: 1.5em;
+
+      b {
+        font-weight: initial ;
+        font-size: 3em;
+        }
+      span {
+        b {
+
+        }
+      }
+      i {
+        font-size: 1.7em;
+        font-weight: bold;
+
+      }
+    }
+
+  }
+  @media only screen and (max-width: 1000px) {
+    .picture {
+      background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
+      background-position: center;
+      background-size: cover;
+      height: 300px;
+    }
+    .histoire {
+      padding: 50px;
+      p {
+        font-size: 1.1em;
+
+        b {
+          font-weight: initial ;
+          font-size: 2em;
+        }
+        span {
+          b {
+
+          }
+        }
+        i {
+          font-size: 1.3em;
+          font-weight: bold;
+
+        }
+      }
+
+    }
+  }
+}
+
+.gallery {
+  background-image: url("http://api.bundles.do/uploads/test/nouvelle_salle_2.jpg");
+  background-position: center;
+  height: 800px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    position: absolute;
+    font-size: 6em;
+    font-style: italic;
+    font-family: $serif ;
+    color: rgba(255, 255, 255, 0);
+
+  }
+}
+
 
