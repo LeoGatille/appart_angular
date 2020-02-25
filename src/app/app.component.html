@@ -1,144 +1,186 @@
 
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! AU MOINS IL MARCHE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-<!--<div class="app-container">-->
-<!--  <mat-sidenav-container>-->
-
-<!--    <mat-sidenav #sidenav mode="over" class="sidenav">-->
-<!--          <mat-toolbar class="toolbar" role="heading">-->
+<div class="app-container">
+  <mat-sidenav-container>
+    <mat-toolbar>
+      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">
+        <mat-icon >view_headline</mat-icon>
+        {{ title }}
+      </button>
+    </mat-toolbar>
+    <mat-sidenav #sidenav mode="hover" class="sidenav">
+<!--          <mat-toolbar class="toolbar" >-->
 <!--            <span>Menu</span>-->
 <!--            <span class="remaining-space"></span>-->
 <!--            <button class="btn-toolbar" mat-button (click)="sidenav.close()">-->
 <!--              <mat-icon>clear</mat-icon>-->
 <!--            </button>-->
 <!--          </mat-toolbar>-->
-<!--          <nav>-->
-<!--            <mat-nav-list>-->
-<!--              <a routerLink="/home" routerLinkActive="active"-->
-<!--                 mat-list-item  (click)="sidenav.close()" >-->
-<!--                <mat-icon>home</mat-icon>-->
-<!--                <span>Accueil</span>-->
-<!--              </a>-->
+          <nav>
+            <mat-nav-list>
+              <a routerLink="/home" routerLinkActive="active"
+                 mat-list-item  (click)="sidenav.close()" >
+                <i class="fab fa-accessible-icon"></i>
+                <span>Accueil</span>
+              </a>
 
-<!--              <span *ngIf="isConnected()">-->
-<!--                <a routerLink="/label" routerLinkActive="active"-->
+              <span *ngIf="isConnected()">
+                <a routerLink="/label" routerLinkActive="active"
+                   mat-list-item (click)="sidenav.close()" >
+                  <mat-icon>bookmarks</mat-icon>
+                  <span>Label</span>
+                </a>
+                <a routerLink="/priority/list" routerLinkActive="active"
+                   mat-list-item (click)="sidenav.close()" >
+                  <mat-icon>warning</mat-icon>
+                  <span>Priority</span>
+                </a>
+              </span>
+
+
+              <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
+                 mat-list-item (click)="sidenav.close()" >
+                <mat-icon>account_circle</mat-icon>
+                <span>Se connecter</span>
+              </a>
+              <span *ngIf="isConnected()">
+                      <a routerLink="/profile" routerLinkActive="active"
+                         mat-list-item (click)="sidenav.close()" >
+                          <mat-icon class="material-icons">account_box</mat-icon>
+                          <span>Mon profile</span>
+                      </a>
+                      <a mat-list-item (click)="sidenav.close(); logout()" >
+                          <mat-icon class="material-icons">close</mat-icon>
+                          <span>Se Déconnecter</span>
+                      </a>
+              </span>
+
+
+            </mat-nav-list>
+          </nav>
+
+
+        </mat-sidenav>
+
+
+
+    <div class="app-body" style="padding-top: 64px">
+      <router-outlet ></router-outlet>
+    </div>
+
+  </mat-sidenav-container>
+  <div>
+<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div>-->
+<!--  <div style="position: sticky; top: 0; z-index: 100">-->
+<!--    <div style=" background: #2ce071; height: 70px; width: 100% ">toto</div>-->
+<!--    <nav style="background: #9E0C17; height: calc(100vh - 70px) ; width: 200px; position: absolute; z-index: 10; top: 70px"> tata</nav>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <router-outlet></router-outlet>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<mat-sidenav-container class="main-container">-->
+<!--  <mat-sidenav #sidenav mode="over" class="sidenav">-->
+<!--&lt;!&ndash;    <mat-toolbar class="toolbar" >&ndash;&gt;-->
+<!--&lt;!&ndash;      <span>Menu</span>&ndash;&gt;-->
+<!--&lt;!&ndash;      <span class="remaining-space"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button class="btn-toolbar" mat-button (click)="sidenav.close()">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-icon>clear</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;      </button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </mat-toolbar>&ndash;&gt;-->
+<!--    <nav>-->
+<!--      <mat-nav-list>-->
+<!--        <a routerLink="/home" routerLinkActive="active"-->
+<!--           mat-list-item  (click)="sidenav.close()" >-->
+<!--          <mat-icon>home</mat-icon>-->
+<!--          <span>Accueil</span>-->
+<!--        </a>-->
+
+<!--        <span *ngIf="isConnected()">-->
+<!--          <a routerLink="/label" routerLinkActive="active"-->
+<!--             mat-list-item (click)="sidenav.close()" >-->
+<!--            <mat-icon>bookmarks</mat-icon>-->
+<!--            <span>Label</span>-->
+<!--          </a>-->
+<!--          <a routerLink="/priority/list" routerLinkActive="active"-->
+<!--             mat-list-item (click)="sidenav.close()" >-->
+<!--            <mat-icon>warning</mat-icon>-->
+<!--            <span>Priority</span>-->
+<!--          </a>-->
+<!--        </span>-->
+
+
+<!--        <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"-->
+<!--           mat-list-item (click)="sidenav.close()" >-->
+<!--          <mat-icon>account_circle</mat-icon>-->
+<!--          <span>Se connecter</span>-->
+<!--        </a>-->
+<!--        <span *ngIf="isConnected()">-->
+<!--                <a routerLink="/profile" routerLinkActive="active"-->
 <!--                   mat-list-item (click)="sidenav.close()" >-->
-<!--                  <mat-icon>bookmarks</mat-icon>-->
-<!--                  <span>Label</span>-->
+<!--                    <mat-icon class="material-icons">account_box</mat-icon>-->
+<!--                    <span>Mon profile</span>-->
 <!--                </a>-->
-<!--                <a routerLink="/priority/list" routerLinkActive="active"-->
-<!--                   mat-list-item (click)="sidenav.close()" >-->
-<!--                  <mat-icon>warning</mat-icon>-->
-<!--                  <span>Priority</span>-->
+<!--                <a mat-list-item (click)="sidenav.close(); logout()" >-->
+<!--                    <mat-icon class="material-icons">close</mat-icon>-->
+<!--                    <span>Se Déconnecter</span>-->
 <!--                </a>-->
-<!--              </span>-->
+<!--        </span>-->
 
 
-<!--              <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"-->
-<!--                 mat-list-item (click)="sidenav.close()" >-->
-<!--                <mat-icon>account_circle</mat-icon>-->
-<!--                <span>Se connecter</span>-->
-<!--              </a>-->
-<!--              <span *ngIf="isConnected()">-->
-<!--                      <a routerLink="/profile" routerLinkActive="active"-->
-<!--                         mat-list-item (click)="sidenav.close()" >-->
-<!--                          <mat-icon class="material-icons">account_box</mat-icon>-->
-<!--                          <span>Mon profile</span>-->
-<!--                      </a>-->
-<!--                      <a mat-list-item (click)="sidenav.close(); logout()" >-->
-<!--                          <mat-icon class="material-icons">close</mat-icon>-->
-<!--                          <span>Se Déconnecter</span>-->
-<!--                      </a>-->
-<!--              </span>-->
+<!--      </mat-nav-list>-->
+<!--    </nav>-->
 
 
-<!--            </mat-nav-list>-->
-<!--          </nav>-->
+<!--  </mat-sidenav>-->
+<!--  <mat-sidenav-content>-->
 
 
-<!--        </mat-sidenav>-->
-
-<!--    <mat-toolbar>-->
+<!--    <mat-toolbar class="toolbar" role="heading">-->
 <!--      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">-->
 <!--        <mat-icon >view_headline</mat-icon>-->
 <!--        {{ title }}-->
 <!--      </button>-->
+<!--      <nav class="test">-->
+
+<!--      </nav>-->
 <!--    </mat-toolbar>-->
-
-<!--    <div class="app-body">-->
-<!--      <router-outlet></router-outlet>-->
-<!--    </div>-->
-
-<!--  </mat-sidenav-container>-->
-<!--  <div>-->
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
-
-
-<mat-sidenav-container class="main-container">
-  <mat-sidenav #sidenav mode="over" class="sidenav">
-    <mat-toolbar class="toolbar" role="heading">
-      <span>Menu</span>
-      <span class="remaining-space"></span>
-      <button class="btn-toolbar" mat-button (click)="sidenav.close()">
-        <mat-icon>clear</mat-icon>
-      </button>
-    </mat-toolbar>
-    <nav>
-      <mat-nav-list>
-        <a routerLink="/home" routerLinkActive="active"
-           mat-list-item  (click)="sidenav.close()" >
-          <mat-icon>home</mat-icon>
-          <span>Accueil</span>
-        </a>
-
-        <span *ngIf="isConnected()">
-          <a routerLink="/label" routerLinkActive="active"
-             mat-list-item (click)="sidenav.close()" >
-            <mat-icon>bookmarks</mat-icon>
-            <span>Label</span>
-          </a>
-          <a routerLink="/priority/list" routerLinkActive="active"
-             mat-list-item (click)="sidenav.close()" >
-            <mat-icon>warning</mat-icon>
-            <span>Priority</span>
-          </a>
-        </span>
-
-
-        <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
-           mat-list-item (click)="sidenav.close()" >
-          <mat-icon>account_circle</mat-icon>
-          <span>Se connecter</span>
-        </a>
-        <span *ngIf="isConnected()">
-                <a routerLink="/profile" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                    <mat-icon class="material-icons">account_box</mat-icon>
-                    <span>Mon profile</span>
-                </a>
-                <a mat-list-item (click)="sidenav.close(); logout()" >
-                    <mat-icon class="material-icons">close</mat-icon>
-                    <span>Se Déconnecter</span>
-                </a>
-        </span>
-
-
-      </mat-nav-list>
-    </nav>
-
-
-  </mat-sidenav>
-  <mat-sidenav-content>
-
-
-    <mat-toolbar class="toolbar" role="heading">
-      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">
-        <mat-icon >view_headline</mat-icon>
-        {{ title }}
-      </button>
-      <nav class="toolbar">
-
-      </nav>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<!--    <router-outlet></router-outlet>-->
+<!--  </mat-sidenav-content>-->
+<!--</mat-sidenav-container>-->

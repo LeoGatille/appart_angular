@@ -1,6 +1,9 @@
 
 // $serif: 'IBM Plex Serif', serif;
 $serif: 'Merriweather', sans-serif ;
+.row {
+  margin: 0;
+}
 .home {
   .picture-container {
     background-image: url("http://api.bundles.do/uploads/test/home.jpg");
