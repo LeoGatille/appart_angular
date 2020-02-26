@@ -92,6 +92,10 @@ import { MessageComponent } from './component/message/message.component';
 import {NgbButtonsModule} from '@ng-bootstrap/ng-bootstrap';
 import { CustomTooltipComponent } from './component/common/custom-tooltip/custom-tooltip.component';
 import { ToolTipRendererDirective } from './directive/tool-tip-renderer.directive';
+import { CarteComponent } from './page/food/carte/carte.component';
+import { VinsComponent } from './page/wine/vins/vins.component';
+import { SoireeComponent } from './page/event/soiree/soiree.component';
+import { GalerieComponent } from './page/galerie/galerie.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +157,10 @@ import { ToolTipRendererDirective } from './directive/tool-tip-renderer.directiv
     MessageComponent,
     CustomTooltipComponent,
     ToolTipRendererDirective,
+    CarteComponent,
+    VinsComponent,
+    SoireeComponent,
+    GalerieComponent,
   ],
     imports: [
         MatAutocompleteModule,

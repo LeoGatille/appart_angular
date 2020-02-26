@@ -1,0 +1,167 @@
+
+
+
+
+
+
+
+
+$serif: 'Merriweather', sans-serif ;
+
+@media only screen and (max-width: 1000px) {
+  .header{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .container-text {
+    display: flex;
+    justify-content: center;
+    .other-container {
+      width: 400px;
+
+
+      div {
+        .title {
+          font-size: 4em;
+        }
+        .text {
+          font-size: 0.5em;
+        }
+      }
+    }
+  }
+
+}
+
+.header {
+  background-image: url(http://api.bundles.do/uploads/test/dessert.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 250px;
+  height: 719px;
+  margin-bottom: 100px;
+
+
+  .container-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+    .other-container {
+      padding-left: 30px;
+      padding-right: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255,255,255,0.7);
+     // height: 600px;
+      max-width: 1300px;
+      div{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        .title{
+          font-size: 7em;
+          font-family: $serif;
+          font-weight: bold;
+          font-style: italic;
+
+          color: #9E0C17;
+        }
+      }
+
+
+        .text{
+
+          text-align: left;
+          height: max-content;
+          font-size: 2em;
+
+        }
+
+
+    }
+
+
+  }
+}
+
+
+.creation {
+  font-size: 2em;
+  font-weight: bold;
+  color: #da2018;
+}
+.main-container {
+
+  padding-left: 20px;
+}
+.mat-form-field {
+  font-size: 2em;
+}
+.app-auto-complete {
+  font-size: 2em;
+}
+.title {
+  width: 500px;
+}
+.description {
+  width: 700px;
+}
+.text {
+  height: 100px;
+}
+.allergens-btn {
+  margin:20px
+}
+.check-container {
+  font-size: 2em;
+  padding-left: 25px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  height: 60px;
+}
+.mat-checkbox-inner-container {
+  height: 35px ;
+  width: 35px;
+}
+.save {
+  background-color: #da2018;
+  color: white;
+  margin-bottom: 20px;
+}
+.list-container {
+  padding-left: 35px;
+}
+.type {
+
+}
+.list-container{
+  margin-top: 50px;
+
+  .container-type {
+    margin-bottom: 50px;
+
+    .type-title {
+      color: #da2018;
+      font-weight: bolder;
+    }
+    .line {
+      height: 1px;
+      width: 60%;
+      background: #da2018;
+      margin-bottom: 10px;
+
+    }
+  }
+
+}
+

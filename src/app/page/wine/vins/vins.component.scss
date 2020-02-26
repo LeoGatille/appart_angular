@@ -1,0 +1,118 @@
+$serif: 'Merriweather', sans-serif ;
+$futura: 'Didact Gothic', sans-serif;
+
+
+
+.header {
+  background-image: url("http://api.bundles.do/uploads/test/table.jpg");
+  background-size: cover ;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 30px;
+  align-items: center;
+  height: 700px;
+}
+.text-container {
+  background-color: rgba(255,255,255,0.4);
+
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  .container-title {
+    //width: 1000px;
+   // display: flex;
+    margin-bottom: 150px;
+
+    .title{
+      font-family: $serif;
+      text-align: left;
+      font-size: 4em;
+      font-style: italic;
+      font-weight: bold;
+      color: #9E0C17;
+    }
+  }
+  .parent-text {
+   // width: 100%;
+    display: flex;
+//    justify-content: flex-start;
+    .text{
+      font-size: 2em;
+      text-align: left;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .header {
+      justify-content: center;
+      height: max-content;
+      background-image: none;
+      background-color: red;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+.mat-expansion-panel-header {
+  margin-bottom: 50px;
+}
+
+.main-container {
+
+  padding-left: 0px;
+}
+.filter-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  background-color: #9E0C17;
+  button {
+    // font-family: $serif;
+    background-color: #9E0C17;
+    color: #FFFFFF;
+  }
+}
+.no-choice {
+
+  .selector-container {
+
+    padding-left: 15px;
+    border: solid #9E0C17;
+    border-width: 0 0 0 1px;
+    .selector {
+      padding-top: 10px;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      font-weight: 200;
+      font-size: 1.5rem;
+      color: #9E0C17;
+      .mat-expansion-panel-body {
+        padding-top: 50px;
+        .wine-section {
+          margin-bottom: 50px;
+        }
+      }
+    }
+    .separation {
+      //width: 100%;
+      //margin-top: 20px;
+      //border: solid #9E0C17;
+      //border-width: 1px 0 ;
+    }
+  }
+}
+
+

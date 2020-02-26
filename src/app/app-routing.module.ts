@@ -26,9 +26,33 @@ import {FormulaPageComponent} from './page/admin/food/formula-page/formula-page.
 import {GalleryListPageComponent} from './page/admin/gallery/gallery-list-page/gallery-list-page.component';
 import {EventListPageComponent} from './page/admin/event/event-list-page/event-list-page.component';
 import {FoodEditPageComponent} from './page/admin/food/food-edit-page/food-edit-page.component';
+import {CarteComponent} from './page/food/carte/carte.component';
+import {VinsComponent} from './page/wine/vins/vins.component';
+import {SoireeComponent} from './page/event/soiree/soiree.component';
+import {GalerieComponent} from './page/galerie/galerie.component';
 
 
 const routes: Routes = [
+  {
+    path: 'carte',
+    component: CarteComponent,
+    data: {title: 'La carte'}
+  },
+  {
+    path: 'vins',
+    component: VinsComponent,
+    data: {title: 'Les vins'}
+  },
+  {
+    path: 'soirees',
+    component: SoireeComponent,
+    data: {title: 'Soirées Spéciales'}
+  },
+  {
+    path: 'galerie',
+    component: GalerieComponent,
+    data: {title: 'Galerie'}
+  },
   {
     path: 'admin/food/:verb/:id',
     component: FoodEditPageComponent,
@@ -178,7 +202,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: AppComponent
+    component: HomePageComponent
   }
 ];
 

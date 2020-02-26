@@ -1,0 +1,49 @@
+
+
+
+<div class="header">
+  <div class="text-container">
+    <div class="container-title"><h1 class="title">Les vins</h1></div>
+    <div class="parent-text">
+      <p class="text">
+        Cette sélection de vins est l’histoire d’une rencontre.
+        <br>L’un passionné par le solide, le chef d’orchestre, le plus souvent derrière ses pianos.
+        <br>L’autre, plutôt liquide, amoureux des bons flacons qui enchantent l’âme et l’esprit.
+        <br>De cette alchimie où le sens des mots plaisir, générosité, partage ont une vraie valeur
+        <br>Est née cette carte.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="filter-container">
+  <div>
+    <button mat-flat-button (click)="getSelector('category')">Catégorie</button>
+    <button mat-flat-button (click)="getSelector('designation')">Appellation</button>
+    <button mat-flat-button (click)="getSelector('color')">Couleur</button>
+  </div>
+  <div>
+    <button mat-flat-button (click)="getSelector('label')">Label</button>
+    <button mat-flat-button (click)="getSelector('vintage')">Millésime</button>
+  </div>
+</div>
+
+<div class="no-choice">
+  <mat-expansion-panel class="selector-container" *ngFor="let selected of selector" [expanded]="true">
+    <mat-expansion-panel-header>
+      <div class="selector">
+        {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="wine-section" *ngFor="let wine of selected.wines">
+      <div>
+        <app-wine-row [wine]="wine"
+                      [selector]="selected"
+        ></app-wine-row>
+      </div>
+    </div>
+    <div class="separation container-fluid"></div>
+  </mat-expansion-panel>
+
+</div>

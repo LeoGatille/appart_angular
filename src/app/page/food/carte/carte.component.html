@@ -1,0 +1,26 @@
+
+<div class="header">
+  <div class="container-text">
+    <div class="other-container">
+      <div><h1 class="title">La carte</h1></div>
+      <p class="text">
+        Chaque mois nous changeons notre carte pour cuisiner des produits frais de saison issus de producteurs locaux.
+        <br>Par exemple, nos pigeons viennent de l'élevage de Madame LE GUEN en dordogne.
+        <br>Nos fruits et nos légumes proviennent essentiellement de maraichers locaux pratiquant une culture raisonnée mais parfois aussi du jardin de nos amis et de notre famille. Notre pain et nos glaces sont faits maison.
+        <br> <br><b>C'est ce goût, cette fraicheur et cette qualité authentique des produits que nous souhaitons vous offrir.</b>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<div class="list-container container-fluid" *ngIf="!loading">
+  <div class="container-type" *ngFor="let type of allTypes">
+    <h3 class="type-title">{{type.typeName}}</h3>
+    <div class="line"></div>
+    <div *ngFor="let food of type.foods ">
+      <app-food-row [food]="food"
+      ></app-food-row>
+    </div>
+  </div>
+</div>
