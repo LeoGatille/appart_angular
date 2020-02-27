@@ -11,7 +11,8 @@ $serif: 'Playfair Display', serif;
     align-items: flex-start;
     .wine-header {
       display: flex;
-      justify-content: space-around;
+      justify-content: flex-start;
+      flex-wrap: wrap;
       .vintage{
         font-family: 'IBM Plex Serif', serif;
         //   font-style: italic;

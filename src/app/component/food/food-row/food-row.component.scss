@@ -1,5 +1,7 @@
+
+$serif: 'Merriweather', sans-serif ;
 .main-container {
-  padding-left: 30px;
+  padding-left: 15px;
   min-width: 350px;
   max-width: 900px;
   padding-right: 30px;
@@ -10,6 +12,9 @@
     flex-wrap: wrap;
 
     .title {
+      font-family: $serif;
+      font-style: italic;
+      color: #9E0C17;
       padding-left: 15px;
       display: flex;
       font-weight: bold;

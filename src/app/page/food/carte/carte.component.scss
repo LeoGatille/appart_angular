@@ -8,142 +8,78 @@
 
 $serif: 'Merriweather', sans-serif ;
 
-@media only screen and (max-width: 1000px) {
-  .header{
-    padding: 0;
-    display: flex;
-    justify-content: center;
+.formules-container {
+  padding: 50px;
+  .formula {
     width: 100%;
-  }
-  .container-text {
-    display: flex;
-    justify-content: center;
-    .other-container {
-      width: 400px;
-
-
-      div {
-        .title {
-          font-size: 4em;
-        }
-        .text {
-          font-size: 0.5em;
-        }
-      }
+    flex-direction: column;
+    .formula-title {
+      font-family: $serif;
+      color: #9E0C17;
+      font-style: italic;
+    }
+    .formula-body {
+      justify-content: space-between;
+      display: flex;
     }
   }
-
 }
+
+
 
 .header {
-  background-image: url(http://api.bundles.do/uploads/test/dessert.jpg);
-  background-size: contain;
+  background-image: url("http://api.bundles.do/uploads/test/mezza.jpg");
+  background-size: cover ;
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: left;
   display: flex;
+  justify-content: flex-start;
+  padding-left: 30px;
   align-items: center;
-  justify-content: flex-end;
-  padding-right: 250px;
-  height: 719px;
-  margin-bottom: 100px;
+  min-height: 700px;
+}
+  .text-container {
+  background-color: rgba(255,255,255,0.4);
 
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  .container-title {
+    //width: 1000px;
+    // display: flex;
 
-  .container-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-
-    .other-container {
-      padding-left: 30px;
-      padding-right: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(255,255,255,0.7);
-     // height: 600px;
-      max-width: 1300px;
-      div{
-        width: 100%;
-        display: flex;
-        justify-content: flex-start;
-        .title{
-          font-size: 7em;
-          font-family: $serif;
-          font-weight: bold;
-          font-style: italic;
-
-          color: #9E0C17;
-        }
-      }
-
-
-        .text{
-
-          text-align: left;
-          height: max-content;
-          font-size: 2em;
-
-        }
-
-
+    .title{
+      font-family: $serif;
+      text-align: left;
+      font-size: 4em;
+      font-style: italic;
+      font-weight: bold;
+      color: #9E0C17;
     }
-
-
   }
-}
+  .parent-text {
+    // width: 100%;
+    display: flex;
+    //    justify-content: flex-start;
+    .text{
+      font-size: 2em;
+      text-align: left;
+    }
+  }
 
-
-.creation {
-  font-size: 2em;
-  font-weight: bold;
-  color: #da2018;
-}
-.main-container {
-
-  padding-left: 20px;
-}
-.mat-form-field {
-  font-size: 2em;
-}
-.app-auto-complete {
-  font-size: 2em;
-}
-.title {
-  width: 500px;
-}
-.description {
-  width: 700px;
-}
-.text {
-  height: 100px;
-}
-.allergens-btn {
-  margin:20px
-}
-.check-container {
-  font-size: 2em;
-  padding-left: 25px;
-  margin-bottom: 30px;
-  margin-top: 20px;
-  height: 60px;
-}
-.mat-checkbox-inner-container {
-  height: 35px ;
-  width: 35px;
-}
-.save {
-  background-color: #da2018;
-  color: white;
-  margin-bottom: 20px;
-}
-.list-container {
-  padding-left: 35px;
-}
-.type {
+  @media only screen and (max-width: 1000px) {
+    .header {
+      justify-content: center;
+      height: max-content;
+      background-image: none;
+      background-color: red;
+    }
+  }
 
 }
+
 .list-container{
   margin-top: 50px;
 
@@ -151,14 +87,16 @@ $serif: 'Merriweather', sans-serif ;
     margin-bottom: 50px;
 
     .type-title {
-      color: #da2018;
+
+      color: #9E0C17;
+      font-family: $serif;
       font-weight: bolder;
     }
     .line {
       height: 1px;
       width: 60%;
       background: #da2018;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
 
     }
   }
