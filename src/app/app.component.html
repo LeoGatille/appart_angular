@@ -23,6 +23,10 @@
                 <i class="fab fa-accessible-icon"></i>
                 <span>Accueil</span>
               </a>
+              <a routerLink="/reservations" routerLinkActive="active"
+                 mat-list-item (click)="sidenav.close()" >
+                <span><b>Réservations</b></span>
+              </a>
               <span>
                 <a routerLink="/carte" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
@@ -41,7 +45,7 @@
                   <span>Galerie</span>
                 </a>
                  <a  routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
-                     (click)="sidenav.close()" >
+                     mat-list-item (click)="sidenav.close()" >
                   <span>Connexion</span>
                 </a>
               </span>

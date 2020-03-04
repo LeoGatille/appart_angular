@@ -1,0 +1,56 @@
+.main {
+  padding: 50px;
+}
+.map {
+  width: 500px;
+  height: 500px;
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.text {
+
+  h1 {
+
+  }
+  p {
+    .logo {
+
+    }
+    .address {
+
+    }
+    .phone {
+
+    }
+    .open {
+
+    }
+    .hours {
+
+    }
+    .payement {
+
+    }
+  }
+}
+.text-2 {
+  p {
+    i {
+
+    }
+  }
+}
+.resrv {
+
+}
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 5px;
+  }
+  .map {
+    width: 100%;
+  }
+}

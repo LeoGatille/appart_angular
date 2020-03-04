@@ -30,9 +30,15 @@ import {CarteComponent} from './page/food/carte/carte.component';
 import {VinsComponent} from './page/wine/vins/vins.component';
 import {SoireeComponent} from './page/event/soiree/soiree.component';
 import {GalerieComponent} from './page/galerie/galerie.component';
+import {ReservationComponent} from './page/reservation/reservation.component';
 
 
 const routes: Routes = [
+  {
+    path: 'reservations',
+    component: ReservationComponent,
+    data: {title: 'Reservations'}
+  },
   {
     path: 'carte',
     component: CarteComponent,

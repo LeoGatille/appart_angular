@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ImageService {
-  private allImagess: any;
+  private allImages: any;
   private uri = `${Globals.APP_API_URL}/image`;
   constructor(
     private http: HttpClient
