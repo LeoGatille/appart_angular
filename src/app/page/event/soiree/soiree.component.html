@@ -1,91 +1,195 @@
-<div *ngIf="!loading" class="row">
-  <div class="header col-4">
-    <div class="counter-container">
-      <div class="counter">
-        Soirées Prévues
+<div class="header col-12" style="background-color: black; padding-top: 50px">
+  <div >
+   <h1 class="great-title"> Soirées Spéciales</h1>
+  </div>
+  <div class="counter-container">
+    <div class="counter">
+     {{newEventsList.length}} Soirées Prévues
+    </div>
+  </div>
+</div>
+<div  *ngFor="let newEvent of newEventsList" class="row" style="padding-bottom: 150px">
+<div class="col-3"></div>
+<div  class="col-lg-9 col-md-12">
+  <div class="row">
+    <div>
+      <h4 class="date">{{newEvent.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
+    </div>
+  </div>
+  <div class="row" >
+    <h3 class="title">{{newEvent.eventName}}</h3>
+  </div>
+  <div class="row">
+    <div class="prix">Prix avec boissons : <b>{{newEvent.priceWithDrinks}}€&nbsp;&nbsp;</b></div>
+    <div class="prix">Prix sans boissons : <b>{{newEvent.priceNoDrinks}}€</b></div>
+  </div>
+  <div class="row">
+    <div>
+      <p>{{newEvent.eventDescription}}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container-type col-lg-4 col-sm-12">
+      <h3 class="type-title">Entrée</h3>
+      <div class="line"></div>
+      <div *ngFor="let entree of newEvent.entrees">
+        <div>
+          <div class="main-container">
+            <div class="header row" >
+              <h2 >{{entree.foodName}}
+              </h2>
+            </div>
+            <div class="col-6"></div>
+          </div>
+          <div class="text-container">
+            <p class="description">
+              {{entree.foodDescription}}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="container-type  col-lg-4 col-sm-12">
+    <h3 class="type-title">Plats</h3>
+    <div class="line"></div>
+    <div  *ngFor="let plat of newEvent.plats">
+      <div >
+        <div class="main-container">
+          <div class="header row" >
+            <h2 >{{plat.foodName}}
+            </h2>
+          </div>
+          <div class="col-6"></div>
+        </div>
+        <div class="text-container">
+          <p class="description">
+            {{plat.foodDescription}}
+          </p>
+        </div>
       </div>
     </div>
   </div>
-
-  <div *ngFor="let newEvent of newEventsList" class="main-container col-md-7 col-sm-12">
-    <div class="col-4"></div>
-    <div class="date-container" ><h2 class="date">{{newEvent.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h2></div>
-    <div class="soiree-contianer"><h1 class="soiree col-md-8 col-sm-12">Soirée <br> Spéciale</h1> <div class="cale col-4"></div></div>
-    <div class="text-container"><p class="text">Un petit texte de présentation de la dite soirée</p></div>
-    <div class="food-container">
-
-    <div class="list-container container-fluid" >
-
-      <div class="container-type">
-        <h3 class="type-title">Entrée</h3>
-        <div class="line"></div>
-        <div *ngFor="let entree of newEvent.entrees">
-          <div>
-            <div class="main-container">
-              <div class="header row" >
-                <h2 class="title">{{entree.foodName}}
-                </h2>
-                </div>
-                <div class="col-6"></div>
-              </div>
-              <div class="text-container">
-                <p class="description">
-                  {{entree.foodDescription}}
-                </p>
-              </div>
-            </div>
+  <div class="container-type  col-lg-4 col-sm-12">
+    <h3 class="type-title">Desserts</h3>
+    <div class="line"></div>
+    <div *ngFor="let dessert of newEvent.dessert">
+      <div >
+        <div class="main-container">
+          <div class="header row" >
+            <h2 >{{dessert.foodName}}
+            </h2>
           </div>
+          <div class="col-6"></div>
+        </div>
+        <div class="text-container">
+          <p class="description">
+            {{dessert.foodDescription}}
+          </p>
         </div>
       </div>
-
-      <div class="container-type">
-        <h3 class="type-title">Plats</h3>
-        <div class="line"></div>
-        <div  *ngFor="let plat of newEvent.plats">
-          <div >
-
-            <div class="main-container">
-              <div class="header row" >
-                <h2 class="title">{{plat.foodName}}
-                </h2>
-              </div>
-              <div class="col-6"></div>
-            </div>
-            <div class="text-container">
-              <p class="description">
-                {{plat.foodDescription}}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-type">
-        <h3 class="type-title">Desserts</h3>
-        <div class="line"></div>
-        <div *ngFor="let dessert of newEvent.dessert">
-          <div >
-
-            <div class="main-container">
-              <div class="header row" >
-                <h2 class="title">{{dessert.foodName}}
-                </h2>
-              </div>
-              <div class="col-6"></div>
-            </div>
-            <div class="text-container">
-              <p class="description">
-                {{dessert.foodDescription}}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      </div>
-    </div>
-    <div class="btn-container">
-      <button mat-flat-button class="reservation">Réserver</button>
     </div>
   </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<div *ngIf="!loading" class="row">-->
+<!--  <div class="header col-4">-->
+<!--    <div class="counter-container">-->
+<!--      <div class="counter">-->
+<!--        Soirées Prévues-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div *ngFor="let newEvent of newEventsList" class="main-container col-md-7 col-sm-12">-->
+<!--    <div class="col-4"></div>-->
+<!--    <div class="date-container" ><h2 class="date">{{newEvent.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h2></div>-->
+<!--    <div class="soiree-contianer"><h1 class="soiree col-md-8 col-sm-12">Soirée <br> Spéciale</h1> <div class="cale col-4"></div></div>-->
+<!--    <div class="text-container"><p class="text">Un petit texte de présentation de la dite soirée</p></div>-->
+<!--    <div class="food-container">-->
+
+<!--    <div class="list-container container-fluid" >-->
+
+<!--      <div class="container-type">-->
+<!--        <h3 class="type-title">Entrée</h3>-->
+<!--        <div class="line"></div>-->
+<!--        <div *ngFor="let entree of newEvent.entrees">-->
+<!--          <div>-->
+<!--            <div class="main-container">-->
+<!--              <div class="header row" >-->
+<!--                <h2 class="title">{{entree.foodName}}-->
+<!--                </h2>-->
+<!--                </div>-->
+<!--                <div class="col-6"></div>-->
+<!--              </div>-->
+<!--              <div class="text-container">-->
+<!--                <p class="description">-->
+<!--                  {{entree.foodDescription}}-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="container-type">-->
+<!--        <h3 class="type-title">Plats</h3>-->
+<!--        <div class="line"></div>-->
+<!--        <div  *ngFor="let plat of newEvent.plats">-->
+<!--          <div >-->
+
+<!--            <div class="main-container">-->
+<!--              <div class="header row" >-->
+<!--                <h2 class="title">{{plat.foodName}}-->
+<!--                </h2>-->
+<!--              </div>-->
+<!--              <div class="col-6"></div>-->
+<!--            </div>-->
+<!--            <div class="text-container">-->
+<!--              <p class="description">-->
+<!--                {{plat.foodDescription}}-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div class="container-type">-->
+<!--        <h3 class="type-title">Desserts</h3>-->
+<!--        <div class="line"></div>-->
+<!--        <div *ngFor="let dessert of newEvent.dessert">-->
+<!--          <div >-->
+
+<!--            <div class="main-container">-->
+<!--              <div class="header row" >-->
+<!--                <h2 class="title">{{dessert.foodName}}-->
+<!--                </h2>-->
+<!--              </div>-->
+<!--              <div class="col-6"></div>-->
+<!--            </div>-->
+<!--            <div class="text-container">-->
+<!--              <p class="description">-->
+<!--                {{dessert.foodDescription}}-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="btn-container">-->
+<!--      <button mat-flat-button class="reservation">Réserver</button>-->
+<!--    </div>-->
+<!--  </div>-->
 

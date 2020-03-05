@@ -47,13 +47,12 @@ export class SoireeComponent implements OnInit {
           entrees.push(food);
           break;
         case 2 :
-          entrees.push(food);
+          plats.push(food);
           break;
         case 3 :
-          entrees.push(food);
+          dessert.push(food);
           break;
-        default :
-          const merde = food;
+
       }
 
     });
