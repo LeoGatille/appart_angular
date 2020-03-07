@@ -21,6 +21,7 @@ export class DialogComponent implements OnInit {
   value: any;
   numberValue: any = null;
   nameValue: string = null;
+  descriptionValue: string = null;
   modal: boolean;
   food: Food = null;
   wine: Wine = null;
@@ -47,7 +48,10 @@ export class DialogComponent implements OnInit {
     this.wine = data.wine;
     this.selector = data.selector;
     this.suppr = data.suppr;
-    this.event = data.event
+    this.event = data.event;
+    this.numberValue = data.numberValue;
+    this.nameValue = data.nameValue;
+    this.descriptionValue = data.descriptionValue;
   }
 
   ngOnInit() {

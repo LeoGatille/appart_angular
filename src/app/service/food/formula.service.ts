@@ -19,6 +19,11 @@ export class FormulaService {
   public createFormula(formulaName: string, formulaPrice: number, description: string) {
     return this.http.post(`${this.uri}/create`, {formulaName, formulaPrice, description});
   }
+
+  public editFormula(id:number, formulaName: string, formulaPrice: number, description: string) {
+    return this.http.put(`${this.uri}/${id}/edit`, {formulaName, formulaPrice, description});
+  }
+
   public deleteFormula(id: number) {
     console.log('serviceDelete', id);
     return this.http.delete(`${this.uri}/${id}/delete`);
