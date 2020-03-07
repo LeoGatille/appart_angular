@@ -60,7 +60,7 @@ export class DesignationListPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
-      value: designation.designationName,
+      nameValue: designation.designationName,
       nameField: true,
       title: 'Modification' ,
     };

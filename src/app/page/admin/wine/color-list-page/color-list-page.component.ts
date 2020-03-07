@@ -54,7 +54,7 @@ export class ColorListPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
-      value: color.colorName,
+      nameValue: color.colorName,
       nameField: true,
       title: 'Modification' ,
     };

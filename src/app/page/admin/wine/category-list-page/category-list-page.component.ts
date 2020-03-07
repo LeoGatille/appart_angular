@@ -59,7 +59,7 @@ export class CategoryListPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
-      value: category.categoryName,
+      nameValue: category.categoryName,
       nameField: true,
       title: 'Modification' ,
     };

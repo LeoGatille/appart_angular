@@ -52,7 +52,7 @@ export class LabelListPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
-      value: label.labelName,
+      nameValue: label.labelName,
       nameField: true,
       title: 'Modification' ,
     };

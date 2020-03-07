@@ -55,7 +55,7 @@ export class VintageListPageComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
-      value: vintage.vintageYear,
+      numberValue: vintage.vintageYear,
       numberField: true,
       title: 'Modification' ,
     };

@@ -81,11 +81,13 @@ export class AutoCompleteComponent implements OnInit {
   // }
 
   launchModalCreation() {
+    console.log('the typeof = ', typeof this.myControl.value);
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
     dialogConfig.data = {
       modal: true,
-      value: this.myControl.value,
+      nameValue: typeof this.myControl.value === 'string' ? this.myControl.value : null,
+      numberValue: typeof this.myControl.value === 'number' ? this.myControl.value : null,
       numberField: this.numberField,
       nameField: this.nameField,
       descriptionField: this.descriptionField,
