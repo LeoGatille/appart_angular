@@ -71,10 +71,32 @@ export class VintageListPageComponent implements OnInit {
         this.getVintages(true);
       });
   }
-  delete(id: number) {
-    this.vintageService.deleteVintage(id)
-      .subscribe(() => {
-        this.getVintages(true);
-      });
+  // delete(id: number) {
+  //   this.vintageService.deleteVintage(id)
+  //     .subscribe(() => {
+  //       this.getVintages(true);
+  //     });
+  // }
+
+  delete(vintage: Vintage) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: vintage.vintageYear,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.vintageService.deleteVintage(vintage.id)
+            .subscribe(() => {
+              this.getVintages(true);
+            });
+        }
+      }
+    );
   }
 }

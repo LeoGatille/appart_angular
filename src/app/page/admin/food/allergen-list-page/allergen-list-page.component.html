@@ -7,7 +7,7 @@
 <div *ngFor="let allergen of allAllergens">
   <div>{{allergen.allergenName}}
     <button mat-flat-button
-            (click)="deleteAllergen(allergen.id)"
+            (click)="delete(allergen)"
     >suppr</button>
   </div>
 </div>

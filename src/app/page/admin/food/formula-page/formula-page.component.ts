@@ -35,9 +35,31 @@ export class FormulaPageComponent implements OnInit {
       });
     // console.log($event.numberControl);
   }
-  deleteFormula(id) {
-    this.formulaService.deleteFormula(id)
-      .subscribe(() => { this.ngOnInit(); });
+  // deleteFormula(id) {
+  //   this.formulaService.deleteFormula(id)
+  //     .subscribe(() => { this.ngOnInit(); });
+  // }
+
+  delete(formula: Formula) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: formula.formulaName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.formulaService.deleteFormula(formula.id)
+            .subscribe(() => {
+              this.ngOnInit();
+            });
+        }
+      }
+    );
   }
 
   addFormula($event) {

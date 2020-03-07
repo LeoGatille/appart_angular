@@ -68,10 +68,32 @@ export class LabelListPageComponent implements OnInit {
         this.getLabels(true);
       });
   }
-  delete(id: number) {
-    this.labelService.deleteLabel(id)
-      .subscribe(() => {
-        this.getLabels(true);
-      });
+  // delete(id: number) {
+  //   this.labelService.deleteLabel(id)
+  //     .subscribe(() => {
+  //       this.getLabels(true);
+  //     });
+  // }
+
+  delete(label: Label) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: label.labelName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.labelService.deleteLabel(label.id)
+            .subscribe(() => {
+              this.getLabels(true);
+            });
+        }
+      }
+    );
   }
 }

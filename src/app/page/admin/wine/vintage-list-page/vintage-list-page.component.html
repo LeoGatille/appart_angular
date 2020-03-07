@@ -6,5 +6,5 @@
 <div *ngFor="let vintage of listToAdd">
   <p>{{vintage.vintageYear}}</p>
   <button (click)="editInit(vintage.id)">modifier</button>
-  <button (click)="delete(vintage.id)">suppr</button>
+  <button (click)="delete(vintage)">suppr</button>
 </div>

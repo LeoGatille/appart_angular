@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Allergen} from '../../../../class/food/allergen';
 import {AllergenService} from '../../../../service/food/allergen.service';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-allergen-list-page',
@@ -13,7 +15,9 @@ export class AllergenListPageComponent implements OnInit {
   allergenPromise: any;
   loading = true;
   constructor(
-    private allergenService: AllergenService
+    private allergenService: AllergenService,
+    private dialog: MatDialog,
+
   ) { }
 
   ngOnInit() {
@@ -49,6 +53,32 @@ export class AllergenListPageComponent implements OnInit {
           console.log('toto');
         });
       });
+  }
+
+  delete(allergen: Allergen) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: allergen.allergenName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.allergenService.deleteAllergen(allergen.id)
+            .subscribe(() => {
+              this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
+              this.allergenPromise().then((data: any[]) => {
+                this.allAllergens = data;
+                console.log('toto');
+              });
+            });
+        }
+      }
+    );
   }
 
 }

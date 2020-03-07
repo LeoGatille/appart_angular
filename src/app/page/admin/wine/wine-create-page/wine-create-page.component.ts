@@ -142,7 +142,7 @@ export class WineCreatePageComponent implements OnInit {
         if (data) {
           this.wineService.deleteWine($event.id)
             .subscribe(() => {
-              this.getSelector(this.option,true);
+              this.getSelector(this.option, true);
             });
         }
       }

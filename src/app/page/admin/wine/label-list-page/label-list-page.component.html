@@ -7,5 +7,5 @@
 <div *ngFor="let label of listToAdd">
   <p>{{label.labelName}}</p>
   <button (click)="editInit(label.id)">modifier</button>
-  <button (click)="delete(label.id)">suppr</button>
+  <button (click)="delete(label)">suppr</button>
 </div>

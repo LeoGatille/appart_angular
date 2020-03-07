@@ -76,10 +76,32 @@ export class DesignationListPageComponent implements OnInit {
         this.getDesignations(true);
       });
   }
-  delete(id: number) {
-    this.designationService.deleteDesignation(id)
-      .subscribe(() => {
-        this.getDesignations(true);
-      });
+  // delete(id: number) {
+  //   this.designationService.deleteDesignation(id)
+  //     .subscribe(() => {
+  //       this.getDesignations(true);
+  //     });
+  // }
+
+  delete(designation: Designation) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: designation.designationName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.designationService.deleteDesignation(designation.id)
+            .subscribe(() => {
+              this.getDesignations(true);
+            });
+        }
+      }
+    );
   }
 }

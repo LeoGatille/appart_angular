@@ -70,11 +70,32 @@ export class ColorListPageComponent implements OnInit {
         this.getColors(true);
       });
   }
-  delete(id) {
-    this.colorService.deleteColor(id)
-      .subscribe(() => {
-        this.getColors(true);
-      });
+  // delete(id) {
+  //   this.colorService.deleteColor(id)
+  //     .subscribe(() => {
+  //       this.getColors(true);
+  //     });
+  // }
+  delete(color: Color) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: color.colorName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.colorService.deleteColor(color.id)
+            .subscribe(() => {
+              this.getColors(true);
+            });
+        }
+      }
+    );
   }
 
 }

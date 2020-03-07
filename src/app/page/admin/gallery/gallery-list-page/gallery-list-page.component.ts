@@ -83,12 +83,7 @@ export class GalleryListPageComponent implements OnInit {
     tab.forEach((image: any) => {
       this.imageService.deleteImage(image.id)
         .subscribe(res => {
-          if  (res) {
-            this.getAllImages();
-            // mst toast this.
-          } else {
-            // must toast that
-          }
+          this.getAllImages();
         });
     });
   }

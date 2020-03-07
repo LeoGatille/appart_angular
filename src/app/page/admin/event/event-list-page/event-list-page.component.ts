@@ -121,11 +121,34 @@ export class EventListPageComponent implements OnInit {
   //   }
   //   this.action = 'list';
   // }
-  delete(id) {
-    this.eventService.deleteEvent(id)
-      .subscribe(() => {
-        this.ngOnInit();
-      });
-  }
 
+
+  // delete(id) {
+  //   this.eventService.deleteEvent(id)
+  //     .subscribe(() => {
+  //       this.ngOnInit();
+  //     });
+  // }
+
+  delete(event: Event) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: event.eventName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.eventService.deleteEvent(event.id)
+            .subscribe(() => {
+              this.ngOnInit();
+            });
+        }
+      }
+    );
+  }
 }

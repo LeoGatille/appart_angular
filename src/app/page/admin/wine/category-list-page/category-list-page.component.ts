@@ -75,10 +75,32 @@ export class CategoryListPageComponent implements OnInit {
         this.getCategories(true);
       });
   }
-  delete(id: number) {
-    this.categoryService.deleteCategory(id)
-      .subscribe(() => {
-        this.getCategories(true);
-      });
+  // delete(id: number) {
+  //   this.categoryService.deleteCategory(id)
+  //     .subscribe(() => {
+  //       this.getCategories(true);
+  //     });
+  // }
+
+  delete(category: Category) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: category.categoryName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.categoryService.deleteCategory(category.id)
+            .subscribe(() => {
+              this.getCategories(true);
+            });
+        }
+      }
+    );
   }
 }

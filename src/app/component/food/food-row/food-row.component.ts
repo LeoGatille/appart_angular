@@ -83,12 +83,30 @@ export class FoodRowComponent implements OnInit {
     }
     return checked;
   }
-  deleteFood() {
-    this.foodService.deleteFood(this.food.id)
-      .subscribe(() => {
-        this.editData.emit();
-      });
+
+
+  delete(food: Food) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: food.foodName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.foodService.deleteFood(this.food.id)
+            .subscribe(() => {
+              this.editData.emit();
+            });
+        }
+      }
+    );
   }
+
   editFood(food: Food) {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
