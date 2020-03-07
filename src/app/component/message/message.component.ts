@@ -42,13 +42,15 @@ export class MessageComponent implements OnInit {
     return this.auth.isConnected();
   }
   editMessage($event) {
+
     const val = this.formGroup.value;
     let checked: number;
-    if (val.ckeck === 'true') {
+    if (val.check === true) {
       checked = 1;
     } else {
       checked = 2;
     }
+    console.log('checked = ', checked);
     this.messageService.editMessage(this.message.id, $event.descriptionControl, checked)
       .subscribe((message: Message) => {
         this.message = message;
