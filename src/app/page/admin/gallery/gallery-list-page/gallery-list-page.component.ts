@@ -55,7 +55,8 @@ export class GalleryListPageComponent implements OnInit {
     for (let i = 0; i < supprElements.length; i++) {
       const myIndex: any  = supprElements[i].getAttribute('index');
       supprImages.push(this.allImage[myIndex]);
-      supprNames.push(this.allImage[myIndex].alt);
+      console.log('allimage index = ', this.allImage[myIndex]);
+      supprNames.push(this.allImage[myIndex].alternative);
     }
     this.OpenSuppresionModal(supprNames, supprImages);
   }
@@ -71,6 +72,7 @@ export class GalleryListPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       data =>  {
         if (data) {
+          console.log('tabSuppr = ', tabNames);
           this.launchSuppression(tabSuppr);
         }
       }
@@ -82,7 +84,7 @@ export class GalleryListPageComponent implements OnInit {
       this.imageService.deleteImage(image.id)
         .subscribe(res => {
           if  (res) {
-            this.getAllImages()
+            this.getAllImages();
             // mst toast this.
           } else {
             // must toast that

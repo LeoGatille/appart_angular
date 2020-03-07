@@ -59,7 +59,7 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('suppr =', this.suppr);
+    console.log('many =', this.manySuppr);
   }
   defineValue(data) {
 
