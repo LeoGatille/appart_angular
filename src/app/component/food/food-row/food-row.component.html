@@ -2,11 +2,6 @@
 <div *ngIf="!loading" class="main-container">
   <div class="header row" >
     <h2 class="title">{{food.foodName}}
-      <button *ngIf="tooltip"
-               mat-mini-fab class="mini-btn"
-              [matTooltipPosition]="'above'"
-               matTooltip="{{tooltip}}"
-      >?</button>
     </h2>
     <div *ngIf="isConnected()" class="container-btn">
       <button mat-mini-fab class="edit-btn"
@@ -34,6 +29,9 @@
     <p class="description">
       {{food.foodDescription}}
     </p>
+    <div class="allergens-display" style="display: flex">
+      <p *ngIf="tooltip">allergens : <i>{{tooltip}}</i></p>
+    </div>
   </div>
 </div>
 

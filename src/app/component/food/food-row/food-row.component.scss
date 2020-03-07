@@ -80,3 +80,18 @@ $serif: 'Merriweather', sans-serif ;
 .description {
 
 }
+.allergens-display {
+
+  p {
+    color: #313131;
+    font-size: 0.7em;
+    i {
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .main-container {
+    padding-left: 0;
+  }
+}

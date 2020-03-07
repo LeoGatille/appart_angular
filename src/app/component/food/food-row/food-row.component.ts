@@ -49,7 +49,10 @@ export class FoodRowComponent implements OnInit {
   }
   getAllergensNames() {
     this.food.allergen.forEach(allergen => {
-      this.allAllergens.push(allergen.allergenName)
+      if (this.allAllergens.indexOf(allergen.allergenName)) {
+        this.allAllergens.push(allergen.allergenName);
+      }
+
     });
     this.prepareTooltip();
   }

@@ -10,14 +10,28 @@
                   [oldPriceWithDrinks]="oldPriceWithDrinks"
 
 ></app-event-create>
-<div *ngFor="let event of allEvents ">
-  <div>{{event.eventName}} ||| {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</div>
-  <div *ngFor="let food of event.foods">
+<div *ngFor="let event of allEvents " style="margin-bottom: 50px">
+  <div style="display: flex; padding-left: 20px">
+    <button mat-mini-fab class="edit-btn" (click)="edit(event)">
+      <i class="material-icons">create</i>
+    </button>
+
+    <button mat-mini-fab class="delete-btn" (click)="delete(event.id)">
+      <i class="material-icons">delete</i>
+    </button>
+  </div>
+
+  <div> <b>{{event.eventName}}</b> &nbsp; <i> {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</i></div>
+  <div class="row">
+    <div class="prix">Prix avec boissons : <b>{{event.priceWithDrinks}}€ &nbsp;</b></div>
+    <div class="prix">Prix sans boissons : <b>{{event.priceNoDrinks}}€</b></div>
+  </div>
+  <div *ngFor="let food of event.food">
     <div>{{food.foodName}}</div>
   </div>
-  <button (click)="edit(event)" >modifer</button>
-  <button (click)="delete(event.id)" >suppr</button>
 </div>
+
+
 
 <!--<div *ngFor="let event of allEvents" class="row-cols-6">-->
 <!--  <h3 class="date">{{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h3>-->
