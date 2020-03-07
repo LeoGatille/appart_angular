@@ -1,0 +1,23 @@
+$serif: 'Merriweather', sans-serif ;
+
+.router {
+  cursor: pointer;
+
+  &:hover {
+    font-weight: bolder;
+  }
+}
+h3 {
+  font-size: 2em;
+  font-family: $serif;
+  font-weight: bold;
+  color: #9E0C17;
+}
+
+li {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+.container-list {
+ margin-bottom: 20px;
+}

@@ -1,6 +1,7 @@
 <div>
   <h3>{{title}}</h3>
-  <app-create-form *ngIf="!food && !wine && !suppr && !event" [nameField]="nameField"
+
+  <app-create-form *ngIf="!food && !wine && !suppr && !event && !message" [nameField]="nameField"
                    [nameValue]="nameValue"
                    [numberField]="numberField"
                    [numberValue]="numberValue"
@@ -9,15 +10,31 @@
                    [dialog]="dialog"
                    (serviceCall)="close($event)">
   </app-create-form>
+
   <app-food-edit-page *ngIf="food" [food]="food" (close)="close()"></app-food-edit-page>
+
   <app-wine-edit *ngIf="wine" [wine]="wine" [selector]="selector" (close)="close()"></app-wine-edit>
+
   <app-event-edit-page *ngIf="event" [event]="event" (close)="close()"></app-event-edit-page>
+
   <div *ngIf="suppr">
     <p>Êtes vous sur de vouloir supprimer <br> <b>*{{suppr}}*</b> ?</p>
     <div style="display: flex; justify-content: space-around">
       <button mat-flat-button style="background: #2ce071; color: white" (click)="validate()">Confirmer</button>
       <button mat-flat-button style="background: #e02f4a; color: white" (click)="close()">Annuler</button>
     </div>
+  </div>
+
+  <div *ngIf="manySuppr">
+    <p>Êtes vous sur de vouloir supprimer <br> <b>*{{suppr}}*</b> ?</p>
+    <div style="display: flex; justify-content: space-around">
+      <button mat-flat-button style="background: #2ce071; color: white" (click)="validate()">Confirmer</button>
+      <button mat-flat-button style="background: #e02f4a; color: white" (click)="close()">Annuler</button>
+    </div>
+  </div>
+
+  <div *ngIf="message">
+    <app-message></app-message>
 
   </div>
 

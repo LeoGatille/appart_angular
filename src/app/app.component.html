@@ -52,9 +52,10 @@
 
 
               <span *ngIf="isConnected()">
-                <a mat-list-item (click)="sidenav.close(); logout()" >
-                   <mat-icon>lock</mat-icon>
-                    <span><b>Se Déconnecter</b></span>
+
+                <a routerLink="/admin/" routerLinkActive="active"
+                   mat-list-item (click)="sidenav.close()" >
+                  <span><b> Administration </b></span>
                 </a>
 
                 <a routerLink="/admin/food" routerLinkActive="active"
@@ -74,7 +75,10 @@
                   <span>Galerie <i>ADMIN</i></span>
                 </a>
 
-
+                <a mat-list-item (click)="sidenav.close(); logout()" >
+                   <mat-icon>lock</mat-icon>
+                    <span><b>Se Déconnecter</b></span>
+                </a>
               </span>
 
 

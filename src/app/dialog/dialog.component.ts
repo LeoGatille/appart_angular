@@ -29,6 +29,8 @@ export class DialogComponent implements OnInit {
   suppr = '';
   confirmation = false;
   event: Event;
+  message = false;
+  manySuppr: any[] = [];
 
   @Output() sendData = new EventEmitter<any>();
 
@@ -52,6 +54,8 @@ export class DialogComponent implements OnInit {
     this.numberValue = data.numberValue;
     this.nameValue = data.nameValue;
     this.descriptionValue = data.descriptionValue;
+    this.message = data.message;
+    this.manySuppr = data.manySuppr;
   }
 
   ngOnInit() {

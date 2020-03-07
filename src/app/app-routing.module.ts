@@ -31,9 +31,15 @@ import {VinsComponent} from './page/wine/vins/vins.component';
 import {SoireeComponent} from './page/event/soiree/soiree.component';
 import {GalerieComponent} from './page/galerie/galerie.component';
 import {ReservationComponent} from './page/reservation/reservation.component';
+import {MainComponent} from './page/admin/main/main.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin',
+    component: MainComponent,
+    data: {title: 'Administration'}
+  },
   {
     path: 'reservations',
     component: ReservationComponent,

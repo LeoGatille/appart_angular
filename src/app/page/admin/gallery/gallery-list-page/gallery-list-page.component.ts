@@ -3,6 +3,8 @@ import {ImageService} from '../../../../service/gallery/image.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Globals} from '../../../../globals';
 import {HttpClient} from '@angular/common/http';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-gallery-list-page',
@@ -12,23 +14,85 @@ import {HttpClient} from '@angular/common/http';
 export class GalleryListPageComponent implements OnInit {
 
   imageForm: FormGroup;
+  allImage: any[] = [];
+  objectTab: any[] = [];
   fileToUpload: File = null;
+  loading = true;
   constructor(
     private imageService: ImageService,
     private fb: FormBuilder,
     private httpClient: HttpClient,
+    private dialog: MatDialog,
+
   ) { }
 
   ngOnInit() {
+    this.getAllImages();
     this.imageForm = this.fb.group({
       fileControl: [null],
       altControl: ['']
     });
   }
+  getAllImages() {
+    this.imageService.getAllImages()
+      .subscribe((res: any) => {
+        console.log('res = ', res);
+        this.allImage = res;
+        this.getAllPath(res);
+      });
+  }
+  getAllPath(tab) {
+    tab.forEach(image => {
+      this.objectTab.push({path: image.imgPath, alt: image.alternative});
+    });
+    this.loading = false;
+  }
+
+  deleteImages() {
+    const supprElements = document.getElementsByClassName('suppr');
+    const supprImages: any[] = [];
+    const supprNames: string[] = [];
+    for (let i = 0; i < supprElements.length; i++) {
+      const myIndex: any  = supprElements[i].getAttribute('index');
+      supprImages.push(this.allImage[myIndex]);
+      supprNames.push(this.allImage[myIndex].alt);
+    }
+    this.OpenSuppresionModal(supprNames, supprImages);
+  }
+  OpenSuppresionModal(tabNames, tabSuppr) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      title: 'Suppression',
+      manySuppr: tabNames,
+    };
+
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        if (data) {
+          this.launchSuppression(tabSuppr);
+        }
+      }
+    );
+  }
+
+  launchSuppression(tab: any[]) {
+    tab.forEach((image: any) => {
+      this.imageService.deleteImage(image.id)
+        .subscribe(res => {
+          if  (res) {
+            this.getAllImages()
+            // mst toast this.
+          } else {
+            // must toast that
+          }
+        });
+    });
+  }
 
   onFileSelect(event) {
     const file = (event.target as HTMLInputElement).files[0];
-    console.log('file = ', file);
     this.imageForm.patchValue({
       fileControl: file
     });
@@ -41,8 +105,6 @@ export class GalleryListPageComponent implements OnInit {
   }
 
   save() {
-
-
     if (this.fileToUpload) {
       console.log('fileToUpload = ', this.fileToUpload.type);
       const val = this.imageForm.value;
@@ -50,8 +112,11 @@ export class GalleryListPageComponent implements OnInit {
       input.append('image', this.fileToUpload);
       input.append('alternative', val.altControl);
       this.imageService.createImage(input)
-        .subscribe(() => {
-
+        .subscribe((res) => {
+            if(res){
+              //toast
+              this.getAllImages();
+          }
         });
     }
 
@@ -78,4 +143,5 @@ export class GalleryListPageComponent implements OnInit {
     input.append('avatar', this.imageForm.get('file').value);
     return input;
   }
+
 }

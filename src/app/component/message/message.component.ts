@@ -11,7 +11,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./message.component.scss']
 })
 export class MessageComponent implements OnInit {
-
   user: User;
   message: Message;
   formGroup: FormGroup;
