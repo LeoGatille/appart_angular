@@ -115,6 +115,12 @@ $serif: 'Merriweather', sans-serif ;
     .vins {
       height: 338px;
     }
+    h2 {
+      width: 100%;
+      text-align: center;
+      background-color: rgba(158, 12, 23, 0.4) !important;
+      color: white !important;
+    }
   }
 }
 
@@ -272,11 +278,49 @@ $serif: 'Merriweather', sans-serif ;
     }
   }
   @media only screen and (max-width: 1000px) {
-    .carte {
-      height: 338px;
+    @media only screen and (max-width: 1000px) {
+      .gallery {
+        height: 338px;
+      }
+      h2 {
+        width: 100%;
+        text-align: center;
+        background-color: rgba(158, 12, 23, 0.4) !important;
+        color: white !important;
+      }
     }
 
   }
 }
 
+.mobile-only {
+  display: none;
+}
 
+@media screen and (max-width: 640px) {
+  .carte-wine {
+    a {
+      .mobile-only {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 6em;
+        font-style: italic;
+        font-family: $serif;
+        color: #9E0C17;
+        transition: color 0.5s, background-color 0.5s;
+        text-decoration: none;
+
+        h2 {
+          font-size: inherit;
+          font-style: inherit;
+          font-family: inherit;
+          color: inherit;
+          text-decoration: inherit;
+        }
+      }
+    }
+  }
+}

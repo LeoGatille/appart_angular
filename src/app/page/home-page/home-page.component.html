@@ -11,13 +11,8 @@
 <!--        News letter-->
 <!--      </button>-->
 <!--    </div>-->
-    <div class="container-btn row" style="justify-content: space-around">
-      <div class="col-md-5 col-sm-12" >
-        <button mat-flat-button class="btn-letter" >News letter</button>
-      </div>
-      <div class="col-md-5 col-sm-12">
+    <div class="container-btn row" style="justify-content: center">
         <button mat-flat-button class="btn-reservation" routerLink="/reservations" >Réservations</button>
-      </div>
     </div>
   </div>
 </div>
@@ -26,7 +21,11 @@
   <div class="carte col-md-6 col-sm-12">
     <a href="/carte">
       <div class="overlay"><h2>La carte</h2></div>
+      <div class="mobile-only">
+        <h2>La carte</h2>
+      </div>
     </a>
+
 
   </div>
   <div class="vins col-md-6 col-sm-12">
@@ -36,17 +35,20 @@
   </div>
 </div>
 <a href="/soirees">
+
 <div class="row event" >
-    <div class="event-container first col-12">
+    <div style="z-index: 50" class="event-container first col-12">
       <div class="col-2 "></div>
       <div class="soiree col-6"><h2>Soirées</h2></div>
       <div class="col-4"></div>
-    </div> <div class="event-container second col-12">
+    </div>
+    <div style="z-index: 50" class="event-container second col-12">
       <div class="col-4"></div>
       <div class="col-6"><h2>Spéciales</h2></div>
       <div class="col-2"></div>
     </div>
 </div>
+
 </a>
 
 <div class="row chef">
@@ -66,9 +68,10 @@
     </p>
   </div>
 </div>
-<a href="/galerie">
-<div class="gallery row">
 
+<div class="gallery row">
+  <a href="/galerie">
     <div class="overlay"><h2>Galerie</h2></div>
+  </a>
 </div>
-</a>
+<div class="carte col-md-6 col-sm-12">
