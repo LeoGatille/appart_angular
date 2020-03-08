@@ -5,6 +5,7 @@ import {Food} from '../../../../class/food/food';
 import {EventCreateComponent} from '../event-create/event-create.component';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-list-page',
@@ -27,6 +28,7 @@ export class EventListPageComponent implements OnInit {
   constructor(
     private eventService: EventService,
     public dialog: MatDialog,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -74,7 +76,8 @@ export class EventListPageComponent implements OnInit {
         eventData.priceNoDrinks,
         eventData.priceWithDrinks,
         foodsData
-      ).subscribe(() => {
+      ).subscribe((event: Event) => {
+        this.toast.success('Ajout de ' + event.eventName );
         this.ngOnInit();
       });
     } else {
@@ -101,7 +104,7 @@ export class EventListPageComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data =>  {
+      (data) =>  {
         this.ngOnInit();
       }
     );
@@ -145,6 +148,7 @@ export class EventListPageComponent implements OnInit {
         if (data) {
           this.eventService.deleteEvent(event.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
               this.ngOnInit();
             });
         }

@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Food} from '../../../../class/food/food';
 import {TypeService} from '../../../../service/food/type.service';
 import {Type} from '../../../../class/food/type';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-edit-page',
@@ -27,6 +28,7 @@ export class EventEditPageComponent implements OnInit {
     private typeService: TypeService,
     private eventService: EventService,
     private fb: FormBuilder,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -91,7 +93,8 @@ export class EventEditPageComponent implements OnInit {
       val.priceNoDrinks,
       val.priceWithDrinks,
       this.foodsId
-    ).subscribe(() => {
+    ).subscribe((event: Event) => {
+      this.toast.success('Modification de ' + event.eventName);
       this.close.emit();
     });
   }
