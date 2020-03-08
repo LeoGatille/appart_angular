@@ -1,11 +1,13 @@
-<app-create-form [listToAdd]="listToAdd"
+<div style="min-height:calc(100vh - 158px) ">
+  <app-create-form [listToAdd]="listToAdd"
                  [class]="class"
                  (serviceCall)="createDesignation($event)"
                  [nameField]="true"
                  [placeholderName]="placeholderName"
-></app-create-form>
-<div *ngFor="let designation of listToAdd">
-  <p>{{designation.designationName}}</p>
-  <button (click)="editInit(designation.id)">modifier</button>
-  <button (click)="delete(designation)">suppr</button>
+  ></app-create-form>
+  <div *ngFor="let designation of listToAdd">
+    <p>{{designation.designationName}}</p>
+    <button (click)="editInit(designation.id)">modifier</button>
+    <button (click)="delete(designation)">suppr</button>
+  </div>
 </div>

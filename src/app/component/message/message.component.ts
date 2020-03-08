@@ -4,6 +4,7 @@ import {User} from '../../class/user';
 import {MessageService} from '../../service/message.service';
 import {Message} from '../../class/message';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-message',
@@ -19,6 +20,7 @@ export class MessageComponent implements OnInit {
     private auth: AuthService,
     private messageService: MessageService,
     private fb: FormBuilder,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class MessageComponent implements OnInit {
     console.log('checked = ', checked);
     this.messageService.editMessage(this.message.id, $event.descriptionControl, checked)
       .subscribe((message: Message) => {
+        this.toast.success('Message modifié');
         this.message = message;
       });
   }
@@ -68,6 +71,7 @@ export class MessageComponent implements OnInit {
     console.log('val', checked);
     this.messageService.patchMessage(this.message.id, checked)
       .subscribe((message: Message) => {
+        this.toast.success('Message mis a jour');
         this.message = message;
       });
   }

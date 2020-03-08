@@ -1,11 +1,13 @@
-<app-create-form [listToAdd]="listToAdd"
-                 [class]="class"
-                 (serviceCall)="createLabel($event)"
-                 [nameField]="true"
-                 [placeholderName]="placeholderName"
-></app-create-form>
-<div *ngFor="let label of listToAdd">
-  <p>{{label.labelName}}</p>
-  <button (click)="editInit(label.id)">modifier</button>
-  <button (click)="delete(label)">suppr</button>
+<div style="min-height:calc(100vh - 158px) ">
+    <app-create-form [listToAdd]="listToAdd"
+                   [class]="class"
+                   (serviceCall)="createLabel($event)"
+                   [nameField]="true"
+                   [placeholderName]="placeholderName"
+  ></app-create-form>
+  <div *ngFor="let label of listToAdd">
+    <p>{{label.labelName}}</p>
+    <button (click)="editInit(label.id)">modifier</button>
+    <button (click)="delete(label)">suppr</button>
+  </div>
 </div>
