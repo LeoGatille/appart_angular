@@ -1,3 +1,4 @@
+<div style="min-height:calc(100vh - 158px) ">
 <app-create-form [listToAdd]="allFormulas"
                  [nameField]="true"
                  [descriptionField]="true"
@@ -8,9 +9,9 @@
 <div *ngIf="!loading">
 
 </div>
-<div *ngFor="let formula of allFormulas">
+<div *ngFor="let formula of formatedFormulas">
   <div>
-    {{formula.formulaName}} | {{formula.formulaPrice}}
+    {{formula.formulaName}} | {{formula.realPrice}}
     <button mat-flat-button
             (click)="delete(formula)"
     >suppr</button>
@@ -19,4 +20,5 @@
   <div>
     {{formula.description}}
   </div>
+</div>
 </div>

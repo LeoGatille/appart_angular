@@ -97,7 +97,7 @@ export class WineEditComponent implements OnInit {
       vintageControl : this.vintageControl,
       statusControl : ['', Validators.required],
       nameControl : [this.wine.wineName, Validators.required],
-      priceControl : [this.wine.winePrice, Validators.required]
+      priceControl : [this.wine.winePrice / 100, Validators.required]
     });
   }
 
@@ -225,7 +225,7 @@ export class WineEditComponent implements OnInit {
       this.wine.color.id,
       this.wine.label.id,
       this.wine.wineName,
-      this.wine.winePrice,
+      this.wine.winePrice * 100,
       this.wine.vintage.id,
       this.wine.status.id,
       this.wine.id,

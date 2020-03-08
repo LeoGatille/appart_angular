@@ -14,8 +14,8 @@
 </div>
 
 <div class="formules-container col-md-5 col-sm-12">
-  <div class="row formula" *ngFor="let formula of allFormulas">
-    <h3 class="formula-title">{{formula.formulaName}} {{formula.formulaPrice}}€ </h3>
+  <div class="row formula" *ngFor="let formula of formatedFormulas">
+    <h3 class="formula-title">{{formula.formulaName}} {{formula.realPrice}} </h3>
     <div class="formula-body col-md-5  col-sm-12">
       <p>{{formula.description}}</p>
       <p></p>

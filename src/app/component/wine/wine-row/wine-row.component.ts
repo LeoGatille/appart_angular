@@ -44,6 +44,11 @@ export class WineRowComponent implements OnInit {
       });
 
   }
+
+  getRealPrice() {
+    this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice / 100));
+  }
+
   isConnected(): boolean {
     this.user = this.auth.currentUser;
     return this.auth.isConnected();
@@ -77,6 +82,7 @@ export class WineRowComponent implements OnInit {
 
 
   ngOnInit() {
+    this.getRealPrice();
     if (this.wine.status.id !== 1) {
       this.showCurrentStatus = true;
     }
@@ -92,10 +98,8 @@ export class WineRowComponent implements OnInit {
       selector
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  this.editData.emit()
-    );
+    dialogRef.afterClosed().subscribe(data =>  {
+      this.editData.emit();
+    });
   }
 }

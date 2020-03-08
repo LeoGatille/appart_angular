@@ -16,6 +16,8 @@ export class CarteComponent implements OnInit {
   loading = true;
   allTypes: Type[] = null;
   allFormulas: Formula[] = null;
+  formatedFormulas: any[] = [];
+
   constructor(
     private typeService: TypeService,
     private formulaService: FormulaService,
@@ -33,9 +35,20 @@ export class CarteComponent implements OnInit {
   }
   getFormulas() {
     this.formulaService.getAllFormulas()
-      .subscribe((fomrulas: Formula[]) => {
-        this.allFormulas = fomrulas;
+      .subscribe((formulas: Formula[]) => {
+        this.allFormulas = formulas;
+        this.realPrice(this.allFormulas);
         this.loading = false;
       });
+  }
+
+  realPrice(tab: Formula[]) {
+    this.formatedFormulas = [];
+    this.allFormulas.forEach((formula: Formula) => {
+      let newFormula: any;
+      newFormula = formula;
+      newFormula.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(formula.formulaPrice / 100));
+      this.formatedFormulas.push(newFormula);
+    });
   }
 }

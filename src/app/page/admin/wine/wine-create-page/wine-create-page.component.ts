@@ -280,7 +280,7 @@ export class WineCreatePageComponent implements OnInit {
       vin.color.id,
       vin.label.id,
       vin.wineName,
-      vin.winePrice,
+      vin.winePrice * 100,
       vin.vintage.id,
       vin.status.id
     )

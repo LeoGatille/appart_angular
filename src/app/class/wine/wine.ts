@@ -15,4 +15,5 @@ export class Wine {
   label: Label| null;
   vintage: Vintage| null;
   status: Status| null;
+  realPrice: string | null;
 }

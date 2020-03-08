@@ -13,6 +13,7 @@ import {DialogComponent} from '../../../../dialog/dialog.component';
 export class FormulaPageComponent implements OnInit {
 
   allFormulas: Formula[];
+  formatedFormulas: any[] = [];
   loading = true;
   constructor(
     private formulaService: FormulaService,
@@ -21,20 +22,39 @@ export class FormulaPageComponent implements OnInit {
 
   ngOnInit() {
     console.log('INIT');
+    this.getAll();
+  }
+
+  getAll() {
     this.formulaService.getAllFormulas()
       .subscribe((formulas: Formula[]) => {
         this.allFormulas = formulas;
-        this.loading = true;
+        this.realPrice(this.allFormulas);
+        this.loading = false;
       });
-    this.loading = false;
   }
+  realPrice(tab: Formula[]) {
+    this.formatedFormulas = [];
+    this.allFormulas.forEach((formula: Formula) => {
+      let newFormula: any;
+      newFormula = formula;
+      newFormula.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(formula.formulaPrice / 100));
+      this.formatedFormulas.push(newFormula);
+    });
+  }
+
   createFormula($event) {
-    this.formulaService.createFormula($event.nameControl, $event.numberControl, $event.descriptionControl)
+    this.formulaService.createFormula($event.nameControl, this.getDecimalPrice($event.numberControl), $event.descriptionControl)
       .subscribe((formula: Formula) => {
-        this.allFormulas.push(formula);
+        this.getAll();
       });
     // console.log($event.numberControl);
   }
+
+  getDecimalPrice(realPrice) {
+    return realPrice * 100;
+  }
+
   // deleteFormula(id) {
   //   this.formulaService.deleteFormula(id)
   //     .subscribe(() => { this.ngOnInit(); });
@@ -55,7 +75,7 @@ export class FormulaPageComponent implements OnInit {
         if (data) {
           this.formulaService.deleteFormula(formula.id)
             .subscribe(() => {
-              this.ngOnInit();
+              this.getAll();
             });
         }
       }
@@ -75,7 +95,7 @@ export class FormulaPageComponent implements OnInit {
       modal: true,
       nameValue: formula.formulaName,
       descriptionValue: formula.description,
-      numberValue: formula.formulaPrice,
+      numberValue: formula.formulaPrice / 100,
       nameField: true,
       numberField: true,
       descriptionField: true,
@@ -88,9 +108,9 @@ export class FormulaPageComponent implements OnInit {
     );
   }
   editLabel(data, id) {
-    this.formulaService.editFormula(id, data.nameControl, data.numberControl, data.descriptionControl,)
+    this.formulaService.editFormula(id, data.nameControl, this.getDecimalPrice(data.numberControl), data.descriptionControl,)
       .subscribe( () => {
-        this.ngOnInit();
+        this.getAll();
       });
   }
 }
