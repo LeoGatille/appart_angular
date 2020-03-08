@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Category} from '../../../../class/wine/category';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-label-list-page',
@@ -23,6 +24,7 @@ export class LabelListPageComponent implements OnInit {
     private labelService: LabelService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class LabelListPageComponent implements OnInit {
   createLabel($event) {
     this.labelService.create($event.nameControl)
       .subscribe((label: Label) => {
+        this.toast.success('Ajout effectué' + ' "' + label.labelName + '"');
         this.listToAdd.push(label);
       });
   }
@@ -64,7 +67,8 @@ export class LabelListPageComponent implements OnInit {
   }
   editLabel(data, id) {
     this.labelService.editLabel(data.nameControl, id)
-      .subscribe( () => {
+      .subscribe( (label: Label) => {
+        this.toast.success('Modification effectuée' + ' "' + label.labelName + '"');
         this.getLabels(true);
       });
   }
@@ -90,6 +94,8 @@ export class LabelListPageComponent implements OnInit {
         if (data) {
           this.labelService.deleteLabel(label.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
+
               this.getLabels(true);
             });
         }

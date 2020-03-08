@@ -8,6 +8,7 @@ import {Allergen} from '../../../../class/food/allergen';
 import {Color} from '../../../../class/wine/color';
 import {AllergenService} from '../../../../service/food/allergen.service';
 import {ModalService} from '../../../../component/test/modal';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-food-list-page',
@@ -34,6 +35,7 @@ export class FoodListPageComponent implements OnInit {
     private foodService: FoodService,
     private allergenService: AllergenService,
     private modalService: ModalService,
+    private toast: ToastrService,
   ) {
 
   }
@@ -93,16 +95,24 @@ export class FoodListPageComponent implements OnInit {
   }
 
   save() {
+
+    if (!this.foodForm.value.typeControl) {
+      this.toast.error('Présiser le type');
+    }
     const val = this.foodForm.value;
     this.foodService.createFood(val.nameControl,
       val.descriptionControl,
       this.getBooelan(val.displayControl),
       val.typeControl.id,
       this.allergensId
-    ).subscribe((res) => {
+    ).subscribe((success: Food) => {
+        this.toast.success('Ajout de ' + success.foodName);
         this.getFood();
         this.createForm();
         this.allAllergens = [];
+      },
+      error => {
+        this.toast.error(error);
       });
   }
   createForm() {

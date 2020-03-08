@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Allergen} from '../../../../class/food/allergen';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-category-list-page',
@@ -23,6 +24,7 @@ export class CategoryListPageComponent implements OnInit {
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
+    private toast: ToastrService,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -46,6 +48,7 @@ export class CategoryListPageComponent implements OnInit {
    createCategory($event) {
      this.categoryService.create($event.nameControl)
        .subscribe((category: Category) => {
+         this.toast.success('Ajout effectué' + ' "' + category.categoryName + '"');
          this.listToAdd.push(category);
        });
    }
@@ -71,7 +74,8 @@ export class CategoryListPageComponent implements OnInit {
   }
   editCategory(data, id) {
     this.categoryService.editCategory(data.nameControl, id)
-      .subscribe( () => {
+      .subscribe( (category: Category) => {
+        this.toast.success('Modification effectuée' + ' "' + category.categoryName + '"');
         this.getCategories(true);
       });
   }
@@ -97,6 +101,7 @@ export class CategoryListPageComponent implements OnInit {
         if (data) {
           this.categoryService.deleteCategory(category.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée' );
               this.getCategories(true);
             });
         }

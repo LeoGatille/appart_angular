@@ -8,6 +8,7 @@ import {DialogComponent} from '../../../dialog/dialog.component';
 import {Allergen} from '../../../class/food/allergen';
 import {User} from '../../../class/user';
 import {AuthService} from '../../../service/auth.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-food-row',
@@ -21,7 +22,6 @@ export class FoodRowComponent implements OnInit {
   loading = true;
  // showAllergens = false;
   tooltip: string = null;
-  tata = 'boooooom';
   allAllergens: string[] = [];
   patchForm: FormGroup;
   user: User;
@@ -30,6 +30,7 @@ export class FoodRowComponent implements OnInit {
     private foodService: FoodService,
     private fb: FormBuilder,
     private auth: AuthService,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -100,6 +101,7 @@ export class FoodRowComponent implements OnInit {
         if (data) {
           this.foodService.deleteFood(this.food.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
               this.editData.emit();
             });
         }

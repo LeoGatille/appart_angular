@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Category} from '../../../../class/wine/category';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-vintage-list-page',
@@ -22,10 +23,10 @@ export class VintageListPageComponent implements OnInit {
     private vintageService: VintageService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
+    private toast: ToastrService,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
-        console.log('toto', params);
       });
   }
 
@@ -42,6 +43,7 @@ export class VintageListPageComponent implements OnInit {
   createVintage($event) {
     this.vintageService.create($event.numberControl)
       .subscribe((vintage: Vintage) => {
+        this.toast.success('Ajout effectué' + ' "' + vintage.vintageYear + '"');
         this.listToAdd.push(vintage);
       });
   }
@@ -67,7 +69,8 @@ export class VintageListPageComponent implements OnInit {
   }
   editVintage(data, id) {
     this.vintageService.editVintage(data.numberControl, id)
-      .subscribe( () => {
+      .subscribe( (vintage: Vintage) => {
+        this.toast.success('Modification effectuée' + ' "' + vintage.vintageYear + '"');
         this.getVintages(true);
       });
   }
@@ -93,6 +96,7 @@ export class VintageListPageComponent implements OnInit {
         if (data) {
           this.vintageService.deleteVintage(vintage.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
               this.getVintages(true);
             });
         }

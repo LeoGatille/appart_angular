@@ -8,6 +8,7 @@ import {AllergenService} from '../../../../service/food/allergen.service';
 import {TypeService} from '../../../../service/food/type.service';
 import {Type} from '../../../../class/food/type';
 import {log} from 'util';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-food-edit-page',
@@ -39,6 +40,7 @@ export class FoodEditPageComponent implements OnInit {
     private allergenService: AllergenService,
     private typeService: TypeService,
     private activatedRoute: ActivatedRoute,
+    private toast: ToastrService,
   ) {
 
   }
@@ -98,6 +100,9 @@ export class FoodEditPageComponent implements OnInit {
   }
 
   save() {
+    if (!this.foodForm.value.typeControl) {
+      this.toast.error('Présiser le type');
+    }
     const val = this.foodForm.value;
     console.log('val = ', val);
     this.foodService.editFood(
@@ -106,10 +111,14 @@ export class FoodEditPageComponent implements OnInit {
       this.getBooelan(val.displayControl),
       val.typeControl.id,
       this.allergensId
-    ).subscribe((res) => {
-        console.log('res = ', res);
-        this.close.emit();
-      });
+    ).subscribe((res: Food) => {
+      this.toast.success('Modification de ' + res.foodName);
+      this.close.emit();
+      },
+      (error) => {
+        this.toast.error(error);
+      }
+      );
   }
   toglle(event) {
     this.foodForm.patchValue({

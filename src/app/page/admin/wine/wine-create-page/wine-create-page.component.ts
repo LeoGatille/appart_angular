@@ -16,6 +16,7 @@ import {StatusService} from '../../../../service/wine/status.service';
 import {WineService} from '../../../../service/wine/wine.service';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-wine-create-page',
@@ -76,6 +77,7 @@ export class WineCreatePageComponent implements OnInit {
                private wineService: WineService,
                private fb: FormBuilder,
                private dialog: MatDialog,
+               private toast: ToastrService,
 
 ) { }
 
@@ -142,6 +144,7 @@ export class WineCreatePageComponent implements OnInit {
         if (data) {
           this.wineService.deleteWine($event.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
               this.getSelector(this.option, true);
             });
         }
@@ -284,11 +287,14 @@ export class WineCreatePageComponent implements OnInit {
       vin.vintage.id,
       vin.status.id
     )
-      .subscribe(success =>  {
+      .subscribe((success: Wine) =>  {
+          this.toast.success('Ajout de ' + success.wineName);
+          console.log(success);
           this.createForm();
           this.getSelector(this.option, true);
         },
         error => {
+          this.toast.error(error);
           console.log('oh my...', error);
           this.createErrorLog(error);
 

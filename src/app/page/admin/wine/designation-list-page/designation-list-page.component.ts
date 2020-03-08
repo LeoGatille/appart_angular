@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Category} from '../../../../class/wine/category';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-designation-list-page',
@@ -23,6 +24,7 @@ export class DesignationListPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private designationService: DesignationService,
     private dialog: MatDialog,
+    private toast: ToastrService,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -47,6 +49,7 @@ export class DesignationListPageComponent implements OnInit {
   createDesignation($event) {
     this.designationService.create($event.nameControl)
       .subscribe((designation: Designation) => {
+        this.toast.success('Ajout effectué' + ' "' + designation.designationName + '"');
         this.listToAdd.push(designation);
       });
   }
@@ -72,7 +75,8 @@ export class DesignationListPageComponent implements OnInit {
   }
   editDesignation(data, id) {
     this.designationService.editDesignation(data.nameControl, id)
-      .subscribe( () => {
+      .subscribe( (designation: Designation) => {
+        this.toast.success('Modification effectuée' + ' "' + designation.designationName + '"');
         this.getDesignations(true);
       });
   }
@@ -98,6 +102,7 @@ export class DesignationListPageComponent implements OnInit {
         if (data) {
           this.designationService.deleteDesignation(designation.id)
             .subscribe(() => {
+              this.toast.success('suppression effectuée');
               this.getDesignations(true);
             });
         }

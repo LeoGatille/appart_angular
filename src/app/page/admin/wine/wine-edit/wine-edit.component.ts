@@ -15,6 +15,7 @@ import {LabelService} from '../../../../service/wine/label.service';
 import {VintageService} from '../../../../service/wine/vintage.service';
 import {StatusService} from '../../../../service/wine/status.service';
 import {Status} from '../../../../class/wine/status';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-wine-edit',
@@ -72,7 +73,8 @@ export class WineEditComponent implements OnInit {
                private vintageService: VintageService,
                private statusService: StatusService,
                private wineService: WineService,
-               private fb: FormBuilder
+               private fb: FormBuilder,
+               private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -239,12 +241,14 @@ export class WineEditComponent implements OnInit {
       this.wine.status.id,
       this.wine.id,
     )
-      .subscribe(success =>  {
+      .subscribe((success: Wine) =>  {
         this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice));
+        this.toast.success('Modification de ' + success.wineName);
         this.close.emit();
       },
 
         error => {
+          this.toast.error(error);
           console.log('oh my...', error);
           this.createErrorLog(error);
 

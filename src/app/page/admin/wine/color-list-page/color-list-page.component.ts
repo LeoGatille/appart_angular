@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {subscribeOn} from 'rxjs/operators';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-color-list-page',
@@ -21,6 +22,7 @@ export class ColorListPageComponent implements OnInit {
     private colorService: ColorService,
     private activatedRoute: ActivatedRoute,
     public dialog: MatDialog,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,13 @@ export class ColorListPageComponent implements OnInit {
     console.log($event);
     this.colorService.create($event.nameControl)
       .subscribe( (color: Color) => {
-        this.listToAdd.push(color);
+        if (color) {
+          this.toast.success('Ajout effectué' + ' "' + color.colorName + '"');
+          this.listToAdd.push(color);
+        } else {
+          this.toast.error('Echec');
+        }
+
       });
   }
   editInit(id) {
@@ -66,8 +74,14 @@ export class ColorListPageComponent implements OnInit {
   }
   editColor(data, id) {
     this.colorService.editColor(data, id)
-      .subscribe(() => {
-        this.getColors(true);
+      .subscribe((color: Color) => {
+        if (color) {
+          this.toast.success('Modification effectuée' + ' "' + color.colorName + '"');
+          this.getColors(true);
+        } else {
+          this.toast.error('Echec');
+        }
+
       });
   }
   // delete(id) {
@@ -91,6 +105,7 @@ export class ColorListPageComponent implements OnInit {
         if (data) {
           this.colorService.deleteColor(color.id)
             .subscribe(() => {
+              this.toast.success('Suppression effectuée');
               this.getColors(true);
             });
         }
