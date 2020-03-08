@@ -51,7 +51,7 @@ export class WineEditComponent implements OnInit {
   statusControl: FormControl;
   activateButton = true;
 
-
+  edited = false;
 
 
 
@@ -97,8 +97,17 @@ export class WineEditComponent implements OnInit {
       vintageControl : this.vintageControl,
       statusControl : ['', Validators.required],
       nameControl : [this.wine.wineName, Validators.required],
-      priceControl : [this.wine.winePrice / 100, Validators.required]
+      priceControl : [this.wine.winePrice, Validators.required]
     });
+    this.edited = true;
+  }
+
+  getRealPrice() {
+    if (this.edited) {
+      return this.wine.winePrice;
+    } else {
+      return this.wine.winePrice / 100;
+    }
   }
 
   addSelector() {
@@ -230,7 +239,11 @@ export class WineEditComponent implements OnInit {
       this.wine.status.id,
       this.wine.id,
     )
-      .subscribe(success =>  this.close.emit(),
+      .subscribe(success =>  {
+        this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice));
+        this.close.emit();
+      },
+
         error => {
           console.log('oh my...', error);
           this.createErrorLog(error);

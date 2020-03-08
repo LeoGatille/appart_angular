@@ -47,6 +47,7 @@ export class WineRowComponent implements OnInit {
 
   getRealPrice() {
     this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice / 100));
+    this.wine.winePrice = this.wine.winePrice / 100;
   }
 
   isConnected(): boolean {
