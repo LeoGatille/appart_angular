@@ -4,6 +4,7 @@ import {FormulaService} from '../../../../service/food/formula.service';
 import {Label} from '../../../../class/wine/label';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-formula-page',
@@ -18,6 +19,7 @@ export class FormulaPageComponent implements OnInit {
   constructor(
     private formulaService: FormulaService,
     private dialog: MatDialog,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class FormulaPageComponent implements OnInit {
   createFormula($event) {
     this.formulaService.createFormula($event.nameControl, this.getDecimalPrice($event.numberControl), $event.descriptionControl)
       .subscribe((formula: Formula) => {
+        this.toast.success('Ajout de ' + formula.formulaName);
         this.getAll();
       });
     // console.log($event.numberControl);
@@ -75,6 +78,7 @@ export class FormulaPageComponent implements OnInit {
         if (data) {
           this.formulaService.deleteFormula(formula.id)
             .subscribe(() => {
+              this.toast.success('Supression effectuée');
               this.getAll();
             });
         }
@@ -108,8 +112,9 @@ export class FormulaPageComponent implements OnInit {
     );
   }
   editLabel(data, id) {
-    this.formulaService.editFormula(id, data.nameControl, this.getDecimalPrice(data.numberControl), data.descriptionControl,)
-      .subscribe( () => {
+    this.formulaService.editFormula(id, data.nameControl, this.getDecimalPrice(data.numberControl), data.descriptionControl)
+      .subscribe( (formula: Formula) => {
+        this.toast.success('Modification de ' + formula.formulaName);
         this.getAll();
       });
   }

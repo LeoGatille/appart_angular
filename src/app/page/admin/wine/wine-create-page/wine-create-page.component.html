@@ -158,6 +158,7 @@
     <div class="wine-section" *ngFor="let wine of selected.wines">
       <div>
         <app-wine-row [wine]="wine"
+                      (editData)="getSelector(option, true) "
                       [selector]="selected"
                       (delete)="delete($event)"
         ></app-wine-row>

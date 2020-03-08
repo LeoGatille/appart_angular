@@ -5,6 +5,7 @@ import {Globals} from '../../../../globals';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-gallery-list-page',
@@ -23,7 +24,7 @@ export class GalleryListPageComponent implements OnInit {
     private fb: FormBuilder,
     private httpClient: HttpClient,
     private dialog: MatDialog,
-
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -83,6 +84,7 @@ export class GalleryListPageComponent implements OnInit {
     tab.forEach((image: any) => {
       this.imageService.deleteImage(image.id)
         .subscribe(res => {
+          this.toast.success('Suppression effectué');
           this.getAllImages();
         });
     });
@@ -110,10 +112,8 @@ export class GalleryListPageComponent implements OnInit {
       input.append('alternative', val.altControl);
       this.imageService.createImage(input)
         .subscribe((res) => {
-            if(res){
-              //toast
-              this.getAllImages();
-          }
+          this.toast.success('Ajout de l\'image');
+          this.getAllImages();
         });
     }
 

@@ -9,6 +9,7 @@ import {Color} from '../../../class/wine/color';
 import {ColorService} from '../../../service/wine/color.service';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-auto-complete',
@@ -39,7 +40,8 @@ export class AutoCompleteComponent implements OnInit {
   filteredElements: Observable<any[]>;
   listOfElements: any[];
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toast: ToastrService,
   ) {}
   ngOnInit() {
 
@@ -117,6 +119,7 @@ export class AutoCompleteComponent implements OnInit {
       console.log(this.service);
       this.service.create(data.nameControl)
         .subscribe((res) => {
+          this.toast.success('Ajout de ' + data.nameControl);
           this.listOfElements.push(res);
           this.addElement.emit(res);
 
@@ -124,6 +127,7 @@ export class AutoCompleteComponent implements OnInit {
     } else {
       this.service.create(data.numberControl)
         .subscribe((res) => {
+          this.toast.success('Ajout de ' + data.numberControl);
           this.listOfElements.push(res);
           this.addElement.emit(res);
         });

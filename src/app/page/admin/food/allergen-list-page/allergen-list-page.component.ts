@@ -3,6 +3,7 @@ import {Allergen} from '../../../../class/food/allergen';
 import {AllergenService} from '../../../../service/food/allergen.service';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-allergen-list-page',
@@ -17,6 +18,7 @@ export class AllergenListPageComponent implements OnInit {
   constructor(
     private allergenService: AllergenService,
     private dialog: MatDialog,
+    private toast: ToastrService,
 
   ) { }
 
@@ -41,12 +43,14 @@ export class AllergenListPageComponent implements OnInit {
     console.log('event', $event);
     this.allergenService.create($event.nameControl)
       .subscribe((allergen: Allergen) => {
+        this.toast.success('Ajout de ' + allergen.allergenName);
         this.allAllergens.push(allergen);
       });
   }
   deleteAllergen(id) {
     this.allergenService.deleteAllergen(id)
       .subscribe(() => {
+        this.toast.success('Suppression effectuée');
         this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
         this.allergenPromise().then((data: any[]) => {
           this.allAllergens = data;
@@ -70,6 +74,7 @@ export class AllergenListPageComponent implements OnInit {
         if (data) {
           this.allergenService.deleteAllergen(allergen.id)
             .subscribe(() => {
+              this.toast.success('Supression effectuée');
               this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
               this.allergenPromise().then((data: any[]) => {
                 this.allAllergens = data;
