@@ -2,7 +2,9 @@ $serif: 'Merriweather', sans-serif ;
 $futura: 'Didact Gothic', sans-serif;
 
 
-
+.row {
+  margin: 0;
+}
 .header {
   background-image: url("http://api.bundles.do/uploads/test/table.jpg");
   background-size: cover ;

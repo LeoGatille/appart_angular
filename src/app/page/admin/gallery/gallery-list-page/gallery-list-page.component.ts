@@ -43,6 +43,7 @@ export class GalleryListPageComponent implements OnInit {
       });
   }
   getAllPath(tab) {
+    this.objectTab = [];
     tab.forEach(image => {
       this.objectTab.push({path: image.imgPath, alt: image.alternative});
     });

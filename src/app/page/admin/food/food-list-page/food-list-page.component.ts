@@ -9,6 +9,7 @@ import {Color} from '../../../../class/wine/color';
 import {AllergenService} from '../../../../service/food/allergen.service';
 import {ModalService} from '../../../../component/test/modal';
 import {ToastrService} from 'ngx-toastr';
+import {log} from 'util';
 
 @Component({
   selector: 'app-food-list-page',
@@ -29,6 +30,7 @@ export class FoodListPageComponent implements OnInit {
   loading = true;
   title = 'Allergen';
   allergenPromise: any;
+  allergenNames: string[] = [];
   constructor(
     private fb: FormBuilder,
     private typeService: TypeService,
@@ -41,9 +43,9 @@ export class FoodListPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('init');
+
     this.getFood();
-    console.log('build');
+
     this.action = 'list';
     this.allAllergens = [];
     this.food = new Food();
@@ -74,6 +76,7 @@ export class FoodListPageComponent implements OnInit {
     }
     if (typeof $event.id === 'number') {
       this.allergensId.push($event.id);
+      this.allergenNames.push($event.allergenName);
       this.allAllergens.push($event);
     }
   }
@@ -82,8 +85,6 @@ export class FoodListPageComponent implements OnInit {
     this.foodForm.patchValue({
       displayControl: event.checked
     });
-    console.log(event);
-    console.log(this.foodForm.value.displayControl);
   }
 
   getBooelan(val) {
@@ -124,9 +125,11 @@ export class FoodListPageComponent implements OnInit {
       displayControl : ['']
     });
   }
-  removeAllergen(name, id) {
-    this.allAllergens.splice(this.allAllergens.indexOf(name), 1);
-    this.allergensId.splice(this.allergensId.indexOf(id), 1);
+  removeAllergen(name) {
+    console.log('allergen = ', name);
+   // console.log('dans le tab =', this.allAllergens.indexOf(name), 'le tab = ', this.allAllergens);
+    this.allergenNames.splice(this.allergenNames.indexOf(name), 1);
+    this.allergensId.splice(this.allergenNames.indexOf(name), 1);
   }
 
 }

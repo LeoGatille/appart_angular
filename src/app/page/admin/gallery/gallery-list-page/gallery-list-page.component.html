@@ -48,9 +48,9 @@
 
 
   <div class="row" style="margin-top: 150px ">
-    <div  *ngFor="let object of objectTab; let i = index; let suppr = false;"[attr.suppr]="suppr" [attr.index]="i" class="col-lg-4 col-md-6 col-sm-12 img-container" style="cursor: pointer; " [ngClass]="{'suppr': suppr}" (click)="suppr = !suppr ">
-      <div *ngIf="suppr" (click)="suppr = !suppr " style="position: absolute;  font-size: 6em; rgba(255,255,255,0.4); display: flex; justify-content: center; align-items: center">
-        <mat-icon (click)="suppr = !suppr " style="color: #ff295c; font-size: 2em; text-align: center; display: flex; justify-content: center; align-items: center">delete</mat-icon>
+    <div  *ngFor="let object of objectTab; let i = index; let suppr = false;"[attr.suppr]="suppr" [attr.index]="i" class="col-lg-4 col-md-6 col-sm-12 img-container" style="cursor: pointer; display: flex; justify-content: center; align-items: center; " [ngClass]="{'suppr': suppr}" (click)="suppr = !suppr ">
+      <div *ngIf="suppr" (click)="suppr = !suppr " style="position: absolute;  font-size: 6em; rgba(255,255,255,0.4);height: 100px; width: 100px; border-radius: 100%; background-color: white; display: flex; justify-content: center; align-items: center">
+        <mat-icon (click)="suppr = !suppr " style="color: #ff295c; font-size: 1em; text-align: center; display: flex; justify-content: center; align-items: center">delete</mat-icon>
       </div>
       <img width="500px" src="http://api.bundles.do{{object.path}}" alt={{object.alt}}>
     </div>

@@ -7,7 +7,9 @@
 
 
 $serif: 'Merriweather', sans-serif ;
-
+.row {
+  margin: 0;
+}
 .formules-container {
   padding: 50px;
   .formula {

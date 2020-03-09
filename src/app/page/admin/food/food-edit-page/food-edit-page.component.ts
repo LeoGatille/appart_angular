@@ -31,6 +31,7 @@ export class FoodEditPageComponent implements OnInit {
   typeControl: FormControl;
   allergenPromise: any;
   title = 'Allergen';
+  allergensNames: string[] = [];
   @Input() food: Food;
   @Output() close = new EventEmitter<any>();
 
@@ -89,11 +90,13 @@ export class FoodEditPageComponent implements OnInit {
     }
     if ($event === 'init') {
       this.selectedAllergens.forEach(allergen => {
+        this.allergensNames.push(allergen.allergenName);
         this.allergensId.push(allergen.id);
       });
     }
     if (typeof $event.id === 'number') {
       this.allergensId.push($event.id);
+      this.allergensNames.push($event.allergenName);
       this.selectedAllergens.push($event);
       console.log('allergensId = ', this.allergensId);
     }
@@ -147,7 +150,7 @@ export class FoodEditPageComponent implements OnInit {
     });
   }
   removeAllergen(name, id) {
-    this.selectedAllergens.splice(this.selectedAllergens.indexOf(name), 1);
+    this.allergensNames.splice(this.allergensNames.indexOf(name), 1);
     this.allergensId.splice(this.allergensId.indexOf(id), 1);
     console.log('selected = ', this.selectedAllergens, ' allergensId = ', this.allergensId );
   }

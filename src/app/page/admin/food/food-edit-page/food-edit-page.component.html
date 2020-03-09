@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="row" style=" display: flex; justify-content: center" >
-      <button *ngFor="let allergen of selectedAllergens" mat-flat-button class="allergens-btn" color="primary" (click)="removeAllergen(allergen.allergenName, allergen.id)">{{allergen.allergenName}}</button>
+      <button *ngFor="let allergen of allergensNames;" mat-flat-button class="allergens-btn" color="primary" (click)="removeAllergen(allergen)">{{allergen}}</button>
     </div>
 
     <div class="row">
