@@ -9,4 +9,6 @@ export class Event {
   priceNoDrinks: number;
   priceWithDrinks: number;
   food: Food[];
+  realPriceDrink: string | null;
+  realPriceNoDrink: string | null;
 }

@@ -23,8 +23,8 @@
 
     <div> <b>{{event.eventName}}</b> &nbsp; <i> {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</i></div>
     <div class="row">
-      <div class="prix">Prix avec boissons : <b>{{event.priceWithDrinks}}€ &nbsp;</b></div>
-      <div class="prix">Prix sans boissons : <b>{{event.priceNoDrinks}}€</b></div>
+      <div class="prix">Prix avec boissons : <b>{{event.realPriceDrink}} &nbsp;</b></div>
+      <div class="prix">Prix sans boissons : <b>{{event.realPriceNoDrink}}</b></div>
     </div>
     <div *ngFor="let food of event.food">
       <div>{{food.foodName}}</div>

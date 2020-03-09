@@ -22,7 +22,7 @@
 <!--  </form>-->
 <!--  <div>-->
 <div style="min-height:calc(100vh - 158px) ">
-  <div>
+  <div style="display: flex">
     <form [formGroup]="imageForm" enctype="multipart/form-data">
       <input type="file"
              id="file"
@@ -33,15 +33,18 @@
              formControlName="altControl"
       >
     </form>
+    <div>
+      <button mat-flat-button
+              style="background-color: #1cceff; color: white"
+
+              type="submit"
+              (click)="save()"
+      >
+        envoyer
+      </button>
+    </div>
   </div>
-  <div>
-    <button mat-flat-button
-            type="submit"
-            (click)="save()"
-    >
-      envoyer
-    </button>
-  </div>
+
   <div>
     <button (click)="deleteImages()" mat-flat-button style="background-color: #e02f4a; color: white">Supprimer</button>
   </div>

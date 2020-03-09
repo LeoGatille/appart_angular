@@ -35,13 +35,15 @@ export class EventListPageComponent implements OnInit {
     this.action = 'list';
     this.eventService.getAllEvents()
       .subscribe((events: Event[]) => {
-        this.allEvents = events;
-        console.log('allEvents = ', this.allEvents);
+        this.allEvents = this.getRealPrices(events);
       });
-
   }
-  log(date) {
-    console.log('realDate = ', date);
+  getRealPrices(events: Event[]) {
+    events.forEach((oneEvent: Event) => {
+      oneEvent.realPriceDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(oneEvent.priceWithDrinks / 100));
+      oneEvent.realPriceNoDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(oneEvent.priceNoDrinks / 100));
+    });
+    return events;
   }
 
   // edit(id) {
@@ -63,6 +65,11 @@ export class EventListPageComponent implements OnInit {
   //       this.oldFoodControl = event.foods;
   //     });
   // }
+
+  getDecimalPrice(price: number) {
+    return price * 100;
+  }
+
   callServices($event) {
     const eventId = $event[0];
     const eventData = $event[1];
@@ -73,8 +80,8 @@ export class EventListPageComponent implements OnInit {
         timestamp,
         eventData.description,
         eventData.name,
-        eventData.priceNoDrinks,
-        eventData.priceWithDrinks,
+        this.getDecimalPrice(eventData.priceNoDrinks),
+        this.getDecimalPrice(eventData.priceWithDrinks),
         foodsData
       ).subscribe((event: Event) => {
         this.toast.success('Ajout de ' + event.eventName );

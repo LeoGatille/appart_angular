@@ -20,13 +20,7 @@ export class EventService {
                      eventName: string,
                      priceNoDrinks: number,
                      priceWithDrinks: number,
-                     foods: number[] | null) {
-    console.log('eventDate = ', eventDate);
-    console.log('eventDescription = ', eventDescription);
-    console.log('eventName = ', eventName);
-    console.log('priceNoDrinks = ', priceNoDrinks);
-    console.log('priceWithDrinks = ', priceWithDrinks);
-    console.log('eventDate = ', foods);
+                     foods: number[]= null) {
     return this.http.post(`${this.uri}/create`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks, foods});
   }
   public editEvent(id: number,
@@ -35,13 +29,7 @@ export class EventService {
                    eventName: string,
                    priceNoDrinks: number,
                    priceWithDrinks: number,
-                   foods: number[] | null) {
-    console.log('eventDate = ', eventDate);
-    console.log('eventDescription = ', eventDescription);
-    console.log('eventName = ', eventName);
-    console.log('priceNoDrinks = ', priceNoDrinks);
-    console.log('priceWithDrinks = ', priceWithDrinks);
-    console.log('eventDate = ', foods);
+                   foods: number[]= null) {
     return this.http.put(`${this.uri}/${id}/edit`, {eventDate, eventDescription, eventName, priceNoDrinks, priceWithDrinks, foods});
   }
   public getOneEvent(id: number) {

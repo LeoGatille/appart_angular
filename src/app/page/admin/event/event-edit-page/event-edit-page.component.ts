@@ -34,16 +34,14 @@ export class EventEditPageComponent implements OnInit {
   ngOnInit() {
     console.log('event === ', this.event.food);
     this.createForm();
-
-
   }
   createForm() {
     this.editEvent = this.fb.group({
       name : [this.event.eventName, Validators.required],
       description : [this.event.eventDescription, Validators.required],
       date : [this.event.eventDate, Validators.required],
-      priceNoDrinks : [this.event.priceNoDrinks, Validators.required],
-      priceWithDrinks : [this.event.priceWithDrinks, Validators.required],
+      priceNoDrinks : [this.event.priceNoDrinks / 100, Validators.required],
+      priceWithDrinks : [this.event.priceWithDrinks / 100, Validators.required],
       foodControl : [''],
       // typeControl : [''],
     });
@@ -82,16 +80,21 @@ export class EventEditPageComponent implements OnInit {
     this.allFoods.push(food);
     this.foodsId.push(food.id);
   }
+
+  getDecimalPrice(price: number) {
+    return price * 100;
+  }
   save() {
     const val = this.editEvent.value;
+    console.log('save = ', this.foodsId);
     const timestamp = val.date.getTime();
     this.eventService.editEvent(
       this.event.id,
       timestamp,
       val.description,
       val.name,
-      val.priceNoDrinks,
-      val.priceWithDrinks,
+      this.getDecimalPrice(val.priceNoDrinks),
+      this.getDecimalPrice(val.priceWithDrinks),
       this.foodsId
     ).subscribe((event: Event) => {
       this.toast.success('Modification de ' + event.eventName);
@@ -101,6 +104,7 @@ export class EventEditPageComponent implements OnInit {
   removeFood(id) {
     this.foodsId.splice(this.foodsId.indexOf(id), 1);
     this.allFoods.splice(this.foodsId.indexOf(id), 1);
+    console.log('foodId = ', this.foodsId);
   }
 
 }
