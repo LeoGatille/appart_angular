@@ -124,54 +124,106 @@ $serif: 'Merriweather', sans-serif ;
 }
 
 .event {
-  background-color: black;
+  display: flex;
   justify-content: center;
+  padding: 50px 100px 50px 100px;
+  height: max-content;
+  background-color: black;
 
-  .first{
-    padding-top: 50px;
+  h2 {
+    color: #FFFFFF;
+    font-family: $serif;
+    font-style: italic;
+    font-size: 10rem;
+    font-weight: bold;
   }
-  .second {
-    padding-bottom: 50px;
+  .top {
+    text-align: left;
+    padding-left: 100px;
   }
-  .event-container {
+  .bottom {
+    text-align: right;
+    padding-right: 100px;
+  }
 
 
+}
+@media screen and (max-width: 1000px) {
+  .event{
     display: flex;
     justify-content: center;
-
+    align-items: center;
+    padding: 10px;
+    height: 200px;
     h2 {
-      color: #FFFFFF;
-      font-family: $serif;
-      font-size: 10rem;
-      font-weight: bold;
+    color: white;
+    font-family: $serif;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+    .top {
+      text-align: center;
+      padding-left: 0px;
+
+    }
+
+    .bottom {
+      text-align: center;
+      padding-right: 0px;
+
     }
   }
 
-  @media only screen and (max-width: 1000px) {
-    .first{
-    }
-    .second {
-    }
-    .event-container {
-
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      h2 {
-        color: #FFFFFF;
-        font-family: $serif;
-        font-size: 3rem;
-        font-weight: bold;
-      }
-    }
-  }
 }
 
+//.event {
+//  background-color: black;
+//  justify-content: center;
+//
+//  .first{
+//    padding-top: 50px;
+//  }
+//  .second {
+//    padding-bottom: 50px;
+//  }
+//  .event-container {
+//
+//
+//    display: flex;
+//    justify-content: center;
+//
+//    h2 {
+//      color: #FFFFFF;
+//      font-family: $serif;
+//      font-style: italic;
+//      font-size: 10rem;
+//      font-weight: bold;
+//    }
+//  }
+//
+//  @media only screen and (max-width: 1000px) {
+//    .first{
+//    }
+//    .second {
+//    }
+//    .event-container {
+//
+//
+//      display: flex;
+//      justify-content: center;
+//      align-items: center;
+//
+//      h2 {
+//        color: #FFFFFF;
+//        font-family: $serif;
+//        font-size: 3rem;
+//        font-weight: bold;
+//      }
+//    }
+//  }
+//}
+
 .chef {
-  padding-top: 100px;
-  background-color: black;
   .picture {
     background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
     background-position: center;
@@ -236,6 +288,65 @@ $serif: 'Merriweather', sans-serif ;
   }
 }
 
+
+.reservation {
+  background-image: url("http://api.bundles.do/uploads/test/reservation.jpg");
+  background-position: center;
+  height: 200px;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    height: 100%;
+    width: 100%;
+    .overlay {
+      height: 100%;
+      width: 100%;
+      background: rgba(158, 12, 23, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      //transition-delay: 0.5s;
+      font-size: 6em;
+      font-style: italic;
+      font-family: $serif ;
+      color: rgba(255, 255, 255, 1);
+      transition: color 0.5s, background-color 0.5s;
+      text-decoration: none;
+      &:hover {
+        background: rgba(158, 12, 23, 0.7);
+      }
+
+      h2 {
+        font-size: 50px;
+        font-style: inherit;
+        font-family: inherit ;
+        color: inherit;
+        text-decoration: inherit;
+      }
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    @media only screen and (max-width: 1000px) {
+      .reservation {
+        height: 150px;
+      }
+      h2 {
+        font-size: 10em;
+        width: 100%;
+        text-align: center;
+        background-color: rgba(158, 12, 23, 0.4) !important;
+        color: white !important;
+      }
+    }
+
+  }
+}
+
+
+
 .gallery {
   background-image: url("http://api.bundles.do/uploads/test/nouvelle_salle_2.jpg");
   background-position: center;
@@ -282,6 +393,7 @@ $serif: 'Merriweather', sans-serif ;
         height: 338px;
       }
       h2 {
+        font-size: 10em;
         width: 100%;
         text-align: center;
         background-color: rgba(158, 12, 23, 0.4) !important;
