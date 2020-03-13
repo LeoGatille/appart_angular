@@ -8,6 +8,7 @@
                  placeholder="'Nom'"
                  autocomplete="Off"
                  formControlName="name"
+                 maxlength="255"
                  [ngModel]="oldName"
           />
         </mat-form-field>
@@ -61,6 +62,7 @@
                       placeholder="'Description'"
                       autocomplete="Off"
                       formControlName="description"
+                      maxlength="1000"
                       [ngModel]="oldDescription"
             ></textarea>
           </mat-form-field>
