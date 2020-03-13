@@ -19,6 +19,7 @@ export class GalleryListPageComponent implements OnInit {
   objectTab: any[] = [];
   fileToUpload: File = null;
   loading = true;
+  valid = false;
   constructor(
     private imageService: ImageService,
     private fb: FormBuilder,
@@ -100,6 +101,7 @@ export class GalleryListPageComponent implements OnInit {
   }
 
   handleFileInput(files: FileList) {
+    this.valid = true;
     console.log('$event files = ', files);
     this.fileToUpload = files.item(0);
   }

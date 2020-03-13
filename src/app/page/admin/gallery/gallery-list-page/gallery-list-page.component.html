@@ -26,7 +26,9 @@
     <form [formGroup]="imageForm" enctype="multipart/form-data">
       <input type="file"
              id="file"
-             (change)="handleFileInput($event.target.files)">
+             (change)="handleFileInput($event.target.files)"
+             accept="image/png, image/jpeg"
+      >
       >
       <input type="text"
              name="altControl"
@@ -39,6 +41,7 @@
 
               type="submit"
               (click)="save()"
+              [disabled]="!valid"
       >
         envoyer
       </button>
