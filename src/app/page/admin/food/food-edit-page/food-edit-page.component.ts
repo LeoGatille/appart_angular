@@ -32,6 +32,7 @@ export class FoodEditPageComponent implements OnInit {
   allergenPromise: any;
   title = 'Allergen';
   allergensNames: string[] = [];
+  theType: Type;
   @Input() food: Food;
   @Output() close = new EventEmitter<any>();
 
@@ -76,6 +77,8 @@ export class FoodEditPageComponent implements OnInit {
     //    });
     this.loading = false;
   }
+
+
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
   }
@@ -150,8 +153,8 @@ export class FoodEditPageComponent implements OnInit {
     });
   }
   removeAllergen(name, id) {
+    this.allergensId.splice(this.allergensNames.indexOf(name), 1);
     this.allergensNames.splice(this.allergensNames.indexOf(name), 1);
-    this.allergensId.splice(this.allergensId.indexOf(id), 1);
     console.log('selected = ', this.selectedAllergens, ' allergensId = ', this.allergensId );
   }
 }

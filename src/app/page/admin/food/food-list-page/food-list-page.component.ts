@@ -126,10 +126,12 @@ export class FoodListPageComponent implements OnInit {
     });
   }
   removeAllergen(name) {
-    console.log('allergen = ', name);
+    console.log('allergen = ', this.allergenNames.indexOf(name));
+    console.log('allergenID = ', this.allergensId);
    // console.log('dans le tab =', this.allAllergens.indexOf(name), 'le tab = ', this.allAllergens);
-    this.allergenNames.splice(this.allergenNames.indexOf(name), 1);
     this.allergensId.splice(this.allergenNames.indexOf(name), 1);
+    this.allergenNames.splice(this.allergenNames.indexOf(name), 1);
+
   }
 
 }

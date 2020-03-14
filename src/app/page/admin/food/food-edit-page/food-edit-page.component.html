@@ -29,6 +29,7 @@
         <mat-form-field>
           <mat-label>Type</mat-label>
           <mat-select formControlName="typeControl"
+
           >
             <mat-option *ngFor="let type of allTypes" [value]="type">
               {{type.typeName}}
