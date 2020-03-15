@@ -266,13 +266,16 @@ export class WineCreatePageComponent implements OnInit {
       this.activateButton =  this.categories.some((sample) => sample.categoryName.toLowerCase() === val.toLowerCase());
     }
   }
-
+  toastError(message : string) {
+   this.toast.error(message + ' n\'existe pas');
+   return null;
+  }
   validate() {
     const vin = new Wine();
     vin.status = this.wineForm.value.statusControl;
     vin.wineName = this.wineForm.value.nameControl;
     vin.winePrice = this.wineForm.value.priceControl;
-    vin.category = this.category;
+    vin.category = this.category ? this.category : this.toastError('la catégorie selectionnée');
     vin.designation = this.designation;
     vin.color = this.color;
     vin.label = this.label;
@@ -303,11 +306,11 @@ export class WineCreatePageComponent implements OnInit {
   }
 
   resetValues() {
-    this.color
-    this.category
-    this.designation
-this.label
-this.vintage
+    this.color = null;
+    this.category= null;
+    this.designation= null;
+    this.label= null;
+    this.vintage= null;
   }
 
   createErrorLog(error) {
