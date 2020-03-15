@@ -51,7 +51,7 @@ export class FoodListPageComponent implements OnInit {
     this.food = new Food();
 
     this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
-    this.allergenControl = new FormControl(this.stockAllergen, Validators.required);
+    this.allergenControl = new FormControl(this.stockAllergen);
     this.createForm();
     this.loading = false;
   }
@@ -70,7 +70,7 @@ export class FoodListPageComponent implements OnInit {
       return allergen.allergenName.toLowerCase().includes(filterValue);
     };
   }
-  getAllergenId($event) {
+  getAllergenId($event: Allergen) {
     if (!$event) {
       return;
     }
@@ -110,16 +110,18 @@ export class FoodListPageComponent implements OnInit {
         this.toast.success('Ajout de ' + success.foodName);
         this.getFood();
         this.createForm();
+        this.allergenNames = [];
         this.allAllergens = [];
       },
       error => {
-        this.toast.error(error);
+        this.toast.error(error.error);
+        console.log(error);
       });
   }
   createForm() {
     this.foodForm = this.fb.group({
       allergenControl : this.allergenControl,
-      descriptionControl : ['', Validators.required],
+      descriptionControl : [''],
       nameControl : ['', Validators.required],
       typeControl : [ '' , Validators.required],
       displayControl : ['']

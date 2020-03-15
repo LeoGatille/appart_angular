@@ -21,7 +21,7 @@ export class ResponseInterceptor implements HttpInterceptor {
         }
         const error = err.error.message || err.statusText;
         const errorMessage = err.error;
-        return throwError(errorMessage);
+        return throwError(err);
       }));
   }
 }

@@ -292,14 +292,24 @@ export class WineCreatePageComponent implements OnInit {
           console.log(success);
           this.createForm();
           this.getSelector(this.option, true);
+          this.resetValues();
         },
         error => {
-          this.toast.error(error);
+          this.toast.error(error.error);
           console.log('oh my...', error);
-          this.createErrorLog(error);
+          //this.createErrorLog(error);
 
         });
   }
+
+  resetValues() {
+    this.color
+    this.category
+    this.designation
+this.label
+this.vintage
+  }
+
   createErrorLog(error) {
     this.errorLog = error;
     this.error = true;
