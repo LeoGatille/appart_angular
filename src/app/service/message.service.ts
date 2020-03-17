@@ -15,10 +15,10 @@ export class MessageService {
     return this.http.get(`${this.uri}`);
   }
   public editMessage(id: number, messageText: string, display: number) {
-    return this.http.put(`${this.uri}/${id}/edit`, {messageText, display});
+    return this.http.put(`${this.uri}/${id}/admin/edit`, {messageText, display});
   }
   public patchMessage(id: number, display: number) {
-    return this.http.patch(`${this.uri}/${id}/patch`, {display});
+    return this.http.patch(`${this.uri}/${id}/admin/patch`, {display});
   }
 }
 

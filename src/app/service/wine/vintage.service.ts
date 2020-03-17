@@ -26,15 +26,15 @@ export class VintageService {
   // }
   public create(vintageYear: number) {
     console.log('vintageService !');
-    return this.http.post(`${this.uri}/create`, { vintageYear });
+    return this.http.post(`${this.uri}/admin/create`, { vintageYear });
   }
   public editVintage( vintageYear: number, id ) {
-    return this.http.put(`${this.uri}/${id}/edit`, {vintageYear});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {vintageYear});
   }
   public getOneVintage(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public deleteVintage(id: number) {
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
 }

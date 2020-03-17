@@ -25,6 +25,8 @@ export class AuthService {
         if (data && data.token) {
           // SAUVER MON TOKEN DANS LOCALSTORAGE
           localStorage.setItem(Globals.APP_USER_TOKEN, data.token);
+          console.log('data = ', data);
+          
         }
         return data;
       }));

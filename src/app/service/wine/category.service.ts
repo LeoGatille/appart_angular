@@ -24,15 +24,15 @@ export class CategoryService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create( categoryName: string ) {
-    return this.http.post(`${this.uri}/create`, {categoryName});
+    return this.http.post(`${this.uri}/admin/create`, {categoryName});
   }
   public getOneCategory(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public editCategory( categoryName: string, id ) {
-    return this.http.put(`${this.uri}/${id}/edit`, {categoryName});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {categoryName});
   }
   public deleteCategory(id: number) {
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
 }

@@ -25,15 +25,15 @@ export class DesignationService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create(designationName: string) {
-    return this.http.post(`${this.uri}/create`, {designationName});
+    return this.http.post(`${this.uri}/admin/create`, {designationName});
   }
   public editDesignation( designationName: string, id ) {
-    return this.http.put(`${this.uri}/${id}/edit`, {designationName});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {designationName});
   }
   public getOneDesignation(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public deleteDesignation(id: number) {
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
 }

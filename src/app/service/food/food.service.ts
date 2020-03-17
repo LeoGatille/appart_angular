@@ -21,20 +21,20 @@ export class FoodService {
   //   return this.allFoodsPromise;
   // }
   public createFood(foodName: string, foodDescription: string, display: number, type: number, allergens: number[]) {
-    return this.http.post(`${this.uri}/create`, {foodName, foodDescription, display, allergens, type});
+    return this.http.post(`${this.uri}/admin/create`, {foodName, foodDescription, display, allergens, type});
   }
   public editFood(id: number, foodName: string, foodDescription: string, display: number, type: number, allergens: number[]) {
     console.log(allergens);
-    return this.http.put(`${this.uri}/${id}/edit`, {foodName, foodDescription, display, allergens, type});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {foodName, foodDescription, display, allergens, type});
   }
   public getOneFood(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public deleteFood(id: number) {
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
   public patchFood(id: number, display: number) {
-    return this.http.patch(`${this.uri}/${id}/patch`, {display});
+    return this.http.patch(`${this.uri}/admin/${id}/patch`, {display});
   }
 
   public getAllFood() {

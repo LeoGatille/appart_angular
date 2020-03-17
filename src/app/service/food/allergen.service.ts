@@ -27,10 +27,10 @@ export class AllergenService {
   // }
   public create(allergenName) {
     console.log('serviceCreate', allergenName);
-    return this.http.post(`${this.uri}/create`, {allergenName});
+    return this.http.post(`${this.uri}/admin/create`, {allergenName});
   }
   public deleteAllergen(id: number) {
     console.log('serviceDelete', id);
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
 }

@@ -25,16 +25,16 @@ export class LabelService {
   //  return this.http.get(`${this.uri}`);
   // }
   public create(labelName: string) {
-    return this.http.post(`${this.uri}/create`, {labelName});
+    return this.http.post(`${this.uri}/admin/create`, {labelName});
   }
   public editLabel( labelName: string, id ) {
-    return this.http.put(`${this.uri}/${id}/edit`, {labelName});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {labelName});
   }
   public getOneLabel(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public deleteLabel(id: number) {
-    return this.http.delete(`${this.uri}/${id}/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
 
 }
