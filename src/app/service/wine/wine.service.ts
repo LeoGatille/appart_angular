@@ -32,17 +32,17 @@ export class WineService {
                    winePrice: number,
                    vintage: number,
                    status: number, id ) {
-    return this.http.put(`${this.uri}/${id}/admin/edit`, {category, designation, color, label, wineName, winePrice, vintage, status});
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {category, designation, color, label, wineName, winePrice, vintage, status});
   }
   public getOneWine(id: number) {
     return this.http.get(`${this.uri}/${id}`);
   }
   public deleteWine(id: number) {
-    return this.http.delete(`${this.uri}/${id}/admin/delete`);
+    return this.http.delete(`${this.uri}/admin/${id}/delete`);
   }
   public patchWine(id: number, status: number) {
     console.log('Servicepatch->id= ', id );
     console.log('Servicepatch->status= ', id );
-    return this.http.patch(`${this.uri}/${id}/admin/patch`, {status});
+    return this.http.patch(`${this.uri}/admin/${id}/patch`, {status});
   }
 }

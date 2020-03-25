@@ -248,9 +248,7 @@ export class WineEditComponent implements OnInit {
       },
 
         error => {
-          this.toast.error(error);
-          console.log('oh my...', error);
-          this.createErrorLog(error);
+          this.toast.error(error.error);
 
         });
   }

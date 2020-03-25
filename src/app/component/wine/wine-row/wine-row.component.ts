@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
 import {User} from '../../../class/user';
 import {AuthService} from '../../../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wine-row',
@@ -33,6 +34,7 @@ export class WineRowComponent implements OnInit {
     private statusService: StatusService,
     private dialog: MatDialog,
     private auth: AuthService,
+    private toast: ToastrService,
   ) {
     this.activatedRoute.params
       .subscribe((params) => {
@@ -46,8 +48,8 @@ export class WineRowComponent implements OnInit {
   }
 
   getRealPrice() {
-    this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice / 100));
     this.wine.winePrice = this.wine.winePrice / 100;
+    this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice));
   }
 
   isConnected(): boolean {
@@ -56,9 +58,6 @@ export class WineRowComponent implements OnInit {
   }
   sendDelete(id) {
     this.delete.emit(id);
-  }
-  log() {
-    console.log('mega toto');
   }
   showWineStatus() {
     if (this.showAllStatus) {
@@ -72,6 +71,7 @@ export class WineRowComponent implements OnInit {
         .subscribe((patchedWine: Wine) => {
           this.wine.status = patchedWine.status;
           this.showAllStatus = false;
+          this.toast.success(this.wine.wineName + ' modifié');
           if (this.wine.status.id !== 1) {
             this.showCurrentStatus = true;
           }
@@ -83,6 +83,7 @@ export class WineRowComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this.getRealPrice();
     if (this.wine.status.id !== 1) {
       this.showCurrentStatus = true;
@@ -102,5 +103,9 @@ export class WineRowComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data =>  {
       this.editData.emit();
     });
+  }
+  ngOnDestroy() {
+    this.wine.winePrice = this.wine.winePrice * 100;
+    this.wine.realPrice = null;
   }
 }

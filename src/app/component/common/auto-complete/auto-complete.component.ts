@@ -114,16 +114,28 @@ export class AutoCompleteComponent implements OnInit {
     //   console.log('The dialog was closed');
     // });
   }
+
+  doubleControl(data) {    
+    return this.listOfElements.find(listItem => listItem.allergenName === data 
+      || listItem.colorName === data 
+      || listItem.vintageYear === data 
+      || listItem.categoryName === data 
+      || listItem.designationName === data 
+      || listItem.labelName === data)
+  }
+
   createElement(data: any) {
     if (data.nameControl) {
-      console.log(this.service);
-      this.service.create(data.nameControl)
+      if(!this.doubleControl(data.nameControl)) {
+        this.service.create(data.nameControl)
         .subscribe((res) => {
           this.toast.success('Ajout de ' + data.nameControl);
           this.listOfElements.push(res);
           this.addElement.emit(res);
-
         });
+      } else {
+        this.toast.error('l\'élément envoyé existe déja')
+      }
     } else {
       this.service.create(data.numberControl)
         .subscribe((res) => {
