@@ -44,10 +44,10 @@
                    mat-list-item (click)="sidenav.close()" >
                   <span>Galerie</span>
                 </a>
-                 <a  routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
+                 <!--<a  routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
                      mat-list-item (click)="sidenav.close()" >
-                  <span>Connexion</span>
-                </a>
+                  <span >Connexion</span>
+                </a>-->
               </span>
 
 
@@ -84,7 +84,9 @@
 
             </mat-nav-list>
           </nav>
+          <div class="ninja" (mousedown)="adminAccess()" (mouseup)="stopClick()">
 
+          </div>
 
         </mat-sidenav>
 
