@@ -139,6 +139,8 @@ export class WineEditComponent implements OnInit {
     this.statusService.getAllStatus()
       .subscribe((status: Status[]) => {
         this.allStatus = status;
+        const toSelect = this.allStatus.find(c => c.id == this.wine.status.id);
+        this.wineForm.get('statusControl').setValue(toSelect);
       });
   }
   displayFn(color: Color): string {
@@ -216,7 +218,6 @@ export class WineEditComponent implements OnInit {
 
   activateNewCategory(val) {
     if (typeof val === 'string') {
-      console.log('activateNewCategory = ' + this.categories.some((sample) => sample.categoryName === val));
       this.activateButton =  this.categories.some((sample) => sample.categoryName.toLowerCase() === val.toLowerCase());
     }
   }

@@ -19,8 +19,6 @@ export class FoodEditPageComponent implements OnInit {
 
   display: number;
   id: number;
-  // food: Food;
- // allAllergens: Allergen[];
   allTypes: Type[];
   loading = true;
   allergenControl: FormControl;
@@ -47,37 +45,33 @@ export class FoodEditPageComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    console.log('FOOD = ', this.food);
+  ngOnInit() {    
     this.launchProcesses();
-    // this.allergensId = [];
-    // this.activatedRoute.params
-    //   .subscribe((params) => {
-    //     this.id = params.id;
-    //     return this.launchProcesses();
-    //   });
-
   }
   launchProcesses() {
     this.typeService.getAllType()
       .subscribe((types: Type[]) => {
-        this.allTypes = types;
+        this.allTypes = types;  
+        this.getFoodType();
       });
     this.allergenPromise = (bool) => this.allergenService.getAllAllergens(bool);
     this.allergenControl = new FormControl('', Validators.required);
     this.selectedAllergens = this.food.allergen;
     this.createForm();
     this.getAllergenId('init');
-    // this.foodService.getOneFood(this.id)
-    //    .subscribe((food: Food) => {
-    //      this.food = food;
-    //      this.selectedAllergens = this.food.allergen;
-    //
-    //      this.loading = false;
-    //    });
     this.loading = false;
   }
-
+  getFoodType() {
+    this.allTypes.forEach((type: Type) => {
+      type.foods.forEach(food => {
+        if(food.id == this.food.id) {
+          this.foodForm.get('typeControl').setValue(type);
+        }
+      });
+    })
+    
+      
+  }
 
   displayFn(allergen: Allergen): string {
     return allergen ? allergen.allergenName : '';
@@ -101,7 +95,6 @@ export class FoodEditPageComponent implements OnInit {
       this.allergensId.push($event.id);
       this.allergensNames.push($event.allergenName);
       this.selectedAllergens.push($event);
-      console.log('allergensId = ', this.allergensId);
     }
   }
 
@@ -110,7 +103,6 @@ export class FoodEditPageComponent implements OnInit {
       this.toast.error('Présiser le type');
     }
     const val = this.foodForm.value;
-    console.log('val = ', val);
     this.foodService.editFood(
       this.food.id, val.nameControl,
       val.descriptionControl,
@@ -150,11 +142,10 @@ export class FoodEditPageComponent implements OnInit {
       nameControl : [this.food.foodName, Validators.required],
       typeControl : [ this.food.type , Validators.required],
       displayControl : [this.food.display]
-    });
+    });   
   }
   removeAllergen(name, id) {
     this.allergensId.splice(this.allergensNames.indexOf(name), 1);
     this.allergensNames.splice(this.allergensNames.indexOf(name), 1);
-    console.log('selected = ', this.selectedAllergens, ' allergensId = ', this.allergensId );
   }
 }
