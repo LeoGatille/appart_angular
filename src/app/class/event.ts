@@ -2,7 +2,7 @@ import {Food} from './food/food';
 
 export class Event {
   id: number;
-  eventDate: Date;
+  eventDate: any;
   timestamp: number;
   eventDescription: string;
   eventName: string;

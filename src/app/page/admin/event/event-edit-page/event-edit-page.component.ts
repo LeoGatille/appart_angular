@@ -33,13 +33,12 @@ export class EventEditPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('event === ', this.event.food);
     this.createForm();
     this.getDate();
   }
 
   getDate() {
-    console.log('EVENT = ', new Date(this.event.eventDate.timestamp * 1000));
+    console.log('EVENT = ', this.event);
     
    this.date = new Date(this.event.eventDate.timestamp * 1000);
   }
