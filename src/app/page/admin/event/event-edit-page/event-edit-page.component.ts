@@ -16,6 +16,7 @@ export class EventEditPageComponent implements OnInit {
   @Input() event: Event = null;
   @Output() close = new EventEmitter<any>();
 
+  date: any = null;
   editEvent: FormGroup;
   allFoods: Food[] = [];
   foodsId: number[] = [];
@@ -34,12 +35,20 @@ export class EventEditPageComponent implements OnInit {
   ngOnInit() {
     console.log('event === ', this.event.food);
     this.createForm();
+    this.getDate();
   }
+
+  getDate() {
+    console.log('EVENT = ', new Date(this.event.eventDate.timestamp * 1000));
+    
+   this.date = new Date(this.event.eventDate.timestamp * 1000);
+  }
+
   createForm() {
     this.editEvent = this.fb.group({
       name : [this.event.eventName, Validators.required],
       description : [this.event.eventDescription, Validators.required],
-      date : [this.event.eventDate, Validators.required],
+      date : [new Date(this.event.eventDate.timestamp * 1000), Validators.required],
       priceNoDrinks : [this.event.priceNoDrinks / 100, Validators.required],
       priceWithDrinks : [this.event.priceWithDrinks / 100, Validators.required],
       foodControl : [''],
@@ -50,6 +59,10 @@ export class EventEditPageComponent implements OnInit {
       this.getTypes();
     }
   }
+
+  
+
+
   getTypes() {
     this.typeService.getAllType()
       .subscribe((types: Type[]) => {
