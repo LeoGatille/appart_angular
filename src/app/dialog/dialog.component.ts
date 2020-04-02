@@ -51,23 +51,24 @@ export class DialogComponent implements OnInit {
     this.selector = data.selector;
     this.suppr = data.suppr;
     this.event = data.event;
-    this.numberValue = data.numberValue;
+    this.numberValue = parseInt(data.numberValue, 10);
     this.nameValue = data.nameValue;
     this.descriptionValue = data.descriptionValue;
     this.message = data.message;
     this.manySuppr = data.manySuppr;
+    
   }
 
   ngOnInit() {
-    console.log('many =', this.manySuppr);
   }
   defineValue(data) {
 
     if (typeof data !== 'object') {
       if (this.numberField) {
-        console.log('toto');
+        console.log('toto = ', data);
         this.numberValue = data ? data : '';
       } else {
+        console.log('tutu = ', data);
         this.nameValue = data ? data : '';
       }
     }

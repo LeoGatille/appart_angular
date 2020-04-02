@@ -88,8 +88,8 @@ export class AutoCompleteComponent implements OnInit {
     // dialogConfig.autoFocus = true;
     dialogConfig.data = {
       modal: true,
-      nameValue: typeof this.myControl.value === 'string' ? this.myControl.value : null,
-      numberValue: typeof this.myControl.value === 'number' ? this.myControl.value : null,
+      nameValue: isNaN(this.myControl.value) ? this.myControl.value : null,
+      numberValue:  !isNaN(this.myControl.value) ? this.myControl.value : null,
       numberField: this.numberField,
       nameField: this.nameField,
       descriptionField: this.descriptionField,
