@@ -89,8 +89,12 @@ export class EventEditPageComponent implements OnInit {
     });
   }
   getSelectedFood(food: Food) {
-    this.allFoods.push(food);
-    this.foodsId.push(food.id);
+    if(!this.foodsId.find(id => id === food.id)) {
+      this.allFoods.push(food);
+      this.foodsId.push(food.id);
+    } else {
+      this.toast.error('élément déjà assigné');
+    }
   }
 
   getDecimalPrice(price: number) {

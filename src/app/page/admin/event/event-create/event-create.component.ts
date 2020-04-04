@@ -7,6 +7,7 @@ import {TypeService} from '../../../../service/food/type.service';
 import {Type} from '../../../../class/food/type';
 import {DatePipe} from '@angular/common';
 import {Timestamp} from 'rxjs/internal-compatibility';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-create',
@@ -44,6 +45,7 @@ export class EventCreateComponent implements OnInit {
     private typeService: TypeService,
     private fb: FormBuilder,
     private datePipe: DatePipe,
+    private toast: ToastrService,
   ) { }
   ngOnInit() {
     this.foodsId = [];
@@ -71,8 +73,12 @@ export class EventCreateComponent implements OnInit {
   }
 
   getSelectedFood(food: Food) {
-    this.allFoods.push(food);
-    this.foodsId.push(food.id);
+    if(!this.foodsId.find(id => id === food.id)) {
+      this.allFoods.push(food);
+      this.foodsId.push(food.id);
+    } else {
+      this.toast.error('élément déjà assigné');
+    }
   }
   removeFood(id) {
     this.foodsId.splice(this.foodsId.indexOf(id), 1);

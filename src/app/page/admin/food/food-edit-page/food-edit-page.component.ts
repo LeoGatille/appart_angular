@@ -92,9 +92,13 @@ export class FoodEditPageComponent implements OnInit {
       });
     }
     if (typeof $event.id === 'number') {
-      this.allergensId.push($event.id);
-      this.allergensNames.push($event.allergenName);
-      this.selectedAllergens.push($event);
+      if(!this.allergensId.find(id => id === $event.id)) {
+        this.allergensId.push($event.id);
+        this.allergensNames.push($event.allergenName);
+        this.selectedAllergens.push($event);
+      } else {
+        this.toast.error('élément déjà assigné');
+      }
     }
   }
 

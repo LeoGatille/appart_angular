@@ -75,9 +75,16 @@ export class FoodListPageComponent implements OnInit {
       return;
     }
     if (typeof $event.id === 'number') {
+      if (!this.allergensId.find(id => id === $event.id)) {
+        console.log('toto = ',this.allergensId.find(id => id === $event.id));
+        
       this.allergensId.push($event.id);
       this.allergenNames.push($event.allergenName);
       this.allAllergens.push($event);
+      } else {
+        this.toast.error('élément déja assigné');
+      }
+
     }
   }
 
