@@ -50,6 +50,9 @@ export class CategoryListPageComponent implements OnInit {
        .subscribe((category: Category) => {
          this.toast.success('Ajout effectué' + ' "' + category.categoryName + '"');
          this.listToAdd.push(category);
+       },
+       error => {
+         this.toast.error(error.error)
        });
    }
   editInit(id: number) {

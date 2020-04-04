@@ -45,6 +45,9 @@ export class VintageListPageComponent implements OnInit {
       .subscribe((vintage: Vintage) => {
         this.toast.success('Ajout effectué' + ' "' + vintage.vintageYear + '"');
         this.listToAdd.push(vintage);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
   editInit(id: number) {

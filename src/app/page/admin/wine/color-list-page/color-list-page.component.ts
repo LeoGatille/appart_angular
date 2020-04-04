@@ -43,13 +43,11 @@ export class ColorListPageComponent implements OnInit {
     console.log($event);
     this.colorService.create($event.nameControl)
       .subscribe( (color: Color) => {
-        if (color) {
-          this.toast.success('Ajout effectué' + ' "' + color.colorName + '"');
-          this.listToAdd.push(color);
-        } else {
-          this.toast.error('Echec');
-        }
-
+        this.toast.success('Ajout effectué' + ' "' + color.colorName + '"');
+        this.listToAdd.push(color);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
   editInit(id) {

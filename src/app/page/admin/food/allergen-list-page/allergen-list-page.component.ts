@@ -45,6 +45,9 @@ export class AllergenListPageComponent implements OnInit {
       .subscribe((allergen: Allergen) => {
         this.toast.success('Ajout de ' + allergen.allergenName);
         this.allAllergens.push(allergen);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
   deleteAllergen(id) {

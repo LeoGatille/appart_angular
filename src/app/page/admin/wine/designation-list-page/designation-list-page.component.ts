@@ -51,6 +51,9 @@ export class DesignationListPageComponent implements OnInit {
       .subscribe((designation: Designation) => {
         this.toast.success('Ajout effectué' + ' "' + designation.designationName + '"');
         this.listToAdd.push(designation);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
   editInit(id: number) {

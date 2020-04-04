@@ -43,6 +43,9 @@ export class LabelListPageComponent implements OnInit {
       .subscribe((label: Label) => {
         this.toast.success('Ajout effectué' + ' "' + label.labelName + '"');
         this.listToAdd.push(label);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
   editInit(id: number) {
