@@ -32,9 +32,20 @@ export class SoireeComponent implements OnInit {
   }
   refactoEvents() {
     this.eventList.forEach(event => {
+      event = this.getRealPrices(event);
       this.sortEvent(event);
     });
+    console.log('LA LISTE = ', this.eventList);
+    
   }
+
+  getRealPrices(event: Event) {
+    event.realPriceDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(event.priceWithDrinks / 100));
+    event.realPriceNoDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(event.priceNoDrinks / 100));
+
+    return event;
+  }
+
   sortEvent(event: Event) {
     const newEvent: any = {};
     const entrees: Food[] = [];
@@ -64,6 +75,8 @@ export class SoireeComponent implements OnInit {
     newEvent.timestamp = event.timestamp;
     newEvent.priceWithDrinks = event.priceWithDrinks;
     newEvent.priceNoDrinks = event.priceNoDrinks;
+    newEvent.realPriceDrink = event.realPriceDrink;
+    newEvent.realPriceNoDrink = event.realPriceNoDrink;
     newEvent.entrees = entrees;
     newEvent.plats = plats;
     newEvent.dessert = dessert;
