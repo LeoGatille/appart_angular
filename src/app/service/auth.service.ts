@@ -67,6 +67,14 @@ export class AuthService {
   }
 
   public isConnected(): boolean {
-    return !!this.tokenData && !!this.currentUser;
+    if(!this.tokenData || !this.currentUser) {
+      return false;
+    }
+    let tokenArray = this.tokenData.split('.');
+    let translatedToken = atob(tokenArray[1]);
+    let jsonToken = JSON.parse(translatedToken);
+    if(jsonToken.exp > Math.floor(Date.now() / 1000)) {
+      return true;
+    }
   }
 }

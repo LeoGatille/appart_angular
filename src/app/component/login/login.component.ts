@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
       this.auth.login(val.username, val.password)
         .subscribe( () => {
           this.auth.profile()
-            .subscribe( (bool: boolean) => {
-              if (bool) {
-                this.router.navigate(['/home']);
+            .subscribe( (authorized: boolean) => {
+              if (authorized) {
+                this.router.navigate(['/admin']);
               }
             });
         }, (err) => {
