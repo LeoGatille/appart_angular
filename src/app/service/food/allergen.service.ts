@@ -18,7 +18,8 @@ export class AllergenService {
     if (this.allAllergensPromise && !force) {
       return Promise.resolve(this.allAllergensPromise);
     }
-    this.allAllergensPromise = this.http.get<Allergen[]>(`${this.uri}`).toPromise();
+    this.allAllergensPromise = this.http.get<Allergen[]>(`${this.uri}`).toPromise()
+    .then(list => list.map(raw => Object.assign(new Allergen, raw)));
     return this.allAllergensPromise;
   }
 

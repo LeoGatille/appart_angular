@@ -118,16 +118,6 @@ export class WineCreatePageComponent implements OnInit {
       });
     }
   }
-
-
-  // getAllWines() {
-  //   console.log('getAllaWines');
-  //   this.wineService.getAllWines()
-  //     .subscribe((wines: Wine[]) => {
-  //       this.wines = wines;
-  //     });
-  // }
-
   delete($event) {
     console.log('event = ', $event);
     const dialogConfig = new MatDialogConfig();
@@ -182,47 +172,6 @@ export class WineCreatePageComponent implements OnInit {
         this.allStatus = status;
       });
   }
-  displayFn(color: Color): string {
-    return color ? color.colorName : '';
-  }
-  displayFnCategory(category: Category): string {
-    return category ? category.categoryName : '';
-  }
-  displayFnDesignation(designation: Designation): string {
-    return designation ? designation.designationName : '';
-  }
-  displayFnLabel(label: Label): string {
-    return label ? label.labelName : '';
-  }
-  displayFnVintage(vintage: Vintage): any {
-    return vintage ? vintage.vintageYear : '';
-  }
-
-  callBackFilter(filterValue) {
-    return (color) => {
-      return color.colorName.toLowerCase().includes(filterValue);
-    };
-  }
-  callBackFilterCat(filterValue) {
-    return (category) => {
-      return category.categoryName.toLowerCase().includes(filterValue);
-    };
-  }
-  callBackFilterDesignation(filterValue) {
-    return (designation) => {
-      return designation.designationName.toLowerCase().includes(filterValue);
-    };
-  }
-  callBackFilterLabel(filterValue) {
-    return (label) => {
-      return label.labelName.toLowerCase().includes(filterValue);
-    };
-  }
-  callBackFilterVintage(filterValue) {
-    return (vintage) => {
-      return vintage.vintageYear.includes(filterValue);
-    };
-  }
   setColor($event: Color) {
     if (!$event) {
       return;
@@ -234,7 +183,6 @@ export class WineCreatePageComponent implements OnInit {
     if (!$event) {
       return;
     }
-    this.activateNewCategory($event);
     this.category = $event;
     this.newCategory = $event;
   }
@@ -258,13 +206,6 @@ export class WineCreatePageComponent implements OnInit {
     }
     this.vintage = $event;
     this.newVintage = $event;
-  }
-
-  activateNewCategory(val) {
-    if (typeof val === 'string') {
-      console.log('activateNewCategory = ' + this.categories.some((sample) => sample.categoryName === val));
-      this.activateButton =  this.categories.some((sample) => sample.categoryName.toLowerCase() === val.toLowerCase());
-    }
   }
   toastError(message : string) {
    this.toast.error(message + ' n\'existe pas');

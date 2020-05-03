@@ -18,7 +18,8 @@ export class DesignationService {
     if (this.allDesignationPromise && !force) {
       return Promise.resolve(this.allDesignationPromise);
     }
-    this.allDesignationPromise = this.http.get<Designation[]>(`${this.uri}`).toPromise();
+    this.allDesignationPromise = this.http.get<Designation[]>(`${this.uri}`).toPromise()
+    .then(list => list.map(raw => Object.assign(new Designation, raw)));
     return this.allDesignationPromise;
   }
   // public getAllDesignations() {

@@ -18,7 +18,8 @@ export class VintageService {
     if (this.allVintagePromise && !force) {
       return Promise.resolve(this.allVintagePromise);
     }
-    this.allVintagePromise = this.http.get<Vintage[]>(`${this.uri}`).toPromise();
+    this.allVintagePromise = this.http.get<Vintage[]>(`${this.uri}`).toPromise()
+    .then(list => list.map(raw => Object.assign(new Vintage, raw)));
     return this.allVintagePromise;
   }
   // getAllVintages() {

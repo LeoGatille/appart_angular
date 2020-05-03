@@ -36,7 +36,7 @@ export class ColorListPageComponent implements OnInit {
   getColors(force = false) {
     this.colorPromise = (bool) => this.colorService.getAllColors((force));
     this.colorPromise().then((data: any[]) => {
-      this.listToAdd = data;
+      this.listToAdd = data;      
     });
   }
   createColor($event) {

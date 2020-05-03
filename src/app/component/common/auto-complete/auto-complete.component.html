@@ -1,7 +1,8 @@
+<div style="display: flex;">
 <mat-form-field>
   <input
     type="text"
-    placeholder=""
+    placeholder={{title}}
     matInput
     (ngModelChange)="sendToParent()"
     [(ngModel)]="parentModel"
@@ -9,17 +10,19 @@
     [matAutocomplete]="auto"
   />
 </mat-form-field>
-<button mat-mini-fab
-        color="primary"
-        [disabled]="activateButton"
-        (click)="launchModalCreation()">
-  <mat-icon>add</mat-icon>
-</button>
+
+  <button mat-mini-fab
+          color="error"
+          [disabled]="activateButton"
+          (click)="launchModalCreation()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 
 <mat-autocomplete #auto="matAutocomplete"
-                  [displayWith]="displayFn"
+                  [displayWith]="newDisplayFn"
 >
   <mat-option *ngFor="let option of (filteredElements | async)" [value]="option">
-    {{ displayFn(option) }}
+    {{ newDisplayFn(option) }}
   </mat-option>
 </mat-autocomplete>

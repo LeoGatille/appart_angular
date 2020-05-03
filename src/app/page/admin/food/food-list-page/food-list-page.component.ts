@@ -5,11 +5,9 @@ import {TypeService} from '../../../../service/food/type.service';
 import {FoodService} from '../../../../service/food/food.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Allergen} from '../../../../class/food/allergen';
-import {Color} from '../../../../class/wine/color';
 import {AllergenService} from '../../../../service/food/allergen.service';
 import {ModalService} from '../../../../component/test/modal';
 import {ToastrService} from 'ngx-toastr';
-import {log} from 'util';
 
 @Component({
   selector: 'app-food-list-page',
@@ -36,11 +34,10 @@ export class FoodListPageComponent implements OnInit {
     private typeService: TypeService,
     private foodService: FoodService,
     private allergenService: AllergenService,
-    private modalService: ModalService,
     private toast: ToastrService,
-  ) {
+  ) { 
 
-  }
+  } 
 
   ngOnInit() {
 

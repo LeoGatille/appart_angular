@@ -10,6 +10,7 @@ import {ColorService} from '../../../service/wine/color.service';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../dialog/dialog.component';
 import {ToastrService} from 'ngx-toastr';
+import { AutoCompleteInterface } from 'src/app/class/autoCompleteInteface';
 
 @Component({
   selector: 'app-auto-complete',
@@ -44,8 +45,7 @@ export class AutoCompleteComponent implements OnInit {
     private toast: ToastrService,
   ) {}
   ngOnInit() {
-
-    this.arrayPromise().then((data: any[]) => {
+    this.arrayPromise().then((data: AutoCompleteInterface[]) => {
       this.listOfElements = data;
       this.filteredElements = this.myControl.valueChanges
         .pipe(
@@ -56,10 +56,13 @@ export class AutoCompleteComponent implements OnInit {
     });
   }
 
-  private _filter(value: string): any[] {
+  private _filter(value: string): AutoCompleteInterface[] {
     if (value && typeof value === 'string' ) {
       const filterValue = value.toLowerCase();
-      return this.listOfElements.filter(this.callBackFilter(filterValue));
+      return this.listOfElements.filter((element: AutoCompleteInterface) =>{ 
+        console.log('element = ', element);
+       return element.getName().toLowerCase().includes(filterValue);
+      }); 
     }
     return this.listOfElements;
   }
@@ -70,7 +73,9 @@ export class AutoCompleteComponent implements OnInit {
       return this.listOfElements.filter(this.find(filterValue));
     }
   }
-
+  newDisplayFn(toDisplay: AutoCompleteInterface) : string {
+    return toDisplay ? toDisplay.getName() : '';
+  }
 
   sendToParent() {
     this.addElement.emit(this.myControl.value);

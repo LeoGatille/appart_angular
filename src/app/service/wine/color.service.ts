@@ -17,7 +17,9 @@ export class ColorService {
     if (this.allColorsPromise && !force) {
       return Promise.resolve(this.allColorsPromise);
     }
-    this.allColorsPromise = this.http.get<Color[]>(`${this.uri}`).toPromise();
+    this.allColorsPromise = this.http.get<Color[]>(`${this.uri}`)
+    .toPromise()
+    .then(list => list.map(raw => Object.assign(new Color(), raw)));
     return this.allColorsPromise;
   }
   // public getAllColors() {

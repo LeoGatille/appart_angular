@@ -17,7 +17,8 @@ export class CategoryService {
     if (this.allCategoriesPromise && !force) {
       return Promise.resolve(this.allCategoriesPromise);
     }
-    this.allCategoriesPromise = this.http.get<Category[]>(`${this.uri}`).toPromise();
+    this.allCategoriesPromise = this.http.get<Category[]>(`${this.uri}`).toPromise()
+    .then(list => list.map(raw => Object.assign(new Category, raw)));
     return this.allCategoriesPromise;
   }
   // public getAllCategories() {

@@ -36,10 +36,6 @@ export class WineRowComponent implements OnInit {
     private auth: AuthService,
     private toast: ToastrService,
   ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        console.log('activatedRoute.params = ', params);
-      });
     this.statusService.getAllStatus()
       .subscribe((allstatus: Status[]) => {
         this.allStatus = allstatus;
