@@ -32,7 +32,7 @@
 
 <div class="no-choice">
   <mat-expansion-panel class="selector-container" *ngFor="let selected of selector" [expanded]="true">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header *ngIf="selected.wines.length > 0">
       <div class="selector">
         {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
       </div>

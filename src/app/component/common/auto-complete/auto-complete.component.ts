@@ -1,3 +1,4 @@
+import { log } from 'util';
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Category} from '../../../class/wine/category';

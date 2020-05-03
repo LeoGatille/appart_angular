@@ -1,3 +1,5 @@
+import { log } from 'util';
+import { Token } from './../class/data-token';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Globals} from '../globals';
@@ -21,14 +23,12 @@ export class AuthService {
   login(username: string, password: string) {
     return this.httpClient
       .post(this.uri, { username, password })
-      .pipe(map( (data: DataToken) => {
+      .pipe(map( (data: Token) => {
         if (data && data.token) {
           // SAUVER MON TOKEN DANS LOCALSTORAGE
-          localStorage.setItem(Globals.APP_USER_TOKEN, data.token);
-          console.log('data = ', data);
-          
+          localStorage.setItem(Globals.APP_USER_TOKEN, data.token);          
         }
-        return data;
+        return Object.assign(new Token, data);
       }));
   }
   logout() {
@@ -37,19 +37,26 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
-  profile() {
-    return this.httpClient
-      .get(this.uriProfile, {})
-      .pipe(map( (user: User) => {
-        if (user) {
-          localStorage.setItem(Globals.APP_USER, JSON.stringify(user));
-          return true;
-        }
-        return false;
-      }));
+  profile(token: Token) {
+    const user = token.getUser();
+    if(user) {
+      localStorage.setItem(Globals.APP_USER, token.getUser());
+      return true;
+    }
+    return false;
+    // return this.httpClient
+      // .get(this.uriProfile, {})
+      // .pipe(map( (user: User) => {
+      //   if (user) {
+      //     localStorage.setItem(Globals.APP_USER, JSON.stringify(user));
+      //     return true;
+      //   }
+      //   return false;
+      // }));
   }
 
   public get tokenData(): string {
+    
     return localStorage.getItem(Globals.APP_USER_TOKEN);
   }
 
@@ -67,14 +74,12 @@ export class AuthService {
   }
 
   public isConnected(): boolean {
-    if(!this.tokenData || !this.currentUser) {
-      return false;
+    if(this.tokenData) {
+      const token: Token = new Token();
+
+      token.token = this.tokenData;
+      return  token.isValid();
     }
-    let tokenArray = this.tokenData.split('.');
-    let translatedToken = atob(tokenArray[1]);
-    let jsonToken = JSON.parse(translatedToken);
-    if(jsonToken.exp > Math.floor(Date.now() / 1000)) {
-      return true;
-    }
+    return false;
   }
 }

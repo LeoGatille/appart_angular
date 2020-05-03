@@ -1,3 +1,4 @@
+import { Token } from './../../class/data-token';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AuthService} from '../../service/auth.service';
@@ -32,13 +33,10 @@ export class LoginComponent implements OnInit {
     const val = this.loginForm.value;
     if (val.username && val.password) {
       this.auth.login(val.username, val.password)
-        .subscribe( () => {
-          this.auth.profile()
-            .subscribe( (authorized: boolean) => {
-              if (authorized) {
-                this.router.navigate(['/admin']);
-              }
-            });
+        .subscribe( (data: Token) => {
+          if(this.auth.profile(data)) {
+            this.router.navigate(['/admin']);
+          }
         }, (err) => {
           console.error(err);
         });
