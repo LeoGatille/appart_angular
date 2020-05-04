@@ -55,7 +55,7 @@
     <div class="wine-footer col-md-5 col-sm-12">
       <div class="wine-bottom">
         <div class="color">{{selector.colorName || wine.color.colorName  }}</div>
-        <div *ngIf="!showAllStatus && wine.status.statusName !== 'En stock'" class="current-status">*{{wine.status.statusName}}</div>
+        <div *ngIf="!showAllStatus && wine.status.id !== 1" class="current-status">*{{wine.status.statusName}}</div>
       </div>
       <div *ngIf="showAllStatus" class="all-status-container">
         <div *ngFor="let status of allStatus">

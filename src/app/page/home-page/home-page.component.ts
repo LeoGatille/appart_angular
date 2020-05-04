@@ -15,13 +15,15 @@ export class HomePageComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
   ngOnInit() {
-    this.messageService.getMessage()
-      .subscribe((message: any) => {
-        console.log('message = ', message);
-        if (message[0].display) {
-          this.launchModalCreation();
-        }
-      });
+    if(!this.messageService.messageAppeared) {
+      this.messageService.getMessage()
+        .subscribe((message: any) => {
+          console.log('message = ', message);
+          if (message[0].display) {
+            this.launchModalCreation();
+          }
+        });
+    }
    }
 
   launchModalCreation() {
@@ -32,5 +34,6 @@ export class HomePageComponent implements OnInit {
       message: true,
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(() => this.messageService.messageAppeared = true);
   }
 }

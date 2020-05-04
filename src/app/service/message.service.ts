@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class MessageService {
-
+  public messageAppeared = false;
   private uri = `${Globals.APP_API_URL}/message`;
   constructor(
     private http: HttpClient

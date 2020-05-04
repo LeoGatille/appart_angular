@@ -5,8 +5,11 @@ export interface DataToken {
   getUser() : string;
 }
 export class Token implements DataToken{
+  constructor(token:string) {
+    this.token = token;
+  }
   token: string | null;
-  public getData() {
+  public getData(): string {
     let tokenArray = this.token.split('.');
     return atob(tokenArray[1]);
   }

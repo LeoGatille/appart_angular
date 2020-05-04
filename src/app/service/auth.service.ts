@@ -28,7 +28,7 @@ export class AuthService {
           // SAUVER MON TOKEN DANS LOCALSTORAGE
           localStorage.setItem(Globals.APP_USER_TOKEN, data.token);          
         }
-        return Object.assign(new Token, data);
+        return new Token(data.token);
       }));
   }
   logout() {
@@ -44,15 +44,6 @@ export class AuthService {
       return true;
     }
     return false;
-    // return this.httpClient
-      // .get(this.uriProfile, {})
-      // .pipe(map( (user: User) => {
-      //   if (user) {
-      //     localStorage.setItem(Globals.APP_USER, JSON.stringify(user));
-      //     return true;
-      //   }
-      //   return false;
-      // }));
   }
 
   public get tokenData(): string {
@@ -75,10 +66,11 @@ export class AuthService {
 
   public isConnected(): boolean {
     if(this.tokenData) {
-      const token: Token = new Token();
-
-      token.token = this.tokenData;
+      const token: Token = new Token(this.tokenData);
+      
       return  token.isValid();
+
+      return new Token(this.tokenData).isValid();
     }
     return false;
   }
