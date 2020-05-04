@@ -1,99 +1,106 @@
-<div style="min-height:calc(100vh - 158px) ">
-<div class="header col-12" style="background-color: black; padding-top: 50px">
-  <div >
-   <h1 class="great-title"> Soirées Spéciales</h1>
-  </div>
-  <div class="counter-container">
-    <div class="counter">
-     {{newEventsList.length}} Soirées Prévues
+<div style="min-height:calc(100vh - 158px); overflow-y: hidden;">
+  <div style="background-color: black; height: 100%; width: 100%; position: fixed; z-index: 1; overflow: hidden;">
+    <div style="position: relative; z-index:2; height: 100%; width: 100%; bottom: 0; right: 0; overflow: hidden;" class="toto">
     </div>
   </div>
-</div>
-<div  *ngFor="let newEvent of newEventsList" class="row" style="padding-bottom: 150px">
-<div class="col-3"></div>
-<div  class="col-lg-9 col-md-12">
-  <div class="row">
-    <div>
-      <h4 class="date">{{newEvent.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
+  <div style="height: 100%; width: 100%; position: relative; z-index: 3;">
+    <div class="header col-12" style=" padding-top: 50px">
+      <div>
+        <h1 class="great-title"> Soirées Spéciales</h1>
+      </div>
+      <div class="counter-container">
+        <div class="counter">
+          {{newEventsList.length}} Soirées Prévues
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="row" >
-    <h3 class="title">{{newEvent.eventName}}</h3>
-  </div>
-  <div class="row">
-    <div class="prix">Prix avec boissons : <b>{{newEvent.realPriceDrink}}&nbsp;&nbsp;</b></div>
-    <div class="prix">Prix sans boissons : <b>{{newEvent.realPriceNoDrink}}</b></div>
-  </div>
-  <div class="row">
-    <div>
-      <p>{{newEvent.eventDescription}}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="container-type col-lg-4 col-sm-12">
-      <h3 class="type-title">Entrée</h3>
-      <div class="line"></div>
-      <div *ngFor="let entree of newEvent.entrees">
-        <div>
-          <div class="main-container">
-            <div class="header row" >
-              <h2 >{{entree.foodName}}
-              </h2>
+    <div *ngFor="let newEvent of newEventsList" class="row" style="padding-bottom: 150px">
+      <div class="col-3"></div>
+      <div class="col-lg-9 col-md-12">
+        <div class="row">
+          <div>
+            <h4 class="date">{{newEvent.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
+          </div>
+        </div>
+        <div class="row">
+          <h3 class="title">{{newEvent.eventName}}</h3>
+        </div>
+        <div class="row">
+          <div class="prix">Prix avec boissons : <b>{{newEvent.realPriceDrink}}&nbsp;&nbsp;</b></div>
+          <div class="prix">Prix sans boissons : <b>{{newEvent.realPriceNoDrink}}</b></div>
+        </div>
+        <div class="row">
+          <div>
+            <p>{{newEvent.eventDescription}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="container-type col-lg-4 col-sm-12">
+            <h3 class="type-title">Entrée</h3>
+            <div class="line"></div>
+            <div *ngFor="let entree of newEvent.entrees">
+              <div>
+                <div class="main-container">
+                  <div class="header row">
+                    <h2>{{entree.foodName}}
+                    </h2>
+                  </div>
+                  <div class="col-6"></div>
+                </div>
+                <div class="text-container">
+                  <p class="description">
+                    {{entree.foodDescription}}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="col-6"></div>
           </div>
-          <div class="text-container">
-            <p class="description">
-              {{entree.foodDescription}}
-            </p>
+  
+          <div class="container-type  col-lg-4 col-sm-12">
+            <h3 class="type-title">Plats</h3>
+            <div class="line"></div>
+            <div *ngFor="let plat of newEvent.plats">
+              <div>
+                <div class="main-container">
+                  <div class="header row">
+                    <h2>{{plat.foodName}}
+                    </h2>
+                  </div>
+                  <div class="col-6"></div>
+                </div>
+                <div class="text-container">
+                  <p class="description">
+                    {{plat.foodDescription}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container-type  col-lg-4 col-sm-12">
+            <h3 class="type-title">Desserts</h3>
+            <div class="line"></div>
+            <div *ngFor="let dessert of newEvent.dessert">
+              <div>
+                <div class="main-container">
+                  <div class="header row">
+                    <h2>{{dessert.foodName}}
+                    </h2>
+                  </div>
+                  <div class="col-6"></div>
+                </div>
+                <div class="text-container">
+                  <p class="description">
+                    {{dessert.foodDescription}}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-  <div class="container-type  col-lg-4 col-sm-12">
-    <h3 class="type-title">Plats</h3>
-    <div class="line"></div>
-    <div  *ngFor="let plat of newEvent.plats">
-      <div >
-        <div class="main-container">
-          <div class="header row" >
-            <h2 >{{plat.foodName}}
-            </h2>
-          </div>
-          <div class="col-6"></div>
-        </div>
-        <div class="text-container">
-          <p class="description">
-            {{plat.foodDescription}}
-          </p>
-        </div>
-      </div>
-    </div>
   </div>
-  <div class="container-type  col-lg-4 col-sm-12">
-    <h3 class="type-title">Desserts</h3>
-    <div class="line"></div>
-    <div *ngFor="let dessert of newEvent.dessert">
-      <div >
-        <div class="main-container">
-          <div class="header row" >
-            <h2 >{{dessert.foodName}}
-            </h2>
-          </div>
-          <div class="col-6"></div>
-        </div>
-        <div class="text-container">
-          <p class="description">
-            {{dessert.foodDescription}}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-</div>
-</div>
+   
 
 </div>
 
@@ -193,4 +200,3 @@
 <!--      <button mat-flat-button class="reservation">Réserver</button>-->
 <!--    </div>-->
 <!--  </div>-->
-
