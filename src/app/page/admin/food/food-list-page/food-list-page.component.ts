@@ -59,14 +59,6 @@ export class FoodListPageComponent implements OnInit {
         this.allTypes = types;
       });
   }
-  displayFn(allergen: Allergen): string {
-    return allergen ? allergen.allergenName : '';
-  }
-  callBackFilter(filterValue) {
-    return (allergen) => {
-      return allergen.allergenName.toLowerCase().includes(filterValue);
-    };
-  }
   getAllergenId($event: Allergen) {
     if (!$event) {
       return;
@@ -113,7 +105,7 @@ export class FoodListPageComponent implements OnInit {
     ).subscribe((success: Food) => {
         this.toast.success('Ajout de ' + success.foodName);
         this.getFood();
-        this.createForm();
+        this.resetForm();
         this.allergenNames = [];
         this.allAllergens = [];
       },
@@ -121,6 +113,11 @@ export class FoodListPageComponent implements OnInit {
         this.toast.error(error.error);
         console.log(error);
       });
+  }
+  resetForm() {
+    this.foodForm.reset();
+    this.allergensId = [];
+    this.allergenNames = [];
   }
   createForm() {
     this.foodForm = this.fb.group({

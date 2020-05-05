@@ -3,7 +3,7 @@
   <div class="header row" >
     <h2 class="title">{{food.foodName}}
     </h2>
-    <div *ngIf="isConnected()" class="container-btn">
+    <div *ngIf="isConnected() && administration" class="container-btn">
       <button mat-mini-fab class="edit-btn"
               (click)="editFood(food)"
       >

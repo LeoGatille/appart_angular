@@ -18,6 +18,7 @@ import {ToastrService} from 'ngx-toastr';
 export class FoodRowComponent implements OnInit {
 
   @Input() food: Food;
+  @Input() administration = false;
   @Output() editData = new EventEmitter<any>();
   loading = true;
  // showAllergens = false;
@@ -74,7 +75,7 @@ export class FoodRowComponent implements OnInit {
   patchFood(id) {
     this.foodService.patchFood(id, this.getBoolean(this.patchForm.value.check))
       .subscribe((res) => {
-        console.log(res);
+        this.toast.success('Modification effectuée');
       });
   }
   getBoolean(val) {

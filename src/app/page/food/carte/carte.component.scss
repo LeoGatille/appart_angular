@@ -129,10 +129,51 @@ $serif: 'Merriweather', sans-serif ;
         text-align: left;
       }
     }
-
-
   }
 
 
+  
+}
+.content-container {
+  display: flex;
+  flex-direction: row-reverse;
+  padding-left: 50px;
+  margin-bottom: 50px;
+}
+.right-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 640px;
+  
+  .pattern {
+    background-image: url("http://api.bundles.do/uploads/test/appart_contour_fleurs.svg");
+    height: 2000px;
+    width: 1000px;
+    background-position: right top -15px;
+    background-repeat: no-repeat;
+    transform: rotate(180deg);  
+    position: absolute;
+    right: -250px;
+    bottom: 0;
+  }
+}
+@media screen and (max-width: 640px) {
+  .content-container {
+    display: block;
+    padding-left: 10px;
+    margin-bottom: 50px;
+    .pattern{
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 1500px) {
+  .content-container {
+    padding-bottom: 50px;
+    .pattern{
+      display: none;
+    }
+  }
 
 }
