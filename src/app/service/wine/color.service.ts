@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -26,7 +27,11 @@ export class ColorService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create( colorName: string) {
-    return this.http.post(`${this.uri}/admin/create`, { colorName });
+    const result = this.http.post(`${this.uri}/admin/create`, { colorName })
+      .pipe(
+        map(response => Object.assign(new Color, response))
+      );
+    return result;
   }
   public editColor( colorName: string, id ) {
     return this.http.put(`${this.uri}/admin/${id}/edit`, { colorName });

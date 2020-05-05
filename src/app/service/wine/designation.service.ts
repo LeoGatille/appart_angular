@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -26,7 +27,11 @@ export class DesignationService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create(designationName: string) {
-    return this.http.post(`${this.uri}/admin/create`, {designationName});
+    const result = this.http.post(`${this.uri}/admin/create`, {designationName})
+      .pipe(
+        map(response => Object.assign(new Designation(), response))
+      );
+    return result;
   }
   public editDesignation( designationName: string, id ) {
     return this.http.put(`${this.uri}/admin/${id}/edit`, {designationName});

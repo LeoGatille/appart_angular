@@ -1,3 +1,4 @@
+import { log } from 'util';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -26,7 +27,11 @@ export class LabelService {
   //  return this.http.get(`${this.uri}`);
   // }
   public create(labelName: string) {
-    return this.http.post(`${this.uri}/admin/create`, {labelName});
+    const result = this.http.post(`${this.uri}/admin/create`, {labelName})
+      .pipe(
+        map(value => Object.assign(new Label(), value))
+        );
+    return result;
   }
   public editLabel( labelName: string, id ) {
     return this.http.put(`${this.uri}/admin/${id}/edit`, {labelName});

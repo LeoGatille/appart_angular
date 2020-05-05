@@ -41,7 +41,7 @@ export class LabelListPageComponent implements OnInit {
   createLabel($event) {
     this.labelService.create($event.nameControl)
       .subscribe((label: Label) => {
-        this.toast.success('Ajout effectué' + ' "' + label.labelName + '"');
+        this.toast.success('Ajout effectué' + ' "' + label.getName() + '"');
         this.listToAdd.push(label);
       },
       error => {

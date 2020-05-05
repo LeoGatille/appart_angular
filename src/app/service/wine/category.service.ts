@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -25,7 +26,11 @@ export class CategoryService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create( categoryName: string ) {
-    return this.http.post(`${this.uri}/admin/create`, {categoryName});
+    const result =  this.http.post(`${this.uri}/admin/create`, {categoryName})
+      .pipe(
+        map(response => Object.assign(new Category, response))
+      );
+    return result;
   }
   public getOneCategory(id: number) {
     return this.http.get(`${this.uri}/${id}`);

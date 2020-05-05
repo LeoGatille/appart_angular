@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -22,13 +23,12 @@ export class AllergenService {
     .then(list => list.map(raw => Object.assign(new Allergen, raw)));
     return this.allAllergensPromise;
   }
-
-  // public getAllAllergens() {
-  //   return this.http.get(`${this.uri}`);
-  // }
   public create(allergenName) {
-    console.log('serviceCreate', allergenName);
-    return this.http.post(`${this.uri}/admin/create`, {allergenName});
+   const reslut = this.http.post(`${this.uri}/admin/create`, {allergenName})
+      .pipe(
+        map(response => Object.assign(new Allergen(), response))
+      );
+    return reslut;
   }
   public deleteAllergen(id: number) {
     console.log('serviceDelete', id);

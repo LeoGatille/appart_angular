@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Globals} from '../../globals';
 import {HttpClient} from '@angular/common/http';
@@ -26,8 +27,11 @@ export class VintageService {
   //   return this.http.get(`${this.uri}`);
   // }
   public create(vintageYear: number) {
-    console.log('vintageService !');
-    return this.http.post(`${this.uri}/admin/create`, { vintageYear });
+    const result = this.http.post(`${this.uri}/admin/create`, { vintageYear })
+      .pipe(
+        map(response => Object.assign(new Vintage(), response))
+      );
+    return result;
   }
   public editVintage( vintageYear: number, id ) {
     return this.http.put(`${this.uri}/admin/${id}/edit`, {vintageYear});
