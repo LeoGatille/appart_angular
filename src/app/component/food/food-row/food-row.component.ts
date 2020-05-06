@@ -21,9 +21,8 @@ export class FoodRowComponent implements OnInit {
   @Input() administration = false;
   @Output() editData = new EventEmitter<any>();
   loading = true;
- // showAllergens = false;
-  tooltip: string = null;
   allAllergens: string[] = [];
+  allergensList: string = null;
   patchForm: FormGroup;
   user: User;
   constructor(
@@ -44,19 +43,14 @@ export class FoodRowComponent implements OnInit {
     this.user = this.auth.currentUser;
     return this.auth.isConnected();
   }
-  prepareTooltip() {
-    this.tooltip = this.allAllergens.join();
-    console.log('tooltip = ', this.tooltip);
-    this.loading = false;
-  }
   getAllergensNames() {
     this.food.allergen.forEach(allergen => {
       if (this.allAllergens.indexOf(allergen.allergenName)) {
-        this.allAllergens.push(allergen.allergenName);
+        this.allAllergens.push(allergen.allergenName); 
       }
-
     });
-    this.prepareTooltip();
+    this.allergensList = this.allAllergens.join();
+    this.loading = false;
   }
   createForm() {
     this.patchForm = this.fb.group({
@@ -78,6 +72,7 @@ export class FoodRowComponent implements OnInit {
         this.toast.success('Modification effectuée');
       });
   }
+
   getBoolean(val) {
     let checked = 2;
     if (val === true) {
@@ -86,7 +81,6 @@ export class FoodRowComponent implements OnInit {
     return checked;
   }
 
-
   delete(food: Food) {
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
@@ -94,11 +88,7 @@ export class FoodRowComponent implements OnInit {
       suppr: food.foodName,
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
+    dialogRef.afterClosed().subscribe(data =>  {
         if (data) {
           this.foodService.deleteFood(this.food.id)
             .subscribe(() => {
@@ -120,8 +110,7 @@ export class FoodRowComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
 
-    dialogRef.afterClosed().subscribe(
-      data =>  {
+    dialogRef.afterClosed().subscribe(data =>  {
         this.editData.emit();
         this.getAllergensNames();
       }
