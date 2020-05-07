@@ -2,7 +2,6 @@
 // $serif: 'IBM Plex Serif', serif;
 $serif: 'Merriweather', sans-serif ;
 
-
 .row {
   margin: 0;
 }
@@ -131,8 +130,61 @@ $serif: 'Merriweather', sans-serif ;
   padding: 50px 100px 50px 100px;
   height: max-content;
   background-color: black;
+  position: relative;
+  overflow: hidden;
+  .pattern-right-container {
+  height: inherit;
+  width: 100%;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow-y: hidden;
+  transform: translate(20px);
+  .pattern-right {
+    z-index: 1;
+    height: 700px;
+    width: 626px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    background-image: url("http://api.bundles.do/uploads/test/appart_contour_fleurs.svg");
+    transform: rotate(141deg);
+  }
+  
+}
+.pattern-left-container {
+  height: inherit;
+  width: 100%;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-y: hidden;
+  transform: translate(0, -35px);
+  .pattern-left {
+    z-index: 1;
+    height: 1104px;
+    width: 696px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    background-image: url("http://api.bundles.do/uploads/test/appart_contour_fleurs.svg");
+    transform: rotate(320deg);
+  }
+  
+}
+
+
 
   h2 {
+    position: relative;
+
+    z-index: 2;
     color: #FFFFFF;
     font-family: $serif;
     font-style: italic;
@@ -140,10 +192,16 @@ $serif: 'Merriweather', sans-serif ;
     font-weight: bold;
   }
   .top {
+    position: relative;
+
+    z-index: 2;
     text-align: left;
     padding-left: 100px;
   }
   .bottom {
+    position: relative;
+
+    z-index: 2;
     text-align: right;
     padding-right: 100px;
   }
