@@ -37,9 +37,8 @@
 
         <div class="color-category row">
           <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="setColor($event)"
-                               [arrayPromise]="colorPromise"
-                               [parentModel]="newColor"
+            <app-auto-complete (addElement)="stockWineItems('color', $event)"
+                               [arrayPromise]="promiseContainer.colorPromise"
                                [myControl]="colorControl"
                                [creation]="true"
                                [nameField]="true"
@@ -48,9 +47,8 @@
             ></app-auto-complete>
           </div>
           <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="setCategory($event)"
-                               [arrayPromise]="categoryPromise"
-                               [parentModel]="newCategory"
+            <app-auto-complete (addElement)="stockWineItems('category', $event)"
+                               [arrayPromise]="promiseContainer.categoryPromise"
                                [myControl]="categoryControl"
                                [creation]="true"
                                [nameField]="true"
@@ -62,9 +60,8 @@
         </div>
         <div class="designation-label row">
           <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="setDesignation($event)"
-                               [arrayPromise]="designationPromise"
-                               [parentModel]="newDesignation"
+            <app-auto-complete (addElement)="stockWineItems('designation', $event)"
+                               [arrayPromise]="promiseContainer.designationPromise"
                                [myControl]="designationControl"
                                [creation]="true"
                                [nameField]="true"
@@ -74,9 +71,8 @@
             </app-auto-complete>
           </div>
           <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="setLabel($event)"
-                               [arrayPromise]="labelPromise"
-                               [parentModel]="newLabel"
+            <app-auto-complete (addElement)="stockWineItems('label', $event)"
+                               [arrayPromise]="promiseContainer.labelPromise"
                                [myControl]="labelControl"
                                [creation]="true"
                                [nameField]="true"
@@ -89,9 +85,8 @@
 
         <div class="vintage-status row">
           <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="setVintage($event)"
-                               [arrayPromise]="vintagePromise"
-                               [parentModel]="newVintage"
+            <app-auto-complete (addElement)="stockWineItems('vintage', $event)"
+                               [arrayPromise]="promiseContainer.vintagePromise"
                                [myControl]="vintageControl"
                                [creation]="true"
                                [numberField]="true"
@@ -128,13 +123,13 @@
 
 <div class="filter-container">
   <div>
-    <button mat-flat-button (click)="getSelector('category')">Catégorie</button>
-    <button mat-flat-button (click)="getSelector('designation')">Appellation</button>
-    <button mat-flat-button (click)="getSelector('color')">Couleur</button>
+    <button mat-flat-button (click)="getSelector('categoryPromise')">Catégorie</button>
+    <button mat-flat-button (click)="getSelector('designationPromise')">Appellation</button>
+    <button mat-flat-button (click)="getSelector('colorPromise')">Couleur</button>
   </div>
   <div>
-    <button mat-flat-button (click)="getSelector('label')">Label</button>
-    <button mat-flat-button (click)="getSelector('vintage')">Millésime</button>
+    <button mat-flat-button (click)="getSelector('labelPromise')">Label</button>
+    <button mat-flat-button (click)="getSelector('vintagePromise')">Millésime</button>
   </div>
 </div>
 

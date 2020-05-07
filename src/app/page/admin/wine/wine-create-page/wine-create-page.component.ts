@@ -1,3 +1,5 @@
+import { element } from 'protractor';
+import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
 import {Wine} from '../../../../class/wine/wine';
 import {Status} from '../../../../class/wine/status';
@@ -25,6 +27,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class WineCreatePageComponent implements OnInit {
 
+  loading = true;
 
   errorLog: string;
   error = false;
@@ -36,10 +39,6 @@ export class WineCreatePageComponent implements OnInit {
   designation: Designation;
   label: Label;
   vintage: Vintage;
-  labelName: string;
-  loading = true;
-  colors: any[];
-  categories: any[];
   wineForm: FormGroup;
   colorControl: FormControl;
   categoryControl: FormControl;
@@ -47,17 +46,7 @@ export class WineCreatePageComponent implements OnInit {
   labelControl: FormControl;
   vintageControl: FormControl;
   statusControl: FormControl;
-  activateButton = true;
 
- 
-
-
-
-  newColor: Color = null;
-  newCategory: Category = null;
-  newDesignation: Designation = null;
-  newVintage: Vintage = null;
-  newLabel: Label = null;
   wines: Wine[];
   colorPromise: any = null;
   categoryPromise: any = null;
@@ -65,84 +54,97 @@ export class WineCreatePageComponent implements OnInit {
   labelPromise: any = null;
   vintagePromise: any = null;
 
+  
+  wineItemsMap = new Map();
   selector: any[] = [];
-  option = 'category';
+  option: any = null;
 
-  constructor( private colorService: ColorService,
-               private categoryService: CategoryService,
-               private designationService: DesignationService,
-               private labelService: LabelService,
-               private vintageService: VintageService,
-               private statusService: StatusService,
-               private wineService: WineService,
-               private fb: FormBuilder,
-               private dialog: MatDialog,
-               private toast: ToastrService,
+  promiseContainer = {
+    colorPromise : (force) => this.colorService.getAllColors(force),
+    categoryPromise : (force) => this.categoryService.getAllCategories(force),
+    designationPromise : (force) => this.designationService.getAllDesignations(force),
+    labelPromise : (force) => this.labelService.getAllLabels(force),
+    vintagePromise : (force) => this.vintageService.getAllVintages(force),
+    status: this.statusService.getAllStatus()
+  .subscribe((status: Status[]) => {
+  this.allStatus = status;
+  })
+  }
 
+  refreshElements = (key) => {
+    return new Promise((resolve) => {
+      resolve(this.getElements(key, true));
+    }).then(data => {return data});
+  } 
+  constructor( 
+    private colorService: ColorService,
+    private categoryService: CategoryService,
+    private designationService: DesignationService,
+    private labelService: LabelService,
+    private vintageService: VintageService,
+    private statusService: StatusService,
+    private wineService: WineService,
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private toast: ToastrService,
 ) { }
-
   ngOnInit() {
-  // this.getAllWines();
-  this.getElements();
+  //this.getElements(true);
   this.createForm();
-  this.getSelector(this.option);
+  this.getSelector('vintagePromise', true);
   this.loading = false;
   }
-  getSelector(option, force = false) {
-    if (force) {
-      this.getElements(force);
-    }
-    if (option === 'category') {
-      this.categoryPromise().then((data: Category[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'label') {
-      this.labelPromise().then((data: Label[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'designation') {
-      this.designationPromise().then((data: Designation[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'color') {
-      this.colorPromise().then((data: Color[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'vintage') {
-      this.vintagePromise().then((data: Vintage[]) => {
-        this.selector = data;
-      });
-    }
-  }
-  delete($event) {
-    console.log('event = ', $event);
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: $event.wineName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.wineService.deleteWine($event.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée');
-              this.getSelector(this.option, true);
-            });
-        }
-      }
-    );
+  getSelector(key: string, force = false) {
+    this.option = key;
+    if(force) {
+     const elementPromise = this.refreshElements(key); 
+     elementPromise.then(data => {
+       data(force).then((tab: any[]) => {
+         this.selector = tab;
+       })
+       console.log('promiseData = ', data)
+     })
+    } else {
+      const elementPromise = this.getElements(key);
+      console.log('elemnetPromise = ', elementPromise)
+      elementPromise().then((data: any[]) => {
+        console.log('Mais pourquoi ? = ', data)
+        this.selector = data;
+      })
+    }
+    
   }
+  getElements(key:string = 'category', force = false) {
+    return this.promiseContainer[key];
+  }
+  // getSelector(option, force = false) {
+  //   this.option = option !== this.option ? option : this.option;
+  //   if (force) {
+  //     const elementsPromise = new Promise((resolve) => {
+  //       console.log('step1')
+  //       this.getElements(force);
+  //       resolve(() => {this.getSelector(option); console.log('fuick'); return});
+  //     });'LES PROMISES PUE LA MERDE !!!'
+
+  //   }
+  //   option.then((data: any[]) => {
+  //     console.log('data = ', data)
+  //     this.selector = data;
+  //   } );
+  // }
+  // getElements(force = false) {
+  //   this.colorPromise = (bool) => this.colorService.getAllColors(force);
+  //   this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
+  //   this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
+  //   this.labelPromise = (bool) => this.labelService.getAllLabels(force);
+  //   this.vintagePromise = (bool) => this.vintageService.getAllVintages(force);
+  //   this.statusService.getAllStatus()
+  //     .subscribe((status: Status[]) => {
+  //     this.allStatus = status;
+  //   });
+  // }
   createForm() {
-    console.log('createForm');
     this.colorControl = new FormControl('', Validators.required);
     this.categoryControl = new FormControl('', Validators.required);
     this.designationControl = new FormControl('', Validators.required);
@@ -160,78 +162,37 @@ export class WineCreatePageComponent implements OnInit {
       priceControl : ['', Validators.required]
     });
   }
-
-  getElements(force = false) {
-      this.colorPromise = (bool) => this.colorService.getAllColors(force);
-      this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
-      this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
-      this.labelPromise = (bool) => this.labelService.getAllLabels(force);
-      this.vintagePromise = (bool) => this.vintageService.getAllVintages(force);
-      this.statusService.getAllStatus()
-        .subscribe((status: Status[]) => {
-        this.allStatus = status;
-      });
-  }
-  setColor($event: Color) {
-    if (!$event) {
+  stockWineItems(key: string, item) {
+    if(!item) {
       return;
     }
-    this.color = $event;
-    this.newColor = $event;
+    this.wineItemsMap.set(key, item);
+    console.log('map = ', this.wineItemsMap)
   }
-  setCategory($event: Category) {
-    if (!$event) {
-      return;
-    }
-    this.category = $event;
-    this.newCategory = $event;
-  }
-  setDesignation($event: Designation) {
-    if (!$event) {
-      return;
-    }
-    this.designation = $event;
-    this.newDesignation = $event;
-  }
-  setLabel($event: Label) {
-    if (!$event) {
-      return;
-    }
-    this.label = $event;
-    this.newLabel = $event;
-  }
-  setVintage($event: Vintage) {
-    if (!$event) {
-      return;
-    }
-    this.vintage = $event;
-    this.newVintage = $event;
-  }
-  toastError(message : string) {
-   this.toast.error(message + ' n\'existe pas');
-   return null;
+  setNewWine() {
+    const newWine = new Wine();
+    newWine.status = this.wineForm.value.statusControl;
+    newWine.wineName = this.wineForm.value.nameControl;
+    newWine.winePrice = this.wineForm.value.priceControl;
+    newWine.category = this.wineItemsMap.get('category');
+    newWine.designation = this.wineItemsMap.get('designation');
+    newWine.color = this.wineItemsMap.get('color');
+    newWine.label = this.wineItemsMap.get('label');
+    newWine.vintage = this.wineItemsMap.get('vintage');
+    return newWine;
   }
   validate() {
-    const vin = new Wine();
-    vin.status = this.wineForm.value.statusControl;
-    vin.wineName = this.wineForm.value.nameControl;
-    vin.winePrice = this.wineForm.value.priceControl;
-    vin.category = this.category ? this.category : this.toastError('la catégorie selectionnée');
-    vin.designation = this.designation;
-    vin.color = this.color;
-    vin.label = this.label;
-    vin.vintage = this.vintage;
+    const vin = this.setNewWine();
     this.wineService.createWine(
-      vin.category.id,
-      vin.designation.id,
-      vin.color.id,
-      vin.label.id,
-      vin.wineName,
-      vin.winePrice * 100,
-      vin.vintage.id,
-      vin.status.id
-    )
-      .subscribe((success: Wine) =>  {
+        vin.category.id,
+        vin.designation.id,
+        vin.color.id,
+        vin.label.id,
+        vin.wineName,
+        vin.winePrice * 100,
+        vin.vintage.id,
+        vin.status.id
+    ).subscribe((success: Wine) =>  {
           this.toast.success('Ajout de ' + success.wineName);
           console.log(success);
           this.createForm();
@@ -240,23 +201,30 @@ export class WineCreatePageComponent implements OnInit {
         },
         error => {
           this.toast.error(error.error);
-          console.log('oh my...', error);
-          //this.createErrorLog(error);
-
         });
   }
-
   resetValues() {
-    this.color = null;
-    this.category= null;
-    this.designation= null;
-    this.label= null;
-    this.vintage= null;
+    this.wineItemsMap.clear()
   }
-
-  createErrorLog(error) {
-    this.errorLog = error;
-    this.error = true;
+  delete($event) {
+    console.log('event = ', $event);
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: $event.wineName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data =>  {
+        console.log('data === ', data);
+        if (data) {
+          this.wineService.deleteWine($event.id)
+            .subscribe(() => {
+              this.toast.success('Suppression effectuée');
+              this.getSelector(this.option, true);
+            });
+        }
+      }
+    );
   }
-
 }
