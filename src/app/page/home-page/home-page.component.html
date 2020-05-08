@@ -1,18 +1,9 @@
 
 
-<!--<app-message></app-message>-->
 <div class="row home">
   <div class=" picture-container col-12">
 
     <h1>l'appart</h1>
-<!--    <div class="reserv-news col-md-4 col-sm-6">-->
-<!--      <button class="reservations col-6" mat-flat-button>-->
-<!--        <a href="">Reservations</a>-->
-<!--      </button>-->
-<!--      <button class="news-letter col-6" mat-flat-button>-->
-<!--        News letter-->
-<!--      </button>-->
-<!--    </div>-->
     <div class="container-btn row" style="justify-content: center">
         <button mat-flat-button class="btn-reservation" routerLink="/reservations" >Réservations</button>
     </div>
@@ -21,7 +12,7 @@
 
 <div class="row carte-wine ">
   <div class="carte col-md-6 col-sm-12">
-    <a href="/carte">
+    <a routerLink="/carte">
       <div class="overlay"><h2>La carte</h2></div>
       <div class="mobile-only">
         <h2>La carte</h2>
@@ -31,13 +22,13 @@
 
   </div>
   <div class="vins col-md-6 col-sm-12">
-    <a href="/vins">
+    <a routerLink="/vins">
       <div class="overlay"><h2>Les vins</h2></div>
     </a>
   </div>
 </div>
 
-<div class="event" >
+<div class="event" routerLink="/soirees" >
   <div class="pattern-right-container">
     <div class="pattern-right"></div>
   </div>
@@ -54,11 +45,6 @@
   </div>
 
 </div>
-<!--<a href="/soirees">-->
-
-
-
-<!--</a>-->
 
 <div class="row chef">
   <div class="picture col-md-12 col-lg-4"></div>
@@ -78,13 +64,13 @@
   </div>
 </div>
 <div class="reservation row">
-  <a href="/reservations">
+  <a routerLink="/reservations">
     <div class="overlay"><h2>Réservation</h2></div>
   </a>
 </div>
 
 <div class="gallery row">
-  <a href="/galerie">
+  <a routerLink="/galerie">
     <div class="overlay"><h2>Galerie</h2></div>
   </a>
 </div>

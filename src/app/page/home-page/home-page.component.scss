@@ -125,6 +125,7 @@ $serif: 'Merriweather', sans-serif ;
 }
 
 .event {
+  cursor: pointer;
   display: flex;
   justify-content: center;
   padding: 50px 100px 50px 100px;
@@ -132,6 +133,11 @@ $serif: 'Merriweather', sans-serif ;
   background-color: black;
   position: relative;
   overflow: hidden;
+  &:hover {
+   h2 {
+     text-decoration: underline;
+   } 
+  }
   .pattern-right-container {
   height: inherit;
   width: 100%;
@@ -288,7 +294,6 @@ $serif: 'Merriweather', sans-serif ;
     background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
     background-position: center;
     background-size: cover;
-    height: 800px;
   }
   .histoire {
     background: white;
