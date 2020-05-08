@@ -1,3 +1,4 @@
+import { AutoCompleteInterface } from './../../../../class/autoCompleteInteface';
 import { element } from 'protractor';
 import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
@@ -66,9 +67,9 @@ export class WineCreatePageComponent implements OnInit {
     labelPromise : (force) => this.labelService.getAllLabels(force),
     vintagePromise : (force) => this.vintageService.getAllVintages(force),
     status: this.statusService.getAllStatus()
-  .subscribe((status: Status[]) => {
-  this.allStatus = status;
-  })
+      .subscribe((status: Status[]) => {
+        this.allStatus = status;
+      })
   }
 
   refreshElements = (key) => {
@@ -91,7 +92,7 @@ export class WineCreatePageComponent implements OnInit {
   ngOnInit() {
   //this.getElements(true);
   this.createForm();
-  this.getSelector('vintagePromise', true);
+  this.getSelector('categoryPromise', true);
   this.loading = false;
   }
 
@@ -99,7 +100,7 @@ export class WineCreatePageComponent implements OnInit {
     this.option = key;
     if(force) {
      const elementPromise = this.refreshElements(key); 
-     elementPromise.then(data => {
+     elementPromise.then((data: any) => {
        data(force).then((tab: any[]) => {
          this.selector = tab;
        })
@@ -108,9 +109,8 @@ export class WineCreatePageComponent implements OnInit {
     } else {
       const elementPromise = this.getElements(key);
       console.log('elemnetPromise = ', elementPromise)
-      elementPromise().then((data: any[]) => {
-        console.log('Mais pourquoi ? = ', data)
-        this.selector = data;
+      elementPromise().then((elementTab: any[]) => {
+        this.selector = elementTab;
       })
     }
     
@@ -118,32 +118,7 @@ export class WineCreatePageComponent implements OnInit {
   getElements(key:string = 'category', force = false) {
     return this.promiseContainer[key];
   }
-  // getSelector(option, force = false) {
-  //   this.option = option !== this.option ? option : this.option;
-  //   if (force) {
-  //     const elementsPromise = new Promise((resolve) => {
-  //       console.log('step1')
-  //       this.getElements(force);
-  //       resolve(() => {this.getSelector(option); console.log('fuick'); return});
-  //     });'LES PROMISES PUE LA MERDE !!!'
-
-  //   }
-  //   option.then((data: any[]) => {
-  //     console.log('data = ', data)
-  //     this.selector = data;
-  //   } );
-  // }
-  // getElements(force = false) {
-  //   this.colorPromise = (bool) => this.colorService.getAllColors(force);
-  //   this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
-  //   this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
-  //   this.labelPromise = (bool) => this.labelService.getAllLabels(force);
-  //   this.vintagePromise = (bool) => this.vintageService.getAllVintages(force);
-  //   this.statusService.getAllStatus()
-  //     .subscribe((status: Status[]) => {
-  //     this.allStatus = status;
-  //   });
-  // }
+ 
   createForm() {
     this.colorControl = new FormControl('', Validators.required);
     this.categoryControl = new FormControl('', Validators.required);

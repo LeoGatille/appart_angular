@@ -137,7 +137,8 @@
   <mat-expansion-panel class="selector-container" *ngFor="let selected of selector" [expanded]="true">
     <mat-expansion-panel-header>
       <div class="selector">
-        {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
+        {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}} 
+        <span *ngIf="selected.wines.length <= 0"><i>*VIDE*</i></span>
       </div>
     </mat-expansion-panel-header>
 
