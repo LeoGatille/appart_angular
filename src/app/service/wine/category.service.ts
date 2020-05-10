@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Category} from '../../class/wine/category';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
 
@@ -14,12 +14,17 @@ export class CategoryService {
   constructor(
     private http: HttpClient
   ) { }
+
+    public reachMe(text: string = 'You reached me') {
+      console.log(text)
+    }
+
   public getAllCategories(force = false) {
     if (this.allCategoriesPromise && !force) {
       return Promise.resolve(this.allCategoriesPromise);
     }
     this.allCategoriesPromise = this.http.get<Category[]>(`${this.uri}`).toPromise()
-    .then(list => list.map(raw => Object.assign(new Category, raw)));
+    .then(list => list.map(raw => Object.assign(new Category(), raw)));
     return this.allCategoriesPromise;
   }
   // public getAllCategories() {

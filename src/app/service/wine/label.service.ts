@@ -20,7 +20,7 @@ export class LabelService {
       return Promise.resolve(this.allLabelsPromise);
     }
     this.allLabelsPromise = this.http.get<Label[]>(`${this.uri}`).toPromise()
-    .then(list => list.map(raw => Object.assign(new Label, raw)));
+    .then(list => list.map(raw => Object.assign(new Label(), raw)));
     return this.allLabelsPromise;
   }
   // public getAllLabels() {

@@ -39,7 +39,7 @@ export class AutoCompleteComponent implements OnInit {
   @Output() controlButton = new EventEmitter<any>();
   @Output() addElement = new EventEmitter<any>();
 
-  filteredElements: Observable<any[]>;
+  filteredElements: Observable<AutoCompleteInterface[]>;
   listOfElements: any[];
   constructor(
     public dialog: MatDialog,
@@ -47,6 +47,7 @@ export class AutoCompleteComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.arrayPromise().then((data: AutoCompleteInterface[]) => {
+      console.log('DATA = ', data)
       this.listOfElements = data;
       this.filteredElements = this.myControl.valueChanges
         .pipe(
@@ -61,7 +62,7 @@ export class AutoCompleteComponent implements OnInit {
     if (value && typeof value === 'string' ) {
       const filterValue = value.toLowerCase();
       return this.listOfElements.filter((element: AutoCompleteInterface) =>{ 
-        console.log('element = ', element);
+        
        return element.getName().toLowerCase().includes(filterValue);
       }); 
     }
@@ -74,7 +75,7 @@ export class AutoCompleteComponent implements OnInit {
       return this.listOfElements.filter(this.find(filterValue));
     }
   }
-  newDisplayFn(toDisplay: AutoCompleteInterface) : string {
+  newDisplayFn(toDisplay: AutoCompleteInterface) : string {    
     return toDisplay ? toDisplay.getName() : '';
   }
 

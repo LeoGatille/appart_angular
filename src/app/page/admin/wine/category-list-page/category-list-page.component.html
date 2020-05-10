@@ -12,7 +12,7 @@
   </div>
   <div *ngFor="let category of listToAdd">
     <p>{{category.categoryName}}</p>
-    <button (click)="editInit(category.id)">modifier</button>
+    <button (click)="edit(category)">modifier</button>
     <button (click)="delete(category)" >delete</button>
   </div>
 </div>

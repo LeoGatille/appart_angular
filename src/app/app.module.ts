@@ -1,5 +1,7 @@
+import { ServiceLocator } from './class/serviceLocator';
+import { DialogManger } from './class/dialogManager';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -99,6 +101,10 @@ import { GalerieComponent } from './page/galerie/galerie.component';
 import { ReservationComponent } from './page/reservation/reservation.component';
 import { MainComponent } from './page/admin/main/main.component';
 import { ToastrModule } from 'ngx-toastr';
+import { SuppressionDialogComponent } from './dialog/suppression-dialog/suppression-dialog.component';
+import { RouterBoxComponent } from './page/admin/main/router-box/router-box.component';
+import { CategoryService } from './service/wine/category.service';
+import { EditionModalComponent } from './dialog/edition-modal/edition-modal.component';
 
 @NgModule({
   declarations: [
@@ -166,6 +172,9 @@ import { ToastrModule } from 'ngx-toastr';
     GalerieComponent,
     ReservationComponent,
     MainComponent,
+    SuppressionDialogComponent,
+    RouterBoxComponent,
+    EditionModalComponent,
   ],
     imports: [
         MatAutocompleteModule,
@@ -202,10 +211,13 @@ import { ToastrModule } from 'ngx-toastr';
 
     ],
     entryComponents: [
+      EditionModalComponent,
       DialogComponent,
-      CustomTooltipComponent
+      CustomTooltipComponent,
+      SuppressionDialogComponent,
     ],
-  providers: [
+    providers: [
+    CategoryService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
@@ -213,4 +225,8 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(private injector: Injector) {
+      ServiceLocator.injector = injector;
+    }
+ }

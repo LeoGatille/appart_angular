@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>
+    Edition <i>{{name}}</i>
+</h1>
+<form *ngIf="!loading"
+      [formGroup]="createForm"
+      style="background: white;"
+>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput type="text"
+             placeholder="'Nom'"
+             autocomplete="Off"
+             formControlName="nameControl"
+             maxlength="255"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button mat-flat-button
+            [disabled]="createForm.invalid"
+            (click)="save()"
+            color="primary"
+    >
+      Envoyer
+    </button>
+  </div>
+</form>

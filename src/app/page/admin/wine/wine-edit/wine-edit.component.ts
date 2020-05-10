@@ -79,11 +79,11 @@ export class WineEditComponent implements OnInit {
   }
   createForm() {
     this.addSelector();
-    this.colorControl = new FormControl(Object.assign(new Color, this.wine.color), Validators.required);
-    this.categoryControl = new FormControl(Object.assign(new Category, this.wine.category), Validators.required);
-    this.designationControl = new FormControl(Object.assign(new Designation, this.wine.designation), Validators.required);
-    this.labelControl = new FormControl(Object.assign(new Label, this.wine.label), Validators.required);
-    this.vintageControl = new FormControl(Object.assign(new Vintage, this.wine.vintage), Validators.required);
+    this.colorControl = new FormControl(Object.assign(new Color(), this.wine.color), Validators.required);
+    this.categoryControl = new FormControl(Object.assign(new Category(), this.wine.category), Validators.required);
+    this.designationControl = new FormControl(Object.assign(new Designation(), this.wine.designation), Validators.required);
+    this.labelControl = new FormControl(Object.assign(new Label(), this.wine.label), Validators.required);
+    this.vintageControl = new FormControl(Object.assign(new Vintage(), this.wine.vintage), Validators.required);
     this.statusControl = new FormControl(this.wine.status, Validators.required);
     this.wineForm = this.fb.group({
       colorControl : this.colorControl,
@@ -147,7 +147,6 @@ export class WineEditComponent implements OnInit {
     if (!$event) {
       return;
     }
-    this.activateNewCategory($event);
     this.category = $event;
   }
   setDesignation($event: Designation) {
