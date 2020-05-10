@@ -55,8 +55,11 @@ export class Category implements AutoCompleteInterface, WineGetterInterface, Cru
       .then(() => {return this.sendResult(`Modification de ${this.getName()}`)})
       .catch((err) => {return this.sendResult(err.error)});
   }
-  public askForDeletion() {
-    const suppressionDialog = new DialogManger();
+  public askForDeletion(): Promise<any>  {
+    if(this.getWines().length >= 1) {
+      return Promise.reject(new Error('La catégory est liée à un ou plusieurs Vins'));
+    }
+  const suppressionDialog = new DialogManger();
    return suppressionDialog.launchSuppressionModal(this.getName()).then((confirm: boolean) => {
       if(confirm) {
         return this.delete(this.id);

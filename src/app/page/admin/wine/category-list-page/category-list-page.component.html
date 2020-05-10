@@ -11,7 +11,12 @@
   <div>
   </div>
   <div *ngFor="let category of listToAdd">
-    <p>{{category.categoryName}}</p>
+    <p>
+      {{category.categoryName}}
+      <i *ngIf="category.getWines().length >= 1" class="material-icons">
+        link
+      </i>
+    </p> 
     <button (click)="edit(category)">modifier</button>
     <button (click)="delete(category)" >delete</button>
   </div>

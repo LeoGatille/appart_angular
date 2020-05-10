@@ -17,8 +17,6 @@ import { first, catchError } from 'rxjs/operators';
 })
 export class CategoryListPageComponent implements OnInit {
 
-  categoryNameEdit: string | null;
-  action: string;
   listToAdd: Category[];
   class: Category;
   placeholderName: string;
@@ -36,8 +34,6 @@ export class CategoryListPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.action = 'list';
-    this.categoryNameEdit = null;
     this.placeholderName = 'Nom';
     this.getCategories();
    }
@@ -48,44 +44,15 @@ export class CategoryListPageComponent implements OnInit {
      });
    }
 
-   createCategory($event) {
-     this.categoryService.create($event.nameControl)
-       .subscribe((category: Category) => {
-         this.toast.success('Ajout effectué' + ' "' + category.categoryName + '"');
-         this.listToAdd.push(category);
-       },
-       error => {
-         this.toast.error(error.error)
-       });
-   }
-  editInit(id: number) {
-    this.categoryService.getOneCategory(id)
+  createCategory(formValue) {
+    this.categoryService.create(formValue.nameControl)
       .subscribe((category: Category) => {
-        this.launchModalCreation(category);
+        this.listToAdd.push(category);
+      },
+      error => {
+        this.toast.error(error.error)
       });
   }
-  launchModalCreation(category: Category) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      nameValue: category.categoryName,
-      nameField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editCategory(data, category.id)
-    );
-  }
-  editCategory(data, id) {
-    this.categoryService.editCategory(data.nameControl, id)
-      .subscribe( (category: Category) => {
-        this.toast.success('Modification effectuée' + ' "' + category.categoryName + '"');
-        this.getCategories(true);
-      });
-  }
-
   edit(toEdit: CrudInterface) {
     toEdit.initEdition()
       .then((promise) => {
@@ -95,7 +62,6 @@ export class CategoryListPageComponent implements OnInit {
               return;
             }
             console.log('cest moi = ', message);
-            
             this.toast.success(message);
             this.getCategories(true);
           })
@@ -108,41 +74,19 @@ export class CategoryListPageComponent implements OnInit {
   }
 
   delete(toDelete: CrudInterface) {
-      const promiseOfDeletion = toDelete.askForDeletion();
-      promiseOfDeletion.then((promise) => {
-        const promiseOfmessage = Promise.resolve(promise);
-        return promiseOfmessage.then((message: string) => {
+    const promiseOfDeletion = toDelete.askForDeletion();
+    promiseOfDeletion.then((promise) => {
+      const promiseOfmessage = Promise.resolve(promise);
+      return promiseOfmessage.then((message: string) => {
+        if(message) {
           this.toast.success(message);
           this.getCategories(true);
-        })
-        .catch((message: string) => {
-          this.toast.error(message);
-        });
+        }
       }).catch((message: string) => {
         this.toast.error(message);
       });
+    }).catch((message: string) => {
+      this.toast.error(message);
+    });
   }
-
-  // delete(category: Category) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   // dialogConfig.autoFocus = true;
-  //   dialogConfig.data = {
-  //     suppr: category.categoryName,
-  //   };
-  //   const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-  //   dialogRef.afterClosed().subscribe(
-  //     data =>  {
-  //       console.log('data === ', data);
-  //       if (data) {
-  //         this.categoryService.deleteCategory(category.id)
-  //           .subscribe(() => {
-  //             this.toast.success('Suppression effectuée' );
-  //             this.getCategories(true);
-  //           });
-  //       }
-  //     }
-  //   );
-  // }
 }
