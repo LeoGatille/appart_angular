@@ -45,7 +45,7 @@ export class Category implements AutoCompleteInterface, WineGetterInterface, Cru
     });
   }
   private edit(newName) {
-    if((newName === null || newName === undefined || newName === '' ) {
+    if((newName === null || newName === undefined || newName === '' )) {
       return new Promise((resolve, reject ) => {
 
       }).then()
