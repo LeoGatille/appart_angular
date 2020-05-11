@@ -43,14 +43,13 @@ export class CategoryListPageComponent implements OnInit {
        this.listToAdd = data;
      });
    }
-
   createCategory(formValue) {
     this.categoryService.create(formValue.nameControl)
       .subscribe((category: Category) => {
         this.listToAdd.push(category);
       },
       error => {
-        this.toast.error(error.error)
+        this.toast.warning(error.error)
       });
   }
   edit(toEdit: CrudInterface) {
@@ -66,13 +65,12 @@ export class CategoryListPageComponent implements OnInit {
             this.getCategories(true);
           })
           .catch((message: string) => {
-            this.toast.error(message);
+            this.toast.warning(message);
           })
       }).catch((error) => {
-        this.toast.error(error);
+        this.toast.warning(error);
       })
   }
-
   delete(toDelete: CrudInterface) {
     const promiseOfDeletion = toDelete.askForDeletion();
     promiseOfDeletion.then((promise) => {
@@ -83,10 +81,10 @@ export class CategoryListPageComponent implements OnInit {
           this.getCategories(true);
         }
       }).catch((message: string) => {
-        this.toast.error(message);
+        this.toast.warning(message);
       });
     }).catch((message: string) => {
-      this.toast.error(message);
+      this.toast.warning(message);
     });
   }
 }
