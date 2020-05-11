@@ -1,9 +1,43 @@
 .description {
     width: 700px;
 }
+.horizontal {
+    display: flex;
+    .horizontal-btn {
+        margin-left: 50px;
+        height: 100%;
+        background-color: #9E0C17;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 35px;
+    }
+    .longName {
+     width: 800px;   
+    }
+}
 @media screen and (max-width: 700px) {
     .description{
         width: 350px;
-        
+    }
+    .horizontal {
+        .invalid {
+            background-color: indigo;
+        }
+        display: flex;
+        .horizontal-btn {
+            margin-left: 50px;
+            height: 100%;
+            background-color: #9E0C17;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 15px;
+        }
+        .longName {
+         width: 350px;   
+        }
     }
 }

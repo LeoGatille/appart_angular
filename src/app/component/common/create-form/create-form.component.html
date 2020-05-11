@@ -1,9 +1,10 @@
 <form *ngIf="!loading"
+      [ngClass]="{'horizontal': horizontal}"
       [formGroup]="createForm"
       style="background: white;"
 >
-  <div>
-    <mat-form-field *ngIf="nameField">
+  <div >
+    <mat-form-field *ngIf="nameField" [ngClass]="{'longName': horizontal}">
       <input matInput type="text"
              placeholder="'Nom'"
              autocomplete="Off"
@@ -40,12 +41,20 @@
     </div>
 
   <div>
-    <button mat-flat-button
+    <button *ngIf="!horizontal" mat-flat-button
             [disabled]="createForm.invalid"
             (click)="save()"
             color="primary"
     >
       Envoyer
+    </button>
+    <button mat-flat-button *ngIf="horizontal"
+          class="horizontal-btn"
+          (click)="save()"
+    >
+      <i class="material-icons">
+        done
+      </i>
     </button>
   </div>
 </form>
