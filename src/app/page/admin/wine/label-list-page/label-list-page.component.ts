@@ -37,7 +37,6 @@ export class LabelListPageComponent implements OnInit {
       this.listToAdd = data;
     });
   }
-
   createLabel($event) {
     this.labelService.create($event.nameControl)
       .subscribe((label: Label) => {
@@ -48,61 +47,18 @@ export class LabelListPageComponent implements OnInit {
         this.toast.error(error.error)
       });
   }
-  editInit(id: number) {
-    this.labelService.getOneLabel(id)
-      .subscribe((label: Label) => {
-        this.launchModalCreation(label);
-      });
-  }
-  launchModalCreation(label: Label) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      nameValue: label.labelName,
-      nameField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editLabel(data, label.id)
-    );
-  }
-  editLabel(data, id) {
-    this.labelService.editLabel(data.nameControl, id)
-      .subscribe( (label: Label) => {
-        this.toast.success('Modification effectuée' + ' "' + label.labelName + '"');
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
         this.getLabels(true);
-      });
-  }
-  // delete(id: number) {
-  //   this.labelService.deleteLabel(id)
-  //     .subscribe(() => {
-  //       this.getLabels(true);
-  //     });
-  // }
-
-  delete(label: Label) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: label.labelName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.labelService.deleteLabel(label.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée');
-
-              this.getLabels(true);
-            });
-        }
-      }
-    );
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
 }

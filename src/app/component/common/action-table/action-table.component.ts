@@ -22,7 +22,6 @@ export class ActionTableComponent implements OnInit {
     const wineList = this.itemsList[index].getWines()
     const wineNameList: string[] = [];
     wineList.forEach((wine: Wine, i) => {
-      console.log(i);
       if( (wineNameList.length > 1)) {        
         wineNameList.push(', ');
       }

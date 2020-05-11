@@ -1,12 +1,15 @@
-<div style="min-height:calc(100vh - 158px) ">
-  <app-create-form [listToAdd]="listToAdd"
+<div style="padding-left: 50px; min-height:100vh">
+  <h1>Millésimes</h1>
+<app-create-form [listToAdd]="listToAdd"
                  [class]="class"
                  (serviceCall)="createVintage($event)"
                  [numberField]="true"
-  ></app-create-form>
-  <div *ngFor="let vintage of listToAdd">
-    <p>{{vintage.vintageYear}}</p>
-    <button (click)="editInit(vintage.id)">modifier</button>
-    <button (click)="delete(vintage)">suppr</button>
-  </div>
+                 [placeholderName]="'Année'"
+></app-create-form>
+
+<app-action-table 
+  *ngIf="!loading"
+  [itemsList]="listToAdd"
+  (parentAction)="childAskFor($event)"
+></app-action-table>
 </div>
