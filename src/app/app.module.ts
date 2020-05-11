@@ -105,6 +105,7 @@ import { SuppressionDialogComponent } from './dialog/suppression-dialog/suppress
 import { RouterBoxComponent } from './page/admin/main/router-box/router-box.component';
 import { CategoryService } from './service/wine/category.service';
 import { EditionModalComponent } from './dialog/edition-modal/edition-modal.component';
+import { ActionTableComponent } from './component/common/action-table/action-table.component';
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { EditionModalComponent } from './dialog/edition-modal/edition-modal.comp
     SuppressionDialogComponent,
     RouterBoxComponent,
     EditionModalComponent,
+    ActionTableComponent,
   ],
     imports: [
         MatAutocompleteModule,
@@ -217,7 +219,6 @@ import { EditionModalComponent } from './dialog/edition-modal/edition-modal.comp
       SuppressionDialogComponent,
     ],
     providers: [
-    CategoryService,
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

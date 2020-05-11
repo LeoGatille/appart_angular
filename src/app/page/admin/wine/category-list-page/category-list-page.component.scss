@@ -1,0 +1,43 @@
+.mat-mini-fab {
+    .mat-button-wrapper {
+        /* padding: 8px 0; */
+        /* display: inline-block; */
+        line-height: 24px;
+    }
+}
+.section {
+    display: flex;
+}
+.container-btn {
+
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+
+    .edit-btn {
+        padding-top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-right: 15px;
+      height: 30px;
+      width: 30px;
+      background: #40beff;
+        i {
+          color: white;
+        }
+
+    }
+    .delete-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      height: 30px;
+      width: 30px;
+      background: #ff285d;
+      i {
+        color: white;
+      }
+    }
+}

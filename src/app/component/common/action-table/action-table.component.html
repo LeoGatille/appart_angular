@@ -1,0 +1,46 @@
+<div style="padding: 0 50px 0 50px;">
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Lié</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Edition</th>
+        <th scope="col">Supression</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of itemsList; let i = index">
+        <th scope="row">
+            {{i + 1}}
+        </th>
+        <td [matTooltip]="getWinesTooltip(i)"
+            [matTooltipPosition]="'above'"
+        >
+           <i *ngIf="item.getWines().length >= 1" class="material-icons">
+          link
+          </i>
+        </td>
+        <td>
+            {{item.getName()}}
+        </td>
+        <td> 
+          <button  mat-mini-fab class="edit-btn" (click)="edit(item)">
+            <i class="material-icons">
+              create
+            </i>
+          </button>
+        </td>
+        <td>
+          <button  mat-mini-fab class="delete-btn" (click)="delete(item)" >
+            <i class="material-icons">
+              delete
+            </i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

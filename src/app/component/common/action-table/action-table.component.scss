@@ -1,0 +1,26 @@
+.edit-btn {
+    padding-top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-right: 15px;
+  height: 30px;
+  width: 30px;
+  background: #40beff;
+    i {
+      color: white;
+    }
+
+}
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 15px;
+  height: 30px;
+  width: 30px;
+  background: #ff285d;
+  i {
+    color: white;
+  }
+}

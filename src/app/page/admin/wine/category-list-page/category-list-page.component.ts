@@ -1,3 +1,4 @@
+import { Message } from './../../../../class/message';
 import { promise } from 'protractor';
 import { CrudInterface } from './../../../../class/curdInterface';
 import { Component, OnInit } from '@angular/core';
@@ -9,6 +10,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../../../../dialog/dialog.component';
 import {ToastrService} from 'ngx-toastr';
 import { first, catchError } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-category-list-page',
@@ -21,6 +23,7 @@ export class CategoryListPageComponent implements OnInit {
   class: Category;
   placeholderName: string;
   categoryPromise: any;
+  loading = true;
   constructor(
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
@@ -41,6 +44,7 @@ export class CategoryListPageComponent implements OnInit {
      this.categoryPromise = (bool) => this.categoryService.getAllCategories((force));
      this.categoryPromise().then((data: any[]) => {
        this.listToAdd = data;
+       this.loading = false;
      });
    }
   createCategory(formValue) {
@@ -52,39 +56,18 @@ export class CategoryListPageComponent implements OnInit {
         this.toast.warning(error.error)
       });
   }
-  edit(toEdit: CrudInterface) {
-    toEdit.initEdition()
-      .then((promise) => {
-        Promise.resolve(promise)
-          .then((message: string) => {
-            if(message === null || message === undefined || message === '') {
-              return;
-            }
-            console.log('cest moi = ', message);
-            this.toast.success(message);
-            this.getCategories(true);
-          })
-          .catch((message: string) => {
-            this.toast.warning(message);
-          })
-      }).catch((error) => {
-        this.toast.warning(error);
-      })
-  }
-  delete(toDelete: CrudInterface) {
-    const promiseOfDeletion = toDelete.askForDeletion();
-    promiseOfDeletion.then((promise) => {
-      const promiseOfmessage = Promise.resolve(promise);
-      return promiseOfmessage.then((message: string) => {
-        if(message) {
-          this.toast.success(message);
-          this.getCategories(true);
-        }
-      }).catch((message: string) => {
-        this.toast.warning(message);
-      });
-    }).catch((message: string) => {
-      this.toast.warning(message);
-    });
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
+        this.getCategories(true);
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
 }
