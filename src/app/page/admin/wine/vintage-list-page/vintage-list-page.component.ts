@@ -15,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./vintage-list-page.component.scss']
 })
 export class VintageListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Vintage[];
   class: Vintage;
   vintagePromise: any;
@@ -32,6 +32,7 @@ export class VintageListPageComponent implements OnInit {
     this.vintagePromise = (bool) => this.vintageService.getAllVintages((force));
     this.vintagePromise().then((data: any[]) => {
       this.listToAdd = data;
+      this.loading = false;
     });
   }
   createVintage($event) {

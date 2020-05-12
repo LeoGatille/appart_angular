@@ -10,7 +10,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./designation-list-page.component.scss']
 })
 export class DesignationListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Designation[];
   class: Designation;
   placeholderName: string;
@@ -28,6 +28,7 @@ export class DesignationListPageComponent implements OnInit {
     this.designationPromise = (bool) => this.designationService.getAllDesignations((force));
     this.designationPromise().then((data: any[]) => {
       this.listToAdd = data;
+      this.loading = false;
     });
   }
   createDesignation($event) {

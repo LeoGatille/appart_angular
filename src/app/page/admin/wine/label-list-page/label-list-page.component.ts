@@ -15,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./label-list-page.component.scss']
 })
 export class LabelListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Label[];
   class: Label;
   placeholderName: string;
@@ -35,6 +35,7 @@ export class LabelListPageComponent implements OnInit {
     this.labelPromise = (bool) => this.labelService.getAllLabels((force));
     this.labelPromise().then((data: any[]) => {
       this.listToAdd = data;
+      this.loading = false;
     });
   }
   createLabel($event) {

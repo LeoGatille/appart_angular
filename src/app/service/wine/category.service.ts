@@ -32,7 +32,7 @@ export class CategoryService {
   public create( categoryName: string ) {
     const result =  this.http.post(`${this.uri}/admin/create`, {categoryName})
       .pipe(
-        map(response => Object.assign(new Category, response))
+        map(response => Object.assign(new Category(), response))
       );
     return result;
   }

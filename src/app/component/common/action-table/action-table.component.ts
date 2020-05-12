@@ -14,20 +14,32 @@ export class ActionTableComponent implements OnInit {
   @Output() parentAction = new EventEmitter<any>();
   constructor() { }
 
-  ngOnInit() {
-    console.log('itemlist = ', this.itemsList);
-    
+  async ngOnInit() {
+    this.sortList();
+  }
+  sortList() {
+    this.itemsList.sort(function(a, b) {
+      if(isNaN(parseInt(a.getName(), 10))) {
+        let textA = a.getName().toUpperCase();
+        let textB = b.getName().toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      } else {
+        let numA = parseInt(a.getName(), 10);
+        let numB = parseInt(b.getName(), 10);
+        return numA - numB;
+      }
+  });
   }
   getWinesTooltip(index: number){
-    const wineList = this.itemsList[index].getWines()
-    const wineNameList: string[] = [];
-    wineList.forEach((wine: Wine, i) => {
-      if( (wineNameList.length > 1)) {        
-        wineNameList.push(', ');
+    const linkedList = this.itemsList[index].wines ? this.itemsList[index].wines : this.itemsList[index].foods;
+    const linkedNameList: string[] = [];
+    linkedList.forEach((link: any, i) => {
+      if( (linkedNameList.length > 1)) {        
+        linkedNameList.push(', ');
       }
-      wineNameList.push(wine.wineName);
+      linkedNameList.push(link.wineName ? link.wineName : link.foodName);
     });    
-    return wineNameList.join('');
+    return linkedNameList.join('');
   }
 
   edit(toEdit: CrudInterface) {

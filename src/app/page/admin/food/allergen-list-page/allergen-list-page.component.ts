@@ -19,27 +19,19 @@ export class AllergenListPageComponent implements OnInit {
     private allergenService: AllergenService,
     private dialog: MatDialog,
     private toast: ToastrService,
-
   ) { }
-
   ngOnInit() {
     this.getAllergens();
-    this.loading = false;
-    // this.allergenService.getAllAllergens()
-    // .subscribe((allergens: Allergen[]) => {
-    //   this.allAllergens = allergens;
-    // });
-    // this.loading = false;
   }
   getAllergens(force = false) {
     console.log('titi');
     this.allergenPromise = (bool) => this.allergenService.getAllAllergens((force));
     this.allergenPromise().then((data: any[]) => {
       this.allAllergens = data;
-      console.log('toto');
+      this.loading = false;
     });
   }
-  createAllergen($event) {
+  createAllergens($event) {
     console.log('event', $event);
     this.allergenService.create($event.nameControl)
       .subscribe((allergen: Allergen) => {
@@ -50,43 +42,18 @@ export class AllergenListPageComponent implements OnInit {
         this.toast.error(error.error)
       });
   }
-  deleteAllergen(id) {
-    this.allergenService.deleteAllergen(id)
-      .subscribe(() => {
-        this.toast.success('Suppression effectuée');
-        this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
-        this.allergenPromise().then((data: any[]) => {
-          this.allAllergens = data;
-          console.log('toto');
-        });
-      });
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
+        this.getAllergens(true);
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
-
-  delete(allergen: Allergen) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: allergen.allergenName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.allergenService.deleteAllergen(allergen.id)
-            .subscribe(() => {
-              this.toast.success('Supression effectuée');
-              this.allergenPromise = (bool) => this.allergenService.getAllAllergens((true));
-              this.allergenPromise().then((data: any[]) => {
-                this.allAllergens = data;
-                console.log('toto');
-              });
-            });
-        }
-      }
-    );
-  }
-
 }

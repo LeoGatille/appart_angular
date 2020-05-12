@@ -17,7 +17,7 @@
         <td [matTooltip]="getWinesTooltip(i)"
             [matTooltipPosition]="'above'"
         >
-           <i *ngIf="item.getWines().length >= 1" class="material-icons">
+           <i *ngIf="(item.wines?.length >= 1 ) || (item.foods?.length >= 1)" class="material-icons">
           link
           </i>
         </td>

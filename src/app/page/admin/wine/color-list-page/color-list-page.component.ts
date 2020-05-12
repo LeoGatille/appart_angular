@@ -13,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./color-list-page.component.scss']
 })
 export class ColorListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Color[];
   class: Color;
   placeholderName: string;
@@ -33,6 +33,7 @@ export class ColorListPageComponent implements OnInit {
     this.colorPromise = (bool) => this.colorService.getAllColors((force));
     this.colorPromise().then((data: any[]) => {
       this.listToAdd = data;      
+      this.loading = false;
     });
   }
   createColor($event) {

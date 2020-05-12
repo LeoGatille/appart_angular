@@ -7,6 +7,8 @@ export interface CrudInterface {
     initEdition(): Promise<any>;
     askForDeletion(): Promise<any>;
     getName(): string;
-    getWines?(): Wine[];
-    getFood?(): Food[],
+    getWines?(): Wine[] | Food[];
+    getFoods?(): Food[],
+    wines?: Wine[],
+    foods?: Food[],
 }
