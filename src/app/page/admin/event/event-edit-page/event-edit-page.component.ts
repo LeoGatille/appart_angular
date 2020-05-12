@@ -1,3 +1,4 @@
+import { Food } from './../../../../class/food/food';
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event} from '../../../../class/event';
 import {EventService} from '../../../../service/event.service';
@@ -19,6 +20,7 @@ export class EventEditPageComponent implements OnInit {
   date: any = null;
   editEvent: FormGroup;
   allFoods: Food[] = [];
+  selectedFood: Food[] = [];
   foodsId: number[] = [];
   allTypes: Type[] = [];
   loading = true;
@@ -38,8 +40,6 @@ export class EventEditPageComponent implements OnInit {
   }
 
   getDate() {
-    console.log('EVENT = ', this.event);
-    
    this.date = new Date(this.event.eventDate.timestamp * 1000);
   }
 
@@ -53,10 +53,8 @@ export class EventEditPageComponent implements OnInit {
       foodControl : [''],
       // typeControl : [''],
     });
-    if (this.event.food) {
-      this.getFoods();
       this.getTypes();
-    }
+      
   }
 
   
@@ -66,13 +64,16 @@ export class EventEditPageComponent implements OnInit {
     this.typeService.getAllType()
       .subscribe((types: Type[]) => {
         this.allTypes = types;
-        this.loading = false;
+       this.getFoods();
     });
   }
   getFoods() {
-    this.allFoods = this.event.food;
+    this.selectedFood = this.event.food.length >= 1 ? this.event.food : null;
     console.log('FOOD = ', this.allFoods);
-    this.getFoodsId();
+    if(this.allFoods) {
+      this.getFoodsId();
+    }
+    this.loading = false;
   }
   getFoodsId() {
     this.allFoods.forEach(food => {

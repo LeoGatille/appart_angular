@@ -67,8 +67,6 @@ export class SoireeComponent implements OnInit {
       }
 
     });
-
-
     newEvent.eventName = event.eventName;
     newEvent.eventDescription = event.eventDescription;
     newEvent.eventDate = event.eventDate;
@@ -80,7 +78,6 @@ export class SoireeComponent implements OnInit {
     newEvent.entrees = entrees;
     newEvent.plats = plats;
     newEvent.dessert = dessert;
-
     this.newEventsList.push(newEvent);
     this.loading = false;
 
