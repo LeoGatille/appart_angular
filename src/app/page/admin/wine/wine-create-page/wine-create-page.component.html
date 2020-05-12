@@ -1,4 +1,4 @@
-<div style="min-height:calc(100vh - 158px) ">
+<div style="min-height:100vh; margin-bottom: 150px; ">
   <div style="background: red" *ngIf="error">
   {{errorLog}}
 </div>
@@ -134,6 +134,7 @@
 </div>
 
 <div class="no-choice">
+  <h1>Les vins</h1>
   <mat-expansion-panel class="selector-container" *ngFor="let selected of selector" [expanded]="true">
     <mat-expansion-panel-header>
       <div class="selector">

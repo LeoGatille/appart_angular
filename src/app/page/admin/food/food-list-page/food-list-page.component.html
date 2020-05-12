@@ -1,4 +1,4 @@
-<div style="min-height:calc(100vh - 158px) ">
+<div style="min-height:100vh ; margin-bottom: 150px ;">
   <mat-accordion class="accordion">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
@@ -80,6 +80,7 @@
 
 
 <div class="list-container container-fluid" *ngIf="!loading">
+  <h1>La carte</h1>
   <div class="container-type" *ngFor="let type of allTypes">
     <h3 class="type-title">{{type.typeName}}</h3>
     <div class="line"></div>

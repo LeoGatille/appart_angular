@@ -1,17 +1,18 @@
 $serif: 'Merriweather', sans-serif ;
 
+.message-container {
+  padding-left: 50px;
+  width: 800px;
+  h5 {
+    color: #9E0C17;
+  }
+}
 .admin-container {
   
   .router-row {
     padding-left: 50px;
     display: flex;
     justify-content: space-around;
-    .message-container {
-      width: 500px;
-      h5 {
-        color: #9E0C17;
-      }
-    }
     .routers-container {
       margin-bottom: 50px;
     }

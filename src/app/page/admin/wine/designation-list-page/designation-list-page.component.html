@@ -1,6 +1,7 @@
 <div style="padding-left: 50px; min-height:calc(100vh - 158px) ">
   <h1>Appellation</h1>
   <app-create-form [listToAdd]="listToAdd"
+  [horizontal]="true"
                   [class]="class"
                   (serviceCall)="createDesignation($event)"
                   [nameField]="true"

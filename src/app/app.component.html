@@ -53,26 +53,83 @@
 
               <span *ngIf="isConnected()">
 
-                <a routerLink="/admin/" routerLinkActive="active"
+                <a style="background-color: #ffffff;" routerLink="/admin/" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
-                  <span><b> Administration </b></span>
+                  <span style="color: #9E0C17; display: flex; align-items: center;"><b> Administration </b>
+                    &nbsp;
+                    <i class="material-icons">
+                      account_balance
+                    </i>
+                  </span>
                 </a>
 
                 <a routerLink="/admin/food" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
-                  <span>La carte <i>ADMIN</i> </span>
+                  <span>La carte
+                    <i class="material-icons" style="font-size: 1em;">
+                      create
+                    </i>
+                   </span>
                 </a>
+                <a routerLink="/admin/food/allergen" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Allergènes</i>
+                  </span>
+                </a>
+                <a routerLink="/admin/food/formula" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Formules</i>
+                  </span>
+                </a>
+                
                 <a routerLink="/admin/wine" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
-                  <span>Les vins <i>ADMIN</i></span>
+                  <span>Les vins 
+                    <i class="material-icons" style="font-size: 1em;">
+                      create
+                    </i>
+                  </span>
+                </a>
+                <a routerLink="/admin/wine/category" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Catégories</i>
+                  </span>
+                </a>
+                <a routerLink="/admin/wine/designation" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Appellations</i>
+                  </span>
+                </a>
+                <a routerLink="/admin/wine/vintage" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Millésime</i>
+                  </span>
+                </a>
+                <a routerLink="/admin/wine/label" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Labels</i>
+                  </span>
+                </a>
+                <a routerLink="/admin/wine/color" routerLinkActive="active"
+                mat-list-item (click)="sidenav.close()" >
+                  <span style="font-size: 0.7em; padding-left: 10px;"> <i>Couleurs</i>
+                  </span>
                 </a>
                 <a routerLink="/admin/event" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
-                  <span>Soirées Spéciales <i>ADMIN</i></span>
+                  <span>Soirées Spéciales 
+                    <i class="material-icons" style="font-size: 1em;">
+                      create
+                    </i>
+                  </span>
                 </a>
                 <a routerLink="/admin/gallery" routerLinkActive="active"
                    mat-list-item (click)="sidenav.close()" >
-                  <span>Galerie <i>ADMIN</i></span>
+                  <span>Galerie 
+                    <i class="material-icons" style="font-size: 1em;">
+                      create
+                    </i>
+                  </span>
                 </a>
 
                 <a mat-list-item (click)="sidenav.close(); logout()" >

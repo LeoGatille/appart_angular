@@ -1,6 +1,9 @@
 $serif: 'Playfair Display', serif;
 $futura: 'Didact Gothic', sans-serif;
-
+h1 {
+  padding-left: 50px;
+  color: #9E0C17;
+}
 .main-container {
 
   padding-left: 0px;
@@ -8,7 +11,7 @@ $futura: 'Didact Gothic', sans-serif;
 .creation {
   font-size: 2em;
   font-weight: bold;
-  color: #da2018;
+  color: #9E0C17;
 }
 .filter-container {
   display: flex;

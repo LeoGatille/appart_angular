@@ -1,6 +1,7 @@
 <div style="padding-left: 50px; min-height:100vh">
   <h1>Millésimes</h1>
 <app-create-form [listToAdd]="listToAdd"
+[horizontal]="true"
                  [class]="class"
                  (serviceCall)="createVintage($event)"
                  [numberField]="true"
