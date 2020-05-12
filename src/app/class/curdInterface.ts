@@ -1,3 +1,4 @@
+import { Food } from './food/food';
 import { Wine } from './wine/wine';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
@@ -6,5 +7,6 @@ export interface CrudInterface {
     initEdition(): Promise<any>;
     askForDeletion(): Promise<any>;
     getName(): string;
-    getWines(): Wine[];
+    getWines?(): Wine[];
+    getFood?(): Food[],
 }

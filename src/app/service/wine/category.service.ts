@@ -16,7 +16,6 @@ export class CategoryService {
   ) { }
 
     public reachMe(text: string = 'You reached me') {
-      console.log(text)
     }
 
   public getAllCategories(force = false) {

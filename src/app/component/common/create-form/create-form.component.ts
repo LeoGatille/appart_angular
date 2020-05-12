@@ -69,6 +69,9 @@ export class CreateFormComponent implements OnInit {
   }
 
   save() {
+    if(this.createForm.invalid) {
+     return;
+    }
     const val = this.createForm.value;
     this.serviceCall.emit(val);
   }

@@ -15,7 +15,7 @@ $serif: 'Merriweather', sans-serif ;
 
   }
   .picture-container {
-    background-image: url("http://api.bundles.do/uploads/test/home.jpg");
+    background-image: url("http://api.bundles.do/staticImages/home.jpg");
     background-position: center ;
     background-attachment: initial;
     background-size: cover;
@@ -57,7 +57,7 @@ $serif: 'Merriweather', sans-serif ;
 .carte-wine {
 
   .carte {
-    background-image: url("http://api.bundles.do/uploads/test/plat1.jpg");
+    background-image: url("http://api.bundles.do/staticImages/plat1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -68,7 +68,7 @@ $serif: 'Merriweather', sans-serif ;
   }
 
   .vins {
-    background-image: url("http://api.bundles.do/uploads/test/cave1.jpg");
+    background-image: url("http://api.bundles.do/staticImages/cave1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -291,7 +291,7 @@ $serif: 'Merriweather', sans-serif ;
 
 .chef {
   .picture {
-    background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
+    background-image: url("http://api.bundles.do/staticImages/devanture.jpg");
     background-position: center;
     background-size: cover;
   }
@@ -323,7 +323,7 @@ $serif: 'Merriweather', sans-serif ;
   }
   @media only screen and (max-width: 1000px) {
     .picture {
-      background-image: url("http://api.bundles.do/uploads/test/devanture.jpg");
+      background-image: url("http://api.bundles.do/staticImages/devanture.jpg");
       background-position: center;
       background-size: cover;
       height: 300px;
@@ -355,7 +355,7 @@ $serif: 'Merriweather', sans-serif ;
 
 
 .reservation {
-  background-image: url("http://api.bundles.do/uploads/test/reservation.jpg");
+  background-image: url("http://api.bundles.do/staticImages/reservation.jpg");
   background-position: center;
   height: 200px;
   background-size: cover;
