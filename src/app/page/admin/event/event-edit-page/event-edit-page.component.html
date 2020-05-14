@@ -1,29 +1,16 @@
 <div *ngIf="!loading" class="main-container row-cols-7">
-  <form 
-        [formGroup]="editEvent">
+  <form [formGroup]="editEvent">
     <div class="row ">
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="name">
-          <input matInput type="text"
-                 placeholder="'Nom'"
-                 autocomplete="Off"
-                 formControlName="name"
-                 maxlength="255"
-          />
+          <input matInput type="text" placeholder="'Nom'" autocomplete="Off" formControlName="name" maxlength="255" />
         </mat-form-field>
       </div>
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="date-picker">
-          <input matInput
-                 [matDatepicker]="picker"
-                 formControlName="date"
-                 placeholder="Choix de la date"
-          >
-          <mat-datepicker-toggle matSuffix
-                                 [for]="picker"
-
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker ></mat-datepicker>
+          <input matInput [matDatepicker]="picker" formControlName="date" placeholder="Choix de la date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
     </div>
@@ -31,22 +18,14 @@
     <div class="row col-12">
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="price-n-b">
-          <input matInput
-                 type="number"
-                 placeholder="Prix sans boissons"
-                 autocomplete="Off"
-                 formControlName="priceNoDrinks"
-          />
+          <input matInput type="number" placeholder="Prix sans boissons" autocomplete="Off"
+            formControlName="priceNoDrinks" />
         </mat-form-field>
-      </div >
+      </div>
       <div class="col-md-6 col-sm-12">
         <mat-form-field class="price-w-b">
-          <input matInput
-                 type="number"
-                 placeholder="Prix avec boissons"
-                 autocomplete="Off"
-                 formControlName="priceWithDrinks"
-          />
+          <input matInput type="number" placeholder="Prix avec boissons" autocomplete="Off"
+            formControlName="priceWithDrinks" />
         </mat-form-field>
       </div>
     </div>
@@ -54,12 +33,8 @@
     <div class="row">
       <div class="col-12">
         <mat-form-field class="description">
-            <textarea matInput type="textarea"
-                      placeholder="'Description'"
-                      autocomplete="Off"
-                      formControlName="description"
-                      maxlength="1000"
-            ></textarea>
+          <textarea matInput type="textarea" placeholder="'Description'" autocomplete="Off"
+            formControlName="description" maxlength="1000"></textarea>
         </mat-form-field>
       </div>
 
@@ -70,7 +45,8 @@
         <mat-label>Menu</mat-label>
         <mat-select>
           <mat-optgroup *ngFor="let type of allTypes" [label]="type.typeName">
-            <mat-option  *ngFor="let food of type.foods" [value]="food" (click)="getSelectedFood(food)">
+            <mat-option [disabled]="isAlreadySelected(food.id)" *ngFor="let food of type.foods" [value]="food"
+              (click)="addSelectedFood(food, type)">
               {{food.foodName}}
             </mat-option>
           </mat-optgroup>
@@ -80,23 +56,80 @@
 
 
     <div>
-      <button mat-flat-button
-              [disabled]="editEvent.invalid"
-              (click)="save()"
-              color="primary"
-      >
+      <button mat-flat-button [disabled]="editEvent.invalid" (click)="save()" color="primary">
         Envoyer
       </button>
     </div>
     <div>
       Menue
     </div>
-      <div style="display: flex" *ngFor="let food of allFoods">
-        <div style=" margin-right: 10px">{{food.foodName}}</div>
-        <button mat-mini-fab class="delete-btn"
-                (click)="removeFood(food.id)"
-        >
-          <i class="material-icons">delete</i></button>
+    <div *ngIf="event.getEntrees().length >= 1" class="container-type col-sm-12">
+      <h3 class="type-title">Entrée
+      </h3>
+      <div class="line"></div>
+      <div *ngFor="let entree of event.getEntrees()" class="marg-me">
+        <div class="main-container">
+          <div class="header row">
+            <h6>
+              {{entree.foodName}}
+            </h6>
+            <span>
+              <button mat-mini-fab class="delete-btn" (click)="removeFood(entree.id)">
+                <i class="material-icons">
+                  delete
+                </i>
+              </button>
+            </span>
+          </div>
+          <div class="col-6"></div>
+        </div>
       </div>
+    </div>
+
+    <div *ngIf="event.getPlats().length >= 1" class="container-type col-sm-12">
+      <h3 class="type-title">Plats
+      </h3>
+      <div class="line"></div>
+      <div *ngFor="let entree of event.getPlats()" class="marg-me">
+        <div class="main-container">
+          <div class="header row">
+            <h6>
+              {{entree.foodName}}
+            </h6>
+            <span>
+              <button mat-mini-fab class="delete-btn" (click)="removeFood(entree.id)">
+                <i class="material-icons">
+                  delete
+                </i>
+              </button>
+            </span>
+          </div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="event.getDesserts().length >= 1" class="container-type col-sm-12">
+      <h3 class="type-title">Desserts
+      </h3>
+      <div class="line"></div>
+      <div *ngFor="let entree of event.getDesserts()" class="marg-me">
+        <div class="main-container">
+          <div class="header row">
+            <h6>
+              {{entree.foodName}}
+            </h6>
+            <span>
+              <button mat-mini-fab class="delete-btn" (click)="removeFood(entree.id)">
+                <i class="material-icons">
+                  delete
+                </i>
+              </button>
+            </span>
+          </div>
+          <div class="col-6"></div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>

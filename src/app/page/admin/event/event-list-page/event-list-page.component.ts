@@ -13,7 +13,6 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./event-list-page.component.scss']
 })
 export class EventListPageComponent implements OnInit {
-  newEventsList;
   loading = true;
   chooseId: number | null;
   oldName: string |null;
@@ -37,57 +36,16 @@ export class EventListPageComponent implements OnInit {
     this.getEvents();
   }
   getEvents() {
+    this.eventList = [];
     this.eventService.getAllEvents()
       .subscribe((events: Event[]) => {
-        this.eventList = events;
-        this.refactoEvents();
+        events.forEach(event => {
+          let eventClass = Object.assign(new Event(), event);
+          this.eventList.push(eventClass);
+        });
+        console.log('eventList = ', this.eventList)
+        this.loading = false;
       });
-  }
-  refactoEvents() {
-    this.newEventsList = [];
-    this.eventList.forEach(event => {
-      event = this.getRealPrices(event);
-      this.sortEvent(event);
-    });
-    console.log('LA LISTE = ', this.eventList);
-  }
-  getRealPrices(event: Event) {
-    event.realPriceDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(event.priceWithDrinks / 100));
-    event.realPriceNoDrink = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(event.priceNoDrinks / 100));
-    return event;
-  }
-  sortEvent(event: Event) {
-    const newEvent: any = {};
-    const entrees: Food[] = [];
-    const plats: Food[] = [];
-    const dessert: Food[] = [];
-    event.food.forEach(food => {
-      switch (food.type.id) {
-        case 1 :
-          entrees.push(food);
-          break;
-        case 2 :
-          plats.push(food);
-          break;
-        case 3 :
-          dessert.push(food);
-          break;
-      }
-    });
-    newEvent.id = event.id;
-    newEvent.eventName = event.eventName;
-    newEvent.eventDescription = event.eventDescription;
-    newEvent.eventDate = event.eventDate;
-    newEvent.timestamp = event.timestamp;
-    newEvent.priceWithDrinks = event.priceWithDrinks;
-    newEvent.priceNoDrinks = event.priceNoDrinks;
-    newEvent.realPriceDrink = event.realPriceDrink;
-    newEvent.realPriceNoDrink = event.realPriceNoDrink;
-    newEvent.entrees = entrees;
-    newEvent.plats = plats;
-    newEvent.dessert = dessert;
-    this.newEventsList.push(newEvent);
-    this.loading = false;
   }
   getDecimalPrice(price: number) {
     return price * 100;

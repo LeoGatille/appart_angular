@@ -4,7 +4,7 @@ $serif: 'Merriweather', sans-serif ;
 
     .formula-row {
         display: flex;
-        justify-content: start;
+        justify-content: flex-end;
         .left{
             h3 {
                 font-family: $serif;

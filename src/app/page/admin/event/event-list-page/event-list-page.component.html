@@ -4,16 +4,16 @@
     [oldPriceNoDrinks]="oldPriceNoDrinks" [oldPriceWithDrinks]="oldPriceWithDrinks">
   </app-event-create>
 
-  <div *ngFor="let newEvent of newEventsList" class="row" style="padding-bottom: 100px; padding-left: 50px;">
+  <div *ngFor="let event of eventList" class="row" style="padding-bottom: 100px; padding-left: 50px;">
     <div class="btn-container">
       <button mat-mini-fab class="edit-btn"
-              (click)="edit(newEvent)"
+              (click)="edit(event)"
       >
         <i class="material-icons">create</i>
       </button>
 
       <button mat-mini-fab class="delete-btn"
-              (click)="delete(newEvent)"
+              (click)="delete(event)"
       >
         <i class="material-icons">
           delete
@@ -24,26 +24,26 @@
     <div>
       <div class="row">
         <div>
-          <h4 class="date">{{newEvent.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
+          <h4 class="date">{{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
         </div>
       </div>
       <div class="row">
-        <h3 class="title">{{newEvent.eventName}}</h3>
+        <h3 class="title">{{event.eventName}}</h3>
       </div>
       <div class="row">
-        <div class="prix">Prix avec boissons : <b>{{newEvent.realPriceDrink}}&nbsp;&nbsp;</b></div>
-        <div class="prix">Prix sans boissons : <b>{{newEvent.realPriceNoDrink}}</b></div>
+        <div class="prix">Prix avec boissons : <b>{{event.getRealPriceDrink()}}&nbsp;&nbsp;</b></div>
+        <div class="prix">Prix sans boissons : <b>{{event.getRealPriceNoDrink()}}</b></div>
       </div>
       <div class="row">
         <div>
-          <p>{{newEvent.eventDescription}}</p>
+          <p>{{event.eventDescription}}</p>
         </div>
       </div>
       <div>
-        <div *ngIf="newEvent.entrees.length >= 1" class="container-type col-sm-12">
+        <div *ngIf="event.getEntrees().length >= 1" class="container-type col-sm-12">
           <h3 class="type-title">Entrée</h3>
           <div class="line"></div>
-          <div *ngFor="let entree of newEvent.entrees" class="marg-me">
+          <div *ngFor="let entree of event.getEntrees()" class="marg-me">
             <div>
               <div class="main-container">
                 <div class="header row">
@@ -61,10 +61,10 @@
           </div>
         </div>
 
-        <div *ngIf="newEvent.plats.length >= 1" class="container-type  col-sm-12">
+        <div *ngIf="event.getPlats().length >= 1" class="container-type  col-sm-12">
           <h3 class="type-title">Plats</h3>
           <div class="line"></div>
-          <div *ngFor="let plat of newEvent.plats" class="marg-me">
+          <div *ngFor="let plat of event.getPlats()" class="marg-me">
             <div>
               <div class="main-container">
                 <div class="header row">
@@ -82,10 +82,10 @@
           </div>
         </div>
 
-        <div *ngIf="newEvent.dessert.length >= 1" class="container-type  col-sm-12">
+        <div *ngIf="event.getDesserts().length >= 1" class="container-type  col-sm-12">
           <h3 class="type-title">Desserts</h3>
           <div class="line"></div>
-          <div *ngFor="let dessert of newEvent.dessert" class="marg-me">
+          <div *ngFor="let dessert of event.getDesserts()" class="marg-me">
             <div>
               <div class="main-container">
                 <div class="header row">
