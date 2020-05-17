@@ -114,7 +114,18 @@ export class AutoCompleteComponent implements OnInit {
   }
 
   doubleControl(data) {        
-    let stringToTest = typeof data === 'string' ? data : data.getName(); 
+
+    let stringToTest : string = '';
+    switch(typeof data) {
+      case('number') : 
+        stringToTest = data.toString();
+      break;
+      case('string') :
+       stringToTest = data;
+      break;
+      default :
+        stringToTest = data.getName();
+    }
     console.log('double control = ', this.listOfElements.find(listItem => listItem.getName().toLowerCase() === data) );
     
     return this.listOfElements.find(listItem => listItem.getName().toLowerCase() === stringToTest.toLowerCase());
@@ -128,6 +139,7 @@ export class AutoCompleteComponent implements OnInit {
           this.toast.success('Ajout de ' + data.nameControl);
           this.listOfElements.push(res);
           this.addElement.emit(res);
+          this.activateButton = false;
         });
       } else {
         this.toast.error('l\'élément envoyé existe déja')
@@ -138,6 +150,7 @@ export class AutoCompleteComponent implements OnInit {
           this.toast.success('Ajout de ' + data.numberControl);
           this.listOfElements.push(res);
           this.addElement.emit(res);
+          this.activateButton = false;
         });
     }
   }
