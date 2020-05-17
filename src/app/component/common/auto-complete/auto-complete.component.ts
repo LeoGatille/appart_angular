@@ -1,3 +1,4 @@
+import { CrudInterface } from './../../../class/curdInterface';
 import { log } from 'util';
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
@@ -57,8 +58,23 @@ export class AutoCompleteComponent implements OnInit {
       this.getOrigin(this.myControl.value);
     });
   }
+  sortList(list : CrudInterface[]) {
+     list.sort(function(a, b) {
+        if(isNaN(parseInt(a.getName(), 10))) {
+          let textA = a.getName().toUpperCase();
+          let textB = b.getName().toUpperCase();
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        } else {
+          let numA = parseInt(a.getName(), 10);
+          let numB = parseInt(b.getName(), 10);
+          return numA - numB;
+        }
+    });
+
+  }
 
   private _filter(value: string): AutoCompleteInterface[] {
+    this.sortList(this.listOfElements);
     if (value && typeof value === 'string' ) {
       const filterValue = value.toLowerCase();
       return this.listOfElements.filter((element: AutoCompleteInterface) =>{ 
