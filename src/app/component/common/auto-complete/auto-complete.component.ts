@@ -47,6 +47,9 @@ export class AutoCompleteComponent implements OnInit {
     private toast: ToastrService,
   ) {}
   ngOnInit() {
+    this.getElements();
+  }
+  getElements() {
     this.arrayPromise().then((data: AutoCompleteInterface[]) => {
       console.log('DATA = ', data)
       this.listOfElements = data;
@@ -55,7 +58,7 @@ export class AutoCompleteComponent implements OnInit {
           startWith(''),
           map(value => this._filter(value))
         );
-      this.getOrigin(this.myControl.value);
+     // this.getOrigin(this.myControl.value);
     });
   }
   sortList(list : CrudInterface[]) {
@@ -74,7 +77,7 @@ export class AutoCompleteComponent implements OnInit {
   }
 
   private _filter(value: string): AutoCompleteInterface[] {
-    this.sortList(this.listOfElements);
+    // this.sortList(this.listOfElements);
     if (value && typeof value === 'string' ) {
       const filterValue = value.toLowerCase();
       return this.listOfElements.filter((element: AutoCompleteInterface) =>{ 
@@ -156,6 +159,7 @@ export class AutoCompleteComponent implements OnInit {
           this.listOfElements.push(res);
           this.addElement.emit(res);
           this.activateButton = false;
+          this.getElements();
         });
       } else {
         this.toast.error('l\'élément envoyé existe déja')
@@ -167,6 +171,7 @@ export class AutoCompleteComponent implements OnInit {
           this.listOfElements.push(res);
           this.addElement.emit(res);
           this.activateButton = false;
+          this.getElements();
         });
     }
   }

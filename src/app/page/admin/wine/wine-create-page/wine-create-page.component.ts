@@ -159,6 +159,7 @@ export class WineCreatePageComponent implements OnInit {
       return;
     }
     this.wineItemsMap.set(key, item);
+    this.getSelector('categoryPromise');
   }
   setNewWine() {
     const newWine = new Wine();
