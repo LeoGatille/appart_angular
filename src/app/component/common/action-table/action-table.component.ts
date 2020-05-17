@@ -65,7 +65,7 @@ export class ActionTableComponent implements OnInit {
       const promiseOfmessage = Promise.resolve(promise);
       return promiseOfmessage.then((message: string) => {
         if(message) {
-          this.parentAction.emit({action: 'refresh', message: message})
+          this.parentAction.emit({action: 'refresh', message: message});
         }
       }).catch((message: string) => {
         this.parentAction.emit({action: 'error', message: message})
