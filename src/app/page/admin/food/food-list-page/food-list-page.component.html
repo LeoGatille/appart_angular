@@ -47,10 +47,7 @@
             <div class="col-md-6 col-sm-12" style="padding-top: 45px">
               <app-auto-complete (addElement)="getAllergenId($event)"
                                  [arrayPromise]="allergenPromise"
-                                 [parentModel]=""
-                                 [displayFn]="displayFn"
                                  [myControl]="allergenControl"
-                                 [callBackFilter]="callBackFilter"
                                  [creation]="true"
                                  [nameField]="true"
                                  [title]="title"
@@ -84,7 +81,7 @@
   <div class="container-type" *ngFor="let type of allTypes">
     <h3 class="type-title">{{type.typeName}}</h3>
     <div class="line"></div>
-    <div *ngFor="let food of type.foods ">
+    <div *ngFor="let food of sortFoods(type.foods) ">
       <app-food-row [food]="food"
                     [administration]="true"
                     (editData)="getFood()"

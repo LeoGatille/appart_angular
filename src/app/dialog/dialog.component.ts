@@ -51,7 +51,7 @@ export class DialogComponent implements OnInit {
     this.selector = data.selector;
     this.suppr = data.suppr;
     this.event = data.event;
-    this.numberValue = parseInt(data.numberValue, 10);
+    this.numberValue = typeof data.numberValue === 'number' ? data.numberValue : parseInt(data.numberValue, 10);
     this.nameValue = data.nameValue;
     this.descriptionValue = data.descriptionValue;
     this.message = data.message;
@@ -60,6 +60,8 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('formula on dialog = ', this.numberValue);
+    
   }
   defineValue(data) {
 

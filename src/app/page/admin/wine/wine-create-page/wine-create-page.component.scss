@@ -1,5 +1,21 @@
 $serif: 'Playfair Display', serif;
 $futura: 'Didact Gothic', sans-serif;
+.name {
+  width: 500px;
+}
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  height: 30px;
+  width: 30px;
+  background: #ff285d;
+
+  i {
+    color: white;
+  }
+}
 h1 {
   padding-left: 50px;
   color: #9E0C17;
@@ -39,6 +55,7 @@ background-color: #9E0C17;
       font-weight: 200;
       font-size: 1.5rem;
       color: #9E0C17;
+      display: flex;
       .mat-expansion-panel-body {
         .wine-section {
 

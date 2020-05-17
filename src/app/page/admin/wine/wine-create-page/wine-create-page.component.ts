@@ -1,3 +1,4 @@
+import { CrudInterface } from './../../../../class/curdInterface';
 import { AutoCompleteInterface } from './../../../../class/autoCompleteInteface';
 import { element } from 'protractor';
 import { log } from 'util';
@@ -57,7 +58,7 @@ export class WineCreatePageComponent implements OnInit {
 
   
   wineItemsMap = new Map();
-  selector: any[] = [];
+  selector: CrudInterface[] = [];
   option: any = null;
 
   promiseContainer = {
@@ -90,7 +91,6 @@ export class WineCreatePageComponent implements OnInit {
     private toast: ToastrService,
 ) { }
   ngOnInit() {
-  //this.getElements(true);
   this.createForm();
   this.getSelector('categoryPromise', true);
   this.loading = false;
@@ -101,24 +101,41 @@ export class WineCreatePageComponent implements OnInit {
     if(force) {
      const elementPromise = this.refreshElements(key); 
      elementPromise.then((data: any) => {
-       data(force).then((tab: any[]) => {
+       data(force).then((tab: CrudInterface[]) => {
          this.selector = tab;
-       })
-       console.log('promiseData = ', data)
-     })
+       });
+     });
     } else {
       const elementPromise = this.getElements(key);
-      console.log('elemnetPromise = ', elementPromise)
       elementPromise().then((elementTab: any[]) => {
         this.selector = elementTab;
       })
     }
-    
   }
   getElements(key:string = 'category', force = false) {
     return this.promiseContainer[key];
   }
  
+  sortWines(wineTab: Wine[]) : Wine[] {
+    return wineTab.sort((a: Wine,b: Wine) => {
+      let textA = a.wineName.toUpperCase();
+      let textB = b.wineName.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+  }
+  sortList(list: CrudInterface[]) {
+  return  list.sort(function(a, b) {
+      if(isNaN(parseInt(a.getName(), 10))) {
+        let textA = a.getName().toUpperCase();
+        let textB = b.getName().toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      } else {
+        let numA = parseInt(a.getName(), 10);
+        let numB = parseInt(b.getName(), 10);
+        return numA - numB;
+      }
+    });
+  }
   createForm() {
     this.colorControl = new FormControl('', Validators.required);
     this.categoryControl = new FormControl('', Validators.required);
@@ -142,7 +159,6 @@ export class WineCreatePageComponent implements OnInit {
       return;
     }
     this.wineItemsMap.set(key, item);
-    console.log('map = ', this.wineItemsMap)
   }
   setNewWine() {
     const newWine = new Wine();
@@ -169,7 +185,6 @@ export class WineCreatePageComponent implements OnInit {
         vin.status.id
     ).subscribe((success: Wine) =>  {
           this.toast.success('Ajout de ' + success.wineName);
-          console.log(success);
           this.createForm();
           this.getSelector(this.option, true);
           this.resetValues();
@@ -182,7 +197,6 @@ export class WineCreatePageComponent implements OnInit {
     this.wineItemsMap.clear()
   }
   delete($event) {
-    console.log('event = ', $event);
     const dialogConfig = new MatDialogConfig();
     // dialogConfig.autoFocus = true;
     dialogConfig.data = {
@@ -191,7 +205,6 @@ export class WineCreatePageComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
       data =>  {
-        console.log('data === ', data);
         if (data) {
           this.wineService.deleteWine($event.id)
             .subscribe(() => {
