@@ -114,9 +114,10 @@ export class AutoCompleteComponent implements OnInit {
   }
 
   doubleControl(data) {        
+    let stringToTest = typeof data === 'string' ? data : data.getName(); 
     console.log('double control = ', this.listOfElements.find(listItem => listItem.getName().toLowerCase() === data) );
     
-    return this.listOfElements.find(listItem => listItem.getName().toLowerCase() === data.toLowerCase());
+    return this.listOfElements.find(listItem => listItem.getName().toLowerCase() === stringToTest.toLowerCase());
   }
 
   createElement(data: any) {
