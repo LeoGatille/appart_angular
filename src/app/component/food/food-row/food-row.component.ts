@@ -34,10 +34,8 @@ export class FoodRowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.createForm();
     this.getAllergensNames();
-
   }
   isConnected(): boolean {
     this.user = this.auth.currentUser;
@@ -83,7 +81,6 @@ export class FoodRowComponent implements OnInit {
 
   delete(food: Food) {
     const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
     dialogConfig.data = {
       suppr: food.foodName,
     };
@@ -102,7 +99,6 @@ export class FoodRowComponent implements OnInit {
 
   editFood(food: Food) {
     const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
     dialogConfig.data = {
       title: 'Edition',
       food,

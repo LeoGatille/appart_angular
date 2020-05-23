@@ -1,16 +1,7 @@
-<div style="padding-left: 50px; min-height:calc(100vh - 158px) ">
+<div style="padding-left: 50px; min-height: 100vh">
   <h1>Allergens</h1>
-<app-create-form [listToAdd]="listToAdd"
-                 [horizontal]="true"
-                 [class]="class"
-                 (serviceCall)="createAllergens($event)"
-                 [nameField]="true"
-                 [placeholderName]="placeholderName"
-></app-create-form>
+  <app-create-form [listToAdd]="listToAdd" [horizontal]="true" [class]="class" (serviceCall)="createAllergens($event)"
+    [nameField]="true" [placeholderName]="placeholderName"></app-create-form>
 
-<app-action-table 
-  *ngIf="!loading"
-  [itemsList]="allAllergens"
-  (parentAction)="childAskFor($event)"
-></app-action-table>
-</div> 
+  <app-action-table *ngIf="!loading" [itemsList]="allAllergens" (parentAction)="childAskFor($event)"></app-action-table>
+</div>

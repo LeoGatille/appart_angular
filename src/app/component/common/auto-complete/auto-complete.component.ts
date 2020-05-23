@@ -1,17 +1,17 @@
 import { CrudInterface } from './../../../class/curdInterface';
 import { log } from 'util';
-import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Category} from '../../../class/wine/category';
-import {Wine} from '../../../class/wine/wine';
-import {Observable, Subscription} from 'rxjs';
-import {CategoryService} from '../../../service/wine/category.service';
-import {filter, map, startWith} from 'rxjs/operators';
-import {Color} from '../../../class/wine/color';
-import {ColorService} from '../../../service/wine/color.service';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../dialog/dialog.component';
-import {ToastrService} from 'ngx-toastr';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Category } from '../../../class/wine/category';
+import { Wine } from '../../../class/wine/wine';
+import { Observable, Subscription } from 'rxjs';
+import { CategoryService } from '../../../service/wine/category.service';
+import { filter, map, startWith } from 'rxjs/operators';
+import { Color } from '../../../class/wine/color';
+import { ColorService } from '../../../service/wine/color.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
 import { AutoCompleteInterface } from 'src/app/class/autoCompleteInteface';
 
 @Component({
@@ -21,7 +21,7 @@ import { AutoCompleteInterface } from 'src/app/class/autoCompleteInteface';
 })
 export class AutoCompleteComponent implements OnInit {
 
-//  @Input() listOfElements: any[];
+  //  @Input() listOfElements: any[];
   @Input() arrayPromise: any;
   @Input() parentModel: any;
   @Input() displayFn: any;
@@ -45,7 +45,7 @@ export class AutoCompleteComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private toast: ToastrService,
-  ) {}
+  ) { }
   ngOnInit() {
     this.getElements();
   }
@@ -58,109 +58,91 @@ export class AutoCompleteComponent implements OnInit {
           startWith(''),
           map(value => this._filter(value))
         );
-     // this.getOrigin(this.myControl.value);
     });
   }
-  sortList(list : CrudInterface[]) {
-     list.sort(function(a, b) {
-        if(isNaN(parseInt(a.getName(), 10))) {
-          let textA = a.getName().toUpperCase();
-          let textB = b.getName().toUpperCase();
-          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-        } else {
-          let numA = parseInt(a.getName(), 10);
-          let numB = parseInt(b.getName(), 10);
-          return numA - numB;
-        }
+  sortList(list: CrudInterface[]) {
+    list.sort(function (a, b) {
+      if (isNaN(parseInt(a.getName(), 10))) {
+        let textA = a.getName().toUpperCase();
+        let textB = b.getName().toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      } else {
+        let numA = parseInt(a.getName(), 10);
+        let numB = parseInt(b.getName(), 10);
+        return numA - numB;
+      }
     });
-
   }
-
   private _filter(value: string): AutoCompleteInterface[] {
     // this.sortList(this.listOfElements);
-    if (value && typeof value === 'string' ) {
+    if (value && typeof value === 'string') {
       const filterValue = value.toLowerCase();
-      return this.listOfElements.filter((element: AutoCompleteInterface) =>{ 
-        
-       return element.getName().toLowerCase().includes(filterValue);
-      }); 
+      return this.listOfElements.filter((element: AutoCompleteInterface) => {
+        return element.getName().toLowerCase().includes(filterValue);
+      });
     }
     return this.listOfElements;
   }
-
-  private getOrigin(value: string): any {
-    if (value && typeof value === 'string' ) {
-      const filterValue = value.toLowerCase();
-      return this.listOfElements.filter(this.find(filterValue));
-    }
-  }
-  newDisplayFn(toDisplay: AutoCompleteInterface) : string {    
+  newDisplayFn(toDisplay: AutoCompleteInterface): string {
     return toDisplay ? toDisplay.getName() : '';
   }
-
   sendToParent() {
-    this.addElement.emit(this.myControl.value);
-    if(this.myControl.value && this.myControl.value !== '') {
+    if (typeof this.myControl.value === "object") {
+      this.addElement.emit(this.myControl.value);
+    }
+    if (this.myControl.value && this.myControl.value !== '') {
       this.btnLightUp();
     }
   }
   btnLightUp() {
-     if(!this.doubleControl(this.myControl.value)) {
-       this.activateButton = true;
-     } else {
-       this.activateButton = false;
-     }
+    if (!this.redundancyControl(this.myControl.value)) {
+      this.activateButton = true;
+    } else {
+      this.activateButton = false;
+    }
   }
-
   launchModalCreation() {
     console.log('the typeof = ', typeof this.myControl.value);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       modal: true,
       nameValue: isNaN(this.myControl.value) ? this.myControl.value : null,
-      numberValue:  !isNaN(this.myControl.value) ? this.myControl.value : null,
+      numberValue: !isNaN(this.myControl.value) ? this.myControl.value : null,
       numberField: this.numberField,
       nameField: this.nameField,
       descriptionField: this.descriptionField,
       title: this.title,
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
     dialogRef.afterClosed().subscribe(
       data => this.createElement(data)
     );
   }
-
-  doubleControl(data) {        
-
-    let stringToTest : string = '';
-    switch(typeof data) {
-      case('number') : 
+  redundancyControl(data) {
+    let stringToTest: string = '';
+    switch (typeof data) {
+      case ('number'):
         stringToTest = data.toString();
-      break;
-      case('string') :
-       stringToTest = data;
-      break;
-      default :
+        break;
+      case ('string'):
+        stringToTest = data;
+        break;
+      default:
         stringToTest = data.getName();
     }
-    console.log('double control = ', this.listOfElements.find(listItem => listItem.getName().toLowerCase() === data) );
-    
     return this.listOfElements.find(listItem => listItem.getName().toLowerCase() === stringToTest.toLowerCase());
   }
-
   createElement(data: any) {
     if (data.nameControl) {
-      if(!this.doubleControl(data.nameControl)) {
+      if (!this.redundancyControl(data.nameControl)) {
         this.service.create(data.nameControl)
-        .subscribe((res) => {
-          this.toast.success('Ajout de ' + data.nameControl);
-          this.listOfElements.push(res);
-          this.addElement.emit(res);
-          this.activateButton = false;
-          this.getElements();
-        });
+          .subscribe((res) => {
+            this.toast.success('Ajout de ' + data.nameControl);
+            this.listOfElements.push(res);
+            this.addElement.emit(res);
+            this.activateButton = false;
+            this.getElements();
+          });
       } else {
         this.toast.error('l\'élément envoyé existe déja')
       }

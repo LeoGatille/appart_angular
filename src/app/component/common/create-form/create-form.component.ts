@@ -50,7 +50,7 @@ export class CreateFormComponent implements OnInit {
         this.createForm.addControl('numberControl', new FormControl(this.numberValue) );
       }
       if (this.nameField) {
-        this.createForm.addControl('nameControl', new FormControl(this.nameValue) );
+        this.createForm.addControl('nameControl ', new FormControl(this.nameValue) );
       }
       if (this.descriptionField) {
         this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue) );

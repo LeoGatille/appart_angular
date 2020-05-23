@@ -3,24 +3,24 @@ import { AutoCompleteInterface } from './../../../../class/autoCompleteInteface'
 import { element } from 'protractor';
 import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
-import {Wine} from '../../../../class/wine/wine';
-import {Status} from '../../../../class/wine/status';
-import {Color} from '../../../../class/wine/color';
-import {Category} from '../../../../class/wine/category';
-import {Designation} from '../../../../class/wine/designation';
-import {Label} from '../../../../class/wine/label';
-import {Vintage} from '../../../../class/wine/vintage';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ColorService} from '../../../../service/wine/color.service';
-import {CategoryService} from '../../../../service/wine/category.service';
-import {DesignationService} from '../../../../service/wine/designation.service';
-import {LabelService} from '../../../../service/wine/label.service';
-import {VintageService} from '../../../../service/wine/vintage.service';
-import {StatusService} from '../../../../service/wine/status.service';
-import {WineService} from '../../../../service/wine/wine.service';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../../dialog/dialog.component';
-import {ToastrService} from 'ngx-toastr';
+import { Wine } from '../../../../class/wine/wine';
+import { Status } from '../../../../class/wine/status';
+import { Color } from '../../../../class/wine/color';
+import { Category } from '../../../../class/wine/category';
+import { Designation } from '../../../../class/wine/designation';
+import { Label } from '../../../../class/wine/label';
+import { Vintage } from '../../../../class/wine/vintage';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ColorService } from '../../../../service/wine/color.service';
+import { CategoryService } from '../../../../service/wine/category.service';
+import { DesignationService } from '../../../../service/wine/designation.service';
+import { LabelService } from '../../../../service/wine/label.service';
+import { VintageService } from '../../../../service/wine/vintage.service';
+import { StatusService } from '../../../../service/wine/status.service';
+import { WineService } from '../../../../service/wine/wine.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wine-create-page',
@@ -56,17 +56,17 @@ export class WineCreatePageComponent implements OnInit {
   labelPromise: any = null;
   vintagePromise: any = null;
 
-  
+
   wineItemsMap = new Map();
   selector: CrudInterface[] = [];
   option: any = null;
 
   promiseContainer = {
-    colorPromise : (force) => this.colorService.getAllColors(force),
-    categoryPromise : (force) => this.categoryService.getAllCategories(force),
-    designationPromise : (force) => this.designationService.getAllDesignations(force),
-    labelPromise : (force) => this.labelService.getAllLabels(force),
-    vintagePromise : (force) => this.vintageService.getAllVintages(force),
+    colorPromise: (force) => this.colorService.getAllColors(force),
+    categoryPromise: (force) => this.categoryService.getAllCategories(force),
+    designationPromise: (force) => this.designationService.getAllDesignations(force),
+    labelPromise: (force) => this.labelService.getAllLabels(force),
+    vintagePromise: (force) => this.vintageService.getAllVintages(force),
     status: this.statusService.getAllStatus()
       .subscribe((status: Status[]) => {
         this.allStatus = status;
@@ -76,9 +76,9 @@ export class WineCreatePageComponent implements OnInit {
   refreshElements = (key) => {
     return new Promise((resolve) => {
       resolve(this.getElements(key, true));
-    }).then(data => {return data});
-  } 
-  constructor( 
+    }).then(data => { return data });
+  }
+  constructor(
     private colorService: ColorService,
     private categoryService: CategoryService,
     private designationService: DesignationService,
@@ -89,22 +89,22 @@ export class WineCreatePageComponent implements OnInit {
     private fb: FormBuilder,
     private dialog: MatDialog,
     private toast: ToastrService,
-) { }
+  ) { }
   ngOnInit() {
-  this.createForm();
-  this.getSelector('categoryPromise', true);
-  this.loading = false;
+    this.createForm();
+    this.getSelector('categoryPromise', true);
+    this.loading = false;
   }
 
   getSelector(key: string, force = false) {
     this.option = key;
-    if(force) {
-     const elementPromise = this.refreshElements(key); 
-     elementPromise.then((data: any) => {
-       data(force).then((tab: CrudInterface[]) => {
-         this.selector = tab;
-       });
-     });
+    if (force) {
+      const elementPromise = this.refreshElements(key);
+      elementPromise.then((data: any) => {
+        data(force).then((tab: CrudInterface[]) => {
+          this.selector = tab;
+        });
+      });
     } else {
       const elementPromise = this.getElements(key);
       elementPromise().then((elementTab: any[]) => {
@@ -112,20 +112,20 @@ export class WineCreatePageComponent implements OnInit {
       })
     }
   }
-  getElements(key:string = 'category', force = false) {
+  getElements(key: string = 'category', force = false) {
     return this.promiseContainer[key];
   }
- 
-  sortWines(wineTab: Wine[]) : Wine[] {
-    return wineTab.sort((a: Wine,b: Wine) => {
+
+  sortWines(wineTab: Wine[]): Wine[] {
+    return wineTab.sort((a: Wine, b: Wine) => {
       let textA = a.wineName.toUpperCase();
       let textB = b.wineName.toUpperCase();
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     })
   }
   sortList(list: CrudInterface[]) {
-  return  list.sort(function(a, b) {
-      if(isNaN(parseInt(a.getName(), 10))) {
+    return list.sort(function (a, b) {
+      if (isNaN(parseInt(a.getName(), 10))) {
         let textA = a.getName().toUpperCase();
         let textB = b.getName().toUpperCase();
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
@@ -144,18 +144,18 @@ export class WineCreatePageComponent implements OnInit {
     this.vintageControl = new FormControl('', Validators.required);
     this.statusControl = new FormControl('', Validators.required);
     this.wineForm = this.fb.group({
-      colorControl : this.colorControl,
-      categoryControl : this.categoryControl,
-      designationControl : this.designationControl,
-      labelControl : this.labelControl,
-      vintageControl : this.vintageControl,
-      statusControl : ['', Validators.required],
-      nameControl : ['', Validators.required],
-      priceControl : ['', Validators.required]
+      colorControl: this.colorControl,
+      categoryControl: this.categoryControl,
+      designationControl: this.designationControl,
+      labelControl: this.labelControl,
+      vintageControl: this.vintageControl,
+      statusControl: ['', Validators.required],
+      nameControl: ['', Validators.required],
+      priceControl: ['', Validators.required]
     });
   }
   stockWineItems(key: string, item) {
-    if(!item) {
+    if (!item) {
       return;
     }
     this.wineItemsMap.set(key, item);
@@ -176,23 +176,23 @@ export class WineCreatePageComponent implements OnInit {
   validate() {
     const vin = this.setNewWine();
     this.wineService.createWine(
-        vin.category.id,
-        vin.designation.id,
-        vin.color.id,
-        vin.label.id,
-        vin.wineName,
-        vin.winePrice * 100,
-        vin.vintage.id,
-        vin.status.id
-    ).subscribe((success: Wine) =>  {
-          this.toast.success('Ajout de ' + success.wineName);
-          this.createForm();
-          this.getSelector(this.option, true);
-          this.resetValues();
-        },
-        error => {
-          this.toast.error(error.error);
-        });
+      vin.category.id,
+      vin.designation.id,
+      vin.color.id,
+      vin.label.id,
+      vin.wineName,
+      vin.winePrice * 100,
+      vin.vintage.id,
+      vin.status.id
+    ).subscribe((success: Wine) => {
+      this.toast.success('Ajout de ' + success.wineName);
+      this.createForm();
+      this.getSelector(this.option, true);
+      this.resetValues();
+    },
+      error => {
+        this.toast.error(error.error);
+      });
   }
   resetValues() {
     this.wineItemsMap.clear()
@@ -205,7 +205,7 @@ export class WineCreatePageComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data =>  {
+      data => {
         if (data) {
           this.wineService.deleteWine($event.id)
             .subscribe(() => {

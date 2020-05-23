@@ -1,26 +1,16 @@
 <div class="main-container row-cols-7">
-  <form *ngIf="!loading"
-        [formGroup]="foodForm">
+  <form *ngIf="!loading" [formGroup]="foodForm">
     <div class="row col-12">
       <mat-form-field class="title">
-        <input matInput type="text"
-               placeholder="Nom"
-               autocomplete="Off"
-               formControlName="nameControl"
-               maxlength="255"
-        />
+        <input matInput type="text" placeholder="Nom" autocomplete="Off" formControlName="nameControl"
+          maxlength="255" />
       </mat-form-field>
     </div>
 
     <div class="row col-12">
       <mat-form-field class="description">
-            <textarea class="text"
-                      matInput type="textarea"
-                      placeholder="Description"
-                      autocomplete="Off"
-                      formControlName="descriptionControl"
-                      maxlength="1000"
-            ></textarea>
+        <textarea class="text" matInput type="textarea" placeholder="Description" autocomplete="Off"
+          formControlName="descriptionControl" maxlength="1000"></textarea>
       </mat-form-field>
     </div>
 
@@ -28,9 +18,7 @@
       <div class="col-md-6 col-sm-12">
         <mat-form-field>
           <mat-label>Type</mat-label>
-          <mat-select formControlName="typeControl"
-
-          >
+          <mat-select formControlName="typeControl">
             <mat-option *ngFor="let type of allTypes" [value]="type">
               {{type.typeName}}
             </mat-option>
@@ -38,17 +26,14 @@
         </mat-form-field>
       </div>
       <div class="col-md-6 col-sm-12" style="padding-top: 45px">
-        <app-auto-complete (addElement)="getAllergenId($event)"
-                           [arrayPromise]="allergenPromise"
-                           [creation]="true"
-                           [nameField]="true"
-                           [title]="title"
-                           [service]="allergenService"
-        ></app-auto-complete>
+        <app-auto-complete (addElement)="getAllergenId($event)" [arrayPromise]="allergenPromise" [creation]="true"
+          [myControl]="allergenControl" [nameField]="true" [title]="title" [service]="allergenService">
+        </app-auto-complete>
       </div>
     </div>
-    <div class="row" style=" display: flex; justify-content: center" >
-      <button *ngFor="let allergen of allergensNames;" mat-flat-button class="allergens-btn" color="primary" (click)="removeAllergen(allergen)">{{allergen}}</button>
+    <div class="row" style=" display: flex; justify-content: center">
+      <button *ngFor="let allergen of allergensNames;" mat-flat-button class="allergens-btn" color="primary"
+        (click)="removeAllergen(allergen)">{{allergen}}</button>
     </div>
 
     <div class="row">
@@ -120,5 +105,3 @@
 <!--    <button mat-flat-button (click)="save()">envoyer</button>-->
 <!--  </div>-->
 <!--</form>-->
-
-
