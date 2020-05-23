@@ -1,3 +1,4 @@
+import { CrudInterface } from './../../../class/curdInterface';
 import { Component, OnInit } from '@angular/core';
 import {Category} from '../../../class/wine/category';
 import {Label} from '../../../class/wine/label';
@@ -107,5 +108,24 @@ export class VinsComponent implements OnInit {
         this.allStatus = status;
       });
   }
-
+  sortWines(wineTab: Wine[]): Wine[] {
+    return wineTab.sort((a: Wine, b: Wine) => {
+      let textA = a.wineName.toUpperCase();
+      let textB = b.wineName.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+  }
+  sortList(list: CrudInterface[]) {
+    return list.sort(function (a, b) {
+      if (isNaN(parseInt(a.getName(), 10))) {
+        let textA = a.getName().toUpperCase();
+        let textB = b.getName().toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      } else {
+        let numA = parseInt(a.getName(), 10);
+        let numB = parseInt(b.getName(), 10);
+        return numA - numB;
+      }
+    });
+  }
 }

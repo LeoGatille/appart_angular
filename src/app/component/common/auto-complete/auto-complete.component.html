@@ -4,14 +4,13 @@
       [formControl]="myControl" [matAutocomplete]="auto" />
   </mat-form-field>
   <div class="btn-container">
-    <div [ngClass]="{'creation-required': activateButton}">
-    </div>
-    <div [ngClass]="{'creation-required-2': activateButton}">
-    </div>
+
     <button mat-mini-fab [ngClass]="{btnReady: activateButton}" [disabled]="!activateButton" color="error"
       (click)="launchModalCreation()">
       <mat-icon>add</mat-icon>
     </button>
+    <div [ngClass]="{'creation-required': activateButton}">
+    </div>
   </div>
 </div>
 
