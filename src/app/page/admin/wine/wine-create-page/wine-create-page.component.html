@@ -1,160 +1,136 @@
 <div style="min-height:100vh; margin-bottom: 150px; ">
-  <div style="background: red" *ngIf="error">
-  {{errorLog}}
-</div>
 
-<mat-accordion class="accordion" >
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title class="creation">
-        Création
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <div class="main-content row">
-      <form *ngIf="!loading" [formGroup]="wineForm" >
 
-        <div class="name-price row">
-          <div class="col-md-6 col-sm-12">
-            <mat-form-field class="example-full-width name">
-              <input type="text"
-                     matInput
-                     placeholder="Nom"
-                     formControlName="nameControl"
-              >
-            </mat-form-field>
+  <div class="header row">
+    <div class="text-container col-10">
+      <div class="container-title ">
+        <h1 class="title">Les vins</h1>
+      </div>
+      <div class="parent-text">
+        <p class="text">
+          Cette sélection de vins est l’histoire d’une rencontre.
+          <br>L’un passionné par le solide, le chef d’orchestre, le plus souvent derrière ses pianos.
+          <br>L’autre, plutôt liquide, amoureux des bons flacons qui enchantent l’âme et l’esprit.
+          <br>De cette alchimie où le sens des mots plaisir, générosité, partage ont une vraie valeur
+          <br>Est née cette carte.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <mat-accordion  class="accordion">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="creation">
+          Création
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="main-content row">
+        <form *ngIf="!loading" [formGroup]="wineForm">
+
+          <div class="name-price row">
+            <div class="col-md-6 col-sm-12">
+              <mat-form-field class="example-full-width name">
+                <input type="text" matInput placeholder="Nom" formControlName="nameControl">
+              </mat-form-field>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <mat-form-field class="example-full-width price">
+                <input type="number" matInput placeholder="Prix" formControlName="priceControl">
+              </mat-form-field>
+            </div>
           </div>
 
-          <div class="col-md-6 col-sm-12">
-            <mat-form-field class="example-full-width price">
-              <input type="number"
-                     matInput
-                     placeholder="Prix"
-                     formControlName="priceControl"
-              >
-            </mat-form-field>
+          <div class="color-category row">
+            <div class="col-md-6 col-sm-12">
+              <app-auto-complete (addElement)="stockWineItems('color', $event)"
+                [arrayPromise]="promiseContainer.colorPromise" [myControl]="colorControl" [creation]="true"
+                [nameField]="true" [title]="'Couleur'" [service]="colorService"></app-auto-complete>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <app-auto-complete (addElement)="stockWineItems('category', $event)"
+                [arrayPromise]="promiseContainer.categoryPromise" [myControl]="categoryControl" [creation]="true"
+                [nameField]="true" [title]="'Catégorie'" [service]="categoryService">
+              </app-auto-complete>
+            </div>
           </div>
+          <div class="designation-label row">
+            <div class="col-md-6 col-sm-12">
+              <app-auto-complete (addElement)="stockWineItems('designation', $event)"
+                [arrayPromise]="promiseContainer.designationPromise" [myControl]="designationControl" [creation]="true"
+                [nameField]="true" [title]="'Appellation'" [service]="designationService">
+              </app-auto-complete>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <app-auto-complete (addElement)="stockWineItems('label', $event)"
+                [arrayPromise]="promiseContainer.labelPromise" [myControl]="labelControl" [creation]="true"
+                [nameField]="true" [title]="'Label'" [service]="labelService">
+              </app-auto-complete>
+            </div>
+          </div>
+
+          <div class="vintage-status row">
+            <div class="col-md-6 col-sm-12">
+              <app-auto-complete (addElement)="stockWineItems('vintage', $event)"
+                [arrayPromise]="promiseContainer.vintagePromise" [myControl]="vintageControl" [creation]="true"
+                [numberField]="true" [title]="'Millésime'" [service]="vintageService">
+              </app-auto-complete>
+            </div>
+
+            <div class="col-md-6 col-sm-12">
+              <mat-form-field>
+                <mat-label>Statut</mat-label>
+                <mat-select formControlName="statusControl">
+                  <mat-option *ngFor="let status of allStatus" [value]="status">
+                    {{status.statusName}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div>
+            <button mat-flat-button (click)="validate()" [disabled]="wineForm.invalid">Envoyer</button>
+          </div>
+        </form>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="filter-container">
+    <div>
+      <button mat-flat-button (click)="getSelector('categoryPromise')">Catégorie</button>
+      <button mat-flat-button (click)="getSelector('designationPromise')">Appellation</button>
+      <button mat-flat-button (click)="getSelector('colorPromise')">Couleur</button>
+    </div>
+    <div>
+      <button mat-flat-button (click)="getSelector('labelPromise')">Label</button>
+      <button mat-flat-button (click)="getSelector('vintagePromise')">Millésime</button>
+    </div>
+  </div>
+
+  <div class="no-choice">
+    <h1>Les vins</h1>
+    <mat-expansion-panel class="selector-container" *ngFor="let selected of sortList(selector)" [expanded]="true">
+      <mat-expansion-panel-header>
+        <div class="selector">
+          {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
+          <span *ngIf="selected.wines.length <= 0"><i>*VIDE*</i></span>
         </div>
+      </mat-expansion-panel-header>
 
-        <div class="color-category row">
-          <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="stockWineItems('color', $event)"
-                               [arrayPromise]="promiseContainer.colorPromise"
-                               [myControl]="colorControl"
-                               [creation]="true"
-                               [nameField]="true"
-                               [title]="'Couleur'"
-                               [service]="colorService"
-            ></app-auto-complete>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="stockWineItems('category', $event)"
-                               [arrayPromise]="promiseContainer.categoryPromise"
-                               [myControl]="categoryControl"
-                               [creation]="true"
-                               [nameField]="true"
-                               [title]="'Catégorie'"
-                               [service]="categoryService"
-            >
-            </app-auto-complete>
-          </div>
-        </div>
-        <div class="designation-label row">
-          <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="stockWineItems('designation', $event)"
-                               [arrayPromise]="promiseContainer.designationPromise"
-                               [myControl]="designationControl"
-                               [creation]="true"
-                               [nameField]="true"
-                               [title]="'Appellation'"
-                               [service]="designationService"
-            >
-            </app-auto-complete>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="stockWineItems('label', $event)"
-                               [arrayPromise]="promiseContainer.labelPromise"
-                               [myControl]="labelControl"
-                               [creation]="true"
-                               [nameField]="true"
-                               [title]="'Label'"
-                               [service]="labelService"
-            >
-            </app-auto-complete>
-          </div>
-        </div>
-
-        <div class="vintage-status row">
-          <div class="col-md-6 col-sm-12">
-            <app-auto-complete (addElement)="stockWineItems('vintage', $event)"
-                               [arrayPromise]="promiseContainer.vintagePromise"
-                               [myControl]="vintageControl"
-                               [creation]="true"
-                               [numberField]="true"
-                               [title]="'Millésime'"
-                               [service]="vintageService"
-            >
-            </app-auto-complete>
-          </div>
-
-          <div class="col-md-6 col-sm-12">
-            <mat-form-field>
-              <mat-label>Statut</mat-label>
-              <mat-select formControlName="statusControl"
-              >
-                <mat-option *ngFor="let status of allStatus" [value]="status">
-                  {{status.statusName}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-
+      <div class="wine-section" *ngFor="let wine of sortWines(selected.wines)">
         <div>
-          <button mat-flat-button
-                  (click)="validate()"
-                  [disabled]="wineForm.invalid"
-          >Envoyer</button>
+          <app-wine-row [wine]="wine" (editData)="getSelector(option, true) " [selector]="selected"
+            (delete)="delete($event)"></app-wine-row>
         </div>
-      </form>
-    </div>
-
-  </mat-expansion-panel>
-</mat-accordion>
-
-<div class="filter-container">
-  <div>
-    <button mat-flat-button (click)="getSelector('categoryPromise')">Catégorie</button>
-    <button mat-flat-button (click)="getSelector('designationPromise')">Appellation</button>
-    <button mat-flat-button (click)="getSelector('colorPromise')">Couleur</button>
-  </div>
-  <div>
-    <button mat-flat-button (click)="getSelector('labelPromise')">Label</button>
-    <button mat-flat-button (click)="getSelector('vintagePromise')">Millésime</button>
-  </div>
-</div>
-
-<div class="no-choice">
-  <h1>Les vins</h1>
-  <mat-expansion-panel class="selector-container" *ngFor="let selected of sortList(selector)" [expanded]="true">
-    <mat-expansion-panel-header>
-      <div class="selector">
-        {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}} 
-        <span *ngIf="selected.wines.length <= 0"><i>*VIDE*</i></span>
       </div>
-    </mat-expansion-panel-header>
+      <div class="separation container-fluid"></div>
+    </mat-expansion-panel>
 
-    <div class="wine-section" *ngFor="let wine of sortWines(selected.wines)">
-      <div>
-        <app-wine-row [wine]="wine"
-                      (editData)="getSelector(option, true) "
-                      [selector]="selected"
-                      (delete)="delete($event)"
-        ></app-wine-row>
-      </div>
-    </div>
-    <div class="separation container-fluid"></div>
-  </mat-expansion-panel>
-
-</div>
+  </div>
 
 </div>

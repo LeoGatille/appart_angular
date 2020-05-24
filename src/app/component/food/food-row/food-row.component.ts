@@ -18,7 +18,6 @@ import {ToastrService} from 'ngx-toastr';
 export class FoodRowComponent implements OnInit {
 
   @Input() food: Food;
-  @Input() administration = false;
   @Output() editData = new EventEmitter<any>();
   loading = true;
   allAllergens: string[] = [];

@@ -1,22 +1,24 @@
+import { AuthService } from './../../../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { CrudInterface } from './../../../class/curdInterface';
 import { Component, OnInit } from '@angular/core';
-import {Category} from '../../../class/wine/category';
-import {Label} from '../../../class/wine/label';
-import {Designation} from '../../../class/wine/designation';
-import {Color} from '../../../class/wine/color';
-import {Vintage} from '../../../class/wine/vintage';
-import {Status} from '../../../class/wine/status';
-import {ColorService} from '../../../service/wine/color.service';
-import {CategoryService} from '../../../service/wine/category.service';
-import {DesignationService} from '../../../service/wine/designation.service';
-import {LabelService} from '../../../service/wine/label.service';
-import {VintageService} from '../../../service/wine/vintage.service';
-import {StatusService} from '../../../service/wine/status.service';
-import {WineService} from '../../../service/wine/wine.service';
-import {Wine} from '../../../class/wine/wine';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../dialog/dialog.component';
+import { Category } from '../../../class/wine/category';
+import { Label } from '../../../class/wine/label';
+import { Designation } from '../../../class/wine/designation';
+import { Color } from '../../../class/wine/color';
+import { Vintage } from '../../../class/wine/vintage';
+import { Status } from '../../../class/wine/status';
+import { ColorService } from '../../../service/wine/color.service';
+import { CategoryService } from '../../../service/wine/category.service';
+import { DesignationService } from '../../../service/wine/designation.service';
+import { LabelService } from '../../../service/wine/label.service';
+import { VintageService } from '../../../service/wine/vintage.service';
+import { StatusService } from '../../../service/wine/status.service';
+import { WineService } from '../../../service/wine/wine.service';
+import { Wine } from '../../../class/wine/wine';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../dialog/dialog.component';
 
 @Component({
   selector: 'app-vins',
@@ -25,6 +27,9 @@ import {DialogComponent} from '../../../dialog/dialog.component';
 })
 export class VinsComponent implements OnInit {
 
+  loading = true;
+
+  errorLog: string;
   error = false;
   listToAdd: Wine[];
   allStatus: Status[];
@@ -34,11 +39,12 @@ export class VinsComponent implements OnInit {
   designation: Designation;
   label: Label;
   vintage: Vintage;
-  labelName: string;
-  loading = true;
-
+  wineForm: FormGroup;
+  colorControl: FormControl;
   categoryControl: FormControl;
-
+  designationControl: FormControl;
+  labelControl: FormControl;
+  vintageControl: FormControl;
   statusControl: FormControl;
 
   wines: Wine[];
@@ -48,66 +54,67 @@ export class VinsComponent implements OnInit {
   labelPromise: any = null;
   vintagePromise: any = null;
 
-  selector: any[] = [];
-  option = 'category';
 
-  constructor( private colorService: ColorService,
-               private categoryService: CategoryService,
-               private designationService: DesignationService,
-               private labelService: LabelService,
-               private vintageService: VintageService,
-               private statusService: StatusService,
-  ) { }
+  wineItemsMap = new Map();
+  selector: CrudInterface[] = [];
+  option: any = null;
 
-  ngOnInit() {
-    // this.getAllWines();
-    this.getElements();
-
-    this.getSelector(this.option);
-    this.loading = false;
-  }
-  getSelector(option, force = false) {
-    if (force) {
-      this.getElements(force);
-    }
-    if (option === 'category') {
-      this.categoryPromise().then((data: Category[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'label') {
-      this.labelPromise().then((data: Label[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'designation') {
-      this.designationPromise().then((data: Designation[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'color') {
-      this.colorPromise().then((data: Color[]) => {
-        this.selector = data;
-      });
-    }
-    if (option === 'vintage') {
-      this.vintagePromise().then((data: Vintage[]) => {
-        this.selector = data;
-      });
-    }
-  }
-
-  getElements(force = false) {
-    this.colorPromise = (bool) => this.colorService.getAllColors(force);
-    this.categoryPromise = (bool) => this.categoryService.getAllCategories(force);
-    this.designationPromise = (bool) => this.designationService.getAllDesignations(force);
-    this.labelPromise = (bool) => this.labelService.getAllLabels(force);
-    this.vintagePromise = (bool) => this.vintageService.getAllVintages(force);
-    this.statusService.getAllStatus()
+  promiseContainer = {
+    colorPromise: (force) => this.colorService.getAllColors(force),
+    categoryPromise: (force) => this.categoryService.getAllCategories(force),
+    designationPromise: (force) => this.designationService.getAllDesignations(force),
+    labelPromise: (force) => this.labelService.getAllLabels(force),
+    vintagePromise: (force) => this.vintageService.getAllVintages(force),
+    status: this.statusService.getAllStatus()
       .subscribe((status: Status[]) => {
         this.allStatus = status;
-      });
+      })
   }
+
+  refreshElements = (key) => {
+    return new Promise((resolve) => {
+      resolve(this.getElements(key, true));
+    }).then(data => { return data });
+  }
+  constructor(
+    private colorService: ColorService,
+    private categoryService: CategoryService,
+    private designationService: DesignationService,
+    private labelService: LabelService,
+    private vintageService: VintageService,
+    private statusService: StatusService,
+    private wineService: WineService,
+    private fb: FormBuilder,
+    private dialog: MatDialog,
+    private toast: ToastrService,
+    private auth: AuthService,
+  ) { }
+  ngOnInit() {
+    this.createForm();
+    this.getSelector('categoryPromise', true);
+    this.loading = false;
+  }
+
+  getSelector(key: string, force = false) {
+    this.option = key;
+    if (force) {
+      const elementPromise = this.refreshElements(key);
+      elementPromise.then((data: any) => {
+        data(force).then((tab: CrudInterface[]) => {
+          this.selector = tab;
+        });
+      });
+    } else {
+      const elementPromise = this.getElements(key);
+      elementPromise().then((elementTab: any[]) => {
+        this.selector = elementTab;
+      })
+    }
+  }
+  getElements(key: string = 'category', force = false) {
+    return this.promiseContainer[key];
+  }
+
   sortWines(wineTab: Wine[]): Wine[] {
     return wineTab.sort((a: Wine, b: Wine) => {
       let textA = a.wineName.toUpperCase();
@@ -127,5 +134,89 @@ export class VinsComponent implements OnInit {
         return numA - numB;
       }
     });
+  }
+  createForm() {
+    this.colorControl = new FormControl('', Validators.required);
+    this.categoryControl = new FormControl('', Validators.required);
+    this.designationControl = new FormControl('', Validators.required);
+    this.labelControl = new FormControl('', Validators.required);
+    this.vintageControl = new FormControl('', Validators.required);
+    this.statusControl = new FormControl('', Validators.required);
+    this.wineForm = this.fb.group({
+      colorControl: this.colorControl,
+      categoryControl: this.categoryControl,
+      designationControl: this.designationControl,
+      labelControl: this.labelControl,
+      vintageControl: this.vintageControl,
+      statusControl: ['', Validators.required],
+      nameControl: ['', Validators.required],
+      priceControl: ['', Validators.required]
+    });
+  }
+  stockWineItems(key: string, item) {
+    if (!item) {
+      return;
+    }
+    this.wineItemsMap.set(key, item);
+    this.getSelector('categoryPromise');
+  }
+  setNewWine() {
+    const newWine = new Wine();
+    newWine.status = this.wineForm.value.statusControl;
+    newWine.wineName = this.wineForm.value.nameControl;
+    newWine.winePrice = this.wineForm.value.priceControl;
+    newWine.category = this.wineItemsMap.get('category');
+    newWine.designation = this.wineItemsMap.get('designation');
+    newWine.color = this.wineItemsMap.get('color');
+    newWine.label = this.wineItemsMap.get('label');
+    newWine.vintage = this.wineItemsMap.get('vintage');
+    return newWine;
+  }
+  validate() {
+    const vin = this.setNewWine();
+    this.wineService.createWine(
+      vin.category.id,
+      vin.designation.id,
+      vin.color.id,
+      vin.label.id,
+      vin.wineName,
+      vin.winePrice * 100,
+      vin.vintage.id,
+      vin.status.id
+    ).subscribe((success: Wine) => {
+      this.toast.success('Ajout de ' + success.wineName);
+      this.createForm();
+      this.getSelector(this.option, true);
+      this.resetValues();
+    },
+      error => {
+        this.toast.error(error.error);
+      });
+  }
+  resetValues() {
+    this.wineItemsMap.clear()
+  }
+  delete($event) {
+    const dialogConfig = new MatDialogConfig();
+    // dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      suppr: $event.wineName,
+    };
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.wineService.deleteWine($event.id)
+            .subscribe(() => {
+              this.toast.success('Suppression effectuée');
+              this.getSelector(this.option, true);
+            });
+        }
+      }
+    );
+  }
+  isConnected(): boolean {
+    //this.user = this.auth.currentUser;
+    return this.auth.isConnected();
   }
 }

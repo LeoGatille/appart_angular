@@ -65,7 +65,7 @@
       <h3 class="type-title">{{type.typeName}}</h3>
       <div class="line"></div>
       <div *ngFor="let food of sortFoods(type.foods) ">
-        <app-food-row [food]="food" [administration]="true" (editData)="getFood()"></app-food-row>
+        <app-food-row [food]="food" (editData)="getFood()"></app-food-row>
       </div>
     </div>
   </div>
