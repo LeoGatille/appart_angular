@@ -27,7 +27,7 @@
           <span>
             <a routerLink="/carte" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
               <span>La carte
-                <i class="material-icons" style="font-size: 1em;">
+                <i *ngIf="isConnected()" class="material-icons" style="font-size: 1em;">
                   create
                 </i>
               </span>
