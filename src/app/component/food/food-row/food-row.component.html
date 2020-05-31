@@ -1,12 +1,12 @@
 <div *ngIf="!loading" class="main-container">
   <div class="header row">
     <div *ngIf="isConnected()" class="container-btn">
-      <button mat-mini-fab class="edit-btn" (click)="editFood(food)">
+      <button id="edition" mat-mini-fab class="edit-btn" (click)="editFood(food)">
         <i class="material-icons">create</i>
       </button>
 
       <button mat-mini-fab class="delete-btn" (click)="delete(food)">
-        <i class="material-icons">delete</i></button>
+        <i id="delete" class="material-icons">delete</i></button>
 
       <div class="container-check">
         <form [formGroup]="patchForm">

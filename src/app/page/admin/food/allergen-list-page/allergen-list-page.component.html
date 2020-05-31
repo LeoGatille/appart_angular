@@ -1,4 +1,4 @@
-<div style="padding-left: 50px; min-height: 100vh">
+<div style="padding-left: 50px; min-height:calc(100vh - 158px)">
   <h1>Allergens</h1>
   <app-create-form [listToAdd]="listToAdd" [horizontal]="true" [class]="class" (serviceCall)="createAllergens($event)"
     [nameField]="true" [placeholderName]="placeholderName"></app-create-form>

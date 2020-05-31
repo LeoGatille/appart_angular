@@ -1,48 +1,13 @@
-<!--<div >-->
-<!--  <form enctype="multipart/form-data"-->
-<!--        formGroup="imageForm"-->
-<!--  >-->
-<!--    <div>-->
-<!--      <div class="form-group">-->
-<!--        <label for="file">Choose File</label>-->
-<!--        <input formControlName="fileControl"-->
-<!--               type="file"-->
-<!--               id="file"-->
-<!--               (change)="onFileChange($event)"-->
-<!--        >-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <div>-->
-<!--      <input type="text"-->
-<!--             id="alt"-->
-<!--             formControlName="altControl"-->
-<!--      >-->
-<!--    </div>-->
-<!--  </form>-->
-<!--  <div>-->
-<div style="min-height:calc(100vh - 158px) ">
+<div style="min-height:150vh ; margin-bottom: 50px; ">
   <div style="display: flex">
     <form [formGroup]="imageForm" enctype="multipart/form-data">
-      <input type="file"
-             id="file"
-             (change)="handleFileInput($event.target.files)"
-             accept="image/png, image/jpeg"
+      <input type="file" id="file" (change)="handleFileInput($event.target.files)" accept="image/png, image/jpeg">
       >
-      >
-      <input type="text"
-             name="altControl"
-             formControlName="altControl"
-      >
+      <input type="text" name="altControl" formControlName="altControl">
     </form>
     <div>
-      <button mat-flat-button
-              style="background-color: #1cceff; color: white"
-
-              type="submit"
-              (click)="save()"
-              [disabled]="!valid"
-      >
+      <button mat-flat-button style="background-color: #1cceff; color: white" type="submit" (click)="save()"
+        [disabled]="!valid">
         envoyer
       </button>
     </div>
@@ -53,10 +18,16 @@
   </div>
 
 
-  <div class="row" style="margin-top: 150px ">
-    <div  *ngFor="let object of objectTab; let i = index; let suppr = false;"[attr.suppr]="suppr" [attr.index]="i" class="col-lg-4 col-md-6 col-sm-12 img-container" style="cursor: pointer; display: flex; justify-content: center; align-items: center; " [ngClass]="{'suppr': suppr}" (click)="suppr = !suppr ">
-      <div *ngIf="suppr" (click)="suppr = !suppr " style="position: absolute;  font-size: 6em; rgba(255,255,255,0.4);height: 100px; width: 100px; border-radius: 100%; background-color: white; display: flex; justify-content: center; align-items: center">
-        <mat-icon (click)="suppr = !suppr " style="color: #ff295c; font-size: 1em; text-align: center; display: flex; justify-content: center; align-items: center">delete</mat-icon>
+  <div class="row" style="margin-top: 150px;  ">
+    <div style="margin-bottom: 50px;" *ngFor="let object of objectTab; let i = index; let suppr = false;"
+      [attr.suppr]="suppr" [attr.index]="i" class="col-lg-4 col-md-6 col-sm-12 img-container"
+      style="cursor: pointer; display: flex; justify-content: center; align-items: center; "
+      [ngClass]="{'suppr': suppr}" (click)="suppr = !suppr ">
+      <div *ngIf="suppr" (click)="suppr = !suppr "
+        style="position: absolute;  font-size: 6em; rgba(255,255,255,0.4);height: 100px; width: 100px; border-radius: 100%; background-color: white; display: flex; justify-content: center; align-items: center">
+        <mat-icon (click)="suppr = !suppr "
+          style="color: #ff295c; font-size: 1em; text-align: center; display: flex; justify-content: center; align-items: center">
+          delete</mat-icon>
       </div>
       <img width="500px" src="http://api.bundles.do{{object.path}}" alt={{object.alt}}>
     </div>

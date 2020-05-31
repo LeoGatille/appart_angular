@@ -219,4 +219,50 @@ export class VinsComponent implements OnInit {
     //this.user = this.auth.currentUser;
     return this.auth.isConnected();
   }
+  refreshAfterEdit() {
+    this.getSelector(this.option, true);
+
+    if ('colorPromise' !== this.option) {
+      console.log('COLOR');
+      const elementPromise = this.refreshElements("colorPromise");
+      elementPromise.then((data: any) => {
+        data(true).then((tab: CrudInterface[]) => {
+
+        });
+      });
+    }
+    if ('categoryPromise' !== this.option) {
+      const elementPromise = this.refreshElements("colorPromise");
+      elementPromise.then((data: any) => {
+        data(true).then((tab: CrudInterface[]) => {
+
+        });
+      });
+    }
+    if ('designationPromise' !== this.option) {
+      const elementPromise = this.refreshElements("designationPromise");
+      elementPromise.then((data: any) => {
+        data(true).then((tab: CrudInterface[]) => {
+
+        });
+      });
+    }
+    if ('labelPromise' !== this.option) {
+      const elementPromise = this.refreshElements("labelPromise");
+      elementPromise.then((data: any) => {
+        data(true).then((tab: CrudInterface[]) => {
+
+        });
+      });
+    }
+    if ('vintagePromise' !== this.option) {
+      const elementPromise = this.refreshElements("vintagePromise");
+      elementPromise.then((data: any) => {
+        data(true).then((tab: CrudInterface[]) => {
+
+        });
+      });
+    }
+
+  }
 }

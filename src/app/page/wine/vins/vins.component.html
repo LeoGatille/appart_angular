@@ -117,7 +117,8 @@
 
       <div class="wine-section" *ngFor="let wine of sortWines(selected.wines)">
         <div>
-          <app-wine-row [wine]="wine" [selector]="selected" (delete)="delete($event)"></app-wine-row>
+          <app-wine-row [wine]="wine" (editData)="refreshAfterEdit()" [selector]="selected"
+            (delete)="delete($event)"></app-wine-row>
         </div>
       </div>
       <div class="separation container-fluid"></div>

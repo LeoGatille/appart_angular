@@ -1,21 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {WineService} from '../../../../service/wine/wine.service';
-import {ActivatedRoute} from '@angular/router';
-import {Wine} from '../../../../class/wine/wine';
-import {Color} from '../../../../class/wine/color';
-import {Category} from '../../../../class/wine/category';
-import {Designation} from '../../../../class/wine/designation';
-import {Label} from '../../../../class/wine/label';
-import {Vintage} from '../../../../class/wine/vintage';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ColorService} from '../../../../service/wine/color.service';
-import {CategoryService} from '../../../../service/wine/category.service';
-import {DesignationService} from '../../../../service/wine/designation.service';
-import {LabelService} from '../../../../service/wine/label.service';
-import {VintageService} from '../../../../service/wine/vintage.service';
-import {StatusService} from '../../../../service/wine/status.service';
-import {Status} from '../../../../class/wine/status';
-import {ToastrService} from 'ngx-toastr';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { WineService } from '../../../../service/wine/wine.service';
+import { ActivatedRoute } from '@angular/router';
+import { Wine } from '../../../../class/wine/wine';
+import { Color } from '../../../../class/wine/color';
+import { Category } from '../../../../class/wine/category';
+import { Designation } from '../../../../class/wine/designation';
+import { Label } from '../../../../class/wine/label';
+import { Vintage } from '../../../../class/wine/vintage';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ColorService } from '../../../../service/wine/color.service';
+import { CategoryService } from '../../../../service/wine/category.service';
+import { DesignationService } from '../../../../service/wine/designation.service';
+import { LabelService } from '../../../../service/wine/label.service';
+import { VintageService } from '../../../../service/wine/vintage.service';
+import { StatusService } from '../../../../service/wine/status.service';
+import { Status } from '../../../../class/wine/status';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-wine-edit',
@@ -60,15 +60,15 @@ export class WineEditComponent implements OnInit {
   labelPromise: any = null;
   vintagePromise: any = null;
 
-  constructor( private colorService: ColorService,
-               private categoryService: CategoryService,
-               private designationService: DesignationService,
-               private labelService: LabelService,
-               private vintageService: VintageService,
-               private statusService: StatusService,
-               private wineService: WineService,
-               private fb: FormBuilder,
-               private toast: ToastrService,
+  constructor(private colorService: ColorService,
+    private categoryService: CategoryService,
+    private designationService: DesignationService,
+    private labelService: LabelService,
+    private vintageService: VintageService,
+    private statusService: StatusService,
+    private wineService: WineService,
+    private fb: FormBuilder,
+    private toast: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -86,14 +86,14 @@ export class WineEditComponent implements OnInit {
     this.vintageControl = new FormControl(Object.assign(new Vintage(), this.wine.vintage), Validators.required);
     this.statusControl = new FormControl(this.wine.status, Validators.required);
     this.wineForm = this.fb.group({
-      colorControl : this.colorControl,
-      categoryControl : this.categoryControl,
-      designationControl : this.designationControl,
-      labelControl : this.labelControl,
-      vintageControl : this.vintageControl,
-      statusControl : ['', Validators.required],
-      nameControl : [this.wine.wineName, Validators.required],
-      priceControl : [this.wine.winePrice, Validators.required]
+      colorControl: this.colorControl,
+      categoryControl: this.categoryControl,
+      designationControl: this.designationControl,
+      labelControl: this.labelControl,
+      vintageControl: this.vintageControl,
+      statusControl: ['', Validators.required],
+      nameControl: [this.wine.wineName, Validators.required],
+      priceControl: [this.wine.winePrice, Validators.required]
     });
     this.edited = true;
   }
@@ -170,7 +170,7 @@ export class WineEditComponent implements OnInit {
 
   activateNewCategory(val) {
     if (typeof val === 'string') {
-      this.activateButton =  this.categories.some((sample) => sample.categoryName.toLowerCase() === val.toLowerCase());
+      this.activateButton = this.categories.some((sample) => sample.categoryName.toLowerCase() === val.toLowerCase());
     }
   }
 
@@ -194,7 +194,7 @@ export class WineEditComponent implements OnInit {
       this.wine.status.id,
       this.wine.id,
     )
-      .subscribe((success: Wine) =>  {
+      .subscribe((success: Wine) => {
         this.wine.realPrice = (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(this.wine.winePrice));
         this.toast.success('Modification de ' + success.wineName);
         this.close.emit();
