@@ -1,4 +1,4 @@
-describe('Home Page', () => {
+describe('FOOD page', () => {
     it('sould display La Carte with all foods', () => {
         // Go to login form
         cy.visit('/auth');
