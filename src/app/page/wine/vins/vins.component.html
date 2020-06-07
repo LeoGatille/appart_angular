@@ -111,14 +111,17 @@
     <mat-expansion-panel class="selector-container" *ngFor="let selected of sortList(selector)" [expanded]="true">
       <mat-expansion-panel-header *ngIf="selected.wines.length > 0">
         <div class="selector">
-          {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
+          {{selected.getName()}}
         </div>
+        <!-- <div class="selector">
+          {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
+        </div> -->
       </mat-expansion-panel-header>
 
       <div class="wine-section" *ngFor="let wine of sortWines(selected.wines)">
         <div>
-          <app-wine-row [wine]="wine" (editData)="refreshAfterEdit()" [selector]="selected"
-            (delete)="delete($event)"></app-wine-row>
+          <app-wine-row [wine]="wine" (editData)="refreshAll()" [selector]="selected" (delete)="delete($event)">
+          </app-wine-row>
         </div>
       </div>
       <div class="separation container-fluid"></div>

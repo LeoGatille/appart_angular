@@ -186,7 +186,8 @@ export class VinsComponent implements OnInit {
     ).subscribe((success: Wine) => {
       this.toast.success('Ajout de ' + success.wineName);
       this.createForm();
-      this.getSelector(this.option, true);
+      //this.getSelector(this.option, true);
+      this.refreshAll();
       this.resetValues();
     },
       error => {
@@ -209,7 +210,8 @@ export class VinsComponent implements OnInit {
           this.wineService.deleteWine($event.id)
             .subscribe(() => {
               this.toast.success('Suppression effectuée');
-              this.getSelector(this.option, true);
+              //this.getSelector(this.option, true);
+              this.refreshAll();
             });
         }
       }
@@ -219,7 +221,7 @@ export class VinsComponent implements OnInit {
     //this.user = this.auth.currentUser;
     return this.auth.isConnected();
   }
-  refreshAfterEdit() {
+  refreshAll() {
     this.getSelector(this.option, true);
 
     if ('colorPromise' !== this.option) {
@@ -227,7 +229,6 @@ export class VinsComponent implements OnInit {
       const elementPromise = this.refreshElements("colorPromise");
       elementPromise.then((data: any) => {
         data(true).then((tab: CrudInterface[]) => {
-
         });
       });
     }

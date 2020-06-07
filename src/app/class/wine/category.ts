@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { CrudInterface } from './../curdInterface';
 import { CategoryService } from './../../service/wine/category.service';
 import { WineGetterInterface } from './../wineGetterInterface';
-import {Wine} from './wine';
+import { Wine } from './wine';
 import { AutoCompleteInterface } from '../autoCompleteInteface';
 import { Injectable, Injector, Component, Provider } from '@angular/core';
 import { globalAgent } from 'http';
@@ -20,7 +20,7 @@ import { root } from 'rxjs/internal/util/root';
 
 export class Category implements AutoCompleteInterface, WineGetterInterface, CrudInterface {
   constructor(
-  ) {}
+  ) { }
   service: CategoryService = ServiceLocator.injector.get(CategoryService);
   id: number | null;
   categoryName: string;
@@ -28,42 +28,42 @@ export class Category implements AutoCompleteInterface, WineGetterInterface, Cru
   wines: Wine[];
   public getName() {
     return this.categoryName;
-  } 
+  }
   public getWines(): Wine[] {
     return this.wines;
   }
   public create(): Promise<any> {
-    return new Promise(() => {});
+    return new Promise(() => { });
   }
   public initEdition(): Promise<any> {
     const editionDialog = new DialogManger();
-   return editionDialog.launchEditionModal(this.getName()).then((newName : string) => {
-     if(newName === '') {
-       return;
-     }
+    return editionDialog.launchEditionModal(this.getName()).then((newName: string) => {
+      if (newName === '') {
+        return;
+      }
       return this.edit(newName);
     });
   }
   private edit(newName) {
-    if((newName === null || newName === undefined || newName === '' )) {
-      return new Promise((resolve, reject ) => {
+    if ((newName === null || newName === undefined || newName === '')) {
+      return new Promise((resolve, reject) => {
 
       }).then()
     }
-   return this.service.editCategory(newName, this.id)
+    return this.service.editCategory(newName, this.id)
       .toPromise()
-      .then(() => {return this.sendResult(`Modification de ${this.getName()}`)})
-      .catch((err) => {return this.sendResult(err.error)});
+      .then(() => { return this.sendResult(`Modification de ${this.getName()}`) })
+      .catch((err) => { return this.sendResult(err.error) });
   }
-  public askForDeletion(): Promise<any>  {
-    if(this.getWines().length >= 1) {
+  public askForDeletion(): Promise<any> {
+    if (this.getWines().length >= 1) {
       return Promise.reject(new Error('La catégory est liée à un ou plusieurs Vins'));
     }
-  const suppressionDialog = new DialogManger();
-   return suppressionDialog.launchSuppressionModal(this.getName()).then((confirm: boolean) => {
-      if(confirm) {
+    const suppressionDialog = new DialogManger();
+    return suppressionDialog.launchSuppressionModal(this.getName()).then((confirm: boolean) => {
+      if (confirm) {
         return this.delete(this.id);
-      } 
+      }
     }).catch(err => {
       console.log(err);
     })
@@ -71,13 +71,13 @@ export class Category implements AutoCompleteInterface, WineGetterInterface, Cru
   private delete(id: number) {
     return this.service.deleteCategory(id)
       .pipe(
-        map((val)=> {this.getName()})
+        map((val) => { this.getName() })
       )
       .toPromise()
-      .then(() => {return this.sendResult(`Suppression de ${this.getName()}`);})
-      .catch(() => {return this.sendResult();} );
+      .then(() => { return this.sendResult(`Suppression de ${this.getName()}`); })
+      .catch(() => { return this.sendResult(); });
   }
-  private sendResult(succes: string = null) :string {
+  private sendResult(succes: string = null): string {
     console.log('SendResult');
     return succes ? succes : 'Une erreur est survenue';
   }

@@ -141,6 +141,7 @@ export class AutoCompleteComponent implements OnInit {
             this.listOfElements.push(res);
             this.addElement.emit(res);
             this.activateButton = false;
+            this.myControl.patchValue(res);
             this.getElements();
           });
       } else {

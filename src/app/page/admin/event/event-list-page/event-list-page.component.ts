@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Event} from '../../../../class/event';
-import {EventService} from '../../../../service/event.service';
-import {Food} from '../../../../class/food/food';
-import {EventCreateComponent} from '../event-create/event-create.component';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../../dialog/dialog.component';
-import {ToastrService} from 'ngx-toastr';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Event } from '../../../../class/event';
+import { EventService } from '../../../../service/event.service';
+import { Food } from '../../../../class/food/food';
+import { EventCreateComponent } from '../event-create/event-create.component';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-event-list-page',
@@ -15,13 +15,13 @@ import {ToastrService} from 'ngx-toastr';
 export class EventListPageComponent implements OnInit {
   loading = true;
   chooseId: number | null;
-  oldName: string |null;
-  oldDescription: string |null;
-  oldDate: Date |null;
-  oldPriceNoDrinks: number |null;
-  oldPriceWithDrinks: number |null;
-  oldFoodControl: Food[] |null;
-  oldTypeControl: string |null;
+  oldName: string | null;
+  oldDescription: string | null;
+  oldDate: Date | null;
+  oldPriceNoDrinks: number | null;
+  oldPriceWithDrinks: number | null;
+  oldFoodControl: Food[] | null;
+  oldTypeControl: string | null;
   selectedDate: Date | null;
   eventList: Event[];
   selectedEvent: Event;
@@ -57,20 +57,20 @@ export class EventListPageComponent implements OnInit {
     const timestamp = eventData.date.getTime();
     if (this.action !== 'edit') {
       this.eventService.createEvent(
-        timestamp,
+        timestamp + 8640000,
         eventData.description,
         eventData.name,
         this.getDecimalPrice(eventData.priceNoDrinks),
         this.getDecimalPrice(eventData.priceWithDrinks),
         foodsData
       ).subscribe((event: Event) => {
-        this.toast.success('Ajout de ' + event.eventName );
+        this.toast.success('Ajout de ' + event.eventName);
         this.ngOnInit();
       });
     } else {
       this.eventService.editEvent(
         eventId,
-        timestamp,
+        timestamp + 8640000,
         eventData.description,
         eventData.name,
         eventData.priceNoDrinks,
@@ -90,7 +90,7 @@ export class EventListPageComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      (data) =>  {
+      (data) => {
         this.ngOnInit();
       }
     );
@@ -103,7 +103,7 @@ export class EventListPageComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data =>  {
+      data => {
         console.log('data === ', data);
         if (data) {
           this.eventService.deleteEvent(event.id)

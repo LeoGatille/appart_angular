@@ -6,15 +6,11 @@
 
   <div *ngFor="let event of eventList" class="row" style="padding-bottom: 100px; padding-left: 50px;">
     <div class="btn-container">
-      <button mat-mini-fab class="edit-btn"
-              (click)="edit(event)"
-      >
+      <button mat-mini-fab class="edit-btn" (click)="edit(event)">
         <i class="material-icons">create</i>
       </button>
 
-      <button mat-mini-fab class="delete-btn"
-              (click)="delete(event)"
-      >
+      <button mat-mini-fab class="delete-btn" (click)="delete(event)">
         <i class="material-icons">
           delete
         </i>
@@ -24,7 +20,7 @@
     <div>
       <div class="row">
         <div>
-          <h4 class="date">{{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
+          <h4 class="date">{{(event.eventDate.timestamp) * 1000 | date: 'dd/MM/yyyy' }}</h4>
         </div>
       </div>
       <div class="row">

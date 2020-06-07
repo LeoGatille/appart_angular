@@ -9,7 +9,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 export class CreateFormComponent implements OnInit {
 
   @Input() horizontal = false;
-
   @Input() listToAdd: any[];
   @Input() dialog;
   @Input() class: any;

@@ -32,12 +32,5 @@ export class EditionModalComponent implements OnInit {
   save() {
     const val = this.createForm.value.nameControl;
     this.dialogRef.close(val);
-
-    // const val = this.createForm.value;
-    // this.serviceCreate(val);
-    // if (this.dialog) {
-    //   this.dialog.close();
-    // }
-    // this.createForm.reset();
   }
 }
