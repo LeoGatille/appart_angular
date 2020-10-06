@@ -1,44 +1,11 @@
-<!--<tr *ngIf="!loading">-->
-<!--  <td>{{wine.label.labelName}}</td>-->
-<!--  <td>{{wine.color.colorName}}</td>-->
-<!--  <td>{{wine.category.categoryName}}</td>-->
-<!--  <td>{{wine.designation.designationName}}</td>-->
-<!--  <td>{{wine.wineName}}</td>-->
-<!--  <td>{{wine.vintage.vintageYear}}</td>-->
-<!--  <td>{{wine.winePrice}}</td>-->
-<!--  <td><button mat-icon-button (click)="sendDelete(wine.id)"><i class="material-icons">-->
-<!--    delete-->
-<!--  </i></button></td>-->
-<!--  <td><button mat-icon-button (click)="editWine(wine)" color="success"><i class="material-icons">-->
-<!--    create-->
-<!--  </i></button></td>-->
-<!--  <td><button mat-icon-button (click)="showWineStatus()"><i class="material-icons">-->
-<!--    style-->
-<!--  </i></button></td>-->
-<!--</tr>-->
-
-<!--<tr *ngIf="showAllStatus">-->
-<!--  <td *ngFor="let status of allStatus">-->
-<!--    <button mat-flat-button (click)="editWineStatus(status.id)">{{status.statusName}}</button>-->
-<!--  </td>-->
-<!--</tr>-->
-
-<!--<tr *ngIf="!showAllStatus && showCurrentStatus ">-->
-<!--<td>{{wine.status.statusName}}</td>-->
-<!--</tr>-->
 <div class="main-container row">
   <div *ngIf="isConnected()" class="container-btn">
-    <button mat-mini-fab class="edit-btn"
-            (click)="editWine(wine, selector)"
-    ><i class="material-icons">create</i></button>
+    <button mat-mini-fab class="edit-btn" (click)="editWine(wine, selector)"><i
+        class="material-icons">create</i></button>
 
-    <button mat-mini-fab class="delete-btn"
-            (click)="sendDelete(wine)"
-    ><i class="material-icons">delete</i></button>
+    <button mat-mini-fab class="delete-btn" (click)="sendDelete(wine)"><i class="material-icons">delete</i></button>
 
-    <button mat-mini-fab class="status-btn"
-            (click)="showWineStatus()"
-    ><i class="material-icons">style</i></button>
+    <button mat-mini-fab class="status-btn" (click)="showWineStatus()"><i class="material-icons">style</i></button>
   </div>
   <div class="wine-container col-12">
     <div class="wine-header">
@@ -59,15 +26,11 @@
       </div>
       <div *ngIf="showAllStatus" class="all-status-container">
         <div *ngFor="let status of allStatus">
-          <button mat-flat-button
-                  class="status-btn"
-                  (click)="editWineStatus(status.id)">
+          <button mat-flat-button class="status-btn" (click)="editWineStatus(status.id)">
             {{status.statusName}}
           </button>
         </div>
       </div>
     </div>
   </div>
-
-
 </div>

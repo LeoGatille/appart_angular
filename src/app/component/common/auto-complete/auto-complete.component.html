@@ -1,27 +1,20 @@
-<div style="display: flex;">
-<mat-form-field>
-  <input
-    type="text"
-    placeholder={{title}}
-    matInput
-    (ngModelChange)="sendToParent()"
-    [(ngModel)]="parentModel"
-    [formControl]="myControl"
-    [matAutocomplete]="auto"
-  />
-</mat-form-field>
+<div style="display: flex; width: 100%;">
+  <mat-form-field style="width: 500px;">
+    <input type="text" placeholder={{title}} matInput (ngModelChange)="sendToParent()" [(ngModel)]="parentModel"
+      [formControl]="myControl" [matAutocomplete]="auto" />
+  </mat-form-field>
+  <div class="btn-container">
 
-  <button mat-mini-fab
-          color="error"
-          [disabled]="activateButton"
-          (click)="launchModalCreation()">
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
+    <button mat-mini-fab [ngClass]="{btnReady: activateButton}" [disabled]="!activateButton" color="error"
+      (click)="launchModalCreation()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <div [ngClass]="{'creation-required': activateButton}">
+    </div>
+  </div>
+</div>  
 
-<mat-autocomplete #auto="matAutocomplete"
-                  [displayWith]="newDisplayFn"
->
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="newDisplayFn">
   <mat-option *ngFor="let option of (filteredElements | async)" [value]="option">
     {{ newDisplayFn(option) }}
   </mat-option>

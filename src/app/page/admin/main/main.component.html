@@ -1,35 +1,104 @@
-<div style="min-height:calc(100vh - 158px) ">
-  <h1>Administration</h1>
+<div style="min-height:calc(100vh); margin-bottom: 50px; overflow-x: hidden;">
+  <h1 style="padding-left: 50px; width: max-content;">Administration</h1>
+  <div class="admin-container" style="margin-bottom: 150px;">
+    <div class="router-row row">
+      <div class="router-container col-md-3 col-sm-12">
+        <div class="router-link" routerLink="vins" (mouseenter)="mouseOver('vins') " (mouseleave)="mouseOver('vins')">
+          <h2>Les vins</h2>
+          <div id='edit-vins' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="wine/category" (mouseenter)="mouseOver('categories') "
+          (mouseleave)="mouseOver('categories')">
+          <h4>Catégories</h4>
+          <div id='edit-categories' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="wine/designation" (mouseenter)="mouseOver('appellations') "
+          (mouseleave)="mouseOver('appellations')">
+          <h4>Appellations</h4>
+          <div id='edit-appellations' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="wine/vintage" routerLinkActive="router-link-active"
+          (mouseenter)="mouseOver('millesime') " (mouseleave)="mouseOver('millesime')">
+          <h4>Millésime</h4>
+          <div id='edit-millesime' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="wine/label" routerLinkActive="router-link-active"
+          (mouseenter)="mouseOver('labels') " (mouseleave)="mouseOver('labels')">
+          <h4>Labels</h4>
+          <div id='edit-labels' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="wine/color" routerLinkActive="router-link-active"
+          (mouseenter)="mouseOver('couleurs') " (mouseleave)="mouseOver('couleurs')">
+          <h4>Couleurs</h4>
+          <div id='edit-couleurs' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+      </div>
 
-<div style="margin-bottom: 50px; margin-top: 50px">
-  <h4>Message</h4>
-  <app-message></app-message>
-</div>
+      <div class="router-container col-md-3 col-sm-12">
+        <div class="router-link" routerLink="carte" (mouseenter)="mouseOver('carte') "
+          (mouseleave)="mouseOver('carte')">
+          <h2>La Carte</h2>
+          <div id='edit-carte' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="food/allergen" (mouseenter)="mouseOver('allergens') "
+          (mouseleave)="mouseOver('allergens')">
+          <h4>Allergènes</h4>
+          <div id='edit-allergens' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+        <div class="router-link" routerLink="food/formula" (mouseenter)="mouseOver('formula') "
+          (mouseleave)="mouseOver('formula')">
+          <h4>Formules</h4>
+          <div id='edit-formula' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+      </div>
 
-<div class="container-list col-lg-6 col-sm-12">
-  <h3 class="router" routerLink="wine">Les vins</h3>
-  <ul>
-    <li class="router" routerLink="wine/category">Catégories</li>
-    <li class="router" routerLink="wine/designation">Appelations</li>
-    <li class="router" routerLink="wine/label">Labels</li>
-    <li class="router" routerLink="wine/vintage">Millésimes</li>
-    <li class="router" routerLink="wine/color">Couleurs</li>
-  </ul>
-</div>
+      <div class="router-container col-md-3 col-sm-12">
+        <div class="router-link" routerLink="event" (mouseenter)="mouseOver('events') "
+          (mouseleave)="mouseOver('events')">
+          <h2>Soirées Spéciales</h2>
+          <div id='edit-events' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+      </div>
+      <div class="router-container col-md-3 col-sm-12">
+        <div class="router-link" routerLink="gallery" (mouseenter)="mouseOver('gallery') "
+          (mouseleave)="mouseOver('gallery')">
+          <h2>Galerie</h2>
+          <div id='edit-gallery' class="edit-box-hide">
+            <i class="material-icons">build</i>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="col-lg-6 col-sm-12">
-  <h3 class="router" routerLink="food">La carte</h3>
-  <ul>
-    <li class="router" routerLink="food/allergen">Allergènes</li>
-    <li class="router" routerLink="food/formula">Formules</li>
-  </ul>
-</div>
 
-<div class="col-lg-6 col-sm-12">
-  <h3 class="router" routerLink="event">Soirées Spéciales</h3>
-</div>
+    <div class="router-row col-md-6 col-sm-12">
 
-<div class="col-lg-6 col-sm-12">
-  <h3 class="router" routerLink="gallery">Galerie</h3>
-</div>
+    </div>
+    <div class="router-row col-md-6 col-sm-12"></div>
+  </div>
+
+  <div class="message-container">
+    <app-message></app-message>
+  </div>
+
 </div>

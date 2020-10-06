@@ -1,7 +1,47 @@
 $serif: 'Merriweather', sans-serif ;
 $futura: 'Didact Gothic', sans-serif;
 
+.name {
+  width: 500px;
+}
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  height: 30px;
+  width: 30px;
+  background: #ff285d;
 
+  i {
+    color: white;
+  }
+}
+h1 {
+  padding-left: 50px;
+  color: #9E0C17;
+}
+.main-container {
+
+  padding-left: 0px;
+}
+.creation {
+  font-size: 2em;
+  font-weight: bold;
+  color: #9E0C17;
+}
+.filter-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+background-color: #9E0C17;
+  button {
+   // font-family: $serif;
+    background-color: #9E0C17;
+    color: #FFFFFF;
+  }
+}
 .row {
   margin: 0;
 }

@@ -1,3 +1,4 @@
+import { log } from 'util';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,8 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
 
   constructor() { }
-
+vin: '/vins'
   ngOnInit() {
   }
 
+  mouseOver(target) {
+   const editBox = document.getElementById(`edit-${target}`);
+   let editBoxClass = editBox.className;
+   console.log("editbox = ", editBoxClass)
+   if(editBoxClass === 'edit-box-hide') {
+     editBox.className = 'edit-box-show';
+    } else {
+      editBox.className = 'edit-box-hide';
+   }
+  }
 }

@@ -56,10 +56,6 @@ export class EventCreateComponent implements OnInit {
       .subscribe((types: Type[]) => {
         this.allTypes = types;
       });
-    // this.foodService.getAllFood()
-    //   .subscribe((foods: Food[]) => {
-    //     this.allFoods = foods;
-    //   });
     this.createEvent = this.fb.group({
       name : ['', Validators.required],
       description : ['', Validators.required],
@@ -84,37 +80,16 @@ export class EventCreateComponent implements OnInit {
     this.foodsId.splice(this.foodsId.indexOf(id), 1);
     this.allFoods.splice(this.foodsId.indexOf(id), 1);
   }
-
-  // getSelectedFood(food: Food, type: Type) {
-  //   console.log('food = ', food);
-  //   this.foodsId.push(food.id);
-  //   if (type.id === this.entreesId) {
-  //     this.selectedEntrees.push(food);
-  //   }
-  //   if (type.id === this.platsId) {
-  //     this.selectedPlats.push(food);
-  //   }
-  //   if (type.id === this.dessertsId) {
-  //     this.selectedDesserts.push(food);
-  //   }
-  //   console.log('FoodIds = ', this.foodsId);
-  // }
   save() {
     this.dataToParent = [];
     const val = this.createEvent.value;
     this.dataToParent.push(this.eventId, val, this.foodsId);
     this.allControllers.emit(this.dataToParent);
+    this.resetForm();
   }
-//   displayOldFoods() {
-//   this.oldFoodControl.forEach(food => {
-//   this.getSelectedFood(food, food.type);
-// });
-// }
-  // reset() {
-  //   this.foodsId = [];
-  //   this.selectedDesserts = [];
-  //   this.selectedEntrees = [];
-  //   this.selectedPlats = [];
-  // }
-
+  resetForm() {
+    this.createEvent.reset();
+    this.allFoods = [];
+    this.foodsId = [];
+  }
 }

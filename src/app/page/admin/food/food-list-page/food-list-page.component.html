@@ -1,43 +1,32 @@
-<div style="min-height:calc(100vh - 158px) ">
+<div style="min-height:100vh ; margin-bottom: 150px ;">
   <mat-accordion class="accordion">
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title class="creation">
-        Création
-      </mat-panel-title>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title class="creation">
+          Création
+        </mat-panel-title>
       </mat-expansion-panel-header>
-    <div class="main-container row-cols-7">
-      <form *ngIf="!loading"
-            [formGroup]="foodForm">
-        <div class="row col-12">
-          <mat-form-field class="title">
-            <input matInput type="text"
-                   placeholder="Nom"
-                   autocomplete="Off"
-                   formControlName="nameControl"
-                   maxlength="255"
-            />
-          </mat-form-field>
-        </div>
+      <div class="main-container row-cols-7">
+        <form *ngIf="!loading" [formGroup]="foodForm">
+          <div class="row col-12">
+            <mat-form-field class="title">
+              <input matInput type="text" placeholder="Nom" autocomplete="Off" formControlName="nameControl"
+                maxlength="255" />
+            </mat-form-field>
+          </div>
 
-        <div class="row col-12">
-          <mat-form-field class="description">
-            <textarea class="text"
-                      matInput type="textarea"
-                      placeholder="Description"
-                      autocomplete="Off"
-                      formControlName="descriptionControl"
-                      maxlength="1000"
-            ></textarea>
-          </mat-form-field>
-        </div>
+          <div class="row col-12">
+            <mat-form-field class="description">
+              <textarea class="text" matInput type="textarea" placeholder="Description" autocomplete="Off"
+                formControlName="descriptionControl" maxlength="1000"></textarea>
+            </mat-form-field>
+          </div>
 
-        <div class="row col-8">
+          <div class="row col-8">
             <div class="col-md-6 col-sm-12">
               <mat-form-field>
                 <mat-label>Type</mat-label>
-                <mat-select formControlName="typeControl"
-                >
+                <mat-select formControlName="typeControl">
                   <mat-option *ngFor="let type of allTypes" [value]="type">
                     {{type.typeName}}
                   </mat-option>
@@ -45,21 +34,14 @@
               </mat-form-field>
             </div>
             <div class="col-md-6 col-sm-12" style="padding-top: 45px">
-              <app-auto-complete (addElement)="getAllergenId($event)"
-                                 [arrayPromise]="allergenPromise"
-                                 [parentModel]=""
-                                 [displayFn]="displayFn"
-                                 [myControl]="allergenControl"
-                                 [callBackFilter]="callBackFilter"
-                                 [creation]="true"
-                                 [nameField]="true"
-                                 [title]="title"
-                                 [service]="allergenService"
-              ></app-auto-complete>
+              <app-auto-complete (addElement)="getAllergenId($event)" [arrayPromise]="allergenPromise"
+                [myControl]="allergenControl" [creation]="true" [nameField]="true" [title]="title"
+                [service]="allergenService"></app-auto-complete>
             </div>
-        </div>
-          <div class="row" style=" display: flex; justify-content: center" >
-            <button *ngFor="let allergen of allergenNames;" mat-flat-button class="allergens-btn" color="primary" (click)="removeAllergen(allergen)">{{allergen}}</button>
+          </div>
+          <div class="row" style=" display: flex; justify-content: center">
+            <button *ngFor="let allergen of allergenNames;" mat-flat-button class="allergens-btn" color="primary"
+              (click)="removeAllergen(allergen)">{{allergen}}</button>
           </div>
 
           <div class="row">
@@ -68,83 +50,23 @@
             </div>
           </div>
 
-        <div>
-          <button mat-flat-button class="save" [disabled]="foodForm.invalid" (click)="save()">envoyer</button>
-        </div>
+          <div>
+            <button mat-flat-button class="save" [disabled]="foodForm.invalid" (click)="save()">envoyer</button>
+          </div>
 
-      </form>
-    </div>
+        </form>
+      </div>
 
-  </mat-expansion-panel>
-</mat-accordion>
-
-
-<div class="list-container container-fluid" *ngIf="!loading">
-  <div class="container-type" *ngFor="let type of allTypes">
-    <h3 class="type-title">{{type.typeName}}</h3>
-    <div class="line"></div>
-    <div *ngFor="let food of type.foods ">
-      <app-food-row [food]="food"
-                    [administration]="true"
-                    (editData)="getFood()"
-      ></app-food-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="list-container container-fluid" *ngIf="!loading">
+    <h1>La carte</h1>
+    <div class="container-type" *ngFor="let type of allTypes">
+      <h3 class="type-title">{{type.typeName}}</h3>
+      <div class="line"></div>
+      <div *ngFor="let food of sortFoods(type.foods) ">
+        <app-food-row [food]="food" (editData)="getFood()"></app-food-row>
+      </div>
     </div>
   </div>
 </div>
-</div>
-
-<!--<form *ngIf="!loading"-->
-<!--      [formGroup]="foodForm">-->
-<!--  <div>-->
-<!--    <mat-form-field>-->
-<!--      <input matInput type="text"-->
-<!--             placeholder="Nom"-->
-<!--             autocomplete="Off"-->
-<!--             formControlName="nameControl"-->
-<!--      />-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-
-<!--  <div>-->
-<!--    <mat-form-field>-->
-<!--      <textarea matInput type="textarea"-->
-<!--                placeholder="Description"-->
-<!--                autocomplete="Off"-->
-<!--                formControlName="descriptionControl"-->
-<!--      ></textarea>-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-<!--    <div>-->
-<!--      <app-auto-complete (addElement)="getAllergenId($event)"-->
-<!--                         [arrayPromise]="allergenPromise"-->
-<!--                         [parentModel]=""-->
-<!--                         [displayFn]="displayFn"-->
-<!--                         [myControl]="allergenControl"-->
-<!--                         [callBackFilter]="callBackFilter"-->
-<!--                         [creation]="true"-->
-<!--                         [nameField]="true"-->
-<!--                         [title]="title"-->
-<!--                         [service]="allergenService"-->
-<!--      ></app-auto-complete>-->
-<!--    </div>-->
-<!--    <div *ngFor="let allergen of allAllergens">-->
-<!--      <button mat-flat-button (click)="removeAllergen(allergen.allergenName, allergen.id)">{{allergen.allergenName}}</button>-->
-<!--    </div>-->
-<!--  <div>-->
-<!--    <mat-form-field>-->
-<!--      <mat-label>Type</mat-label>-->
-<!--      <mat-select formControlName="typeControl"-->
-<!--      >-->
-<!--        <mat-option *ngFor="let type of allTypes" [value]="type">-->
-<!--          {{type.typeName}}-->
-<!--        </mat-option>-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <button mat-flat-button (click)="save()">envoyer</button>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <mat-slide-toggle (change)="toglle($event)">Ajouter à la carte</mat-slide-toggle>-->
-<!--  </div>-->
-<!--</form>-->

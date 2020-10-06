@@ -1,18 +1,16 @@
-<div style="min-height:calc(100vh - 158px) ">
+<div style="padding-left: 50px; min-height:calc(100vh - 158px) ">
     <h1>Catégories</h1>
-  <h4 *ngIf="action === 'list'">Création</h4>
-  <h4 *ngIf="action === 'edit'">Modification</h4>
   <app-create-form [listToAdd]="listToAdd"
+                   [horizontal]="true"
                    [class]="class"
                    (serviceCall)="createCategory($event)"
                    [nameField]="true"
                    [placeholderName]="placeholderName"
   ></app-create-form>
-  <div>
-  </div>
-  <div *ngFor="let category of listToAdd">
-    <p>{{category.categoryName}}</p>
-    <button (click)="editInit(category.id)">modifier</button>
-    <button (click)="delete(category)" >delete</button>
-  </div>
-</div>
+
+  <app-action-table 
+    *ngIf="!loading"
+    [itemsList]="listToAdd"
+    (parentAction)="childAskFor($event)"
+  ></app-action-table>
+  </div> 

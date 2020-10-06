@@ -8,6 +8,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class CreateFormComponent implements OnInit {
 
+  @Input() horizontal = false;
   @Input() listToAdd: any[];
   @Input() dialog;
   @Input() class: any;
@@ -33,7 +34,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createForm = this.fb.group({
       initControl : ['', Validators.required]
     });
@@ -48,7 +48,7 @@ export class CreateFormComponent implements OnInit {
         this.createForm.addControl('numberControl', new FormControl(this.numberValue) );
       }
       if (this.nameField) {
-        this.createForm.addControl('nameControl', new FormControl(this.nameValue) );
+        this.createForm.addControl('nameControl ', new FormControl(this.nameValue) );
       }
       if (this.descriptionField) {
         this.createForm.addControl('descriptionControl', new FormControl(this.descriptionValue) );
@@ -67,16 +67,21 @@ export class CreateFormComponent implements OnInit {
   }
 
   save() {
+    if(this.createForm.invalid) {
+     return;
+    }
     const val = this.createForm.value;
-    console.log('save activated = ', val);
     this.serviceCall.emit(val);
-
-
-    // const val = this.createForm.value;
-    // this.serviceCreate(val);
-    // if (this.dialog) {
-    //   this.dialog.close();
-    // }
-    // this.createForm.reset();
+  }
+  animateBtn() {
+    let btn = document.getElementById('btn');
+    console.log('CalssName = ', btn.className);
+    
+    if(btn.className.split(',')[1] === 'activated') {
+      btn.className.replace('activated','animated');
+      setTimeout(() => {
+        btn.className.replace('animated','invalid');
+      }, 300);
+    }
   }
 }

@@ -1,73 +1,104 @@
-<div style="min-height:calc(100vh - 158px) ">
-  <app-event-create (allControllers)="callServices($event)"
-                    [action]="action"
-                    [eventId]="chooseId"
-                    [oldName]="oldName"
-                    [oldDate]="oldDate"
-                    [oldDescription]="oldDescription"
-                    [oldFoodControl]="oldFoodControl"
-                    [oldPriceNoDrinks]="oldPriceNoDrinks"
-                    [oldPriceWithDrinks]="oldPriceWithDrinks"
+<div *ngIf="!loading" style="min-height:calc(100vh - 158px) ">
+  <app-event-create (allControllers)="callServices($event)" [action]="action" [eventId]="chooseId" [oldName]="oldName"
+    [oldDate]="oldDate" [oldDescription]="oldDescription" [oldFoodControl]="oldFoodControl"
+    [oldPriceNoDrinks]="oldPriceNoDrinks" [oldPriceWithDrinks]="oldPriceWithDrinks">
+  </app-event-create>
 
-  ></app-event-create>
-  <div *ngFor="let event of allEvents " style="margin-bottom: 50px">
-    <div style="display: flex; padding-left: 20px">
+  <div *ngFor="let event of eventList" class="row" style="padding-bottom: 100px; padding-left: 50px;">
+    <div class="btn-container">
       <button mat-mini-fab class="edit-btn" (click)="edit(event)">
         <i class="material-icons">create</i>
       </button>
 
       <button mat-mini-fab class="delete-btn" (click)="delete(event)">
-        <i class="material-icons">delete</i>
+        <i class="material-icons">
+          delete
+        </i>
       </button>
-    </div>
 
-    <div> <b>{{event.eventName}}</b> &nbsp; <i> {{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</i></div>
-    <div class="row">
-      <div class="prix">Prix avec boissons : <b>{{event.realPriceDrink}} &nbsp;</b></div>
-      <div class="prix">Prix sans boissons : <b>{{event.realPriceNoDrink}}</b></div>
     </div>
-    <div *ngFor="let food of event.food">
-      <div>{{food.foodName}}</div>
+    <div>
+      <div class="row">
+        <div>
+          <h4 class="date">{{(event.eventDate.timestamp) * 1000 | date: 'dd/MM/yyyy' }}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <h3 class="title">{{event.eventName}}</h3>
+      </div>
+      <div class="row">
+        <div class="prix">Prix avec boissons : <b>{{event.getRealPriceDrink()}}&nbsp;&nbsp;</b></div>
+        <div class="prix">Prix sans boissons : <b>{{event.getRealPriceNoDrink()}}</b></div>
+      </div>
+      <div class="row">
+        <div>
+          <p>{{event.eventDescription}}</p>
+        </div>
+      </div>
+      <div>
+        <div *ngIf="event.getEntrees().length >= 1" class="container-type col-sm-12">
+          <h3 class="type-title">Entrée</h3>
+          <div class="line"></div>
+          <div *ngFor="let entree of event.getEntrees()" class="marg-me">
+            <div>
+              <div class="main-container">
+                <div class="header row">
+                  <h2>{{entree.foodName}}
+                  </h2>
+                </div>
+                <div class="col-6"></div>
+              </div>
+              <div class="text-container">
+                <p class="description">
+                  {{entree.foodDescription}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="event.getPlats().length >= 1" class="container-type  col-sm-12">
+          <h3 class="type-title">Plats</h3>
+          <div class="line"></div>
+          <div *ngFor="let plat of event.getPlats()" class="marg-me">
+            <div>
+              <div class="main-container">
+                <div class="header row">
+                  <h2>{{plat.foodName}}
+                  </h2>
+                </div>
+                <div class="col-6"></div>
+              </div>
+              <div class="text-container">
+                <p class="description">
+                  {{plat.foodDescription}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="event.getDesserts().length >= 1" class="container-type  col-sm-12">
+          <h3 class="type-title">Desserts</h3>
+          <div class="line"></div>
+          <div *ngFor="let dessert of event.getDesserts()" class="marg-me">
+            <div>
+              <div class="main-container">
+                <div class="header row">
+                  <h2>{{dessert.foodName}}
+                  </h2>
+                </div>
+                <div class="col-6"></div>
+              </div>
+              <div class="text-container">
+                <p class="description">
+                  {{dessert.foodDescription}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-<!--<div *ngFor="let event of allEvents" class="row-cols-6">-->
-<!--  <h3 class="date">{{event.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h3>-->
-<!--  <h2 class="name">{{event.eventName}}</h2>-->
-<!--  <div>-->
-<!--    <p class="description">{{event.eventDescription}}</p>-->
-<!--  </div>-->
-<!--  <div *ngFor="let food of event.foods">-->
-<!--    {{food.foodName}}-->
-<!--  </div>-->
-<!--  <div class="menu-container">-->
-<!--    <mat-expansion-panel class="menu">-->
-<!--      <mat-expansion-panel-header>-->
-<!--        <div class="title">Menu</div>-->
-<!--      </mat-expansion-panel-header>-->
-<!--      <div class="food-container" *ngFor="let food of event.foods">-->
-<!--        <div>Entrée-->
-<!--          <div>-->
-<!--            <app-food-row *ngIf="food.type === 1" [food]="food"-->
-<!--            ></app-food-row>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>Plats-->
-<!--          <div>-->
-<!--            <app-food-row *ngIf="food.type === 2" [food]="food"-->
-<!--            ></app-food-row>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div>Dessert-->
-<!--          <div>-->
-<!--            <app-food-row *ngIf="food.type === 3" [food]="food"-->
-<!--            ></app-food-row>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="separation container-fluid"></div>-->
-<!--    </mat-expansion-panel>-->
-<!--  </div>-->
-<!--</div>-->

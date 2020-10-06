@@ -1,13 +1,16 @@
-<div style="min-height:calc(100vh - 158px) ">
+<div style="padding-left: 50px; min-height:calc(100vh - 158px) ">
+  <h1>Appellation</h1>
   <app-create-form [listToAdd]="listToAdd"
-                 [class]="class"
-                 (serviceCall)="createDesignation($event)"
-                 [nameField]="true"
-                 [placeholderName]="placeholderName"
+  [horizontal]="true"
+                  [class]="class"
+                  (serviceCall)="createDesignation($event)"
+                  [nameField]="true"
+                  [placeholderName]="placeholderName"
   ></app-create-form>
-  <div *ngFor="let designation of listToAdd">
-    <p>{{designation.designationName}}</p>
-    <button (click)="editInit(designation.id)">modifier</button>
-    <button (click)="delete(designation)">suppr</button>
-  </div>
+
+  <app-action-table 
+    *ngIf="!loading"
+    [itemsList]="listToAdd"
+    (parentAction)="childAskFor($event)"
+  ></app-action-table>
 </div>

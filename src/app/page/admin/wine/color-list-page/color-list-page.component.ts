@@ -13,7 +13,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./color-list-page.component.scss']
 })
 export class ColorListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Color[];
   class: Color;
   placeholderName: string;
@@ -28,15 +28,12 @@ export class ColorListPageComponent implements OnInit {
   ngOnInit() {
     this.placeholderName = 'Nom';
     this.getColors();
-    // this.colorService.getAllColors()
-    //   .subscribe((colors: Color[]) => {
-    //     this.listToAdd = colors;
-    //   });
   }
   getColors(force = false) {
     this.colorPromise = (bool) => this.colorService.getAllColors((force));
     this.colorPromise().then((data: any[]) => {
       this.listToAdd = data;      
+      this.loading = false;
     });
   }
   createColor($event) {
@@ -50,65 +47,18 @@ export class ColorListPageComponent implements OnInit {
         this.toast.error(error.error)
       });
   }
-  editInit(id) {
-    this.colorService.getOneColor(id)
-      .subscribe((color: Color) => {
-        this.launchModalCreation(color);
-      });
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
+        this.getColors(true);
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
-  launchModalCreation(color: Color) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      nameValue: color.colorName,
-      nameField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editColor(data.nameControl, color.id)
-    );
-  }
-  editColor(data, id) {
-    this.colorService.editColor(data, id)
-      .subscribe((color: Color) => {
-        if (color) {
-          this.toast.success('Modification effectuée' + ' "' + color.colorName + '"');
-          this.getColors(true);
-        } else {
-          this.toast.error('Echec');
-        }
-
-      });
-  }
-  // delete(id) {
-  //   this.colorService.deleteColor(id)
-  //     .subscribe(() => {
-  //       this.getColors(true);
-  //     });
-  // }
-  delete(color: Color) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: color.colorName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.colorService.deleteColor(color.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée');
-              this.getColors(true);
-            });
-        }
-      }
-    );
-  }
-
 }

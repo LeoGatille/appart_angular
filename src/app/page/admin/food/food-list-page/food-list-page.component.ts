@@ -59,6 +59,15 @@ export class FoodListPageComponent implements OnInit {
         this.allTypes = types;
       });
   }
+
+  sortFoods(foodTab: Food[]) : Food[] {
+    return foodTab.sort((a: Food,b: Food) => {
+      let textA = a.foodName.toUpperCase();
+      let textB = b.foodName.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+  }
+
   getAllergenId($event: Allergen) {
     if (!$event) {
       return;

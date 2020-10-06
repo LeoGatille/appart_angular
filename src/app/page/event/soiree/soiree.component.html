@@ -1,6 +1,7 @@
 <div style="min-height:calc(100vh - 158px); overflow-y: hidden;">
   <div style="background-color: black; height: 100%; width: 100%; position: fixed; z-index: 1; overflow: hidden;">
-    <div style="position: relative; z-index:2; height: 100%; width: 100%; bottom: 0; right: 0; overflow: hidden;" class="pattern">
+    <div style="position: relative; z-index:2; height: 100%; width: 100%; bottom: 0; right: 0; overflow: hidden;"
+      class="pattern">
     </div>
   </div>
   <div style="height: 100%; width: 100%; position: relative; z-index: 3;">
@@ -16,7 +17,7 @@
     </div>
     <div *ngFor="let newEvent of newEventsList" class="row" style="padding-bottom: 150px">
       <div class="col-3"></div>
-      <div class="col-lg-9 col-md-12">
+      <div class="col-lg-7 col-md-12">
         <div class="row">
           <div>
             <h4 class="date">{{newEvent.eventDate.timestamp * 1000 | date: 'dd/MM/yyyy' }}</h4>
@@ -34,11 +35,11 @@
             <p>{{newEvent.eventDescription}}</p>
           </div>
         </div>
-        <div class="row">
-          <div class="container-type col-lg-4 col-sm-12">
+        <div>
+          <div *ngIf="newEvent.entrees.length >= 1" class="container-type col-sm-12">
             <h3 class="type-title">Entrée</h3>
             <div class="line"></div>
-            <div *ngFor="let entree of newEvent.entrees">
+            <div *ngFor="let entree of newEvent.entrees" class="marg-me">
               <div>
                 <div class="main-container">
                   <div class="header row">
@@ -55,11 +56,11 @@
               </div>
             </div>
           </div>
-  
-          <div class="container-type  col-lg-4 col-sm-12">
+
+          <div *ngIf="newEvent.plats.length >= 1" class="container-type  col-sm-12">
             <h3 class="type-title">Plats</h3>
             <div class="line"></div>
-            <div *ngFor="let plat of newEvent.plats">
+            <div *ngFor="let plat of newEvent.plats" class="marg-me">
               <div>
                 <div class="main-container">
                   <div class="header row">
@@ -76,10 +77,10 @@
               </div>
             </div>
           </div>
-          <div class="container-type  col-lg-4 col-sm-12">
+          <div *ngIf="newEvent.dessert.length >= 1" class="container-type  col-sm-12">
             <h3 class="type-title">Desserts</h3>
             <div class="line"></div>
-            <div *ngFor="let dessert of newEvent.dessert">
+            <div *ngFor="let dessert of newEvent.dessert" class="marg-me">
               <div>
                 <div class="main-container">
                   <div class="header row">
@@ -100,7 +101,7 @@
       </div>
     </div>
   </div>
-   
+
 
 </div>
 

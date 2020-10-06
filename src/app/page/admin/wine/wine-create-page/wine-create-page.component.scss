@@ -1,6 +1,25 @@
 $serif: 'Playfair Display', serif;
 $futura: 'Didact Gothic', sans-serif;
+.name {
+  width: 500px;
+}
+.delete-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+  height: 30px;
+  width: 30px;
+  background: #ff285d;
 
+  i {
+    color: white;
+  }
+}
+h1 {
+  padding-left: 50px;
+  color: #9E0C17;
+}
 .main-container {
 
   padding-left: 0px;
@@ -8,7 +27,7 @@ $futura: 'Didact Gothic', sans-serif;
 .creation {
   font-size: 2em;
   font-weight: bold;
-  color: #da2018;
+  color: #9E0C17;
 }
 .filter-container {
   display: flex;
@@ -36,11 +55,7 @@ background-color: #9E0C17;
       font-weight: 200;
       font-size: 1.5rem;
       color: #9E0C17;
-      .mat-expansion-panel-body {
-        .wine-section {
-
-        }
-      }
+      display: flex;
     }
     .separation {
       width: 100%;

@@ -15,7 +15,7 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./vintage-list-page.component.scss']
 })
 export class VintageListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Vintage[];
   class: Vintage;
   vintagePromise: any;
@@ -24,12 +24,7 @@ export class VintageListPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private toast: ToastrService,
-  ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-      });
-  }
-
+  ) {}
   ngOnInit() {
     this.getVintages();
   }
@@ -37,9 +32,9 @@ export class VintageListPageComponent implements OnInit {
     this.vintagePromise = (bool) => this.vintageService.getAllVintages((force));
     this.vintagePromise().then((data: any[]) => {
       this.listToAdd = data;
+      this.loading = false;
     });
   }
-
   createVintage($event) {
     this.vintageService.create($event.numberControl)
       .subscribe((vintage: Vintage) => {
@@ -50,60 +45,18 @@ export class VintageListPageComponent implements OnInit {
         this.toast.error(error.error)
       });
   }
-  editInit(id: number) {
-    this.vintageService.getOneVintage(id)
-      .subscribe((vintage: Vintage) => {
-        this.launchModalCreation(vintage);
-      });
-  }
-  launchModalCreation(vintage: Vintage) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      numberValue: vintage.vintageYear,
-      numberField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editVintage(data, vintage.id)
-    );
-  }
-  editVintage(data, id) {
-    this.vintageService.editVintage(data.numberControl, id)
-      .subscribe( (vintage: Vintage) => {
-        this.toast.success('Modification effectuée' + ' "' + vintage.vintageYear + '"');
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
         this.getVintages(true);
-      });
-  }
-  // delete(id: number) {
-  //   this.vintageService.deleteVintage(id)
-  //     .subscribe(() => {
-  //       this.getVintages(true);
-  //     });
-  // }
-
-  delete(vintage: Vintage) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: vintage.vintageYear,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.vintageService.deleteVintage(vintage.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée');
-              this.getVintages(true);
-            });
-        }
-      }
-    );
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
 }

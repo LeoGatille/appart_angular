@@ -67,9 +67,7 @@ export class AuthService {
   public isConnected(): boolean {
     if(this.tokenData) {
       const token: Token = new Token(this.tokenData);
-      
       return  token.isValid();
-
       return new Token(this.tokenData).isValid();
     }
     return false;

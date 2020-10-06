@@ -1,23 +1,97 @@
 $serif: 'Merriweather', sans-serif ;
 
-.router {
-  cursor: pointer;
-
-  &:hover {
-    font-weight: bolder;
+.message-container {
+  padding-left: 50px;
+  width: 800px;
+  h5 {
+    color: #9E0C17;
   }
 }
-h3 {
-  font-size: 2em;
-  font-family: $serif;
-  font-weight: bold;
-  color: #9E0C17;
+.admin-container {
+  
+  .router-row {
+    padding-left: 50px;
+    display: flex;
+    justify-content: space-around;
+    .routers-container {
+      margin-bottom: 50px;
+    }
+    .router-link {
+      
+      cursor: pointer;
+      
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+      transition: box-shadow, color;
+      transition-duration: 0.2s;
+      &:hover {
+        box-shadow: 4px 4px 5px  rgba(128, 128, 128, 0.24);
+        //background-color: rgba(128, 128, 128, 0.123);
+        color: #9E0C17;
+      }
+      h4 {
+        padding-left: 20px;
+      }
+      .edit-box-hide {
+        background-color:#9E0C17;
+        color: white;
+        height: 0px;
+        width: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: width;
+        transition-duration: 0.2s;
+        i {
+          font-size: 1em;
+          color: white;
+        }
+      }
+      .edit-box-show {
+        overflow: hidden;
+        background-color:#9E0C17;
+        color: white;
+        height: 50px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: width;
+        transition-duration: 0.2s;
+        i {
+          font-size: 1em;
+          color: white;
+        }
+      }
+    }
+  }
+
 }
 
-li {
-  font-size: 1.5em;
-  margin-bottom: 5px;
-}
-.container-list {
- margin-bottom: 20px;
-}
+
+
+// .router {
+//   cursor: pointer;
+
+//   &:hover {
+//     font-weight: bolder;
+//   }
+// }
+// h3 {
+//   font-size: 2em;
+//   font-family: $serif;
+//   font-weight: bold;
+//   color: #9E0C17;
+// }
+
+// li {
+//   font-size: 1.5em;
+//   margin-bottom: 5px;
+// }
+// .container-list {
+//  margin-bottom: 20px;
+// }

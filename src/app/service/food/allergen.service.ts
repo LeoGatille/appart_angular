@@ -23,6 +23,9 @@ export class AllergenService {
     .then(list => list.map(raw => Object.assign(new Allergen, raw)));
     return this.allAllergensPromise;
   }
+  public editAllergen(name: string, id: number) {
+    return this.http.put(`${this.uri}/admin/${id}/edit`, {allergenName: name});
+  }
   public create(allergenName) {
    const reslut = this.http.post(`${this.uri}/admin/create`, {allergenName})
       .pipe(

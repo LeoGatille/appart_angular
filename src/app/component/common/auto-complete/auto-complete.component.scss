@@ -8,3 +8,28 @@
     align-items: center;
     color: white;
 }
+button {
+    z-index: 10;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.creation-required {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 0, 0, 0.411);
+    border-radius: 100%;
+    animation-name: growNshrink;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+    animation-duration: 1.7s;
+}
+
+@keyframes growNshrink {
+    0%   {transform:scale(1); display: block}
+    50%  {transform:scale(1.6)}
+    100% {transform:scale(1)}
+  }

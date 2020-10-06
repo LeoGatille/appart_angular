@@ -1,0 +1,54 @@
+$serif: 'Merriweather', sans-serif ;
+.list-container {
+    margin-top: 50px;
+
+    .formula-row {
+        display: flex;
+        justify-content: flex-start;
+        .left{
+            h3 {
+                font-family: $serif;
+                font-style: italic;
+                color: #9E0C17;
+                padding-left: 15px;
+                font-weight: bold;
+            }
+            p {
+                padding-left: 1em;
+            }
+        }
+    }
+
+}
+.container-btn {
+
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+
+    .edit-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      height: 30px;
+      width: 30px;
+      background: #40beff;
+        i {
+          color: white;
+        }
+
+    }
+    .delete-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      height: 30px;
+      width: 30px;
+      background: #ff285d;
+      i {
+        color: white;
+      }
+    }
+}

@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Color} from '../../../../class/wine/color';
-import {ColorService} from '../../../../service/wine/color.service';
 import {Designation} from '../../../../class/wine/designation';
 import {DesignationService} from '../../../../service/wine/designation.service';
-import {ActivatedRoute} from '@angular/router';
-import {Category} from '../../../../class/wine/category';
 import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../../dialog/dialog.component';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
@@ -15,37 +10,27 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./designation-list-page.component.scss']
 })
 export class DesignationListPageComponent implements OnInit {
-
+  loading = true;
   listToAdd: Designation[];
   class: Designation;
   placeholderName: string;
   designationPromise: any;
   constructor(
-    private activatedRoute: ActivatedRoute,
     private designationService: DesignationService,
     private dialog: MatDialog,
     private toast: ToastrService,
-  ) {
-    this.activatedRoute.params
-      .subscribe((params) => {
-        console.log('toto', params);
-      });
-  }
-
+  ) {}
   ngOnInit() {
     this.placeholderName = 'Nom';
     this.getDesignations();
-    // this.designationService.getAllDesignations()
-    //   .subscribe((designations: Designation[]) => {
-    //     this.listToAdd = designations;
-    //   });
-  }getDesignations(force = false) {
+  }
+  getDesignations(force = false) {
     this.designationPromise = (bool) => this.designationService.getAllDesignations((force));
     this.designationPromise().then((data: any[]) => {
       this.listToAdd = data;
+      this.loading = false;
     });
   }
-
   createDesignation($event) {
     this.designationService.create($event.nameControl)
       .subscribe((designation: Designation) => {
@@ -56,60 +41,18 @@ export class DesignationListPageComponent implements OnInit {
         this.toast.error(error.error)
       });
   }
-  editInit(id: number) {
-    this.designationService.getOneDesignation(id)
-      .subscribe((designation: Designation) => {
-        this.launchModalCreation(designation);
-      });
-  }
-  launchModalCreation(designation: Designation) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      nameValue: designation.designationName,
-      nameField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editDesignation(data, designation.id)
-    );
-  }
-  editDesignation(data, id) {
-    this.designationService.editDesignation(data.nameControl, id)
-      .subscribe( (designation: Designation) => {
-        this.toast.success('Modification effectuée' + ' "' + designation.designationName + '"');
+  childAskFor(request: any) {
+    switch(request.action) {
+      case('refresh') :
+        this.toast.success(request.message);
         this.getDesignations(true);
-      });
-  }
-  // delete(id: number) {
-  //   this.designationService.deleteDesignation(id)
-  //     .subscribe(() => {
-  //       this.getDesignations(true);
-  //     });
-  // }
-
-  delete(designation: Designation) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: designation.designationName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.designationService.deleteDesignation(designation.id)
-            .subscribe(() => {
-              this.toast.success('suppression effectuée');
-              this.getDesignations(true);
-            });
-        }
-      }
-    );
+      break;
+      case('error') :
+        this.toast.warning(request.message);
+      break;
+      default :
+        this.toast.warning('Une erreur est survenue');
+      break;
+    }
   }
 }

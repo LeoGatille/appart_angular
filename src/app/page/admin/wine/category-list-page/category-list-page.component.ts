@@ -1,11 +1,16 @@
+import { Message } from './../../../../class/message';
+import { promise } from 'protractor';
+import { CrudInterface } from './../../../../class/curdInterface';
 import { Component, OnInit } from '@angular/core';
-import {Category} from '../../../../class/wine/category';
-import {CategoryService} from '../../../../service/wine/category.service';
-import {ActivatedRoute} from '@angular/router';
-import {Allergen} from '../../../../class/food/allergen';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../../dialog/dialog.component';
-import {ToastrService} from 'ngx-toastr';
+import { Category } from '../../../../class/wine/category';
+import { CategoryService } from '../../../../service/wine/category.service';
+import { ActivatedRoute } from '@angular/router';
+import { Allergen } from '../../../../class/food/allergen';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
+import { first, catchError } from 'rxjs/operators';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-category-list-page',
@@ -14,12 +19,11 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class CategoryListPageComponent implements OnInit {
 
-  categoryNameEdit: string | null;
-  action: string;
   listToAdd: Category[];
   class: Category;
   placeholderName: string;
   categoryPromise: any;
+  loading = true;
   constructor(
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
@@ -33,82 +37,38 @@ export class CategoryListPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.action = 'list';
-    this.categoryNameEdit = null;
     this.placeholderName = 'Nom';
     this.getCategories();
-   }
-   getCategories(force = false) {
-     this.categoryPromise = (bool) => this.categoryService.getAllCategories((force));
-     this.categoryPromise().then((data: any[]) => {
-       this.listToAdd = data;
-     });
-   }
-
-   createCategory($event) {
-     this.categoryService.create($event.nameControl)
-       .subscribe((category: Category) => {
-         this.toast.success('Ajout effectué' + ' "' + category.categoryName + '"');
-         this.listToAdd.push(category);
-       },
-       error => {
-         this.toast.error(error.error)
-       });
-   }
-  editInit(id: number) {
-    this.categoryService.getOneCategory(id)
+  }
+  getCategories(force = false) {
+    this.categoryPromise = (bool) => this.categoryService.getAllCategories((force));
+    this.categoryPromise().then((data: any[]) => {
+      this.listToAdd = data;
+      this.loading = false;
+    });
+  }
+  createCategory(formValue) {
+    this.categoryService.create(formValue.nameControl)
       .subscribe((category: Category) => {
-        this.launchModalCreation(category);
-      });
+        this.toast.success('Ajout effectué' + ' "' + category.categoryName + '"');
+        this.listToAdd.push(category);
+      },
+        error => {
+          this.toast.warning(error.error)
+        });
   }
-  launchModalCreation(category: Category) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      modal: true,
-      nameValue: category.categoryName,
-      nameField: true,
-      title: 'Modification' ,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(
-      data => this.editCategory(data, category.id)
-    );
-  }
-  editCategory(data, id) {
-    this.categoryService.editCategory(data.nameControl, id)
-      .subscribe( (category: Category) => {
-        this.toast.success('Modification effectuée' + ' "' + category.categoryName + '"');
+  childAskFor(request: any) {
+    switch (request.action) {
+      case ('refresh'):
+        this.toast.success(request.message);
         this.getCategories(true);
-      });
-  }
-  // delete(id: number) {
-  //   this.categoryService.deleteCategory(id)
-  //     .subscribe(() => {
-  //       this.getCategories(true);
-  //     });
-  // }
-
-  delete(category: Category) {
-    const dialogConfig = new MatDialogConfig();
-    // dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      suppr: category.categoryName,
-    };
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-
-
-    dialogRef.afterClosed().subscribe(
-      data =>  {
-        console.log('data === ', data);
-        if (data) {
-          this.categoryService.deleteCategory(category.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée' );
-              this.getCategories(true);
-            });
-        }
-      }
-    );
+        break;
+      case ('error'):
+        this.toast.warning(request.message);
+        break;
+      default:
+        this.toast.warning('Une erreur est survenue');
+        break;
+    }
   }
 }

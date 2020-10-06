@@ -1,112 +1,153 @@
-
 <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! AU MOINS IL MARCHE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 <div class="app-container">
   <mat-sidenav-container>
     <mat-toolbar>
       <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">
-        <mat-icon >view_headline</mat-icon>
+        <mat-icon>view_headline</mat-icon>
         {{ title }}
       </button>
     </mat-toolbar>
     <mat-sidenav #sidenav mode="hover" class="sidenav">
-<!--          <mat-toolbar class="toolbar" >-->
-<!--            <span>Menu</span>-->
-<!--            <span class="remaining-space"></span>-->
-<!--            <button class="btn-toolbar" mat-button (click)="sidenav.close()">-->
-<!--              <mat-icon>clear</mat-icon>-->
-<!--            </button>-->
-<!--          </mat-toolbar>-->
-          <nav>
-            <mat-nav-list>
-              <a routerLink="/home" routerLinkActive="active"
-                 mat-list-item  (click)="sidenav.close()" >
-                <i class="fab fa-accessible-icon"></i>
-                <span>Accueil</span>
-              </a>
-              <a routerLink="/reservations" routerLinkActive="active"
-                 mat-list-item (click)="sidenav.close()" >
-                <span><b>Réservations</b></span>
-              </a>
-              <span>
-                <a routerLink="/carte" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>La carte</span>
-                </a>
-                <a routerLink="/vins" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Les vins</span>
-                </a>
-                <a routerLink="/soirees" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Soirées Spéciales</span>
-                </a>
-                <a routerLink="/galerie" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Galerie</span>
-                </a>
-                 <!--<a  routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
+      <!--          <mat-toolbar class="toolbar" >-->
+      <!--            <span>Menu</span>-->
+      <!--            <span class="remaining-space"></span>-->
+      <!--            <button class="btn-toolbar" mat-button (click)="sidenav.close()">-->
+      <!--              <mat-icon>clear</mat-icon>-->
+      <!--            </button>-->
+      <!--          </mat-toolbar>-->
+      <nav>
+        <mat-nav-list>
+          <a routerLink="/home" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+            <i class="fab fa-accessible-icon"></i>
+            <span>Accueil</span>
+          </a>
+          <a routerLink="/reservations" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+            <span><b>Réservations</b></span>
+          </a>
+          <span>
+            <a routerLink="/carte" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>La carte
+                <i *ngIf="isConnected()" class="material-icons" style="font-size: 1em;">
+                  create
+                </i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/food/allergen" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Allergènes</i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/food/formula" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Formules</i>
+              </span>
+            </a>
+            <a routerLink="/vins" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>Les vins
+                <i *ngIf="isConnected()" class="material-icons" style="font-size: 1em;">
+                  create
+                </i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/wine/category" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Catégories</i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/wine/designation" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Appellations</i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/wine/vintage" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Millésime</i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/wine/label" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Labels</i>
+              </span>
+            </a>
+            <a *ngIf="isConnected()" routerLink="/admin/wine/color" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="font-size: 0.7em; padding-left: 10px;"> <i>Couleurs</i>
+              </span>
+            </a>
+            <a routerLink="/soirees" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>Soirées Spéciales</span>
+            </a>
+            <a routerLink="/galerie" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>Galerie</span>
+            </a>
+            <!--<a  routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"
                      mat-list-item (click)="sidenav.close()" >
                   <span >Connexion</span>
                 </a>-->
+          </span>
+
+
+          <span *ngIf="isConnected()">
+
+            <a style="background-color: #ffffff;" routerLink="/admin/" routerLinkActive="active" mat-list-item
+              (click)="sidenav.close()">
+              <span style="color: #9E0C17; display: flex; align-items: center;"><b> Administration </b>
+                &nbsp;
+                <i class="material-icons">
+                  account_balance
+                </i>
               </span>
-
-
-              <span *ngIf="isConnected()">
-
-                <a routerLink="/admin/" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span><b> Administration </b></span>
-                </a>
-
-                <a routerLink="/admin/food" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>La carte <i>ADMIN</i> </span>
-                </a>
-                <a routerLink="/admin/wine" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Les vins <i>ADMIN</i></span>
-                </a>
-                <a routerLink="/admin/event" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Soirées Spéciales <i>ADMIN</i></span>
-                </a>
-                <a routerLink="/admin/gallery" routerLinkActive="active"
-                   mat-list-item (click)="sidenav.close()" >
-                  <span>Galerie <i>ADMIN</i></span>
-                </a>
-
-                <a mat-list-item (click)="sidenav.close(); logout()" >
-                   <mat-icon>lock</mat-icon>
-                    <span><b>Se Déconnecter</b></span>
-                </a>
+            </a>
+            <a routerLink="/admin/event" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>Soirées Spéciales
+                <i class="material-icons" style="font-size: 1em;">
+                  create
+                </i>
               </span>
+            </a>
+            <a routerLink="/admin/gallery" routerLinkActive="active" mat-list-item (click)="sidenav.close()">
+              <span>Galerie
+                <i class="material-icons" style="font-size: 1em;">
+                  create
+                </i>
+              </span>
+            </a>
+
+            <a mat-list-item (click)="sidenav.close(); logout()">
+              <mat-icon>lock</mat-icon>
+              <span><b>Se Déconnecter</b></span>
+            </a>
+          </span>
 
 
-            </mat-nav-list>
-          </nav>
-          <div class="ninja" (mousedown)="adminAccess()" (mouseup)="stopClick()">
+        </mat-nav-list>
+      </nav>
+      <div class="ninja" (mousedown)="adminAccess()" (mouseup)="stopClick()">
 
-          </div>
+      </div>
 
-        </mat-sidenav>
+    </mat-sidenav>
 
 
 
     <div class="app-body" style="padding-top: 64px">
-      <router-outlet ></router-outlet>
+      <router-outlet></router-outlet>
     </div>
 
-    <div style="display: flex; align-items: center; justify-content: space-between; position: absolute; z-index: 200;  bottom: 0; height: max-content; padding-top: 10px; width: 100%; background-color: #9E0C17">
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; position: absolute; z-index: 200;  bottom: 0; height: max-content; padding-top: 10px; width: 100%; background-color: #9E0C17">
       <div>
         <p style="color: white">
           Restaurant l'appart'
           <br>15 rue Maubec 33700 Mérignac
           <br>05.56.47.39.91
+          <br>Mentions légales en attentes
         </p>
       </div>
 
       <div style="display: flex; justify-content: space-around; align-items: center; padding: 10px">
-        <a style="margin-right: 20px" target="_blank" href="https://www.tripadvisor.fr/Restaurant_Review-g207338-d1590661-Reviews-Restaurant_L_Appart-Merignac_Bordeaux_Gironde_Nouvelle_Aquitaine.html">
+        <a style="margin-right: 20px" target="_blank"
+          href="https://www.tripadvisor.fr/Restaurant_Review-g207338-d1590661-Reviews-Restaurant_L_Appart-Merignac_Bordeaux_Gironde_Nouvelle_Aquitaine.html">
           <img height="30px" src="http://api.bundles.do/uploads/test/tripadvisor.svg" alt="">
         </a>
 
@@ -122,7 +163,7 @@
 
   </mat-sidenav-container>
   <div>
-<!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+    <!--!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 
 
 
@@ -140,15 +181,15 @@
 
 
 
-<!--<div>-->
-<!--  <div style="position: sticky; top: 0; z-index: 100">-->
-<!--    <div style=" background: #2ce071; height: 70px; width: 100% ">toto</div>-->
-<!--    <nav style="background: #9E0C17; height: calc(100vh - 70px) ; width: 200px; position: absolute; z-index: 10; top: 70px"> tata</nav>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    <router-outlet></router-outlet>-->
-<!--  </div>-->
-<!--</div>-->
+    <!--<div>-->
+    <!--  <div style="position: sticky; top: 0; z-index: 100">-->
+    <!--    <div style=" background: #2ce071; height: 70px; width: 100% ">toto</div>-->
+    <!--    <nav style="background: #9E0C17; height: calc(100vh - 70px) ; width: 200px; position: absolute; z-index: 10; top: 70px"> tata</nav>-->
+    <!--  </div>-->
+    <!--  <div>-->
+    <!--    <router-outlet></router-outlet>-->
+    <!--  </div>-->
+    <!--</div>-->
 
 
 
@@ -167,72 +208,72 @@
 
 
 
-<!--<mat-sidenav-container class="main-container">-->
-<!--  <mat-sidenav #sidenav mode="over" class="sidenav">-->
-<!--&lt;!&ndash;    <mat-toolbar class="toolbar" >&ndash;&gt;-->
-<!--&lt;!&ndash;      <span>Menu</span>&ndash;&gt;-->
-<!--&lt;!&ndash;      <span class="remaining-space"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;      <button class="btn-toolbar" mat-button (click)="sidenav.close()">&ndash;&gt;-->
-<!--&lt;!&ndash;        <mat-icon>clear</mat-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;      </button>&ndash;&gt;-->
-<!--&lt;!&ndash;    </mat-toolbar>&ndash;&gt;-->
-<!--    <nav>-->
-<!--      <mat-nav-list>-->
-<!--        <a routerLink="/home" routerLinkActive="active"-->
-<!--           mat-list-item  (click)="sidenav.close()" >-->
-<!--          <mat-icon>home</mat-icon>-->
-<!--          <span>Accueil</span>-->
-<!--        </a>-->
+    <!--<mat-sidenav-container class="main-container">-->
+    <!--  <mat-sidenav #sidenav mode="over" class="sidenav">-->
+    <!--&lt;!&ndash;    <mat-toolbar class="toolbar" >&ndash;&gt;-->
+    <!--&lt;!&ndash;      <span>Menu</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;      <span class="remaining-space"></span>&ndash;&gt;-->
+    <!--&lt;!&ndash;      <button class="btn-toolbar" mat-button (click)="sidenav.close()">&ndash;&gt;-->
+    <!--&lt;!&ndash;        <mat-icon>clear</mat-icon>&ndash;&gt;-->
+    <!--&lt;!&ndash;      </button>&ndash;&gt;-->
+    <!--&lt;!&ndash;    </mat-toolbar>&ndash;&gt;-->
+    <!--    <nav>-->
+    <!--      <mat-nav-list>-->
+    <!--        <a routerLink="/home" routerLinkActive="active"-->
+    <!--           mat-list-item  (click)="sidenav.close()" >-->
+    <!--          <mat-icon>home</mat-icon>-->
+    <!--          <span>Accueil</span>-->
+    <!--        </a>-->
 
-<!--        <span *ngIf="isConnected()">-->
-<!--          <a routerLink="/label" routerLinkActive="active"-->
-<!--             mat-list-item (click)="sidenav.close()" >-->
-<!--            <mat-icon>bookmarks</mat-icon>-->
-<!--            <span>Label</span>-->
-<!--          </a>-->
-<!--          <a routerLink="/priority/list" routerLinkActive="active"-->
-<!--             mat-list-item (click)="sidenav.close()" >-->
-<!--            <mat-icon>warning</mat-icon>-->
-<!--            <span>Priority</span>-->
-<!--          </a>-->
-<!--        </span>-->
-
-
-<!--        <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"-->
-<!--           mat-list-item (click)="sidenav.close()" >-->
-<!--          <mat-icon>account_circle</mat-icon>-->
-<!--          <span>Se connecter</span>-->
-<!--        </a>-->
-<!--        <span *ngIf="isConnected()">-->
-<!--                <a routerLink="/profile" routerLinkActive="active"-->
-<!--                   mat-list-item (click)="sidenav.close()" >-->
-<!--                    <mat-icon class="material-icons">account_box</mat-icon>-->
-<!--                    <span>Mon profile</span>-->
-<!--                </a>-->
-<!--                <a mat-list-item (click)="sidenav.close(); logout()" >-->
-<!--                    <mat-icon class="material-icons">close</mat-icon>-->
-<!--                    <span>Se Déconnecter</span>-->
-<!--                </a>-->
-<!--        </span>-->
+    <!--        <span *ngIf="isConnected()">-->
+    <!--          <a routerLink="/label" routerLinkActive="active"-->
+    <!--             mat-list-item (click)="sidenav.close()" >-->
+    <!--            <mat-icon>bookmarks</mat-icon>-->
+    <!--            <span>Label</span>-->
+    <!--          </a>-->
+    <!--          <a routerLink="/priority/list" routerLinkActive="active"-->
+    <!--             mat-list-item (click)="sidenav.close()" >-->
+    <!--            <mat-icon>warning</mat-icon>-->
+    <!--            <span>Priority</span>-->
+    <!--          </a>-->
+    <!--        </span>-->
 
 
-<!--      </mat-nav-list>-->
-<!--    </nav>-->
+    <!--        <a routerLink="/auth" routerLinkActive="active" *ngIf="!isConnected()"-->
+    <!--           mat-list-item (click)="sidenav.close()" >-->
+    <!--          <mat-icon>account_circle</mat-icon>-->
+    <!--          <span>Se connecter</span>-->
+    <!--        </a>-->
+    <!--        <span *ngIf="isConnected()">-->
+    <!--                <a routerLink="/profile" routerLinkActive="active"-->
+    <!--                   mat-list-item (click)="sidenav.close()" >-->
+    <!--                    <mat-icon class="material-icons">account_box</mat-icon>-->
+    <!--                    <span>Mon profile</span>-->
+    <!--                </a>-->
+    <!--                <a mat-list-item (click)="sidenav.close(); logout()" >-->
+    <!--                    <mat-icon class="material-icons">close</mat-icon>-->
+    <!--                    <span>Se Déconnecter</span>-->
+    <!--                </a>-->
+    <!--        </span>-->
 
 
-<!--  </mat-sidenav>-->
-<!--  <mat-sidenav-content>-->
+    <!--      </mat-nav-list>-->
+    <!--    </nav>-->
 
 
-<!--    <mat-toolbar class="toolbar" role="heading">-->
-<!--      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">-->
-<!--        <mat-icon >view_headline</mat-icon>-->
-<!--        {{ title }}-->
-<!--      </button>-->
-<!--      <nav class="test">-->
+    <!--  </mat-sidenav>-->
+    <!--  <mat-sidenav-content>-->
 
-<!--      </nav>-->
-<!--    </mat-toolbar>-->
-<!--    <router-outlet></router-outlet>-->
-<!--  </mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
+
+    <!--    <mat-toolbar class="toolbar" role="heading">-->
+    <!--      <button class="btn-toolbar" mat-button (click)="sidenav.toggle()">-->
+    <!--        <mat-icon >view_headline</mat-icon>-->
+    <!--        {{ title }}-->
+    <!--      </button>-->
+    <!--      <nav class="test">-->
+
+    <!--      </nav>-->
+    <!--    </mat-toolbar>-->
+    <!--    <router-outlet></router-outlet>-->
+    <!--  </mat-sidenav-content>-->
+    <!--</mat-sidenav-container>-->

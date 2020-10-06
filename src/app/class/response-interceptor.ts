@@ -10,8 +10,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   constructor(
     private auth: AuthService,
     private router: Router
-  ) {
-  }
+  ) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req)
       .pipe(catchError( err => {

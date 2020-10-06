@@ -1,15 +1,7 @@
-<div style="min-height:calc(100vh - 158px) ">
-  <app-create-form *ngIf="!loading"
-                   [listToAdd]="allAllergens"
-                   [nameField]="true"
-                   [placeholderName]="'Nom'"
-                   (serviceCall)="createAllergen($event)"
-  ></app-create-form>
-  <div *ngFor="let allergen of allAllergens">
-    <div>{{allergen.allergenName}}
-      <button mat-flat-button
-              (click)="delete(allergen)"
-      >suppr</button>
-    </div>
-  </div>
+<div style="padding-left: 50px; min-height:calc(100vh - 158px)">
+  <h1>Allergens</h1>
+  <app-create-form [listToAdd]="listToAdd" [horizontal]="true" [class]="class" (serviceCall)="createAllergens($event)"
+    [nameField]="true" [placeholderName]="placeholderName"></app-create-form>
+
+  <app-action-table *ngIf="!loading" [itemsList]="allAllergens" (parentAction)="childAskFor($event)"></app-action-table>
 </div>

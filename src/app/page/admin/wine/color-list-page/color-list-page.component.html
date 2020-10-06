@@ -1,13 +1,15 @@
-<div style="min-height:calc(100vh - 158px) ">
-  <app-create-form [listToAdd]="listToAdd"
-                   [class]="class"
-                   (serviceCall)="createColor($event)"
-                   [nameField]="true"
-                   [placeholderName]="placeholderName"
-  ></app-create-form>
-  <div *ngFor="let color of listToAdd">
-    <p>{{color.colorName}}</p>
-    <button (click)="editInit(color.id)">modifier</button>
-    <button (click)="delete(color)">suppr</button>
-  </div>
+<div style="padding-left: 50px; min-height:calc(100vh - 158px) ">
+    <h1>Couleurs</h1>
+      <app-create-form [listToAdd]="listToAdd"
+      [horizontal]="true"
+                       [class]="class"
+                       (serviceCall)="createColor($event)"
+                       [nameField]="true"
+                       [placeholderName]="placeholderName"
+      ></app-create-form>
+  <app-action-table 
+  *ngIf="!loading"
+  [itemsList]="listToAdd"
+  (parentAction)="childAskFor($event)"
+  ></app-action-table>
 </div>

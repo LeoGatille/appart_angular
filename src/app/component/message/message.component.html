@@ -2,6 +2,7 @@
   <div *ngIf="isConnected()">
 
     <app-create-form [descriptionField]="true"
+                     [horizontal] = "true"
                      [descriptionValue]="message.message"
                      (serviceCall)="editMessage($event)"
     ></app-create-form>

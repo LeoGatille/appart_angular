@@ -1,4 +1,4 @@
-<div class="main-container row-cols-7" >
+<div class="main-container row-cols-7">
   <form *ngIf="!loading"
       [formGroup]="createEvent">
     <div class="row ">
@@ -63,6 +63,7 @@
                       autocomplete="Off"
                       formControlName="description"
                       maxlength="1000"
+                      rows="10"
                       [ngModel]="oldDescription"
             ></textarea>
           </mat-form-field>
@@ -82,30 +83,6 @@
         </mat-select>
       </mat-form-field>
     </div>
-
-  <!--  <div>-->
-  <!--    <mat-form-field>-->
-  <!--      <mat-label>Type</mat-label>-->
-  <!--      <mat-select formControlName="typeControl"-->
-  <!--      >-->
-  <!--        <mat-option *ngFor="let type of allTypes"-->
-  <!--                    [value]="type"-->
-  <!--        >-->
-  <!--          {{type.typeName}}-->
-  <!--          <mat-select formControlName="foodControl"-->
-  <!--          >-->
-  <!--            <mat-option *ngFor="let food of type.foods"-->
-  <!--                        [value]="food"-->
-  <!--                        (click)="getSelectedFood(food, type)"-->
-  <!--            >-->
-  <!--              {{food.foodName}}-->
-  <!--            </mat-option>-->
-  <!--          </mat-select>-->
-  <!--        </mat-option>-->
-  <!--      </mat-select>-->
-  <!--    </mat-form-field>-->
-  <!--  </div>-->
-
     <div>
       <button mat-flat-button
               [disabled]="createEvent.invalid"

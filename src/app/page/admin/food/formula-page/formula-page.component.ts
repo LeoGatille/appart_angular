@@ -91,7 +91,10 @@ export class FormulaPageComponent implements OnInit {
   }
 
   editInit(formula: Formula) {
-    this.launchModalCreation(formula);
+    console.log('target formula = ', formula);
+    console.log('price formula = ', formula.formulaPrice / 100);
+    
+     this.launchModalCreation(formula);
   }
   launchModalCreation(formula: Formula) {
     const dialogConfig = new MatDialogConfig();

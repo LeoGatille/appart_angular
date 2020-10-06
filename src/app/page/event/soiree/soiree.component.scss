@@ -1,6 +1,17 @@
 
 $serif: 'Merriweather', sans-serif ;
+.container-type {
+ margin-bottom: 50px;
+ h3 {
+   font-size: 3em;
+   text-decoration: underline;
+ }
+}
+.marg-me {
+  margin-bottom: 35px;
+}
 .pattern {
+  background-color: rgb(80, 11, 17);
   background-image: url("http://api.bundles.do/uploads/test/appart_contour_fleurs.svg");
   background-position: right top -15px;
   background-repeat: no-repeat;
@@ -21,7 +32,6 @@ div {
  // background: black;
 }
 .header {
-  padding-bottom: 50px;
   .counter-container {
    // margin-top: 50px;
     .counter {
@@ -30,6 +40,7 @@ div {
       color: #FFFFFF;
       padding: 20px;
       width: max-content;
+      margin-bottom: 50px;
     }
   }
 }
@@ -47,56 +58,8 @@ div {
   .title {
     font-size: 3em;
   }
+  .pattern {
+    background-color: rgb(80, 11, 17);
+  }
 }
 
-//.main-container {
-//
-//  .date-container {
-//    display: flex;
-//    justify-content: flex-end;
-//    align-items: center;
-//    .date {
-//      font-family: $serif;
-//      font-style: italic;
-//      font-size: 4em;
-//      color: #FFFFFF;
-//    }
-//  }
-//  .soiree-contianer {
-//    display: flex;
-//    //justify-content: flex-end;
-//    //justify-content: flex-end;
-//    align-items: center;
-//    .soiree {
-//      text-align: right;
-//      color: #FFFFFF;
-//      font-size: 6em;
-//      font-weight: bolder;
-//      font-family: $serif;
-//      font-style: italic;
-//    }
-//  }
-//  .text-container {
-//    display: flex;
-//    justify-content: flex-start;
-//    align-items: center;
-//    .text {
-//      color: #FFFFFF;
-//    }
-//  }
-//  .food-container {
-//    display: flex;
-//    justify-content: flex-start;
-//    align-items: center;
-//    color: #FFFFFF;
-//  }
-//  .btn-container {
-//    .reservation {
-//      background: #9E0C17;
-//      color: #FFFFFF;
-//      font-weight: bold;
-//      border-radius: 0;
-//    }
-//  }
-//}
-//
