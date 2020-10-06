@@ -113,9 +113,6 @@
         <div class="selector">
           {{selected.getName()}}
         </div>
-        <!-- <div class="selector">
-          {{selected.categoryName || selected.colorName || selected.vintageYear || selected.labelName || selected.designationName}}
-        </div> -->
       </mat-expansion-panel-header>
 
       <div class="wine-section" *ngFor="let wine of sortWines(selected.wines)">
@@ -126,6 +123,5 @@
       </div>
       <div class="separation container-fluid"></div>
     </mat-expansion-panel>
-
   </div>
 </div>

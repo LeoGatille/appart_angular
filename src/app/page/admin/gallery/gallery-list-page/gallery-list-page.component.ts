@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ImageService} from '../../../../service/gallery/image.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Globals} from '../../../../globals';
-import {HttpClient} from '@angular/common/http';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../../dialog/dialog.component';
-import {ToastrService} from 'ngx-toastr';
+import { ImageService } from '../../../../service/gallery/image.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Globals } from '../../../../globals';
+import { HttpClient } from '@angular/common/http';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../../dialog/dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gallery-list-page',
@@ -31,7 +31,7 @@ export class GalleryListPageComponent implements OnInit {
   ngOnInit() {
     this.getAllImages();
     this.imageForm = this.fb.group({
-      fileControl: [null],
+      fileControl: [null, Validators.required],
       altControl: ['']
     });
   }
@@ -46,7 +46,7 @@ export class GalleryListPageComponent implements OnInit {
   getAllPath(tab) {
     this.objectTab = [];
     tab.forEach(image => {
-      this.objectTab.push({path: image.imgPath, alt: image.alternative});
+      this.objectTab.push({ path: image.imgPath, alt: image.alternative });
     });
     this.loading = false;
   }
@@ -56,7 +56,7 @@ export class GalleryListPageComponent implements OnInit {
     const supprImages: any[] = [];
     const supprNames: string[] = [];
     for (let i = 0; i < supprElements.length; i++) {
-      const myIndex: any  = supprElements[i].getAttribute('index');
+      const myIndex: any = supprElements[i].getAttribute('index');
       supprImages.push(this.allImage[myIndex]);
       console.log('allimage index = ', this.allImage[myIndex]);
       supprNames.push(this.allImage[myIndex].alternative);
@@ -73,7 +73,7 @@ export class GalleryListPageComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data =>  {
+      data => {
         if (data) {
           console.log('tabSuppr = ', tabNames);
           this.launchSuppression(tabSuppr);
@@ -102,13 +102,12 @@ export class GalleryListPageComponent implements OnInit {
 
   handleFileInput(files: FileList) {
     this.valid = true;
-    console.log('$event files = ', files);
+
     this.fileToUpload = files.item(0);
   }
 
   save() {
     if (this.fileToUpload) {
-      console.log('fileToUpload = ', this.fileToUpload.type);
       const val = this.imageForm.value;
       const input = new FormData();
       input.append('image', this.fileToUpload);

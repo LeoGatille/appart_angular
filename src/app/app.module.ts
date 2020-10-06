@@ -7,6 +7,7 @@ import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/h
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {
     MAT_DATE_LOCALE,
     MatButtonModule,
@@ -219,6 +220,7 @@ import { ActionTableComponent } from './component/common/action-table/action-tab
       SuppressionDialogComponent,
     ],
     providers: [
+    {provide : LocationStrategy , useClass: HashLocationStrategy},
     DatePipe,
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR'},
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

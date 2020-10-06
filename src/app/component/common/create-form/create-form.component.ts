@@ -34,7 +34,6 @@ export class CreateFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.createForm = this.fb.group({
       initControl : ['', Validators.required]
     });

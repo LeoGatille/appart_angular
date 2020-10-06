@@ -15,7 +15,6 @@ export class ImageService {
     return this.http.get(`${this.uri}`);
   }
   public createImage(image: any) {
-    console.log('Servicetoto = ', image);
     return this.http.post(`${this.uri}/admin/create`, image);
   }
   public deleteImage(id: number) {

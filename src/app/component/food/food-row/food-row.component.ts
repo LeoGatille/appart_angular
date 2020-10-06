@@ -1,14 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Food} from '../../../class/food/food';
-import {WineService} from '../../../service/wine/wine.service';
-import {FoodService} from '../../../service/food/food.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {DialogComponent} from '../../../dialog/dialog.component';
-import {Allergen} from '../../../class/food/allergen';
-import {User} from '../../../class/user';
-import {AuthService} from '../../../service/auth.service';
-import {ToastrService} from 'ngx-toastr';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Food } from '../../../class/food/food';
+import { WineService } from '../../../service/wine/wine.service';
+import { FoodService } from '../../../service/food/food.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { DialogComponent } from '../../../dialog/dialog.component';
+import { Allergen } from '../../../class/food/allergen';
+import { User } from '../../../class/user';
+import { AuthService } from '../../../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-food-row',
@@ -43,7 +43,7 @@ export class FoodRowComponent implements OnInit {
   getAllergensNames() {
     this.food.allergen.forEach(allergen => {
       if (this.allAllergens.indexOf(allergen.allergenName)) {
-        this.allAllergens.push(allergen.allergenName); 
+        this.allAllergens.push(allergen.allergenName);
       }
     });
     this.allergensList = this.allAllergens.join();
@@ -51,7 +51,7 @@ export class FoodRowComponent implements OnInit {
   }
   createForm() {
     this.patchForm = this.fb.group({
-      check : [this.food.display]
+      check: [this.food.display]
     });
   }
   // showFoodAllergens() {
@@ -65,8 +65,9 @@ export class FoodRowComponent implements OnInit {
   }
   patchFood(id) {
     this.foodService.patchFood(id, this.getBoolean(this.patchForm.value.check))
-      .subscribe((res) => {
+      .subscribe((res: Food) => {
         this.toast.success('Modification effectuée');
+        this.food.display = res.display
       });
   }
 
@@ -84,15 +85,15 @@ export class FoodRowComponent implements OnInit {
       suppr: food.foodName,
     };
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(data =>  {
-        if (data) {
-          this.foodService.deleteFood(this.food.id)
-            .subscribe(() => {
-              this.toast.success('Suppression effectuée');
-              this.editData.emit();
-            });
-        }
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        this.foodService.deleteFood(this.food.id)
+          .subscribe(() => {
+            this.toast.success('Suppression effectuée');
+            this.editData.emit();
+          });
       }
+    }
     );
   }
 
@@ -105,10 +106,10 @@ export class FoodRowComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
 
-    dialogRef.afterClosed().subscribe(data =>  {
-        this.editData.emit();
-        this.getAllergensNames();
-      }
+    dialogRef.afterClosed().subscribe(data => {
+      this.editData.emit();
+      this.getAllergensNames();
+    }
     );
   }
 }

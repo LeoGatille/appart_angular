@@ -30,12 +30,12 @@ export class AutoCompleteComponent implements OnInit {
   @Input() find: any;
   @Input() listToAdd: any[];
   @Input() myControl: FormControl;
-  activateButton = false;
   @Input() numberField = false;
   @Input() nameField = false;
   @Input() descriptionField = false;
   @Input() title: string;
   @Input() service: any;
+  activateButton = false;
 
   @Output() controlButton = new EventEmitter<any>();
   @Output() addElement = new EventEmitter<any>();
@@ -51,7 +51,6 @@ export class AutoCompleteComponent implements OnInit {
   }
   getElements() {
     this.arrayPromise().then((data: AutoCompleteInterface[]) => {
-      console.log('DATA = ', data)
       this.listOfElements = data;
       this.filteredElements = this.myControl.valueChanges
         .pipe(
@@ -74,7 +73,6 @@ export class AutoCompleteComponent implements OnInit {
     });
   }
   private _filter(value: string): AutoCompleteInterface[] {
-    // this.sortList(this.listOfElements);
     if (value && typeof value === 'string') {
       const filterValue = value.toLowerCase();
       return this.listOfElements.filter((element: AutoCompleteInterface) => {
@@ -131,7 +129,7 @@ export class AutoCompleteComponent implements OnInit {
         stringToTest = data.getName();
     }
     return this.listOfElements.find(listItem => listItem.getName().toLowerCase() === stringToTest.toLowerCase());
-  }
+  } 
   createElement(data: any) {
     if (data.nameControl) {
       if (!this.redundancyControl(data.nameControl)) {

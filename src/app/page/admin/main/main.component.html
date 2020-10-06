@@ -3,7 +3,7 @@
   <div class="admin-container" style="margin-bottom: 150px;">
     <div class="router-row row">
       <div class="router-container col-md-3 col-sm-12">
-        <div class="router-link" routerLink="wine" (mouseenter)="mouseOver('vins') " (mouseleave)="mouseOver('vins')">
+        <div class="router-link" routerLink="vins" (mouseenter)="mouseOver('vins') " (mouseleave)="mouseOver('vins')">
           <h2>Les vins</h2>
           <div id='edit-vins' class="edit-box-hide">
             <i class="material-icons">build</i>
@@ -47,7 +47,8 @@
       </div>
 
       <div class="router-container col-md-3 col-sm-12">
-        <div class="router-link" routerLink="food" (mouseenter)="mouseOver('carte') " (mouseleave)="mouseOver('carte')">
+        <div class="router-link" routerLink="carte" (mouseenter)="mouseOver('carte') "
+          (mouseleave)="mouseOver('carte')">
           <h2>La Carte</h2>
           <div id='edit-carte' class="edit-box-hide">
             <i class="material-icons">build</i>
@@ -96,8 +97,8 @@
     <div class="router-row col-md-6 col-sm-12"></div>
   </div>
 
-    <div class="message-container">
-      <app-message></app-message>
-    </div>
- 
+  <div class="message-container">
+    <app-message></app-message>
+  </div>
+
 </div>

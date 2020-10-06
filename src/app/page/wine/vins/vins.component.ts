@@ -236,7 +236,6 @@ export class VinsComponent implements OnInit {
       const elementPromise = this.refreshElements("colorPromise");
       elementPromise.then((data: any) => {
         data(true).then((tab: CrudInterface[]) => {
-
         });
       });
     }
@@ -244,7 +243,6 @@ export class VinsComponent implements OnInit {
       const elementPromise = this.refreshElements("designationPromise");
       elementPromise.then((data: any) => {
         data(true).then((tab: CrudInterface[]) => {
-
         });
       });
     }
@@ -252,7 +250,6 @@ export class VinsComponent implements OnInit {
       const elementPromise = this.refreshElements("labelPromise");
       elementPromise.then((data: any) => {
         data(true).then((tab: CrudInterface[]) => {
-
         });
       });
     }
@@ -260,7 +257,6 @@ export class VinsComponent implements OnInit {
       const elementPromise = this.refreshElements("vintagePromise");
       elementPromise.then((data: any) => {
         data(true).then((tab: CrudInterface[]) => {
-
         });
       });
     }

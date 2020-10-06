@@ -12,7 +12,7 @@
     <div [ngClass]="{'creation-required': activateButton}">
     </div>
   </div>
-</div>
+</div>  
 
 <mat-autocomplete #auto="matAutocomplete" [displayWith]="newDisplayFn">
   <mat-option *ngFor="let option of (filteredElements | async)" [value]="option">
